@@ -10,14 +10,136 @@ namespace FishIt
 {
     public partial class FormPembeli : Form
     {
+        private Size originalFormSize;
+        private Dictionary<Control, Rectangle> ControlBounds = new Dictionary<Control, Rectangle>();
+        private Dictionary<Control, float> OriginalFonts = new Dictionary<Control, float>();
+        private float originalFontSize;
         public FormPembeli()
         {
             InitializeComponent();
+            originalFormSize = this.ClientSize;
+
+            SaveFonts(this);
+            SaveBounds(this);
+
+            this.AutoScaleMode = AutoScaleMode.Dpi;
+            this.ActiveControl = null;
+
+            this.Resize += new System.EventHandler(this.FormPembeli_Resize);
+
+            this.WindowState = FormWindowState.Maximized;
+        }
+
+        private void FormPembeli_Load(object sender, EventArgs e)
+        {
+            LoadPage(new UC_DashboardAdmin());
+            DebugControls(this);
+            panelContent.Visible = false;
+        }
+
+        private void LoadPage(UserControl page)
+        {
+            panelContent.Controls.Clear();
+
+            page.Dock = DockStyle.Fill;
+
+            panelContent.Controls.Add(page);
+        }
+
+        private void FormPembeli_Resize(object sender, EventArgs e)
+        {
+            float xRatio = (float)this.ClientSize.Width / originalFormSize.Width;
+            float yRatio = (float)this.ClientSize.Height / originalFormSize.Height;
+
+            float scale = Math.Min(xRatio, yRatio);
+
+            ResizeControls(this, xRatio, yRatio);
+            ResizeFonts(this, scale);
+
+        }
+
+        private void SaveFonts(Control parent)
+        {
+            foreach (Control control in parent.Controls)
+            {
+                OriginalFonts[control] = control.Font.Size;
+
+                if (control.HasChildren)
+                    SaveFonts(control);
+            }
+        }
+        private void ResizeFonts(Control parent, float scale)
+        {
+            foreach (Control control in parent.Controls)
+            {
+                if (OriginalFonts.ContainsKey(control))
+                {
+                    float newSize = OriginalFonts[control] * scale;
+
+                    if (newSize < 1.0f) newSize = 1.0f;
+
+                    control.Font = new Font(
+                        control.Font.FontFamily,
+                        newSize,
+                        control.Font.Style
+                    );
+                }
+
+                if (control.HasChildren)
+                    ResizeFonts(control, scale);
+            }
+        }
+        private void SaveBounds(Control parent)
+        {
+            foreach (Control control in parent.Controls)
+            {
+                ControlBounds[control] = control.Bounds;
+
+                if (control.HasChildren)
+                    SaveBounds(control);
+            }
+        }
+
+        private void ResizeControls(Control parent, float xRatio, float yRatio)
+        {
+            foreach (Control control in parent.Controls)
+            {
+                if (ControlBounds.ContainsKey(control))
+                {
+                    Rectangle r = ControlBounds[control];
+
+                    control.SetBounds(
+                        (int)(r.X * xRatio),
+                        (int)(r.Y * yRatio),
+                        (int)(r.Width * xRatio),
+                        (int)(r.Height * yRatio)
+                    );
+                }
+
+                if (control.HasChildren)
+                    ResizeControls(control, xRatio, yRatio);
+            }
+        }
+
+        private void DebugControls(Control parent)
+        {
+            foreach (Control c in parent.Controls)
+            {
+                Console.WriteLine(c.Name + " - " + c.Font.Size);
+
+                if (c.HasChildren)
+                    DebugControls(c);
+            }
         }
 
         private void label1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void buttonLogout_Click(object sender, EventArgs e)
+        {
+            Application.Restart();
         }
     }
 }

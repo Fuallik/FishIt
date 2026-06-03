@@ -29,6 +29,16 @@
         private void InitializeComponent()
         {
             label1 = new Label();
+            panelNB = new Panel();
+            panel1 = new Panel();
+            panelContent = new Panel();
+            buttonDashboard = new Button();
+            buttonKatalog = new Button();
+            buttonKeranjang = new Button();
+            buttonRiwayat = new Button();
+            buttonLogout = new Button();
+            panel1.SuspendLayout();
+            panelContent.SuspendLayout();
             SuspendLayout();
             // 
             // label1
@@ -41,14 +51,115 @@
             label1.Text = "INI PEMBELI";
             label1.Click += label1_Click;
             // 
+            // panelNB
+            // 
+            panelNB.BackColor = Color.CornflowerBlue;
+            panelNB.Dock = DockStyle.Top;
+            panelNB.Location = new Point(0, 0);
+            panelNB.Name = "panelNB";
+            panelNB.Size = new Size(980, 50);
+            panelNB.TabIndex = 5;
+            // 
+            // panel1
+            // 
+            panel1.BackColor = Color.CornflowerBlue;
+            panel1.Controls.Add(buttonLogout);
+            panel1.Controls.Add(buttonRiwayat);
+            panel1.Controls.Add(buttonKeranjang);
+            panel1.Controls.Add(buttonKatalog);
+            panel1.Controls.Add(buttonDashboard);
+            panel1.Dock = DockStyle.Left;
+            panel1.Location = new Point(0, 0);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(200, 606);
+            panel1.TabIndex = 0;
+            // 
+            // panelContent
+            // 
+            panelContent.BackColor = Color.White;
+            panelContent.Controls.Add(panel1);
+            panelContent.Dock = DockStyle.Fill;
+            panelContent.Location = new Point(0, 50);
+            panelContent.Name = "panelContent";
+            panelContent.Size = new Size(980, 606);
+            panelContent.TabIndex = 7;
+            // 
+            // buttonDashboard
+            // 
+            buttonDashboard.Dock = DockStyle.Top;
+            buttonDashboard.FlatAppearance.BorderSize = 0;
+            buttonDashboard.FlatStyle = FlatStyle.Flat;
+            buttonDashboard.Location = new Point(0, 0);
+            buttonDashboard.Name = "buttonDashboard";
+            buttonDashboard.Size = new Size(200, 50);
+            buttonDashboard.TabIndex = 0;
+            buttonDashboard.Text = "Dashboard";
+            buttonDashboard.UseVisualStyleBackColor = true;
+            // 
+            // buttonKatalog
+            // 
+            buttonKatalog.Dock = DockStyle.Top;
+            buttonKatalog.FlatAppearance.BorderSize = 0;
+            buttonKatalog.FlatStyle = FlatStyle.Flat;
+            buttonKatalog.Location = new Point(0, 50);
+            buttonKatalog.Name = "buttonKatalog";
+            buttonKatalog.Size = new Size(200, 50);
+            buttonKatalog.TabIndex = 1;
+            buttonKatalog.Text = "Katalog Ikan";
+            buttonKatalog.UseVisualStyleBackColor = true;
+            // 
+            // buttonKeranjang
+            // 
+            buttonKeranjang.Dock = DockStyle.Top;
+            buttonKeranjang.FlatAppearance.BorderSize = 0;
+            buttonKeranjang.FlatStyle = FlatStyle.Flat;
+            buttonKeranjang.Location = new Point(0, 100);
+            buttonKeranjang.Name = "buttonKeranjang";
+            buttonKeranjang.Size = new Size(200, 50);
+            buttonKeranjang.TabIndex = 2;
+            buttonKeranjang.Text = "Keranjang";
+            buttonKeranjang.UseVisualStyleBackColor = true;
+            // 
+            // buttonRiwayat
+            // 
+            buttonRiwayat.Dock = DockStyle.Top;
+            buttonRiwayat.FlatAppearance.BorderSize = 0;
+            buttonRiwayat.FlatStyle = FlatStyle.Flat;
+            buttonRiwayat.Location = new Point(0, 150);
+            buttonRiwayat.Name = "buttonRiwayat";
+            buttonRiwayat.Size = new Size(200, 50);
+            buttonRiwayat.TabIndex = 3;
+            buttonRiwayat.Text = "Riwayat";
+            buttonRiwayat.UseVisualStyleBackColor = true;
+            // 
+            // buttonLogout
+            // 
+            buttonLogout.Dock = DockStyle.Bottom;
+            buttonLogout.FlatAppearance.BorderSize = 0;
+            buttonLogout.FlatStyle = FlatStyle.Flat;
+            buttonLogout.Location = new Point(0, 556);
+            buttonLogout.Name = "buttonLogout";
+            buttonLogout.Size = new Size(200, 50);
+            buttonLogout.TabIndex = 4;
+            buttonLogout.Text = "LogOut";
+            buttonLogout.UseVisualStyleBackColor = true;
+            buttonLogout.Click += buttonLogout_Click;
+            // 
             // FormPembeli
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(980, 656);
+            Controls.Add(panelContent);
+            Controls.Add(panelNB);
             Controls.Add(label1);
+            FormBorderStyle = FormBorderStyle.None;
             Name = "FormPembeli";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "FormPembeli";
+            WindowState = FormWindowState.Maximized;
+            panel1.ResumeLayout(false);
+            panelContent.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -56,5 +167,13 @@
         #endregion
 
         private Label label1;
+        private Panel panelNB;
+        private Panel panel1;
+        private Button buttonDashboard;
+        private Panel panelContent;
+        private Button buttonKatalog;
+        private Button buttonLogout;
+        private Button buttonRiwayat;
+        private Button buttonKeranjang;
     }
 }

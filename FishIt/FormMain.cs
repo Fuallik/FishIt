@@ -4,13 +4,13 @@ using System.Windows.Forms;
 
 namespace FishIt
 {    
-    public partial class Form1 : Form
+    public partial class FormMain : Form
     {
         private Size originalFormSize;
         private Dictionary<Control, Rectangle> ControlBounds = new Dictionary<Control, Rectangle>();
         private Dictionary<Control, float> OriginalFonts = new Dictionary<Control, float>();
         private float originalFontSize;
-        public Form1()
+        public FormMain()
         {
             InitializeComponent();
 
@@ -67,7 +67,7 @@ namespace FishIt
                 "Port=5432;" +
                 "Database=FishIt;" +
                 "Username=postgres;" +
-                "Password=1234";
+                "Password=123";
         }
 
         internal static class Program
@@ -78,7 +78,7 @@ namespace FishIt
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
 
-                Application.Run(new Form1());
+                Application.Run(new FormMain());
             }
         }
 

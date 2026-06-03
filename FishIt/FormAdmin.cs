@@ -29,25 +29,30 @@ namespace FishIt
             this.AutoScaleMode = AutoScaleMode.Dpi;
             this.ActiveControl = null;
             // 4. DAFTARKAN EVENT RESIZE SETELAH SEMUA UKURAN ASLI DISIMPAN
-            this.Resize += new System.EventHandler(this.Form1_Resize);
+            this.Resize += new System.EventHandler(this.FormAdmin_Resize);
 
             // 5. Baru lakukan Maximize. 
-            // Ini akan otomatis memicu Form1_Resize dan memperbesar semuanya dengan benar.
+            // Ini akan otomatis memicu FormAdmin_Resize dan memperbesar semuanya dengan benar.
             this.WindowState = FormWindowState.Maximized;
         }
-
-        private void Form1_Load(object sender, EventArgs e)
+         
+        private void FormAdmin_Load(object sender, EventArgs e)
         {
-            // HAPUS KODE INI: originalFormSize = this.ClientSize;
-            // HAPUS KODE INI: SaveFonts(this);
-            // HAPUS KODE INI: SaveBounds(this);
-
-            // Biarkan fungsi yang lain tetap berjalan
-            //UpdateButtonRadius();
+            LoadPage(new UC_DashboardAdmin());
             DebugControls(this);
+            panelContent.Visible = true;
         }
 
-        private void Form1_Resize(object sender, EventArgs e)
+        private void LoadPage(UserControl page)
+        {
+            panelContent.Controls.Clear();
+
+            page.Dock = DockStyle.Fill;
+
+            panelContent.Controls.Add(page);
+        }
+
+        private void FormAdmin_Resize(object sender, EventArgs e)
         {
             float xRatio = (float)this.ClientSize.Width / originalFormSize.Width;
             float yRatio = (float)this.ClientSize.Height / originalFormSize.Height;
@@ -136,7 +141,101 @@ namespace FishIt
             }
         }
 
+
         private void buttonLogOut_Click(object sender, EventArgs e)
+        {
+            Application.Restart();
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void buttonDashboard_Click(object sender, EventArgs e)
+        {
+            LoadPage(new UC_DashboardAdmin());
+            panelContent.Controls.Clear();
+
+            UC_DashboardAdmin dashboard = new UC_DashboardAdmin();
+
+            dashboard.Dock = DockStyle.Fill;
+
+            panelContent.Controls.Add(dashboard);
+        }
+
+        private void panelCT_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void buttonKlAkun_Click(object sender, EventArgs e)
+        {
+            panelContent.Controls.Clear();
+
+            UC_KelolaAkun akun = new UC_KelolaAkun();
+
+            akun.Dock = DockStyle.Fill;
+
+            panelContent.Controls.Add(akun);
+
+            panelSubKelolaAkun.Visible = !panelSubKelolaAkun.Visible;
+        }
+
+        private void buttonTambahAkun_Click(object sender, EventArgs e)
+        {
+            LoadPage(new UC_TambahAkun());
+        }
+
+        private void buttonEditAkun_Click(object sender, EventArgs e)
+        {
+            LoadPage(new UC_EditAkun());
+        }
+
+        private void buttonHapusAkun_Click(object sender, EventArgs e)
+        {
+            LoadPage(new UC_HapusAkun());
+        }
+
+        private void panelSB_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void buttonKelolaDataKolam_Click(object sender, EventArgs e)
+        {
+            panelContent.Controls.Clear();
+
+            UC_KelolaDataKolam kelolaDataKolam = new UC_KelolaDataKolam();
+
+            kelolaDataKolam.Dock = DockStyle.Fill;
+
+            panelContent.Controls.Add(kelolaDataKolam);
+        }
+
+        private void buttonVerifikasiSupply_Click(object sender, EventArgs e)
+        {
+            panelContent.Controls.Clear();
+
+            UC_VerifikasiSupply verifikasiSupply = new UC_VerifikasiSupply();
+
+            verifikasiSupply.Dock = DockStyle.Fill;
+
+            panelContent.Controls.Add(verifikasiSupply);
+        }
+
+        private void buttonLaporanMonitoring_Click(object sender, EventArgs e)
+        {
+            panelContent.Controls.Clear();
+
+            UC_LaporanMonitoring laporanMonitoring = new UC_LaporanMonitoring();
+
+            laporanMonitoring.Dock = DockStyle.Fill;
+
+            panelContent.Controls.Add(laporanMonitoring);
+        }
+
+        private void buttonLogoutAdmin_Click(object sender, EventArgs e)
         {
             Application.Restart();
         }

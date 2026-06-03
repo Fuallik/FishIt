@@ -41,7 +41,7 @@ namespace FishIt
         public static class Config
         {
             public static string ConnString =
-                "Host=localhost;Port=5432;Username=postgres;Password=1234;Database=FishIt";
+                "Host=localhost;Port=5432;Username=postgres;Password=123;Database=FishIt";
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -128,7 +128,7 @@ namespace FishIt
 
                             MessageBox.Show("Login berhasil sebagai " + role);
 
-                            this.Hide(); // tutup form login
+                            this.Close(); // tutup form login
 
                             if (role == "admins")
                             {
@@ -140,7 +140,7 @@ namespace FishIt
                             }
                             else
                             {
-                                new Form1().Show(); // fallback
+                                new FormMain().Show(); // fallback
                             }
                         }
                         else

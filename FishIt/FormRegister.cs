@@ -6,7 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
-using static FishIt.Form1;
+using static FishIt.FormMain;
 
 namespace FishIt
 {
@@ -108,10 +108,10 @@ namespace FishIt
                     conn.Open();
 
                     // Cek ke database apakah Username sudah dipakai orang lain
-                    string checkQuery = "SELECT COUNT(*) FROM akun WHERE Username = @Username";
+                    string checkQuery = "SELECT COUNT(*) FROM akun WHERE Username = @username";
                     using (var checkCmd = new NpgsqlCommand(checkQuery, conn))
                     {
-                        checkCmd.Parameters.AddWithValue("@Username", username);
+                        checkCmd.Parameters.AddWithValue("@username", username);
 
                         long count = (long)checkCmd.ExecuteScalar();
                         if (count > 0)
@@ -122,22 +122,26 @@ namespace FishIt
                     }
 
                     int id_Kecamatan = GetOrCreateKecamatan(conn, kecamatan);
-                    int id_Kelurahan = GetOrCreateKelurahan(conn, kelurahan);
+                    int id_Kelurahan = GetOrCreateKelurahan(
+                        conn,
+                        kelurahan,
+                        id_Kecamatan
+                    );
 
                     // Enkripsi password sebelum disimpan (Keamanan)
                     //string hashedPassword = HashPassword(password);
 
                     // Simpan data Username dan Password (yang sudah di-hash) ke tabel Users
-                    string insertQuery = "INSERT INTO akun (Nama, Username, Password, no_Telp, Alamat, id_kelurahan, id_kecamatan) VALUES (@Nama, @Username, @Password, @Telpon, @Alamat, @Id_Kelurahan, @Id_Kecamatan)";
+                    string insertQuery = "INSERT INTO akun (nama, username, passwords, no_telp, alamat, id_kelurahan, id_role) VALUES (@nama, @username, @passwords, @telpon, @alamat, @id_Kelurahan, 6)";
                     using (var insertCmd = new NpgsqlCommand(insertQuery, conn))
                     {
-                        insertCmd.Parameters.AddWithValue("@Nama", nama);
-                        insertCmd.Parameters.AddWithValue("@Username", username);
-                        insertCmd.Parameters.AddWithValue("@Password", password);
-                        insertCmd.Parameters.AddWithValue("@Telpon", telpon);
-                        insertCmd.Parameters.AddWithValue("@Alamat", alamat);
-                        insertCmd.Parameters.AddWithValue("@Id_Kelurahan", id_Kelurahan);
-                        insertCmd.Parameters.AddWithValue("@Id_Kecamatan", id_Kecamatan);
+                        insertCmd.Parameters.AddWithValue("@nama", nama);
+                        insertCmd.Parameters.AddWithValue("@username", username);
+                        insertCmd.Parameters.AddWithValue("@passwords", password);
+                        insertCmd.Parameters.AddWithValue("@telpon", telpon);
+                        insertCmd.Parameters.AddWithValue("@alamat", alamat);
+                        insertCmd.Parameters.AddWithValue("@id_Kelurahan", id_Kelurahan);
+                        insertCmd.Parameters.AddWithValue("@id_role", 6); 
 
                         int rowsAffected = insertCmd.ExecuteNonQuery();
 
@@ -153,6 +157,8 @@ namespace FishIt
                             TBAlamat.Clear();
                             TBKelurahan.Clear();
                             TBKecamatan.Clear();
+
+                            this.Close();
                         }
                         else
                         {
@@ -171,7 +177,7 @@ namespace FishIt
         private int GetOrCreateKecamatan(NpgsqlConnection conn, string nama_Kecamatan)
         {
             // Cek apakah kecamatan sudah ada
-            string selectQuery = "SELECT id FROM kecamatan WHERE nama_kecamatan = @nama_kecamatan";
+            string selectQuery = "SELECT id_kecamatan FROM kecamatan WHERE LOWER(nama_kecamatan) = LOWER(@nama_kecamatan)";
             using (var selectCmd = new NpgsqlCommand(selectQuery, conn))
             {
                 selectCmd.Parameters.AddWithValue("@nama_kecamatan", nama_Kecamatan);
@@ -185,35 +191,43 @@ namespace FishIt
             }
 
             // Jika data tidak ada, Insert data baru dan ambil ID-nya (RETURNING id)
-            string insertQuery = "INSERT INTO kecamatan (nama_kecamatan) VALUES (@nama) RETURNING id";
+            string insertQuery = "INSERT INTO kecamatan (nama_kecamatan) VALUES (@nama_kecamatan) RETURNING id_kecamatan";
             using (var insertCmd = new NpgsqlCommand(insertQuery, conn))
             {
-                insertCmd.Parameters.AddWithValue("@nama", nama_Kecamatan);
+                insertCmd.Parameters.AddWithValue("@nama_kecamatan", nama_Kecamatan);
                 return Convert.ToInt32(insertCmd.ExecuteScalar());
             }
         }
 
-        private int GetOrCreateKelurahan(NpgsqlConnection conn, string nama_Kelurahan)
+        private int GetOrCreateKelurahan(
+    NpgsqlConnection conn,
+    string nama_Kelurahan,
+    int id_Kecamatan)
         {
-            // Cek apakah kelurahan sudah ada
-            string selectQuery = "SELECT id FROM kelurahan WHERE nama_kelurahan = @nama_kelurahan";
+            string selectQuery =
+                "SELECT id_kelurahan FROM kelurahan WHERE LOWER(nama_kelurahan) = LOWER(@nama_kelurahan) AND id_kecamatan = @id_kecamatan";
+
             using (var selectCmd = new NpgsqlCommand(selectQuery, conn))
             {
                 selectCmd.Parameters.AddWithValue("@nama_kelurahan", nama_Kelurahan);
+                selectCmd.Parameters.AddWithValue("@id_kecamatan", id_Kecamatan);
+
                 object result = selectCmd.ExecuteScalar();
 
-                // Jika data ada, kembalikan ID-nya
                 if (result != null)
                 {
                     return Convert.ToInt32(result);
                 }
             }
 
-            // Jika data tidak ada, Insert data baru dan ambil ID-nya (RETURNING id)
-            string insertQuery = "INSERT INTO kelurahan (nama_kelurahan) VALUES (@nama) RETURNING id";
+            string insertQuery =
+                "INSERT INTO kelurahan (nama_kelurahan, id_kecamatan) VALUES (@nama_kelurahan, @id_kecamatan) RETURNING id_kelurahan";
+
             using (var insertCmd = new NpgsqlCommand(insertQuery, conn))
             {
-                insertCmd.Parameters.AddWithValue("@nama", nama_Kelurahan);
+                insertCmd.Parameters.AddWithValue("@nama_kelurahan", nama_Kelurahan);
+                insertCmd.Parameters.AddWithValue("@id_kecamatan", id_Kecamatan);
+
                 return Convert.ToInt32(insertCmd.ExecuteScalar());
             }
         }
