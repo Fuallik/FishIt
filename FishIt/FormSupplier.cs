@@ -8,13 +8,13 @@ using System.Windows.Forms;
 
 namespace FishIt
 {
-    public partial class FormPembeli : Form
+    public partial class FormSupplier : Form
     {
         private Size originalFormSize;
         private Dictionary<Control, Rectangle> ControlBounds = new Dictionary<Control, Rectangle>();
         private Dictionary<Control, float> OriginalFonts = new Dictionary<Control, float>();
         private float originalFontSize;
-        public FormPembeli()
+        public FormSupplier()
         {
             InitializeComponent();
             originalFormSize = this.ClientSize;
@@ -25,16 +25,17 @@ namespace FishIt
             this.AutoScaleMode = AutoScaleMode.Dpi;
             this.ActiveControl = null;
 
-            this.Resize += new System.EventHandler(this.FormPembeli_Resize);
+            this.Resize += new System.EventHandler(this.FormSupplier_Resize);
 
             this.WindowState = FormWindowState.Maximized;
+
         }
 
-        private void FormPembeli_Load(object sender, EventArgs e)
+        private void FormSupplier_Load(object sender, EventArgs e)
         {
-            LoadPage(new UC_DashboardAdmin());
+            LoadPage(new UC_DashboardSupplier());
             DebugControls(this);
-            panelContent.Visible = false;
+            panelContent.Visible = true;
         }
 
         private void LoadPage(UserControl page)
@@ -46,7 +47,7 @@ namespace FishIt
             panelContent.Controls.Add(page);
         }
 
-        private void FormPembeli_Resize(object sender, EventArgs e)
+        private void FormSupplier_Resize(object sender, EventArgs e)
         {
             float xRatio = (float)this.ClientSize.Width / originalFormSize.Width;
             float yRatio = (float)this.ClientSize.Height / originalFormSize.Height;
@@ -132,17 +133,42 @@ namespace FishIt
             }
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void buttonKatalogSupp_Click(object sender, EventArgs e)
         {
-
+            LoadPage(new UC_DashboardSupplier());
         }
 
-        private void buttonLogout_Click(object sender, EventArgs e)
+        private void buttonLogoutSupp_Click(object sender, EventArgs e)
         {
             Application.Restart();
         }
 
         private void panelContent_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void buttonKatalogBenih_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonKatalogPakan_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonPengajuanBenih_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonPengajuanPakan_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonRiwayatVerifikasi_Click(object sender, EventArgs e)
         {
 
         }
