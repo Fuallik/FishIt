@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Reflection.Emit;
@@ -40,8 +41,7 @@ namespace FishIt
         }
         public static class Config
         {
-            public static string ConnString =
-                "Host=localhost;Port=5432;Username=postgres;Password=123;Database=FishIt";
+            public static string ConnString = ConfigurationManager.ConnectionStrings["DbConnection"].ConnectionString;
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -113,7 +113,7 @@ namespace FishIt
                 conn.Open();
 
                 string query =
-                    "SELECT nama_role FROM roles r JOIN akun a on a.id_role = r.id_role WHERE username=@u AND passwords=@p LIMIT 1";
+                    "SELECT nama_role FROM roles r JOIN akun a on a.id_role = r.id_role WHERE a.username=@u AND a.passwords=@p LIMIT 1";
 
                 using (var cmd = new NpgsqlCommand(query, conn))
                 {
@@ -134,6 +134,12 @@ namespace FishIt
                             {
                                 new FormAdmin().Show();
                             }
+
+                            else if (role == "supplier") //Baru
+                            {
+                                new FormSupplier().Show();
+                            } //End
+
                             else if (role == "pembeli")
                             {
                                 new FormPembeli().Show();

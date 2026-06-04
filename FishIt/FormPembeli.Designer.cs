@@ -31,12 +31,12 @@
             label1 = new Label();
             panelNB = new Panel();
             panel1 = new Panel();
-            panelContent = new Panel();
-            buttonDashboard = new Button();
-            buttonKatalog = new Button();
-            buttonKeranjang = new Button();
-            buttonRiwayat = new Button();
             buttonLogout = new Button();
+            buttonRiwayat = new Button();
+            buttonKeranjang = new Button();
+            buttonKatalog = new Button();
+            buttonDashboard = new Button();
+            panelContent = new Panel();
             panel1.SuspendLayout();
             panelContent.SuspendLayout();
             SuspendLayout();
@@ -74,51 +74,18 @@
             panel1.Size = new Size(200, 606);
             panel1.TabIndex = 0;
             // 
-            // panelContent
+            // buttonLogout
             // 
-            panelContent.BackColor = Color.White;
-            panelContent.Controls.Add(panel1);
-            panelContent.Dock = DockStyle.Fill;
-            panelContent.Location = new Point(0, 50);
-            panelContent.Name = "panelContent";
-            panelContent.Size = new Size(980, 606);
-            panelContent.TabIndex = 7;
-            // 
-            // buttonDashboard
-            // 
-            buttonDashboard.Dock = DockStyle.Top;
-            buttonDashboard.FlatAppearance.BorderSize = 0;
-            buttonDashboard.FlatStyle = FlatStyle.Flat;
-            buttonDashboard.Location = new Point(0, 0);
-            buttonDashboard.Name = "buttonDashboard";
-            buttonDashboard.Size = new Size(200, 50);
-            buttonDashboard.TabIndex = 0;
-            buttonDashboard.Text = "Dashboard";
-            buttonDashboard.UseVisualStyleBackColor = true;
-            // 
-            // buttonKatalog
-            // 
-            buttonKatalog.Dock = DockStyle.Top;
-            buttonKatalog.FlatAppearance.BorderSize = 0;
-            buttonKatalog.FlatStyle = FlatStyle.Flat;
-            buttonKatalog.Location = new Point(0, 50);
-            buttonKatalog.Name = "buttonKatalog";
-            buttonKatalog.Size = new Size(200, 50);
-            buttonKatalog.TabIndex = 1;
-            buttonKatalog.Text = "Katalog Ikan";
-            buttonKatalog.UseVisualStyleBackColor = true;
-            // 
-            // buttonKeranjang
-            // 
-            buttonKeranjang.Dock = DockStyle.Top;
-            buttonKeranjang.FlatAppearance.BorderSize = 0;
-            buttonKeranjang.FlatStyle = FlatStyle.Flat;
-            buttonKeranjang.Location = new Point(0, 100);
-            buttonKeranjang.Name = "buttonKeranjang";
-            buttonKeranjang.Size = new Size(200, 50);
-            buttonKeranjang.TabIndex = 2;
-            buttonKeranjang.Text = "Keranjang";
-            buttonKeranjang.UseVisualStyleBackColor = true;
+            buttonLogout.Dock = DockStyle.Bottom;
+            buttonLogout.FlatAppearance.BorderSize = 0;
+            buttonLogout.FlatStyle = FlatStyle.Flat;
+            buttonLogout.Location = new Point(0, 556);
+            buttonLogout.Name = "buttonLogout";
+            buttonLogout.Size = new Size(200, 50);
+            buttonLogout.TabIndex = 4;
+            buttonLogout.Text = "LogOut";
+            buttonLogout.UseVisualStyleBackColor = true;
+            buttonLogout.Click += buttonLogout_Click;
             // 
             // buttonRiwayat
             // 
@@ -132,18 +99,52 @@
             buttonRiwayat.Text = "Riwayat";
             buttonRiwayat.UseVisualStyleBackColor = true;
             // 
-            // buttonLogout
+            // buttonKeranjang
             // 
-            buttonLogout.Dock = DockStyle.Bottom;
-            buttonLogout.FlatAppearance.BorderSize = 0;
-            buttonLogout.FlatStyle = FlatStyle.Flat;
-            buttonLogout.Location = new Point(0, 556);
-            buttonLogout.Name = "buttonLogout";
-            buttonLogout.Size = new Size(200, 50);
-            buttonLogout.TabIndex = 4;
-            buttonLogout.Text = "LogOut";
-            buttonLogout.UseVisualStyleBackColor = true;
-            buttonLogout.Click += buttonLogout_Click;
+            buttonKeranjang.Dock = DockStyle.Top;
+            buttonKeranjang.FlatAppearance.BorderSize = 0;
+            buttonKeranjang.FlatStyle = FlatStyle.Flat;
+            buttonKeranjang.Location = new Point(0, 100);
+            buttonKeranjang.Name = "buttonKeranjang";
+            buttonKeranjang.Size = new Size(200, 50);
+            buttonKeranjang.TabIndex = 2;
+            buttonKeranjang.Text = "Keranjang";
+            buttonKeranjang.UseVisualStyleBackColor = true;
+            // 
+            // buttonKatalog
+            // 
+            buttonKatalog.Dock = DockStyle.Top;
+            buttonKatalog.FlatAppearance.BorderSize = 0;
+            buttonKatalog.FlatStyle = FlatStyle.Flat;
+            buttonKatalog.Location = new Point(0, 50);
+            buttonKatalog.Name = "buttonKatalog";
+            buttonKatalog.Size = new Size(200, 50);
+            buttonKatalog.TabIndex = 1;
+            buttonKatalog.Text = "Katalog Ikan";
+            buttonKatalog.UseVisualStyleBackColor = true;
+            // 
+            // buttonDashboard
+            // 
+            buttonDashboard.Dock = DockStyle.Top;
+            buttonDashboard.FlatAppearance.BorderSize = 0;
+            buttonDashboard.FlatStyle = FlatStyle.Flat;
+            buttonDashboard.Location = new Point(0, 0);
+            buttonDashboard.Name = "buttonDashboard";
+            buttonDashboard.Size = new Size(200, 50);
+            buttonDashboard.TabIndex = 0;
+            buttonDashboard.Text = "Dashboard";
+            buttonDashboard.UseVisualStyleBackColor = true;
+            // 
+            // panelContent
+            // 
+            panelContent.BackColor = Color.White;
+            panelContent.Controls.Add(panel1);
+            panelContent.Dock = DockStyle.Fill;
+            panelContent.Location = new Point(0, 50);
+            panelContent.Name = "panelContent";
+            panelContent.Size = new Size(980, 606);
+            panelContent.TabIndex = 7;
+            panelContent.Paint += panelContent_Paint;
             // 
             // FormPembeli
             // 

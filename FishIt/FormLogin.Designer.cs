@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormLogin));
             labelLogin = new Label();
             TBUsername = new TextBox();
             TBPassword = new TextBox();
@@ -53,6 +52,7 @@
             // 
             // TBUsername
             // 
+            TBUsername.Cursor = Cursors.Cross;
             TBUsername.Location = new Point(56, 250);
             TBUsername.Name = "TBUsername";
             TBUsername.Size = new Size(335, 31);
@@ -133,7 +133,6 @@
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(457, 663);
             Controls.Add(labelJudul);
