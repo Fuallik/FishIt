@@ -44,11 +44,13 @@
             // 
             labelLogin.AutoSize = true;
             labelLogin.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            labelLogin.ImageAlign = ContentAlignment.TopCenter;
             labelLogin.Location = new Point(179, 83);
             labelLogin.Name = "labelLogin";
             labelLogin.Size = new Size(86, 32);
             labelLogin.TabIndex = 0;
             labelLogin.Text = "Log In";
+            labelLogin.TextAlign = ContentAlignment.MiddleCenter;
             labelLogin.Click += labelLogin_Click;
             // 
             // TBUsername
@@ -65,6 +67,7 @@
             TBPassword.Name = "TBPassword";
             TBPassword.Size = new Size(338, 31);
             TBPassword.TabIndex = 4;
+            TBPassword.UseSystemPasswordChar = true;
             TBPassword.TextChanged += TBPassword_TextChanged;
             // 
             // buttonRegister
@@ -73,9 +76,9 @@
             buttonRegister.FlatAppearance.BorderSize = 0;
             buttonRegister.FlatStyle = FlatStyle.Flat;
             buttonRegister.ForeColor = Color.RoyalBlue;
-            buttonRegister.Location = new Point(142, 543);
+            buttonRegister.Location = new Point(148, 552);
             buttonRegister.Name = "buttonRegister";
-            buttonRegister.Size = new Size(175, 34);
+            buttonRegister.Size = new Size(169, 34);
             buttonRegister.TabIndex = 6;
             buttonRegister.Text = "belum punya akun";
             buttonRegister.UseVisualStyleBackColor = false;
@@ -88,7 +91,7 @@
             buttonLogin.FlatStyle = FlatStyle.Flat;
             buttonLogin.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             buttonLogin.ForeColor = Color.White;
-            buttonLogin.Location = new Point(142, 592);
+            buttonLogin.Location = new Point(148, 592);
             buttonLogin.Name = "buttonLogin";
             buttonLogin.Size = new Size(169, 50);
             buttonLogin.TabIndex = 7;
@@ -98,13 +101,16 @@
             // 
             // labelJudul
             // 
+            labelJudul.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             labelJudul.AutoSize = true;
             labelJudul.Font = new Font("Segoe UI", 20F, FontStyle.Bold);
-            labelJudul.Location = new Point(158, 29);
+            labelJudul.ImageAlign = ContentAlignment.TopCenter;
+            labelJudul.Location = new Point(155, 29);
             labelJudul.Name = "labelJudul";
             labelJudul.Size = new Size(137, 54);
             labelJudul.TabIndex = 8;
             labelJudul.Text = "Fish It";
+            labelJudul.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // labelPassword
             // 

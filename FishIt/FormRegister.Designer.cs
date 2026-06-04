@@ -45,11 +45,13 @@
             labelKelurahan = new Label();
             TBKelurahan = new TextBox();
             labelKecamatan = new Label();
+            TBKonfirmasiPassword = new TextBox();
+            labelKonfirmasiPassword = new Label();
             SuspendLayout();
             // 
             // TBKecamatan
             // 
-            TBKecamatan.Location = new Point(62, 543);
+            TBKecamatan.Location = new Point(62, 612);
             TBKecamatan.Name = "TBKecamatan";
             TBKecamatan.Size = new Size(335, 31);
             TBKecamatan.TabIndex = 16;
@@ -60,11 +62,13 @@
             labelJudul.AutoSize = true;
             labelJudul.BackColor = Color.Transparent;
             labelJudul.Font = new Font("Segoe UI", 20F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            labelJudul.Location = new Point(149, 9);
+            labelJudul.ImageAlign = ContentAlignment.TopCenter;
+            labelJudul.Location = new Point(161, 9);
             labelJudul.Name = "labelJudul";
             labelJudul.Size = new Size(137, 54);
             labelJudul.TabIndex = 0;
             labelJudul.Text = "Fish It";
+            labelJudul.TextAlign = ContentAlignment.MiddleCenter;
             labelJudul.Click += label1_Click;
             // 
             // labelRegister
@@ -72,11 +76,12 @@
             labelRegister.AutoSize = true;
             labelRegister.BackColor = Color.Transparent;
             labelRegister.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            labelRegister.Location = new Point(161, 63);
+            labelRegister.Location = new Point(174, 63);
             labelRegister.Name = "labelRegister";
             labelRegister.Size = new Size(107, 32);
             labelRegister.TabIndex = 1;
             labelRegister.Text = "Register";
+            labelRegister.Click += labelRegister_Click;
             // 
             // TBNama
             // 
@@ -131,13 +136,14 @@
             TBPassword.Name = "TBPassword";
             TBPassword.Size = new Size(335, 31);
             TBPassword.TabIndex = 7;
+            TBPassword.UseSystemPasswordChar = true;
             TBPassword.TextChanged += TBPassword_TextChanged;
             // 
             // labelTelpon
             // 
             labelTelpon.AutoSize = true;
             labelTelpon.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
-            labelTelpon.Location = new Point(62, 301);
+            labelTelpon.Location = new Point(62, 370);
             labelTelpon.Name = "labelTelpon";
             labelTelpon.Size = new Size(131, 32);
             labelTelpon.TabIndex = 10;
@@ -145,7 +151,7 @@
             // 
             // TBTelpon
             // 
-            TBTelpon.Location = new Point(62, 336);
+            TBTelpon.Location = new Point(62, 405);
             TBTelpon.Name = "TBTelpon";
             TBTelpon.Size = new Size(335, 31);
             TBTelpon.TabIndex = 9;
@@ -155,7 +161,7 @@
             // 
             labelAlamat.AutoSize = true;
             labelAlamat.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
-            labelAlamat.Location = new Point(62, 370);
+            labelAlamat.Location = new Point(62, 439);
             labelAlamat.Name = "labelAlamat";
             labelAlamat.Size = new Size(92, 32);
             labelAlamat.TabIndex = 12;
@@ -163,7 +169,7 @@
             // 
             // TBAlamat
             // 
-            TBAlamat.Location = new Point(62, 405);
+            TBAlamat.Location = new Point(62, 474);
             TBAlamat.Name = "TBAlamat";
             TBAlamat.Size = new Size(335, 31);
             TBAlamat.TabIndex = 11;
@@ -176,7 +182,7 @@
             buttonRegister.FlatStyle = FlatStyle.Flat;
             buttonRegister.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             buttonRegister.ForeColor = Color.White;
-            buttonRegister.Location = new Point(129, 586);
+            buttonRegister.Location = new Point(145, 699);
             buttonRegister.Name = "buttonRegister";
             buttonRegister.Size = new Size(169, 50);
             buttonRegister.TabIndex = 13;
@@ -188,7 +194,7 @@
             // 
             labelKelurahan.AutoSize = true;
             labelKelurahan.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
-            labelKelurahan.Location = new Point(62, 439);
+            labelKelurahan.Location = new Point(62, 508);
             labelKelurahan.Name = "labelKelurahan";
             labelKelurahan.Size = new Size(125, 32);
             labelKelurahan.TabIndex = 15;
@@ -196,7 +202,7 @@
             // 
             // TBKelurahan
             // 
-            TBKelurahan.Location = new Point(62, 474);
+            TBKelurahan.Location = new Point(62, 543);
             TBKelurahan.Name = "TBKelurahan";
             TBKelurahan.Size = new Size(335, 31);
             TBKelurahan.TabIndex = 14;
@@ -206,17 +212,37 @@
             // 
             labelKecamatan.AutoSize = true;
             labelKecamatan.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
-            labelKecamatan.Location = new Point(62, 508);
+            labelKecamatan.Location = new Point(62, 577);
             labelKecamatan.Name = "labelKecamatan";
             labelKecamatan.Size = new Size(136, 32);
             labelKecamatan.TabIndex = 17;
             labelKecamatan.Text = "Kecamatan";
             // 
+            // TBKonfirmasiPassword
+            // 
+            TBKonfirmasiPassword.Location = new Point(62, 336);
+            TBKonfirmasiPassword.Name = "TBKonfirmasiPassword";
+            TBKonfirmasiPassword.Size = new Size(335, 31);
+            TBKonfirmasiPassword.TabIndex = 18;
+            TBKonfirmasiPassword.UseSystemPasswordChar = true;
+            // 
+            // labelKonfirmasiPassword
+            // 
+            labelKonfirmasiPassword.AutoSize = true;
+            labelKonfirmasiPassword.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
+            labelKonfirmasiPassword.Location = new Point(62, 301);
+            labelKonfirmasiPassword.Name = "labelKonfirmasiPassword";
+            labelKonfirmasiPassword.Size = new Size(238, 32);
+            labelKonfirmasiPassword.TabIndex = 19;
+            labelKonfirmasiPassword.Text = "Konfirmasi Password";
+            // 
             // FormRegister
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(457, 663);
+            ClientSize = new Size(500, 800);
+            Controls.Add(labelKonfirmasiPassword);
+            Controls.Add(TBKonfirmasiPassword);
             Controls.Add(labelKecamatan);
             Controls.Add(TBKecamatan);
             Controls.Add(labelKelurahan);
@@ -262,5 +288,7 @@
         private TextBox TBKelurahan;
         private Label labelKecamatan;
         private TextBox TBKecamatan;
+        private TextBox TBKonfirmasiPassword;
+        private Label labelKonfirmasiPassword;
     }
 }

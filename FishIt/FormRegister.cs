@@ -20,9 +20,10 @@ namespace FishIt
             TBNama.PlaceholderText = "Nama";
             TBUsername.PlaceholderText = "Username";
             TBPassword.PlaceholderText = "Password";
+            TBKonfirmasiPassword.PlaceholderText = "Konfirmasi Password";
             TBTelpon.PlaceholderText = "No. Telpon";
             TBAlamat.PlaceholderText = "Alamat";
-            TBKelurahan.PlaceholderText = "Kelurahan"; 
+            TBKelurahan.PlaceholderText = "Kelurahan";
             TBKecamatan.PlaceholderText = "Kecamatan";
         }
 
@@ -86,15 +87,37 @@ namespace FishIt
             string nama = TBNama.Text.Trim();
             string username = TBUsername.Text.Trim();
             string password = TBPassword.Text;
+            string konfirmasipassword = TBKonfirmasiPassword.Text;
             string telpon = TBTelpon.Text.Trim();
             string alamat = TBAlamat.Text.Trim();
             string kelurahan = TBKelurahan.Text.Trim();
             string kecamatan = TBKecamatan.Text.Trim();
 
+
+
             // Validasi: Cek apakah TextBox kosong
-            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+            if (string.IsNullOrEmpty(nama) || string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password) || string.IsNullOrEmpty(konfirmasipassword) || string.IsNullOrEmpty(telpon))
             {
-                MessageBox.Show("Username dan Password tidak boleh kosong!", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("nama, username, password, konfirmasi password, dan no telepon tidak boleh kosong!", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Validasi: Cek apakah password dan konfirmasi password cocok
+            if (password != konfirmasipassword)
+            {
+                MessageBox.Show("Password dan Konfirmasi Password tidak cocok!", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (!telpon.All(char.IsDigit))
+            {
+                MessageBox.Show(
+                    "Nomor telepon hanya boleh berisi angka!",
+                    "Peringatan",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+
+                TBTelpon.Focus();
                 return;
             }
 
@@ -132,7 +155,7 @@ namespace FishIt
                     //string hashedPassword = HashPassword(password);
 
                     // Simpan data Username dan Password (yang sudah di-hash) ke tabel Users
-                    string insertQuery = "INSERT INTO akun (nama, username, passwords, no_telp, alamat, id_kelurahan, id_role) VALUES (@nama, @username, @passwords, @telpon, @alamat, @id_Kelurahan, 6)";
+                    string insertQuery = @"CALL tambah_akun(@nama, @username, @passwords, @telpon, @alamat, @id_kelurahan, @id_role)";
                     using (var insertCmd = new NpgsqlCommand(insertQuery, conn))
                     {
                         insertCmd.Parameters.AddWithValue("@nama", nama);
@@ -141,7 +164,7 @@ namespace FishIt
                         insertCmd.Parameters.AddWithValue("@telpon", telpon);
                         insertCmd.Parameters.AddWithValue("@alamat", alamat);
                         insertCmd.Parameters.AddWithValue("@id_Kelurahan", id_Kelurahan);
-                        insertCmd.Parameters.AddWithValue("@id_role", 6); 
+                        insertCmd.Parameters.AddWithValue("@id_role", 6);
 
                         int rowsAffected = insertCmd.ExecuteNonQuery();
 
@@ -173,6 +196,8 @@ namespace FishIt
                 MessageBox.Show("Terjadi kesalahan koneksi atau database: " + ex.Message, "Error System", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+
 
         private int GetOrCreateKecamatan(NpgsqlConnection conn, string nama_Kecamatan)
         {
@@ -230,6 +255,11 @@ namespace FishIt
 
                 return Convert.ToInt32(insertCmd.ExecuteScalar());
             }
+        }
+
+        private void labelRegister_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
