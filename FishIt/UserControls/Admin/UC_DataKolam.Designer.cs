@@ -1,6 +1,6 @@
 ﻿namespace FishIt
 {
-    partial class UC_KelolaDataKolam
+    partial class UC_DataKolam
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,32 +28,32 @@
         /// </summary>
         private void InitializeComponent()
         {
-            labelKelolaDataAkun = new Label();
+            label1 = new Label();
             SuspendLayout();
             // 
-            // labelKelolaDataAkun
+            // label1
             // 
-            labelKelolaDataAkun.AutoSize = true;
-            labelKelolaDataAkun.Location = new Point(264, 125);
-            labelKelolaDataAkun.Name = "labelKelolaDataAkun";
-            labelKelolaDataAkun.Size = new Size(215, 25);
-            labelKelolaDataAkun.TabIndex = 0;
-            labelKelolaDataAkun.Text = "INI KELOLA DATA KOLAM";
-            labelKelolaDataAkun.Click += label1_Click;
+            label1.AutoSize = true;
+            label1.Location = new Point(359, 288);
+            label1.Name = "label1";
+            label1.Size = new Size(100, 25);
+            label1.TabIndex = 1;
+            label1.Text = "INI KOLAM";
             // 
-            // UC_KelolaDataKolam
+            // UC_DataKolam
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(labelKelolaDataAkun);
-            Name = "UC_KelolaDataKolam";
+            Controls.Add(label1);
+            Name = "UC_DataKolam";
             Size = new Size(800, 600);
+            Load += UC_DataKolam_Load;
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private Label labelKelolaDataAkun;
+        private Label label1;
     }
 }

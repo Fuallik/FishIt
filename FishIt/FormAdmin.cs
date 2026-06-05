@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using FontAwesome.Sharp;
 
 namespace FishIt
 {
@@ -34,13 +35,17 @@ namespace FishIt
             // 5. Baru lakukan Maximize. 
             // Ini akan otomatis memicu FormAdmin_Resize dan memperbesar semuanya dengan benar.
             this.WindowState = FormWindowState.Maximized;
+
+            panelSubKelolaAkun.Visible = false;
+            panelSubDataFishIt.Visible = false;
+            panelSubLaporan.Visible = false;
         }
-         
+
         private void FormAdmin_Load(object sender, EventArgs e)
         {
             LoadPage(new UC_DashboardAdmin());
             DebugControls(this);
-            panelContent.Visible = false;
+            panelContent.Visible = true;
         }
 
         private void LoadPage(UserControl page)
@@ -139,12 +144,6 @@ namespace FishIt
             }
         }
 
-
-        private void buttonLogOut_Click(object sender, EventArgs e)
-        {
-            Application.Restart();
-        }
-
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
 
@@ -204,7 +203,7 @@ namespace FishIt
         {
             panelContent.Controls.Clear();
 
-            UC_KelolaDataKolam kelolaDataKolam = new UC_KelolaDataKolam();
+            UC_DataFishIt kelolaDataKolam = new UC_DataFishIt();
 
             kelolaDataKolam.Dock = DockStyle.Fill;
 
@@ -226,7 +225,7 @@ namespace FishIt
         {
             panelContent.Controls.Clear();
 
-            UC_LaporanMonitoring laporanMonitoring = new UC_LaporanMonitoring();
+            UC_Laporan laporanMonitoring = new UC_Laporan();
 
             laporanMonitoring.Dock = DockStyle.Fill;
 
@@ -236,6 +235,221 @@ namespace FishIt
         private void buttonLogoutAdmin_Click(object sender, EventArgs e)
         {
             Application.Restart();
+        }
+
+        private void panelContent_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void buttonDashboard_Click_1(object sender, EventArgs e)
+        {
+            LoadPage(new UC_DashboardAdmin());
+            panelContent.Controls.Clear();
+
+            UC_DashboardAdmin dashboard = new UC_DashboardAdmin();
+
+            dashboard.Dock = DockStyle.Fill;
+
+            panelContent.Controls.Add(dashboard);
+            buttonDashboard.MouseEnter += SidebarButton_MouseEnter;
+            buttonDashboard.MouseLeave += SidebarButton_MouseLeave;
+        }
+
+        private void SidebarButton_MouseEnter(object sender, EventArgs e)
+        {
+            IconButton btn = (IconButton)sender;
+            btn.BackColor = Color.RoyalBlue;
+        }
+
+        private void SidebarButton_MouseLeave(object sender, EventArgs e)
+        {
+            IconButton btn = (IconButton)sender;
+            btn.BackColor = Color.CornflowerBlue;
+        }
+
+        private void buttonKelolaAkun_Click(object sender, EventArgs e)
+        {
+            panelContent.Controls.Clear();
+
+            UC_KelolaAkun akun = new UC_KelolaAkun();
+
+            akun.Dock = DockStyle.Fill;
+
+            panelContent.Controls.Add(akun);
+
+            panelSubKelolaAkun.Visible = !panelSubKelolaAkun.Visible;
+
+            buttonKelolaAkun.MouseEnter += SidebarButton_MouseEnter;
+            buttonKelolaAkun.MouseLeave += SidebarButton_MouseLeave;
+        }
+
+        private void buttonTambahAkun_Click_1(object sender, EventArgs e)
+        {
+            panelContent.Controls.Clear();
+
+            UC_TambahAkun tambahAkun = new UC_TambahAkun();
+            tambahAkun.Dock = DockStyle.Fill;
+
+            panelContent.Controls.Add(tambahAkun);
+
+            buttonTambahAkun.MouseEnter += SidebarButton_MouseEnter;
+            buttonTambahAkun.MouseLeave += SidebarButton_MouseLeave;
+        }
+
+        private void buttonHapusAkun_Click_1(object sender, EventArgs e)
+        {
+            panelContent.Controls.Clear();
+
+            UC_HapusAkun hapusAkun = new UC_HapusAkun();
+            hapusAkun.Dock = DockStyle.Fill;
+
+            panelContent.Controls.Add(hapusAkun);
+
+            buttonHapusAkun.MouseEnter += SidebarButton_MouseEnter;
+            buttonHapusAkun.MouseLeave += SidebarButton_MouseLeave;
+        }
+
+        private void buttonEditAkun_Click_1(object sender, EventArgs e)
+        {
+            panelContent.Controls.Clear();
+
+            UC_EditAkun editAkun = new UC_EditAkun();
+            editAkun.Dock = DockStyle.Fill;
+
+            panelContent.Controls.Add(editAkun);
+
+            buttonEditAkun.MouseEnter += SidebarButton_MouseEnter;
+            buttonEditAkun.MouseLeave += SidebarButton_MouseLeave;
+        }
+
+        private void buttonLogoutAdmin_Click_1(object sender, EventArgs e)
+        {
+            Application.Restart();
+
+            buttonLogoutAdmin.MouseEnter += SidebarButton_MouseEnter;
+            buttonLogoutAdmin.MouseLeave += SidebarButton_MouseLeave;
+        }
+
+        private void buttonIkan_Click(object sender, EventArgs e)
+        {
+            panelContent.Controls.Clear();
+
+            UC_DataFishIt fishIt = new UC_DataFishIt();
+            fishIt.Dock = DockStyle.Fill;
+
+            panelContent.Controls.Add(fishIt);
+
+            panelSubDataFishIt.Visible = !panelSubDataFishIt.Visible;
+
+            buttonIkan.MouseEnter += SidebarButton_MouseEnter;
+            buttonIkan.MouseLeave += SidebarButton_MouseLeave;
+        }
+
+        private void buttonLaporan_Click(object sender, EventArgs e)
+        {
+            panelContent.Controls.Clear();
+
+            UC_Laporan laporan = new UC_Laporan();
+            laporan.Dock = DockStyle.Fill;
+
+            panelContent.Controls.Add(laporan);
+
+            panelSubLaporan.Visible = !panelSubLaporan.Visible;
+
+            buttonLaporan.MouseEnter += SidebarButton_MouseEnter;
+            buttonLaporan.MouseLeave += SidebarButton_MouseLeave;
+        }
+
+        private void buttonMonitoring_Click(object sender, EventArgs e)
+        {
+            panelContent.Controls.Clear();
+
+            UC_Monitoring monitoring = new UC_Monitoring();
+            monitoring.Dock = DockStyle.Fill;
+
+            panelContent.Controls.Add(monitoring);
+
+            buttonMonitoring.MouseEnter += SidebarButton_MouseEnter;
+            buttonMonitoring.MouseLeave += SidebarButton_MouseLeave;
+        }
+
+        private void buttonVerifikasi_Click(object sender, EventArgs e)
+        {
+            panelContent.Controls.Clear();
+
+            UC_VerifikasiSupply verifikasi = new UC_VerifikasiSupply();
+            verifikasi.Dock = DockStyle.Fill;
+
+            panelContent.Controls.Add(verifikasi);
+
+            buttonVerifikasi.MouseEnter += SidebarButton_MouseEnter;
+            buttonVerifikasi.MouseLeave += SidebarButton_MouseLeave;
+        }
+
+        private void buttonPengiriman_Click(object sender, EventArgs e)
+        {
+            panelContent.Controls.Clear();
+
+            UC_Pengiriman pengiriman = new UC_Pengiriman();
+            pengiriman.Dock = DockStyle.Fill;
+
+            panelContent.Controls.Add(pengiriman);
+
+            buttonPengiriman.MouseEnter += SidebarButton_MouseEnter;
+            buttonPengiriman.MouseLeave += SidebarButton_MouseLeave;
+        }
+
+        private void buttonStokIkan_Click_1(object sender, EventArgs e)
+        {
+            panelContent.Controls.Clear();
+
+            UC_StokIkan stokIkan = new UC_StokIkan();
+            stokIkan.Dock = DockStyle.Fill;
+
+            panelContent.Controls.Add(stokIkan);
+
+            buttonStokIkan.MouseEnter += SidebarButton_MouseEnter;
+            buttonStokIkan.MouseLeave += SidebarButton_MouseLeave;
+        }
+
+        private void buttonKolam_Click_1(object sender, EventArgs e)
+        {
+            panelContent.Controls.Clear();
+
+            UC_DataKolam kolam = new UC_DataKolam();
+            kolam.Dock = DockStyle.Fill;
+
+            panelContent.Controls.Add(kolam);
+
+            buttonKolam.MouseEnter += SidebarButton_MouseEnter;
+            buttonKolam.MouseLeave += SidebarButton_MouseLeave;
+        }
+
+        private void buttonBenih_Click_1(object sender, EventArgs e)
+        {
+            panelContent.Controls.Clear();
+
+            UC_DataBenih benih = new UC_DataBenih();
+            benih.Dock = DockStyle.Fill;
+
+            panelContent.Controls.Add(benih);
+
+            buttonBenih.MouseEnter += SidebarButton_MouseEnter;
+            buttonBenih.MouseLeave += SidebarButton_MouseLeave;
+        }
+
+        private void buttonPakan_Click_1(object sender, EventArgs e)
+        {
+            panelContent.Controls.Clear();
+
+            UC_DataPakan pakan = new UC_DataPakan();
+            pakan.Dock = DockStyle.Fill;
+
+            panelContent.Controls.Add(pakan);
+
+            buttonPakan.MouseEnter += SidebarButton_MouseEnter;
+            buttonPakan.MouseLeave += SidebarButton_MouseLeave;
         }
     }
 }

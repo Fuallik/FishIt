@@ -8,16 +8,11 @@ using System.Windows.Forms;
 
 namespace FishIt
 {
-    public partial class UC_KelolaDataKolam : UserControl
+    public partial class UC_StokIkan : UserControl
     {
-        public UC_KelolaDataKolam()
+        public UC_StokIkan()
         {
             InitializeComponent();
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

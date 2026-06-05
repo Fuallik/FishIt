@@ -29,21 +29,33 @@
         private void InitializeComponent()
         {
             label1 = new Label();
+            panel1 = new Panel();
             SuspendLayout();
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(482, 186);
+            label1.ForeColor = Color.White;
+            label1.Location = new Point(553, 188);
             label1.Name = "label1";
             label1.Size = new Size(87, 25);
             label1.TabIndex = 0;
             label1.Text = "INI AKUN";
             // 
+            // panel1
+            // 
+            panel1.BackColor = Color.White;
+            panel1.Location = new Point(30, 32);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(175, 200);
+            panel1.TabIndex = 1;
+            // 
             // UC_KelolaAkun
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(224, 224, 224);
+            Controls.Add(panel1);
             Controls.Add(label1);
             Name = "UC_KelolaAkun";
             Size = new Size(800, 600);
@@ -54,5 +66,6 @@
         #endregion
 
         private Label label1;
+        private Panel panel1;
     }
 }

@@ -8,9 +8,9 @@ using System.Windows.Forms;
 
 namespace FishIt
 {
-    public partial class UC_LaporanMonitoring : UserControl
+    public partial class UC_Laporan : UserControl
     {
-        public UC_LaporanMonitoring()
+        public UC_Laporan()
         {
             InitializeComponent();
         }

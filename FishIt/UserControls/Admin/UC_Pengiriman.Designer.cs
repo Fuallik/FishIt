@@ -1,6 +1,6 @@
 ﻿namespace FishIt
 {
-    partial class UC_LaporanMonitoring
+    partial class UC_Pengiriman
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,31 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            label1 = new Label();
             SuspendLayout();
             // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(232, 182);
-            label1.Name = "label1";
-            label1.Size = new Size(237, 25);
-            label1.TabIndex = 0;
-            label1.Text = "INI LAPORAN MONITORING";
-            // 
-            // UC_LaporanMonitoring
+            // UC_Pengiriman
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(label1);
-            Name = "UC_LaporanMonitoring";
+            Name = "UC_Pengiriman";
             Size = new Size(800, 600);
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
-
-        private Label label1;
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace FishIt
 {
-    partial class UC_DashboardAdmin
+    partial class UC_DataPakan
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,32 +28,31 @@
         /// </summary>
         private void InitializeComponent()
         {
-            label2 = new Label();
+            label1 = new Label();
             SuspendLayout();
             // 
-            // label2
+            // label1
             // 
-            label2.AutoSize = true;
-            label2.Location = new Point(298, 151);
-            label2.Name = "label2";
-            label2.Size = new Size(143, 25);
-            label2.TabIndex = 1;
-            label2.Text = "INIDASHBOARD";
+            label1.AutoSize = true;
+            label1.Location = new Point(359, 288);
+            label1.Name = "label1";
+            label1.Size = new Size(96, 25);
+            label1.TabIndex = 1;
+            label1.Text = "INI PAKAN";
             // 
-            // UC_DashboardAdmin
+            // UC_DataPakan
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(label2);
-            Name = "UC_DashboardAdmin";
+            Controls.Add(label1);
+            Name = "UC_DataPakan";
             Size = new Size(800, 600);
-            Load += UC_DashboardAdmin_Load;
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private Label label2;
+        private Label label1;
     }
 }

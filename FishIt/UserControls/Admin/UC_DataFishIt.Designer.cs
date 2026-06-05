@@ -1,6 +1,6 @@
 ﻿namespace FishIt
 {
-    partial class UC_DashboardAdmin
+    partial class UC_DataFishIt
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,32 +28,32 @@
         /// </summary>
         private void InitializeComponent()
         {
-            label2 = new Label();
+            labelKelolaDataAkun = new Label();
             SuspendLayout();
             // 
-            // label2
+            // labelKelolaDataAkun
             // 
-            label2.AutoSize = true;
-            label2.Location = new Point(298, 151);
-            label2.Name = "label2";
-            label2.Size = new Size(143, 25);
-            label2.TabIndex = 1;
-            label2.Text = "INIDASHBOARD";
+            labelKelolaDataAkun.AutoSize = true;
+            labelKelolaDataAkun.Location = new Point(264, 125);
+            labelKelolaDataAkun.Name = "labelKelolaDataAkun";
+            labelKelolaDataAkun.Size = new Size(215, 25);
+            labelKelolaDataAkun.TabIndex = 0;
+            labelKelolaDataAkun.Text = "INI KELOLA DATA KOLAM";
+            labelKelolaDataAkun.Click += label1_Click;
             // 
-            // UC_DashboardAdmin
+            // UC_KelolaDataKolam
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(label2);
-            Name = "UC_DashboardAdmin";
+            Controls.Add(labelKelolaDataAkun);
+            Name = "UC_KelolaDataKolam";
             Size = new Size(800, 600);
-            Load += UC_DashboardAdmin_Load;
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private Label label2;
+        private Label labelKelolaDataAkun;
     }
 }

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormLogin));
             labelLogin = new Label();
             TBUsername = new TextBox();
             TBPassword = new TextBox();
@@ -37,6 +38,7 @@
             labelJudul = new Label();
             labelPassword = new Label();
             labelUsername = new Label();
+            button1 = new Button();
             SuspendLayout();
             // 
             // labelLogin
@@ -54,18 +56,21 @@
             // 
             // TBUsername
             // 
-            TBUsername.Cursor = Cursors.Cross;
+            TBUsername.BackColor = Color.White;
+            TBUsername.BorderStyle = BorderStyle.None;
             TBUsername.Location = new Point(56, 250);
             TBUsername.Name = "TBUsername";
-            TBUsername.Size = new Size(335, 31);
+            TBUsername.Size = new Size(335, 24);
             TBUsername.TabIndex = 2;
             // 
             // TBPassword
             // 
             TBPassword.Anchor = AnchorStyles.None;
+            TBPassword.BackColor = Color.White;
+            TBPassword.BorderStyle = BorderStyle.None;
             TBPassword.Location = new Point(56, 345);
             TBPassword.Name = "TBPassword";
-            TBPassword.Size = new Size(338, 31);
+            TBPassword.Size = new Size(338, 24);
             TBPassword.TabIndex = 4;
             TBPassword.UseSystemPasswordChar = true;
             TBPassword.TextChanged += TBPassword_TextChanged;
@@ -135,12 +140,28 @@
             labelUsername.Text = "Username";
             labelUsername.Click += label1_Click;
             // 
+            // button1
+            // 
+            button1.BackColor = Color.Transparent;
+            button1.BackgroundImage = (Image)resources.GetObject("button1.BackgroundImage");
+            button1.BackgroundImageLayout = ImageLayout.Zoom;
+            button1.FlatAppearance.BorderSize = 0;
+            button1.FlatStyle = FlatStyle.Flat;
+            button1.Location = new Point(415, 12);
+            button1.Name = "button1";
+            button1.Size = new Size(30, 30);
+            button1.TabIndex = 10;
+            button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click;
+            // 
             // FormLogin
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.White;
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(457, 663);
+            Controls.Add(button1);
             Controls.Add(labelJudul);
             Controls.Add(buttonLogin);
             Controls.Add(buttonRegister);
@@ -170,5 +191,6 @@
         private Label labelJudul;
         private Label labelPassword;
         private Label labelUsername;
+        private Button button1;
     }
 }

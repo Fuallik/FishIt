@@ -135,10 +135,25 @@ namespace FishIt
                                 new FormAdmin().Show();
                             }
 
-                            else if (role == "supplier") //Baru
+                            else if (role == "kasir")
+                            {
+                                new FormKasir().Show();
+                            }
+
+                            else if (role == "pegawai tambak")
+                            {
+                                new FormPegawaiTambak().Show();
+                            }
+
+                            else if (role == "shipper")
+                            {
+                                new FormShipper().Show();
+                            }
+
+                            else if (role == "supplier")
                             {
                                 new FormSupplier().Show();
-                            } //End
+                            }
 
                             else if (role == "pembeli")
                             {
@@ -146,7 +161,7 @@ namespace FishIt
                             }
                             else
                             {
-                                new FormMain().Show(); // fallback
+                                new FormMain().Show();
                             }
                         }
                         else
@@ -156,6 +171,11 @@ namespace FishIt
                     }
                 }
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

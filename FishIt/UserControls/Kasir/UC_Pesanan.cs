@@ -8,16 +8,11 @@ using System.Windows.Forms;
 
 namespace FishIt
 {
-    public partial class UC_DashboardAdmin : UserControl
+    public partial class UC_Pesanan : UserControl
     {
-        public UC_DashboardAdmin()
+        public UC_Pesanan()
         {
             InitializeComponent();
-        }
-
-        private void UC_DashboardAdmin_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }
