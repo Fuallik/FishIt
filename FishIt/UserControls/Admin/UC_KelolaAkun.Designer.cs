@@ -30,6 +30,7 @@
         {
             label1 = new Label();
             panel1 = new Panel();
+            label2 = new Label();
             SuspendLayout();
             // 
             // label1
@@ -45,16 +46,26 @@
             // panel1
             // 
             panel1.BackColor = Color.White;
-            panel1.Location = new Point(30, 32);
+            panel1.Location = new Point(25, 108);
             panel1.Name = "panel1";
             panel1.Size = new Size(175, 200);
             panel1.TabIndex = 1;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(478, 74);
+            label2.Name = "label2";
+            label2.Size = new Size(59, 25);
+            label2.TabIndex = 2;
+            label2.Text = "label2";
             // 
             // UC_KelolaAkun
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(224, 224, 224);
+            Controls.Add(label2);
             Controls.Add(panel1);
             Controls.Add(label1);
             Name = "UC_KelolaAkun";
@@ -67,5 +78,6 @@
 
         private Label label1;
         private Panel panel1;
+        private Label label2;
     }
 }
