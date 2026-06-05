@@ -29,21 +29,32 @@
         private void InitializeComponent()
         {
             label2 = new Label();
+            label1 = new Label();
             SuspendLayout();
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(298, 151);
+            label2.Location = new Point(3, 11);
             label2.Name = "label2";
             label2.Size = new Size(143, 25);
             label2.TabIndex = 1;
             label2.Text = "INIDASHBOARD";
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(642, 562);
+            label1.Name = "label1";
+            label1.Size = new Size(143, 25);
+            label1.TabIndex = 2;
+            label1.Text = "INIDASHBOARD";
+            // 
             // UC_DashboardAdmin
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(label1);
             Controls.Add(label2);
             Name = "UC_DashboardAdmin";
             Size = new Size(800, 600);
@@ -55,5 +66,6 @@
         #endregion
 
         private Label label2;
+        private Label label1;
     }
 }

@@ -45,7 +45,6 @@ namespace FishIt
         {
             LoadPage(new UC_DashboardAdmin());
             DebugControls(this);
-            panelContent.Visible = true;
         }
 
         private void LoadPage(UserControl page)
@@ -64,8 +63,6 @@ namespace FishIt
 
             ResizeControls(this, xRatio, yRatio);
             ResizeFonts(this, scale);
-
-            //UpdateButtonRadius();
         }
 
         private void SaveFonts(Control parent)
@@ -149,87 +146,14 @@ namespace FishIt
 
         }
 
-        private void buttonDashboard_Click(object sender, EventArgs e)
-        {
-            LoadPage(new UC_DashboardAdmin());
-            panelContent.Controls.Clear();
-
-            UC_DashboardAdmin dashboard = new UC_DashboardAdmin();
-
-            dashboard.Dock = DockStyle.Fill;
-
-            panelContent.Controls.Add(dashboard);
-        }
-
         private void panelCT_Paint(object sender, PaintEventArgs e)
         {
 
         }
 
-        private void buttonKlAkun_Click(object sender, EventArgs e)
-        {
-            panelContent.Controls.Clear();
-
-            UC_KelolaAkun akun = new UC_KelolaAkun();
-
-            akun.Dock = DockStyle.Fill;
-
-            panelContent.Controls.Add(akun);
-
-            panelSubKelolaAkun.Visible = !panelSubKelolaAkun.Visible;
-        }
-
-        private void buttonTambahAkun_Click(object sender, EventArgs e)
-        {
-            LoadPage(new UC_TambahAkun());
-        }
-
-        private void buttonEditAkun_Click(object sender, EventArgs e)
-        {
-            LoadPage(new UC_EditAkun());
-        }
-
-        private void buttonHapusAkun_Click(object sender, EventArgs e)
-        {
-            LoadPage(new UC_HapusAkun());
-        }
-
         private void panelSB_Paint(object sender, PaintEventArgs e)
         {
 
-        }
-
-        private void buttonKelolaDataKolam_Click(object sender, EventArgs e)
-        {
-            panelContent.Controls.Clear();
-
-            UC_DataFishIt kelolaDataKolam = new UC_DataFishIt();
-
-            kelolaDataKolam.Dock = DockStyle.Fill;
-
-            panelContent.Controls.Add(kelolaDataKolam);
-        }
-
-        private void buttonVerifikasiSupply_Click(object sender, EventArgs e)
-        {
-            panelContent.Controls.Clear();
-
-            UC_VerifikasiSupply verifikasiSupply = new UC_VerifikasiSupply();
-
-            verifikasiSupply.Dock = DockStyle.Fill;
-
-            panelContent.Controls.Add(verifikasiSupply);
-        }
-
-        private void buttonLaporanMonitoring_Click(object sender, EventArgs e)
-        {
-            panelContent.Controls.Clear();
-
-            UC_Laporan laporanMonitoring = new UC_Laporan();
-
-            laporanMonitoring.Dock = DockStyle.Fill;
-
-            panelContent.Controls.Add(laporanMonitoring);
         }
 
         private void buttonLogoutAdmin_Click(object sender, EventArgs e)
@@ -270,16 +194,15 @@ namespace FishIt
 
         private void buttonKelolaAkun_Click(object sender, EventArgs e)
         {
-            panelContent.Controls.Clear();
 
             UC_KelolaAkun akun = new UC_KelolaAkun();
-
             akun.Dock = DockStyle.Fill;
 
+            panelContent.Controls.Clear();
             panelContent.Controls.Add(akun);
 
             panelSubKelolaAkun.Visible = !panelSubKelolaAkun.Visible;
-
+            
             buttonKelolaAkun.MouseEnter += SidebarButton_MouseEnter;
             buttonKelolaAkun.MouseLeave += SidebarButton_MouseLeave;
         }
@@ -450,6 +373,11 @@ namespace FishIt
 
             buttonPakan.MouseEnter += SidebarButton_MouseEnter;
             buttonPakan.MouseLeave += SidebarButton_MouseLeave;
+        }
+
+        private void panelContent_Paint_1(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

@@ -29,8 +29,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            label1 = new Label();
-            buttonLogOut = new Button();
             panelSB = new Panel();
             buttonLogoutAdmin = new FontAwesome.Sharp.IconButton();
             panelSubLaporan = new Panel();
@@ -50,31 +48,14 @@
             buttonTambahAkun = new FontAwesome.Sharp.IconButton();
             buttonKelolaAkun = new FontAwesome.Sharp.IconButton();
             buttonDashboard = new FontAwesome.Sharp.IconButton();
-            panelNB = new Panel();
+            label1 = new Label();
+            panelTB = new Panel();
             panelContent = new Panel();
             panelSB.SuspendLayout();
             panelSubLaporan.SuspendLayout();
             panelSubDataFishIt.SuspendLayout();
             panelSubKelolaAkun.SuspendLayout();
             SuspendLayout();
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(336, 224);
-            label1.Name = "label1";
-            label1.Size = new Size(99, 25);
-            label1.TabIndex = 0;
-            label1.Text = "INI ADMIN";
-            // 
-            // buttonLogOut
-            // 
-            buttonLogOut.Location = new Point(389, 342);
-            buttonLogOut.Name = "buttonLogOut";
-            buttonLogOut.Size = new Size(112, 34);
-            buttonLogOut.TabIndex = 1;
-            buttonLogOut.Text = "Log Out";
-            buttonLogOut.UseVisualStyleBackColor = true;
             // 
             // panelSB
             // 
@@ -87,10 +68,11 @@
             panelSB.Controls.Add(panelSubKelolaAkun);
             panelSB.Controls.Add(buttonKelolaAkun);
             panelSB.Controls.Add(buttonDashboard);
+            panelSB.Controls.Add(label1);
             panelSB.Dock = DockStyle.Left;
-            panelSB.Location = new Point(0, 50);
+            panelSB.Location = new Point(0, 0);
             panelSB.Name = "panelSB";
-            panelSB.Size = new Size(200, 662);
+            panelSB.Size = new Size(200, 712);
             panelSB.TabIndex = 3;
             panelSB.Paint += panelSB_Paint;
             // 
@@ -108,7 +90,7 @@
             buttonLogoutAdmin.IconFont = FontAwesome.Sharp.IconFont.Auto;
             buttonLogoutAdmin.IconSize = 30;
             buttonLogoutAdmin.ImageAlign = ContentAlignment.MiddleLeft;
-            buttonLogoutAdmin.Location = new Point(0, 612);
+            buttonLogoutAdmin.Location = new Point(0, 662);
             buttonLogoutAdmin.Name = "buttonLogoutAdmin";
             buttonLogoutAdmin.Padding = new Padding(15, 0, 0, 0);
             buttonLogoutAdmin.Size = new Size(200, 50);
@@ -125,7 +107,7 @@
             panelSubLaporan.Controls.Add(buttonVerifikasi);
             panelSubLaporan.Controls.Add(buttonMonitoring);
             panelSubLaporan.Dock = DockStyle.Top;
-            panelSubLaporan.Location = new Point(0, 492);
+            panelSubLaporan.Location = new Point(0, 542);
             panelSubLaporan.Name = "panelSubLaporan";
             panelSubLaporan.Size = new Size(200, 130);
             panelSubLaporan.TabIndex = 0;
@@ -215,7 +197,7 @@
             buttonLaporan.IconFont = FontAwesome.Sharp.IconFont.Auto;
             buttonLaporan.IconSize = 30;
             buttonLaporan.ImageAlign = ContentAlignment.MiddleLeft;
-            buttonLaporan.Location = new Point(0, 442);
+            buttonLaporan.Location = new Point(0, 492);
             buttonLaporan.Name = "buttonLaporan";
             buttonLaporan.Padding = new Padding(15, 0, 0, 0);
             buttonLaporan.Size = new Size(200, 50);
@@ -233,7 +215,7 @@
             panelSubDataFishIt.Controls.Add(buttonKolam);
             panelSubDataFishIt.Controls.Add(buttonStokIkan);
             panelSubDataFishIt.Dock = DockStyle.Top;
-            panelSubDataFishIt.Location = new Point(0, 275);
+            panelSubDataFishIt.Location = new Point(0, 325);
             panelSubDataFishIt.Name = "panelSubDataFishIt";
             panelSubDataFishIt.Size = new Size(200, 167);
             panelSubDataFishIt.TabIndex = 0;
@@ -347,7 +329,7 @@
             buttonIkan.IconFont = FontAwesome.Sharp.IconFont.Auto;
             buttonIkan.IconSize = 30;
             buttonIkan.ImageAlign = ContentAlignment.MiddleLeft;
-            buttonIkan.Location = new Point(0, 225);
+            buttonIkan.Location = new Point(0, 275);
             buttonIkan.Name = "buttonIkan";
             buttonIkan.Padding = new Padding(15, 0, 0, 0);
             buttonIkan.Size = new Size(200, 50);
@@ -364,7 +346,7 @@
             panelSubKelolaAkun.Controls.Add(buttonHapusAkun);
             panelSubKelolaAkun.Controls.Add(buttonTambahAkun);
             panelSubKelolaAkun.Dock = DockStyle.Top;
-            panelSubKelolaAkun.Location = new Point(0, 100);
+            panelSubKelolaAkun.Location = new Point(0, 150);
             panelSubKelolaAkun.Name = "panelSubKelolaAkun";
             panelSubKelolaAkun.Size = new Size(200, 125);
             panelSubKelolaAkun.TabIndex = 0;
@@ -454,7 +436,7 @@
             buttonKelolaAkun.IconFont = FontAwesome.Sharp.IconFont.Auto;
             buttonKelolaAkun.IconSize = 30;
             buttonKelolaAkun.ImageAlign = ContentAlignment.MiddleLeft;
-            buttonKelolaAkun.Location = new Point(0, 50);
+            buttonKelolaAkun.Location = new Point(0, 100);
             buttonKelolaAkun.Name = "buttonKelolaAkun";
             buttonKelolaAkun.Padding = new Padding(15, 0, 0, 0);
             buttonKelolaAkun.Size = new Size(200, 50);
@@ -478,7 +460,7 @@
             buttonDashboard.IconFont = FontAwesome.Sharp.IconFont.Auto;
             buttonDashboard.IconSize = 30;
             buttonDashboard.ImageAlign = ContentAlignment.MiddleLeft;
-            buttonDashboard.Location = new Point(0, 0);
+            buttonDashboard.Location = new Point(0, 50);
             buttonDashboard.Name = "buttonDashboard";
             buttonDashboard.Padding = new Padding(15, 0, 0, 0);
             buttonDashboard.Size = new Size(200, 50);
@@ -489,15 +471,24 @@
             buttonDashboard.UseVisualStyleBackColor = false;
             buttonDashboard.Click += buttonDashboard_Click_1;
             // 
-            // panelNB
+            // label1
             // 
-            panelNB.BackColor = Color.CornflowerBlue;
-            panelNB.Dock = DockStyle.Top;
-            panelNB.Location = new Point(0, 0);
-            panelNB.Name = "panelNB";
-            panelNB.Size = new Size(1002, 50);
-            panelNB.TabIndex = 2;
-            panelNB.Paint += panel1_Paint;
+            label1.Dock = DockStyle.Top;
+            label1.Location = new Point(0, 0);
+            label1.Name = "label1";
+            label1.Size = new Size(200, 50);
+            label1.TabIndex = 0;
+            label1.Text = "label1";
+            label1.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // panelTB
+            // 
+            panelTB.BackColor = Color.Black;
+            panelTB.Dock = DockStyle.Top;
+            panelTB.Location = new Point(200, 0);
+            panelTB.Name = "panelTB";
+            panelTB.Size = new Size(802, 50);
+            panelTB.TabIndex = 0;
             // 
             // panelContent
             // 
@@ -505,8 +496,8 @@
             panelContent.Location = new Point(200, 50);
             panelContent.Name = "panelContent";
             panelContent.Size = new Size(802, 662);
-            panelContent.TabIndex = 4;
-            panelContent.Paint += panelContent_Paint;
+            panelContent.TabIndex = 1;
+            panelContent.Paint += panelContent_Paint_1;
             // 
             // FormAdmin
             // 
@@ -514,10 +505,8 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1002, 712);
             Controls.Add(panelContent);
+            Controls.Add(panelTB);
             Controls.Add(panelSB);
-            Controls.Add(panelNB);
-            Controls.Add(buttonLogOut);
-            Controls.Add(label1);
             FormBorderStyle = FormBorderStyle.None;
             Name = "FormAdmin";
             StartPosition = FormStartPosition.CenterScreen;
@@ -529,17 +518,12 @@
             panelSubDataFishIt.ResumeLayout(false);
             panelSubKelolaAkun.ResumeLayout(false);
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
-
-        private Label label1;
-        private Button buttonLogOut;
         private Panel panelSB;
         private Panel panelNB;
         private FontAwesome.Sharp.IconButton buttonDashboard;
-        private Panel panelContent;
         private FontAwesome.Sharp.IconButton buttonKelolaAkun;
         private Panel panelSubKelolaAkun;
         private FontAwesome.Sharp.IconButton buttonTambahAkun;
@@ -557,5 +541,8 @@
         private FontAwesome.Sharp.IconButton buttonBenih;
         private FontAwesome.Sharp.IconButton buttonKolam;
         private FontAwesome.Sharp.IconButton buttonStokIkan;
+        private Label label1;
+        private Panel panelTB;
+        private Panel panelContent;
     }
 }
