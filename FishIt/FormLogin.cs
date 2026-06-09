@@ -113,7 +113,7 @@ namespace FishIt
                 conn.Open();
 
                 string query =
-                    "SELECT nama_role FROM roles r JOIN akun a on a.id_role = r.id_role WHERE a.username=@u AND a.passwords=@p LIMIT 1";
+                    "SELECT nama_role FROM roles r JOIN akun a on a.id_role = r.id_role WHERE a.username=@u AND a.passwords=@p AND a.aktif = TRUE LIMIT 1";
 
                 using (var cmd = new NpgsqlCommand(query, conn))
                 {

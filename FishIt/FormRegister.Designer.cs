@@ -240,6 +240,7 @@
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.White;
             ClientSize = new Size(500, 800);
             Controls.Add(labelKonfirmasiPassword);
             Controls.Add(TBKonfirmasiPassword);

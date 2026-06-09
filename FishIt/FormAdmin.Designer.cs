@@ -43,8 +43,6 @@
             buttonStokIkan = new FontAwesome.Sharp.IconButton();
             buttonIkan = new FontAwesome.Sharp.IconButton();
             panelSubKelolaAkun = new Panel();
-            buttonEditAkun = new FontAwesome.Sharp.IconButton();
-            buttonHapusAkun = new FontAwesome.Sharp.IconButton();
             buttonTambahAkun = new FontAwesome.Sharp.IconButton();
             buttonKelolaAkun = new FontAwesome.Sharp.IconButton();
             buttonDashboard = new FontAwesome.Sharp.IconButton();
@@ -107,7 +105,7 @@
             panelSubLaporan.Controls.Add(buttonVerifikasi);
             panelSubLaporan.Controls.Add(buttonMonitoring);
             panelSubLaporan.Dock = DockStyle.Top;
-            panelSubLaporan.Location = new Point(0, 542);
+            panelSubLaporan.Location = new Point(0, 460);
             panelSubLaporan.Name = "panelSubLaporan";
             panelSubLaporan.Size = new Size(200, 130);
             panelSubLaporan.TabIndex = 0;
@@ -197,7 +195,7 @@
             buttonLaporan.IconFont = FontAwesome.Sharp.IconFont.Auto;
             buttonLaporan.IconSize = 30;
             buttonLaporan.ImageAlign = ContentAlignment.MiddleLeft;
-            buttonLaporan.Location = new Point(0, 492);
+            buttonLaporan.Location = new Point(0, 410);
             buttonLaporan.Name = "buttonLaporan";
             buttonLaporan.Padding = new Padding(15, 0, 0, 0);
             buttonLaporan.Size = new Size(200, 50);
@@ -215,7 +213,7 @@
             panelSubDataFishIt.Controls.Add(buttonKolam);
             panelSubDataFishIt.Controls.Add(buttonStokIkan);
             panelSubDataFishIt.Dock = DockStyle.Top;
-            panelSubDataFishIt.Location = new Point(0, 325);
+            panelSubDataFishIt.Location = new Point(0, 243);
             panelSubDataFishIt.Name = "panelSubDataFishIt";
             panelSubDataFishIt.Size = new Size(200, 167);
             panelSubDataFishIt.TabIndex = 0;
@@ -329,7 +327,7 @@
             buttonIkan.IconFont = FontAwesome.Sharp.IconFont.Auto;
             buttonIkan.IconSize = 30;
             buttonIkan.ImageAlign = ContentAlignment.MiddleLeft;
-            buttonIkan.Location = new Point(0, 275);
+            buttonIkan.Location = new Point(0, 193);
             buttonIkan.Name = "buttonIkan";
             buttonIkan.Padding = new Padding(15, 0, 0, 0);
             buttonIkan.Size = new Size(200, 50);
@@ -342,62 +340,12 @@
             // 
             // panelSubKelolaAkun
             // 
-            panelSubKelolaAkun.Controls.Add(buttonEditAkun);
-            panelSubKelolaAkun.Controls.Add(buttonHapusAkun);
             panelSubKelolaAkun.Controls.Add(buttonTambahAkun);
             panelSubKelolaAkun.Dock = DockStyle.Top;
             panelSubKelolaAkun.Location = new Point(0, 150);
             panelSubKelolaAkun.Name = "panelSubKelolaAkun";
-            panelSubKelolaAkun.Size = new Size(200, 125);
+            panelSubKelolaAkun.Size = new Size(200, 43);
             panelSubKelolaAkun.TabIndex = 0;
-            // 
-            // buttonEditAkun
-            // 
-            buttonEditAkun.BackColor = Color.Transparent;
-            buttonEditAkun.Dock = DockStyle.Top;
-            buttonEditAkun.FlatAppearance.BorderSize = 0;
-            buttonEditAkun.FlatStyle = FlatStyle.Flat;
-            buttonEditAkun.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            buttonEditAkun.ForeColor = Color.White;
-            buttonEditAkun.IconChar = FontAwesome.Sharp.IconChar.UserPen;
-            buttonEditAkun.IconColor = Color.White;
-            buttonEditAkun.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            buttonEditAkun.IconSize = 30;
-            buttonEditAkun.ImageAlign = ContentAlignment.MiddleLeft;
-            buttonEditAkun.Location = new Point(0, 80);
-            buttonEditAkun.Name = "buttonEditAkun";
-            buttonEditAkun.Padding = new Padding(50, 0, 0, 0);
-            buttonEditAkun.Size = new Size(200, 40);
-            buttonEditAkun.TabIndex = 10;
-            buttonEditAkun.Text = "Edit Akun";
-            buttonEditAkun.TextAlign = ContentAlignment.MiddleLeft;
-            buttonEditAkun.TextImageRelation = TextImageRelation.ImageBeforeText;
-            buttonEditAkun.UseVisualStyleBackColor = false;
-            buttonEditAkun.Click += buttonEditAkun_Click_1;
-            // 
-            // buttonHapusAkun
-            // 
-            buttonHapusAkun.BackColor = Color.Transparent;
-            buttonHapusAkun.Dock = DockStyle.Top;
-            buttonHapusAkun.FlatAppearance.BorderSize = 0;
-            buttonHapusAkun.FlatStyle = FlatStyle.Flat;
-            buttonHapusAkun.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            buttonHapusAkun.ForeColor = Color.White;
-            buttonHapusAkun.IconChar = FontAwesome.Sharp.IconChar.UserMinus;
-            buttonHapusAkun.IconColor = Color.White;
-            buttonHapusAkun.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            buttonHapusAkun.IconSize = 30;
-            buttonHapusAkun.ImageAlign = ContentAlignment.MiddleLeft;
-            buttonHapusAkun.Location = new Point(0, 40);
-            buttonHapusAkun.Name = "buttonHapusAkun";
-            buttonHapusAkun.Padding = new Padding(50, 0, 0, 0);
-            buttonHapusAkun.Size = new Size(200, 40);
-            buttonHapusAkun.TabIndex = 9;
-            buttonHapusAkun.Text = "Hapus Akun";
-            buttonHapusAkun.TextAlign = ContentAlignment.MiddleLeft;
-            buttonHapusAkun.TextImageRelation = TextImageRelation.ImageBeforeText;
-            buttonHapusAkun.UseVisualStyleBackColor = false;
-            buttonHapusAkun.Click += buttonHapusAkun_Click_1;
             // 
             // buttonTambahAkun
             // 
@@ -407,7 +355,7 @@
             buttonTambahAkun.FlatStyle = FlatStyle.Flat;
             buttonTambahAkun.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point, 0);
             buttonTambahAkun.ForeColor = Color.White;
-            buttonTambahAkun.IconChar = FontAwesome.Sharp.IconChar.UserPlus;
+            buttonTambahAkun.IconChar = FontAwesome.Sharp.IconChar.Users;
             buttonTambahAkun.IconColor = Color.White;
             buttonTambahAkun.IconFont = FontAwesome.Sharp.IconFont.Auto;
             buttonTambahAkun.IconSize = 30;
@@ -417,7 +365,7 @@
             buttonTambahAkun.Padding = new Padding(50, 0, 0, 0);
             buttonTambahAkun.Size = new Size(200, 40);
             buttonTambahAkun.TabIndex = 8;
-            buttonTambahAkun.Text = "Tambah Akun";
+            buttonTambahAkun.Text = "Kelola Akun";
             buttonTambahAkun.TextAlign = ContentAlignment.MiddleLeft;
             buttonTambahAkun.TextImageRelation = TextImageRelation.ImageBeforeText;
             buttonTambahAkun.UseVisualStyleBackColor = false;
@@ -441,7 +389,7 @@
             buttonKelolaAkun.Padding = new Padding(15, 0, 0, 0);
             buttonKelolaAkun.Size = new Size(200, 50);
             buttonKelolaAkun.TabIndex = 8;
-            buttonKelolaAkun.Text = "Kelola Akun";
+            buttonKelolaAkun.Text = "Data Akun";
             buttonKelolaAkun.TextAlign = ContentAlignment.MiddleLeft;
             buttonKelolaAkun.TextImageRelation = TextImageRelation.ImageBeforeText;
             buttonKelolaAkun.UseVisualStyleBackColor = false;
@@ -483,7 +431,7 @@
             // 
             // panelTB
             // 
-            panelTB.BackColor = Color.Black;
+            panelTB.BackColor = Color.LightSteelBlue;
             panelTB.Dock = DockStyle.Top;
             panelTB.Location = new Point(200, 0);
             panelTB.Name = "panelTB";
@@ -492,6 +440,7 @@
             // 
             // panelContent
             // 
+            panelContent.BackColor = Color.LightSteelBlue;
             panelContent.Dock = DockStyle.Fill;
             panelContent.Location = new Point(200, 50);
             panelContent.Name = "panelContent";
@@ -527,8 +476,6 @@
         private FontAwesome.Sharp.IconButton buttonKelolaAkun;
         private Panel panelSubKelolaAkun;
         private FontAwesome.Sharp.IconButton buttonTambahAkun;
-        private FontAwesome.Sharp.IconButton buttonEditAkun;
-        private FontAwesome.Sharp.IconButton buttonHapusAkun;
         private FontAwesome.Sharp.IconButton buttonIkan;
         private Panel panelSubDataFishIt;
         private Panel panelSubLaporan;

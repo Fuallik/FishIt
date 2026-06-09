@@ -13,6 +13,7 @@ namespace FishIt
         public UC_DashboardAdmin()
         {
             InitializeComponent();
+            new AutoScaleHelper(this);
         }
 
         private void UC_DashboardAdmin_Load(object sender, EventArgs e)
