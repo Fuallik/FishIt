@@ -8,9 +8,9 @@ using System.Windows.Forms;
 
 namespace FishIt
 {
-    public partial class UC_BuktiTransaksi : UserControl
+    public partial class UC_RiwayatPembayaran : UserControl
     {
-        public UC_BuktiTransaksi()
+        public UC_RiwayatPembayaran()
         {
             InitializeComponent();
         }

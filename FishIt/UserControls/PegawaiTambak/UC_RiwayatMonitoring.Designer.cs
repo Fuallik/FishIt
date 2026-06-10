@@ -1,6 +1,6 @@
-﻿namespace FishIt
+﻿namespace FishIt.UserControls.PegawaiTambak
 {
-    partial class UC_BuktiTransaksi
+    partial class UC_RiwayatMonitoring
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,17 +28,31 @@
         /// </summary>
         private void InitializeComponent()
         {
+            label1 = new Label();
             SuspendLayout();
             // 
-            // UC_BuktiTransaksi
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(286, 217);
+            label1.Name = "label1";
+            label1.Size = new Size(200, 25);
+            label1.TabIndex = 0;
+            label1.Text = "RIWAYAT MONITORING";
+            // 
+            // UC_RiwayatMonitoring
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            Name = "UC_BuktiTransaksi";
+            Controls.Add(label1);
+            Name = "UC_RiwayatMonitoring";
             Size = new Size(800, 600);
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
+
+        private Label label1;
     }
 }

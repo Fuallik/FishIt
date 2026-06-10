@@ -1,6 +1,6 @@
-﻿namespace FishIt.UserControls.PegawaiTambak
+﻿namespace FishIt
 {
-    partial class UC_Monitoring
+    partial class UC_KonfirmasiPembayaran
     {
         /// <summary> 
         /// Required designer variable.
@@ -34,18 +34,18 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(247, 145);
+            label1.Location = new Point(265, 193);
             label1.Name = "label1";
-            label1.Size = new Size(123, 25);
+            label1.Size = new Size(234, 25);
             label1.TabIndex = 0;
-            label1.Text = "MONITORING";
+            label1.Text = "KONFIRMASI PEMBAYARAN";
             // 
-            // UC_Monitoring
+            // UC_KonfirmasiPembayaran
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(label1);
-            Name = "UC_Monitoring";
+            Name = "UC_KonfirmasiPembayaran";
             Size = new Size(800, 600);
             ResumeLayout(false);
             PerformLayout();
