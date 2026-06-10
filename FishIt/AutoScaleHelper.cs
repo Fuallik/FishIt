@@ -15,11 +15,9 @@ public class AutoScaleHelper
         _container = container;
         _originalContainerSize = container.Size;
 
-        // Catat posisi dan font awal semua kontrol di dalam kontainer ini
         SaveBounds(_container);
         SaveFonts(_container);
 
-        // Daftarkan event resize secara otomatis
         _container.Resize += Container_Resize;
     }
 
@@ -27,7 +25,6 @@ public class AutoScaleHelper
     {
         if (_originalContainerSize.Width == 0 || _originalContainerSize.Height == 0) return;
 
-        // Hitung rasio berdasarkan perubahan ukuran kontainer itu sendiri
         float xRatio = (float)_container.Width / _originalContainerSize.Width;
         float yRatio = (float)_container.Height / _originalContainerSize.Height;
         float scale = Math.Min(xRatio, yRatio);

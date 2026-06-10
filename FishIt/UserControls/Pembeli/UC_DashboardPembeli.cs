@@ -8,9 +8,9 @@ using System.Windows.Forms;
 
 namespace FishIt
 {
-    public partial class UC_DataBenih : UserControl
+    public partial class UC_DashboardPembeli : UserControl
     {
-        public UC_DataBenih()
+        public UC_DashboardPembeli()
         {
             InitializeComponent();
         }

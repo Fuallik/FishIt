@@ -109,11 +109,11 @@ namespace FishIt
         private void buttonKelolaAkun_Click(object sender, EventArgs e)
         {
 
-            UC_DataAkun akun = new UC_DataAkun();
-            akun.Dock = DockStyle.Fill;
+            //UC_DataAkun akun = new UC_DataAkun();
+            //akun.Dock = DockStyle.Fill;
 
-            panelContent.Controls.Clear();
-            panelContent.Controls.Add(akun);
+            //panelContent.Controls.Clear();
+            ///panelContent.Controls.Add(akun);
 
             panelSubKelolaAkun.Visible = !panelSubKelolaAkun.Visible;
 
@@ -144,12 +144,12 @@ namespace FishIt
 
         private void buttonIkan_Click(object sender, EventArgs e)
         {
-            panelContent.Controls.Clear();
+            //panelContent.Controls.Clear();
 
-            UC_DataFishIt fishIt = new UC_DataFishIt();
-            fishIt.Dock = DockStyle.Fill;
+            //UC_DataFishIt fishIt = new UC_DataFishIt();
+            //fishIt.Dock = DockStyle.Fill;
 
-            panelContent.Controls.Add(fishIt);
+            //panelContent.Controls.Add(fishIt);
 
             panelSubDataFishIt.Visible = !panelSubDataFishIt.Visible;
 
@@ -237,32 +237,6 @@ namespace FishIt
             buttonKolam.MouseLeave += SidebarButton_MouseLeave;
         }
 
-        private void buttonBenih_Click_1(object sender, EventArgs e)
-        {
-            panelContent.Controls.Clear();
-
-            UC_DataBenih benih = new UC_DataBenih();
-            benih.Dock = DockStyle.Fill;
-
-            panelContent.Controls.Add(benih);
-
-            buttonBenih.MouseEnter += SidebarButton_MouseEnter;
-            buttonBenih.MouseLeave += SidebarButton_MouseLeave;
-        }
-
-        private void buttonPakan_Click_1(object sender, EventArgs e)
-        {
-            panelContent.Controls.Clear();
-
-            UC_DataPakan pakan = new UC_DataPakan();
-            pakan.Dock = DockStyle.Fill;
-
-            panelContent.Controls.Add(pakan);
-
-            buttonPakan.MouseEnter += SidebarButton_MouseEnter;
-            buttonPakan.MouseLeave += SidebarButton_MouseLeave;
-        }
-
         private void panelContent_Paint_1(object sender, PaintEventArgs e)
         {
 
@@ -276,6 +250,18 @@ namespace FishIt
         private void TBSearch_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnDataAkun_Click(object sender, EventArgs e)
+        {
+            UC_DataAkun akun = new UC_DataAkun();
+            akun.Dock = DockStyle.Fill;
+
+            panelContent.Controls.Clear();
+            panelContent.Controls.Add(akun);
+
+            buttonKelolaAkun.MouseEnter += SidebarButton_MouseEnter;
+            buttonKelolaAkun.MouseLeave += SidebarButton_MouseLeave;
         }
     }
 }

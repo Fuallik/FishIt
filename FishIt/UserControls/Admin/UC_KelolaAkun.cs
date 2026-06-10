@@ -1,4 +1,5 @@
-﻿using Npgsql;
+﻿using FontAwesome.Sharp;
+using Npgsql;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,8 +17,9 @@ namespace FishIt
         {
             InitializeComponent();
             PanelHelper.BuatMelengkung(panelJumlahAkun, 25);
-            PanelHelper.BuatMelengkung(panelAkunTambak, 25);
             PanelHelper.BuatMelengkung(panelStatistik, 25);
+            PanelHelper.MakeButtonRounded(btnTambahAkun, 20);
+            PanelHelper.MakeButtonRounded(btnHapus, 20);
             new AutoScaleHelper(this);
         }
         public static class Config
@@ -34,7 +36,6 @@ namespace FishIt
 
         public void MuatDataRiwayat()
         {
-            // Ambil dari VIEW dan urutkan dari yang paling baru (DESC)
             string query = "SELECT * FROM view_laporan_riwayat ORDER BY \"Waktu\" DESC";
 
             using (var conn = new NpgsqlConnection(Config.ConnString))
@@ -49,13 +50,10 @@ namespace FishIt
                         DataTable dt = new DataTable();
                         adapter.Fill(dt);
 
-                        // IKATKAN KE DATA GRID VIEW RIWAYAT KAMU
                         DGVRiwayatTambahAkun.DataSource = dt;
 
-                        // Rapikan tampilan visualnya menggunakan helper tema modern
                         GridHelper.AturTemaModern(DGVRiwayatTambahAkun);
 
-                        // (Opsional) Atur ukuran kolom aktivitas agar lebih lebar dibanding ID
                         if (DGVRiwayatTambahAkun.Columns["Aktivitas"] != null)
                         {
                             DGVRiwayatTambahAkun.Columns["Aktivitas"].Width = 300;
@@ -69,18 +67,6 @@ namespace FishIt
             }
         }
 
-        private void btnTambah_Click(object sender, EventArgs e)
-        {
-            // 1. Buat objek/instance baru dari FormTambahAkun
-            FormTambahAkun formTambah = new FormTambahAkun();
-
-            // 2. Tampilkan form sebagai Dialog (Pop-up yang mengunci halaman belakang)
-            // Menggunakan ShowDialog() jauh lebih disarankan dibanding Show() biasa agar admin fokus mengisi data
-            if (formTambah.ShowDialog() == DialogResult.OK)
-            {
-                MuatDataRiwayat();
-            }
-        }
         private void HitungAkunAktif()
         {
             string query = "SELECT COUNT(*) FROM akun WHERE aktif = true";
@@ -128,7 +114,18 @@ namespace FishIt
                 }
             }
         }
-        private void btnHapusAkun_Click(object sender, EventArgs e)
+
+        private void btnTambahAkun_Click(object sender, EventArgs e)
+        {
+            FormTambahAkun formTambah = new FormTambahAkun();
+
+            if (formTambah.ShowDialog() == DialogResult.OK)
+            {
+                MuatDataRiwayat();
+            }
+        }
+
+        private void btnHapus_Click(object sender, EventArgs e)
         {
             FormHapusAkun formHapus = new FormHapusAkun();
 

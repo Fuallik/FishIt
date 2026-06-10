@@ -29,16 +29,16 @@
         private void InitializeComponent()
         {
             label1 = new Label();
-            panelNB = new Panel();
-            panel1 = new Panel();
-            buttonLogout = new Button();
-            buttonRiwayat = new Button();
-            buttonKeranjang = new Button();
-            buttonKatalog = new Button();
-            buttonDashboard = new Button();
             panelContent = new Panel();
-            panel1.SuspendLayout();
-            panelContent.SuspendLayout();
+            panelTB = new Panel();
+            panelSB = new Panel();
+            buttonLogoutAdmin = new FontAwesome.Sharp.IconButton();
+            buttonRiwayat = new FontAwesome.Sharp.IconButton();
+            buttonKeranjang = new FontAwesome.Sharp.IconButton();
+            buttonKatalogIkan = new FontAwesome.Sharp.IconButton();
+            buttonDashboard = new FontAwesome.Sharp.IconButton();
+            label2 = new Label();
+            panelSB.SuspendLayout();
             SuspendLayout();
             // 
             // label1
@@ -51,100 +51,170 @@
             label1.Text = "INI PEMBELI";
             label1.Click += label1_Click;
             // 
-            // panelNB
+            // panelContent
             // 
-            panelNB.BackColor = Color.CornflowerBlue;
-            panelNB.Dock = DockStyle.Top;
-            panelNB.Location = new Point(0, 0);
-            panelNB.Name = "panelNB";
-            panelNB.Size = new Size(980, 50);
-            panelNB.TabIndex = 5;
+            panelContent.BackColor = Color.LightSteelBlue;
+            panelContent.Dock = DockStyle.Fill;
+            panelContent.Location = new Point(200, 50);
+            panelContent.Name = "panelContent";
+            panelContent.Size = new Size(780, 606);
+            panelContent.TabIndex = 5;
+            panelContent.Paint += panelContent_Paint_1;
             // 
-            // panel1
+            // panelTB
             // 
-            panel1.BackColor = Color.CornflowerBlue;
-            panel1.Controls.Add(buttonLogout);
-            panel1.Controls.Add(buttonRiwayat);
-            panel1.Controls.Add(buttonKeranjang);
-            panel1.Controls.Add(buttonKatalog);
-            panel1.Controls.Add(buttonDashboard);
-            panel1.Dock = DockStyle.Left;
-            panel1.Location = new Point(0, 0);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(200, 606);
-            panel1.TabIndex = 0;
+            panelTB.BackColor = Color.LightSteelBlue;
+            panelTB.Dock = DockStyle.Top;
+            panelTB.Location = new Point(200, 0);
+            panelTB.Name = "panelTB";
+            panelTB.Size = new Size(780, 50);
+            panelTB.TabIndex = 4;
             // 
-            // buttonLogout
+            // panelSB
             // 
-            buttonLogout.Dock = DockStyle.Bottom;
-            buttonLogout.FlatAppearance.BorderSize = 0;
-            buttonLogout.FlatStyle = FlatStyle.Flat;
-            buttonLogout.Location = new Point(0, 556);
-            buttonLogout.Name = "buttonLogout";
-            buttonLogout.Size = new Size(200, 50);
-            buttonLogout.TabIndex = 4;
-            buttonLogout.Text = "LogOut";
-            buttonLogout.UseVisualStyleBackColor = true;
-            buttonLogout.Click += buttonLogout_Click;
+            panelSB.BackColor = Color.CornflowerBlue;
+            panelSB.Controls.Add(buttonLogoutAdmin);
+            panelSB.Controls.Add(buttonRiwayat);
+            panelSB.Controls.Add(buttonKeranjang);
+            panelSB.Controls.Add(buttonKatalogIkan);
+            panelSB.Controls.Add(buttonDashboard);
+            panelSB.Controls.Add(label2);
+            panelSB.Dock = DockStyle.Left;
+            panelSB.Location = new Point(0, 0);
+            panelSB.Name = "panelSB";
+            panelSB.Size = new Size(200, 656);
+            panelSB.TabIndex = 6;
+            // 
+            // buttonLogoutAdmin
+            // 
+            buttonLogoutAdmin.BackColor = Color.Transparent;
+            buttonLogoutAdmin.BackgroundImageLayout = ImageLayout.Zoom;
+            buttonLogoutAdmin.Dock = DockStyle.Bottom;
+            buttonLogoutAdmin.FlatAppearance.BorderSize = 0;
+            buttonLogoutAdmin.FlatStyle = FlatStyle.Flat;
+            buttonLogoutAdmin.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            buttonLogoutAdmin.ForeColor = Color.White;
+            buttonLogoutAdmin.IconChar = FontAwesome.Sharp.IconChar.LongArrowLeft;
+            buttonLogoutAdmin.IconColor = Color.White;
+            buttonLogoutAdmin.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            buttonLogoutAdmin.IconSize = 30;
+            buttonLogoutAdmin.ImageAlign = ContentAlignment.MiddleLeft;
+            buttonLogoutAdmin.Location = new Point(0, 606);
+            buttonLogoutAdmin.Name = "buttonLogoutAdmin";
+            buttonLogoutAdmin.Padding = new Padding(15, 0, 0, 0);
+            buttonLogoutAdmin.Size = new Size(200, 50);
+            buttonLogoutAdmin.TabIndex = 11;
+            buttonLogoutAdmin.Text = "Logout";
+            buttonLogoutAdmin.TextAlign = ContentAlignment.MiddleLeft;
+            buttonLogoutAdmin.TextImageRelation = TextImageRelation.ImageBeforeText;
+            buttonLogoutAdmin.UseVisualStyleBackColor = false;
+            buttonLogoutAdmin.Click += buttonLogoutAdmin_Click;
             // 
             // buttonRiwayat
             // 
+            buttonRiwayat.BackColor = Color.Transparent;
             buttonRiwayat.Dock = DockStyle.Top;
             buttonRiwayat.FlatAppearance.BorderSize = 0;
             buttonRiwayat.FlatStyle = FlatStyle.Flat;
-            buttonRiwayat.Location = new Point(0, 150);
+            buttonRiwayat.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            buttonRiwayat.ForeColor = Color.White;
+            buttonRiwayat.IconChar = FontAwesome.Sharp.IconChar.ArrowsSpin;
+            buttonRiwayat.IconColor = Color.White;
+            buttonRiwayat.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            buttonRiwayat.IconSize = 30;
+            buttonRiwayat.ImageAlign = ContentAlignment.MiddleLeft;
+            buttonRiwayat.Location = new Point(0, 200);
             buttonRiwayat.Name = "buttonRiwayat";
+            buttonRiwayat.Padding = new Padding(15, 0, 0, 0);
             buttonRiwayat.Size = new Size(200, 50);
-            buttonRiwayat.TabIndex = 3;
+            buttonRiwayat.TabIndex = 10;
             buttonRiwayat.Text = "Riwayat";
-            buttonRiwayat.UseVisualStyleBackColor = true;
+            buttonRiwayat.TextAlign = ContentAlignment.MiddleLeft;
+            buttonRiwayat.TextImageRelation = TextImageRelation.ImageBeforeText;
+            buttonRiwayat.UseVisualStyleBackColor = false;
+            buttonRiwayat.Click += buttonRiwayat_Click;
             // 
             // buttonKeranjang
             // 
+            buttonKeranjang.BackColor = Color.Transparent;
             buttonKeranjang.Dock = DockStyle.Top;
             buttonKeranjang.FlatAppearance.BorderSize = 0;
             buttonKeranjang.FlatStyle = FlatStyle.Flat;
-            buttonKeranjang.Location = new Point(0, 100);
+            buttonKeranjang.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            buttonKeranjang.ForeColor = Color.White;
+            buttonKeranjang.IconChar = FontAwesome.Sharp.IconChar.BoxOpen;
+            buttonKeranjang.IconColor = Color.White;
+            buttonKeranjang.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            buttonKeranjang.IconSize = 30;
+            buttonKeranjang.ImageAlign = ContentAlignment.MiddleLeft;
+            buttonKeranjang.Location = new Point(0, 150);
             buttonKeranjang.Name = "buttonKeranjang";
+            buttonKeranjang.Padding = new Padding(15, 0, 0, 0);
             buttonKeranjang.Size = new Size(200, 50);
-            buttonKeranjang.TabIndex = 2;
+            buttonKeranjang.TabIndex = 9;
             buttonKeranjang.Text = "Keranjang";
-            buttonKeranjang.UseVisualStyleBackColor = true;
+            buttonKeranjang.TextAlign = ContentAlignment.MiddleLeft;
+            buttonKeranjang.TextImageRelation = TextImageRelation.ImageBeforeText;
+            buttonKeranjang.UseVisualStyleBackColor = false;
+            buttonKeranjang.Click += buttonKeranjang_Click;
             // 
-            // buttonKatalog
+            // buttonKatalogIkan
             // 
-            buttonKatalog.Dock = DockStyle.Top;
-            buttonKatalog.FlatAppearance.BorderSize = 0;
-            buttonKatalog.FlatStyle = FlatStyle.Flat;
-            buttonKatalog.Location = new Point(0, 50);
-            buttonKatalog.Name = "buttonKatalog";
-            buttonKatalog.Size = new Size(200, 50);
-            buttonKatalog.TabIndex = 1;
-            buttonKatalog.Text = "Katalog Ikan";
-            buttonKatalog.UseVisualStyleBackColor = true;
+            buttonKatalogIkan.BackColor = Color.Transparent;
+            buttonKatalogIkan.Dock = DockStyle.Top;
+            buttonKatalogIkan.FlatAppearance.BorderSize = 0;
+            buttonKatalogIkan.FlatStyle = FlatStyle.Flat;
+            buttonKatalogIkan.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            buttonKatalogIkan.ForeColor = Color.White;
+            buttonKatalogIkan.IconChar = FontAwesome.Sharp.IconChar.FishFins;
+            buttonKatalogIkan.IconColor = Color.White;
+            buttonKatalogIkan.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            buttonKatalogIkan.IconSize = 30;
+            buttonKatalogIkan.ImageAlign = ContentAlignment.MiddleLeft;
+            buttonKatalogIkan.Location = new Point(0, 100);
+            buttonKatalogIkan.Name = "buttonKatalogIkan";
+            buttonKatalogIkan.Padding = new Padding(15, 0, 0, 0);
+            buttonKatalogIkan.Size = new Size(200, 50);
+            buttonKatalogIkan.TabIndex = 8;
+            buttonKatalogIkan.Text = "Katalog Ikan";
+            buttonKatalogIkan.TextAlign = ContentAlignment.MiddleLeft;
+            buttonKatalogIkan.TextImageRelation = TextImageRelation.ImageBeforeText;
+            buttonKatalogIkan.UseVisualStyleBackColor = false;
+            buttonKatalogIkan.Click += buttonKatalogIkan_Click;
             // 
             // buttonDashboard
             // 
+            buttonDashboard.BackColor = Color.Transparent;
             buttonDashboard.Dock = DockStyle.Top;
             buttonDashboard.FlatAppearance.BorderSize = 0;
             buttonDashboard.FlatStyle = FlatStyle.Flat;
-            buttonDashboard.Location = new Point(0, 0);
+            buttonDashboard.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            buttonDashboard.ForeColor = Color.White;
+            buttonDashboard.IconChar = FontAwesome.Sharp.IconChar.Bars;
+            buttonDashboard.IconColor = Color.White;
+            buttonDashboard.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            buttonDashboard.IconSize = 30;
+            buttonDashboard.ImageAlign = ContentAlignment.MiddleLeft;
+            buttonDashboard.Location = new Point(0, 50);
             buttonDashboard.Name = "buttonDashboard";
+            buttonDashboard.Padding = new Padding(15, 0, 0, 0);
             buttonDashboard.Size = new Size(200, 50);
-            buttonDashboard.TabIndex = 0;
+            buttonDashboard.TabIndex = 7;
             buttonDashboard.Text = "Dashboard";
-            buttonDashboard.UseVisualStyleBackColor = true;
+            buttonDashboard.TextAlign = ContentAlignment.MiddleLeft;
+            buttonDashboard.TextImageRelation = TextImageRelation.ImageBeforeText;
+            buttonDashboard.UseVisualStyleBackColor = false;
+            buttonDashboard.Click += buttonDashboard_Click;
             // 
-            // panelContent
+            // label2
             // 
-            panelContent.BackColor = Color.White;
-            panelContent.Controls.Add(panel1);
-            panelContent.Dock = DockStyle.Fill;
-            panelContent.Location = new Point(0, 50);
-            panelContent.Name = "panelContent";
-            panelContent.Size = new Size(980, 606);
-            panelContent.TabIndex = 7;
-            panelContent.Paint += panelContent_Paint;
+            label2.Dock = DockStyle.Top;
+            label2.Location = new Point(0, 0);
+            label2.Name = "label2";
+            label2.Size = new Size(200, 50);
+            label2.TabIndex = 0;
+            label2.Text = "label2";
+            label2.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // FormPembeli
             // 
@@ -152,15 +222,15 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(980, 656);
             Controls.Add(panelContent);
-            Controls.Add(panelNB);
+            Controls.Add(panelTB);
+            Controls.Add(panelSB);
             Controls.Add(label1);
             FormBorderStyle = FormBorderStyle.None;
             Name = "FormPembeli";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "FormPembeli";
             WindowState = FormWindowState.Maximized;
-            panel1.ResumeLayout(false);
-            panelContent.ResumeLayout(false);
+            panelSB.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -168,13 +238,14 @@
         #endregion
 
         private Label label1;
-        private Panel panelNB;
-        private Panel panel1;
-        private Button buttonDashboard;
         private Panel panelContent;
-        private Button buttonKatalog;
-        private Button buttonLogout;
-        private Button buttonRiwayat;
-        private Button buttonKeranjang;
+        private Panel panelTB;
+        private Panel panelSB;
+        private FontAwesome.Sharp.IconButton buttonLogoutAdmin;
+        private FontAwesome.Sharp.IconButton buttonRiwayat;
+        private FontAwesome.Sharp.IconButton buttonKeranjang;
+        private FontAwesome.Sharp.IconButton buttonKatalogIkan;
+        private FontAwesome.Sharp.IconButton buttonDashboard;
+        private Label label2;
     }
 }

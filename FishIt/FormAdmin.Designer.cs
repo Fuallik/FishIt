@@ -37,12 +37,11 @@
             buttonMonitoring = new FontAwesome.Sharp.IconButton();
             buttonLaporan = new FontAwesome.Sharp.IconButton();
             panelSubDataFishIt = new Panel();
-            buttonPakan = new FontAwesome.Sharp.IconButton();
-            buttonBenih = new FontAwesome.Sharp.IconButton();
             buttonKolam = new FontAwesome.Sharp.IconButton();
             buttonStokIkan = new FontAwesome.Sharp.IconButton();
             buttonIkan = new FontAwesome.Sharp.IconButton();
             panelSubKelolaAkun = new Panel();
+            btnDataAkun = new FontAwesome.Sharp.IconButton();
             buttonTambahAkun = new FontAwesome.Sharp.IconButton();
             buttonKelolaAkun = new FontAwesome.Sharp.IconButton();
             buttonDashboard = new FontAwesome.Sharp.IconButton();
@@ -105,7 +104,7 @@
             panelSubLaporan.Controls.Add(buttonVerifikasi);
             panelSubLaporan.Controls.Add(buttonMonitoring);
             panelSubLaporan.Dock = DockStyle.Top;
-            panelSubLaporan.Location = new Point(0, 460);
+            panelSubLaporan.Location = new Point(0, 418);
             panelSubLaporan.Name = "panelSubLaporan";
             panelSubLaporan.Size = new Size(200, 130);
             panelSubLaporan.TabIndex = 0;
@@ -195,7 +194,7 @@
             buttonLaporan.IconFont = FontAwesome.Sharp.IconFont.Auto;
             buttonLaporan.IconSize = 30;
             buttonLaporan.ImageAlign = ContentAlignment.MiddleLeft;
-            buttonLaporan.Location = new Point(0, 410);
+            buttonLaporan.Location = new Point(0, 368);
             buttonLaporan.Name = "buttonLaporan";
             buttonLaporan.Padding = new Padding(15, 0, 0, 0);
             buttonLaporan.Size = new Size(200, 50);
@@ -208,63 +207,13 @@
             // 
             // panelSubDataFishIt
             // 
-            panelSubDataFishIt.Controls.Add(buttonPakan);
-            panelSubDataFishIt.Controls.Add(buttonBenih);
             panelSubDataFishIt.Controls.Add(buttonKolam);
             panelSubDataFishIt.Controls.Add(buttonStokIkan);
             panelSubDataFishIt.Dock = DockStyle.Top;
-            panelSubDataFishIt.Location = new Point(0, 243);
+            panelSubDataFishIt.Location = new Point(0, 281);
             panelSubDataFishIt.Name = "panelSubDataFishIt";
-            panelSubDataFishIt.Size = new Size(200, 167);
+            panelSubDataFishIt.Size = new Size(200, 87);
             panelSubDataFishIt.TabIndex = 0;
-            // 
-            // buttonPakan
-            // 
-            buttonPakan.BackColor = Color.Transparent;
-            buttonPakan.Dock = DockStyle.Top;
-            buttonPakan.FlatAppearance.BorderSize = 0;
-            buttonPakan.FlatStyle = FlatStyle.Flat;
-            buttonPakan.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            buttonPakan.ForeColor = Color.White;
-            buttonPakan.IconChar = FontAwesome.Sharp.IconChar.WheatAwn;
-            buttonPakan.IconColor = Color.White;
-            buttonPakan.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            buttonPakan.IconSize = 30;
-            buttonPakan.ImageAlign = ContentAlignment.MiddleLeft;
-            buttonPakan.Location = new Point(0, 120);
-            buttonPakan.Name = "buttonPakan";
-            buttonPakan.Padding = new Padding(50, 0, 0, 0);
-            buttonPakan.Size = new Size(200, 40);
-            buttonPakan.TabIndex = 16;
-            buttonPakan.Text = "Data Pakan";
-            buttonPakan.TextAlign = ContentAlignment.MiddleLeft;
-            buttonPakan.TextImageRelation = TextImageRelation.ImageBeforeText;
-            buttonPakan.UseVisualStyleBackColor = false;
-            buttonPakan.Click += buttonPakan_Click_1;
-            // 
-            // buttonBenih
-            // 
-            buttonBenih.BackColor = Color.Transparent;
-            buttonBenih.Dock = DockStyle.Top;
-            buttonBenih.FlatAppearance.BorderSize = 0;
-            buttonBenih.FlatStyle = FlatStyle.Flat;
-            buttonBenih.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            buttonBenih.ForeColor = Color.White;
-            buttonBenih.IconChar = FontAwesome.Sharp.IconChar.Egg;
-            buttonBenih.IconColor = Color.White;
-            buttonBenih.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            buttonBenih.IconSize = 30;
-            buttonBenih.ImageAlign = ContentAlignment.MiddleLeft;
-            buttonBenih.Location = new Point(0, 80);
-            buttonBenih.Name = "buttonBenih";
-            buttonBenih.Padding = new Padding(50, 0, 0, 0);
-            buttonBenih.Size = new Size(200, 40);
-            buttonBenih.TabIndex = 15;
-            buttonBenih.Text = "Data Benih";
-            buttonBenih.TextAlign = ContentAlignment.MiddleLeft;
-            buttonBenih.TextImageRelation = TextImageRelation.ImageBeforeText;
-            buttonBenih.UseVisualStyleBackColor = false;
-            buttonBenih.Click += buttonBenih_Click_1;
             // 
             // buttonKolam
             // 
@@ -282,7 +231,7 @@
             buttonKolam.Location = new Point(0, 40);
             buttonKolam.Name = "buttonKolam";
             buttonKolam.Padding = new Padding(50, 0, 0, 0);
-            buttonKolam.Size = new Size(200, 40);
+            buttonKolam.Size = new Size(200, 47);
             buttonKolam.TabIndex = 14;
             buttonKolam.Text = "Data Kolam";
             buttonKolam.TextAlign = ContentAlignment.MiddleLeft;
@@ -327,7 +276,7 @@
             buttonIkan.IconFont = FontAwesome.Sharp.IconFont.Auto;
             buttonIkan.IconSize = 30;
             buttonIkan.ImageAlign = ContentAlignment.MiddleLeft;
-            buttonIkan.Location = new Point(0, 193);
+            buttonIkan.Location = new Point(0, 231);
             buttonIkan.Name = "buttonIkan";
             buttonIkan.Padding = new Padding(15, 0, 0, 0);
             buttonIkan.Size = new Size(200, 50);
@@ -340,12 +289,37 @@
             // 
             // panelSubKelolaAkun
             // 
+            panelSubKelolaAkun.Controls.Add(btnDataAkun);
             panelSubKelolaAkun.Controls.Add(buttonTambahAkun);
             panelSubKelolaAkun.Dock = DockStyle.Top;
             panelSubKelolaAkun.Location = new Point(0, 150);
             panelSubKelolaAkun.Name = "panelSubKelolaAkun";
-            panelSubKelolaAkun.Size = new Size(200, 43);
+            panelSubKelolaAkun.Size = new Size(200, 81);
             panelSubKelolaAkun.TabIndex = 0;
+            // 
+            // btnDataAkun
+            // 
+            btnDataAkun.BackColor = Color.Transparent;
+            btnDataAkun.Dock = DockStyle.Top;
+            btnDataAkun.FlatAppearance.BorderSize = 0;
+            btnDataAkun.FlatStyle = FlatStyle.Flat;
+            btnDataAkun.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnDataAkun.ForeColor = Color.White;
+            btnDataAkun.IconChar = FontAwesome.Sharp.IconChar.UserFriends;
+            btnDataAkun.IconColor = Color.White;
+            btnDataAkun.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            btnDataAkun.IconSize = 30;
+            btnDataAkun.ImageAlign = ContentAlignment.MiddleLeft;
+            btnDataAkun.Location = new Point(0, 40);
+            btnDataAkun.Name = "btnDataAkun";
+            btnDataAkun.Padding = new Padding(50, 0, 0, 0);
+            btnDataAkun.Size = new Size(200, 40);
+            btnDataAkun.TabIndex = 9;
+            btnDataAkun.Text = "Data Akun";
+            btnDataAkun.TextAlign = ContentAlignment.MiddleLeft;
+            btnDataAkun.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnDataAkun.UseVisualStyleBackColor = false;
+            btnDataAkun.Click += btnDataAkun_Click;
             // 
             // buttonTambahAkun
             // 
@@ -389,7 +363,7 @@
             buttonKelolaAkun.Padding = new Padding(15, 0, 0, 0);
             buttonKelolaAkun.Size = new Size(200, 50);
             buttonKelolaAkun.TabIndex = 8;
-            buttonKelolaAkun.Text = "Data Akun";
+            buttonKelolaAkun.Text = "Akun";
             buttonKelolaAkun.TextAlign = ContentAlignment.MiddleLeft;
             buttonKelolaAkun.TextImageRelation = TextImageRelation.ImageBeforeText;
             buttonKelolaAkun.UseVisualStyleBackColor = false;
@@ -484,12 +458,11 @@
         private FontAwesome.Sharp.IconButton buttonPengiriman;
         private FontAwesome.Sharp.IconButton buttonVerifikasi;
         private FontAwesome.Sharp.IconButton buttonMonitoring;
-        private FontAwesome.Sharp.IconButton buttonPakan;
-        private FontAwesome.Sharp.IconButton buttonBenih;
         private FontAwesome.Sharp.IconButton buttonKolam;
         private FontAwesome.Sharp.IconButton buttonStokIkan;
         private Label label1;
         private Panel panelTB;
         private Panel panelContent;
+        private FontAwesome.Sharp.IconButton btnDataAkun;
     }
 }

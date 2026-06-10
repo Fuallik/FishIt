@@ -1,0 +1,12 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace FishIt
+{
+    public static class Session
+    {
+        public static int IdAkun { get; set; }
+        public static string NamaUser { get; set; }
+    }
+}

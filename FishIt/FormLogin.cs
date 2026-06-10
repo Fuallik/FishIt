@@ -8,6 +8,7 @@ using System.Drawing;
 using System.Reflection.Emit;
 using System.Text;
 using System.Windows.Forms;
+using static PanelHelper;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace FishIt
@@ -94,6 +95,9 @@ namespace FishIt
         private void buttonRegister_MouseLeave(object sender, EventArgs e)
         {
             buttonRegister.ForeColor = Color.RoyalBlue;
+
+            buttonRegister.MouseEnter += buttonRegister_MouseEnter;
+            buttonRegister.MouseLeave += buttonRegister_MouseLeave;
         }
 
         private void labelPassword_Click(object sender, EventArgs e)
@@ -112,8 +116,11 @@ namespace FishIt
             {
                 conn.Open();
 
-                string query =
-                    "SELECT nama_role FROM roles r JOIN akun a on a.id_role = r.id_role WHERE a.username=@u AND a.passwords=@p AND a.aktif = TRUE LIMIT 1";
+                string query = @"SELECT r.nama_role, a.id_akun, a.nama 
+                             FROM roles r 
+                             JOIN akun a ON a.id_role = r.id_role 
+                             WHERE a.username=@u AND a.passwords=@p AND a.aktif = TRUE 
+                             LIMIT 1";
 
                 using (var cmd = new NpgsqlCommand(query, conn))
                 {
@@ -126,9 +133,10 @@ namespace FishIt
                         {
                             string role = reader.GetString(0);
 
-                            MessageBox.Show("Login berhasil sebagai " + role);
+                            Session.IdAkun = Convert.ToInt32(reader["id_akun"]);
+                            Session.NamaUser = reader["nama"].ToString();
 
-                            this.Close(); // tutup form login
+                            this.Close();
 
                             if (role == "admins")
                             {

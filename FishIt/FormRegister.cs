@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Text;
@@ -25,6 +26,10 @@ namespace FishIt
             TBAlamat.PlaceholderText = "Alamat";
             TBKelurahan.PlaceholderText = "Kelurahan";
             TBKecamatan.PlaceholderText = "Kecamatan";
+        }
+        public static class Config
+        {
+            public static string ConnString = ConfigurationManager.ConnectionStrings["DbConnection"].ConnectionString;
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -124,9 +129,7 @@ namespace FishIt
             try
             {
                 // Panggil koneksi Database menggunakan class buatanmu
-                Database db = new Database(Config.ConnString);
-
-                using (var conn = db.GetConnection())
+                using (var conn = new NpgsqlConnection(Config.ConnString))
                 {
                     conn.Open();
 

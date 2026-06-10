@@ -1,6 +1,6 @@
 ﻿namespace FishIt
 {
-    partial class UC_DataBenih
+    partial class UC_DashboardPembeli
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,15 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            SuspendLayout();
-            // 
-            // UC_DataBenih
-            // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
-            AutoScaleMode = AutoScaleMode.Font;
-            Name = "UC_DataBenih";
-            Size = new Size(800, 600);
-            ResumeLayout(false);
+            components = new System.ComponentModel.Container();
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         }
 
         #endregion
