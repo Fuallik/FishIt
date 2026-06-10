@@ -13,6 +13,7 @@ namespace FishIt.UserControls.PegawaiTambak
         public UC_InfoStok()
         {
             InitializeComponent();
+            new AutoScaleHelper(this);
         }
     }
 }

@@ -20,5 +20,10 @@ namespace FishIt
         {
 
         }
+
+        private void lblKasirKelola_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

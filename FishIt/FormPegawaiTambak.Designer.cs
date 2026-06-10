@@ -75,7 +75,7 @@
             // 
             // panelTB
             // 
-            panelTB.BackColor = Color.Black;
+            panelTB.BackColor = Color.Transparent;
             panelTB.Dock = DockStyle.Top;
             panelTB.Location = new Point(200, 0);
             panelTB.Name = "panelTB";

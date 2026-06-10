@@ -28,31 +28,61 @@
         /// </summary>
         private void InitializeComponent()
         {
-            label1 = new Label();
+            DGVRiwayatTambahAkun = new DataGridView();
+            panel3 = new Panel();
+            label6 = new Label();
+            ((System.ComponentModel.ISupportInitialize)DGVRiwayatTambahAkun).BeginInit();
+            panel3.SuspendLayout();
             SuspendLayout();
             // 
-            // label1
+            // DGVRiwayatTambahAkun
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(286, 217);
-            label1.Name = "label1";
-            label1.Size = new Size(200, 25);
-            label1.TabIndex = 0;
-            label1.Text = "RIWAYAT MONITORING";
+            DGVRiwayatTambahAkun.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            DGVRiwayatTambahAkun.Location = new Point(30, 106);
+            DGVRiwayatTambahAkun.Name = "DGVRiwayatTambahAkun";
+            DGVRiwayatTambahAkun.RowHeadersWidth = 62;
+            DGVRiwayatTambahAkun.Size = new Size(740, 470);
+            DGVRiwayatTambahAkun.TabIndex = 40;
+            // 
+            // panel3
+            // 
+            panel3.BackColor = Color.CornflowerBlue;
+            panel3.Controls.Add(label6);
+            panel3.Location = new Point(30, 21);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(740, 55);
+            panel3.TabIndex = 43;
+            // 
+            // label6
+            // 
+            label6.BackColor = Color.Transparent;
+            label6.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label6.ForeColor = Color.White;
+            label6.Location = new Point(3, 9);
+            label6.Name = "label6";
+            label6.Size = new Size(737, 32);
+            label6.TabIndex = 3;
+            label6.Text = "Riwayat Monitoring";
+            label6.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // UC_RiwayatMonitoring
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(label1);
+            BackColor = Color.LightSteelBlue;
+            Controls.Add(panel3);
+            Controls.Add(DGVRiwayatTambahAkun);
             Name = "UC_RiwayatMonitoring";
             Size = new Size(800, 600);
+            ((System.ComponentModel.ISupportInitialize)DGVRiwayatTambahAkun).EndInit();
+            panel3.ResumeLayout(false);
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
 
-        private Label label1;
+        private DataGridView DGVRiwayatTambahAkun;
+        private Panel panel3;
+        private Label label6;
     }
 }

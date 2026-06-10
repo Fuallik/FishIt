@@ -13,6 +13,7 @@ namespace FishIt.UserControls.PegawaiTambak
         public UC_RiwayatMonitoring()
         {
             InitializeComponent();
+            new AutoScaleHelper(this);
         }
     }
 }

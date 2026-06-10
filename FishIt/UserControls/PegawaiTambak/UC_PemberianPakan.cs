@@ -13,6 +13,12 @@ namespace FishIt.UserControls.PegawaiTambak
         public UC_PemberianPakan()
         {
             InitializeComponent();
+            new AutoScaleHelper(this);
+        }
+
+        private void labelTotalPanen_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
