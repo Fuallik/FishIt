@@ -6,11 +6,11 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-namespace FishIt.UserControls.PegawaiTambak
+namespace FishIt
 {
-    public partial class UC_Monitoring : UserControl
+    public partial class UC_KonfirmasiPembayaran : UserControl
     {
-        public UC_Monitoring()
+        public UC_KonfirmasiPembayaran()
         {
             InitializeComponent();
         }

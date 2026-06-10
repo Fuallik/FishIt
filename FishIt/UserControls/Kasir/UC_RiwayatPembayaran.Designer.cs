@@ -1,6 +1,6 @@
 ﻿namespace FishIt
 {
-    partial class UC_Pesanan
+    partial class UC_RiwayatPembayaran
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,17 +28,31 @@
         /// </summary>
         private void InitializeComponent()
         {
+            label1 = new Label();
             SuspendLayout();
             // 
-            // UC_Pesanan
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(262, 181);
+            label1.Name = "label1";
+            label1.Size = new Size(202, 25);
+            label1.TabIndex = 0;
+            label1.Text = "RIWAYAT PEMBAYARAN";
+            // 
+            // UC_RiwayatPembayaran
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            Name = "UC_Pesanan";
+            Controls.Add(label1);
+            Name = "UC_RiwayatPembayaran";
             Size = new Size(800, 600);
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
+
+        private Label label1;
     }
 }

@@ -1,6 +1,6 @@
-﻿namespace FishIt
+﻿namespace FishIt.UserControls.PegawaiTambak
 {
-    partial class UC_DashboardKasir
+    partial class UC_Operasi
     {
         /// <summary> 
         /// Required designer variable.
@@ -34,18 +34,18 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(330, 171);
+            label1.Location = new Point(269, 196);
             label1.Name = "label1";
-            label1.Size = new Size(173, 25);
+            label1.Size = new Size(83, 25);
             label1.TabIndex = 0;
-            label1.Text = "DASHBOARD KASIR";
+            label1.Text = "OPERASI";
             // 
-            // UC_DashboardKasir
+            // UC_Operasi
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(label1);
-            Name = "UC_DashboardKasir";
+            Name = "UC_Operasi";
             Size = new Size(800, 600);
             ResumeLayout(false);
             PerformLayout();
