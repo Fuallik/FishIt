@@ -136,6 +136,37 @@ namespace FishIt
         {
 
         }
+        private void buttonDashboard_Click(object sender, EventArgs e)
+        {
+            LoadPage(new UC_DashboardKasir());
+            panelContent.Controls.Clear();
+
+            UC_DashboardKasir dashboard = new UC_DashboardKasir();
+
+            dashboard.Dock = DockStyle.Fill;
+
+            panelContent.Controls.Add(dashboard);
+        }
+
+        private void buttonKonfirmasiPembayaran_Click(object sender, EventArgs e)
+        {
+            panelContent.Controls.Clear();
+
+            UC_KonfirmasiPembayaran konfirmasiPembayaran = new UC_KonfirmasiPembayaran();
+            konfirmasiPembayaran.Dock = DockStyle.Fill;
+
+            panelContent.Controls.Add(konfirmasiPembayaran);
+        }
+
+        private void buttonRiwayatPembayaran_Click(object sender, EventArgs e)
+        {
+            panelContent.Controls.Clear();
+
+            UC_RiwayatPembayaran riwayatPembayaran = new UC_RiwayatPembayaran();
+            riwayatPembayaran.Dock = DockStyle.Fill;
+
+            panelContent.Controls.Add(riwayatPembayaran);
+        }
 
         private void buttonLogout_Click(object sender, EventArgs e)
         {
