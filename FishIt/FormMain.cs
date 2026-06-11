@@ -11,6 +11,20 @@ namespace FishIt
         {
             InitializeComponent();
 
+            buttonRegister.FlatStyle = FlatStyle.Flat;
+            buttonRegister.FlatAppearance.BorderSize = 0;
+
+            buttonRegister.BackColor = Color.Transparent;
+            buttonRegister.FlatAppearance.MouseOverBackColor = Color.Transparent;
+            buttonRegister.FlatAppearance.MouseDownBackColor = Color.Transparent;
+
+            buttonRegister.ForeColor = Color.Blue;
+
+            buttonRegister.UseVisualStyleBackColor = false;
+
+            buttonRegister.MouseEnter += buttonRegister_MouseEnter;
+            buttonRegister.MouseLeave += buttonRegister_MouseLeave;
+
             new AutoScaleHelper(this);
         }
         public static class Config
@@ -37,11 +51,7 @@ namespace FishIt
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            // HAPUS KODE INI: originalFormSize = this.ClientSize;
-            // HAPUS KODE INI: SaveFonts(this);
-            // HAPUS KODE INI: SaveBounds(this);
-
-            // Biarkan fungsi yang lain tetap berjalan
+            
         }
 
         private void buttonLogin_Click(object sender, EventArgs e)

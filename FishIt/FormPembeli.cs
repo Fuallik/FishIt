@@ -11,26 +11,17 @@ namespace FishIt
 {
     public partial class FormPembeli : Form
     {
-        private Size originalFormSize;
-        private Dictionary<Control, Rectangle> ControlBounds = new Dictionary<Control, Rectangle>();
-        private Dictionary<Control, float> OriginalFonts = new Dictionary<Control, float>();
-        private float originalFontSize;
         public FormPembeli()
         {
             InitializeComponent();
             new AutoScaleHelper(this);
-
-            this.AutoScaleMode = AutoScaleMode.Dpi;
-            this.ActiveControl = null;
-            this.WindowState = FormWindowState.Maximized;
         }
 
         private void FormPembeli_Load(object sender, EventArgs e)
         {
-            LoadPage(new UC_DashboardAdmin()); ;
+            LoadPage(new UC_DashboardPembeli()); ;
             panelContent.Visible = false;
         }
-
         private void LoadPage(UserControl page)
         {
             panelContent.Controls.Clear();

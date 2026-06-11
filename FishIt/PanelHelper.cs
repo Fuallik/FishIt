@@ -57,13 +57,10 @@ public static class PanelHelper
     }
     public static void ShowUserControl(Panel pnl, UserControl uc)
     {
-        // Bersihkan UserControl lama yang ada di panel konten
         pnl.Controls.Clear();
 
-        // Atur agar ukurannya otomatis penuh mengikuti panel
         uc.Dock = DockStyle.Fill;
 
-        // Masukkan UserControl baru ke dalam panel, lalu tampilkan
         pnl.Controls.Add(uc);
         uc.BringToFront();
     }

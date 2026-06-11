@@ -22,23 +22,26 @@ namespace FishIt
 
             TBUsername.PlaceholderText = "Username";
             TBPassword.PlaceholderText = "Password";
-            // Background transparan
+
             buttonRegister.FlatStyle = FlatStyle.Flat;
             buttonRegister.FlatAppearance.BorderSize = 0;
-
             buttonRegister.BackColor = Color.Transparent;
             buttonRegister.FlatAppearance.MouseOverBackColor = Color.Transparent;
             buttonRegister.FlatAppearance.MouseDownBackColor = Color.Transparent;
-
-            // Warna awal tulisan
             buttonRegister.ForeColor = Color.Blue;
-
-            // Support transparan
             buttonRegister.UseVisualStyleBackColor = false;
-
-            // Event hover & click
             buttonRegister.MouseEnter += buttonRegister_MouseEnter;
             buttonRegister.MouseLeave += buttonRegister_MouseLeave;
+
+            btnExit.FlatStyle = FlatStyle.Flat;
+            btnExit.FlatAppearance.BorderSize = 0;
+            btnExit.BackColor = Color.Transparent;
+            btnExit.FlatAppearance.MouseOverBackColor = Color.Transparent;
+            btnExit.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            btnExit.ForeColor = Color.Black;
+            btnExit.UseVisualStyleBackColor = false;
+            btnExit.MouseEnter += btnExit_MouseEnter;
+            btnExit.MouseLeave += btnExit_MouseLeave;
         }
         public static class Config
         {
@@ -69,9 +72,7 @@ namespace FishIt
 
         private void buttonRegister_Click(object sender, EventArgs e)
         {
-            FormRegister register = Application.OpenForms
-        .OfType<FormRegister>()
-        .FirstOrDefault();
+            FormRegister register = Application.OpenForms.OfType<FormRegister>().FirstOrDefault();
 
             if (register == null)
             {
@@ -85,19 +86,29 @@ namespace FishIt
                 register.Focus();
             }
         }
-        // HOVER -> GREEN
         private void buttonRegister_MouseEnter(object sender, EventArgs e)
         {
             buttonRegister.ForeColor = Color.MidnightBlue;
         }
 
-        // KEMBALI NORMAL
         private void buttonRegister_MouseLeave(object sender, EventArgs e)
         {
             buttonRegister.ForeColor = Color.RoyalBlue;
 
             buttonRegister.MouseEnter += buttonRegister_MouseEnter;
             buttonRegister.MouseLeave += buttonRegister_MouseLeave;
+        }
+        private void btnExit_MouseEnter(object sender, EventArgs e)
+        {
+            btnExit.ForeColor = Color.MidnightBlue;
+        }
+
+        private void btnExit_MouseLeave(object sender, EventArgs e)
+        {
+            btnExit.ForeColor = Color.Black;
+
+            btnExit.MouseEnter += btnExit_MouseEnter;
+            btnExit.MouseLeave += btnExit_MouseLeave;
         }
 
         private void labelPassword_Click(object sender, EventArgs e)
@@ -112,72 +123,80 @@ namespace FishIt
 
         private void buttonLogin_Click(object sender, EventArgs e)
         {
+            string query = @"SELECT r.nama_role, a.id_akun, a.username 
+                             FROM akun a 
+                             JOIN roles r ON a.id_role = r.id_role 
+                             WHERE a.username=@u AND a.passwords=@p AND a.aktif = TRUE 
+                             LIMIT 1";
+
             using (var conn = new NpgsqlConnection(Config.ConnString))
             {
                 conn.Open();
 
-                string query = @"SELECT r.nama_role, a.id_akun, a.nama 
-                             FROM roles r 
-                             JOIN akun a ON a.id_role = r.id_role 
-                             WHERE a.username=@u AND a.passwords=@p AND a.aktif = TRUE 
-                             LIMIT 1";
-
                 using (var cmd = new NpgsqlCommand(query, conn))
-                {
-                    cmd.Parameters.AddWithValue("@u", TBUsername.Text);
-                    cmd.Parameters.AddWithValue("@p", TBPassword.Text);
-
-                    using (var reader = cmd.ExecuteReader())
+                    try
                     {
-                        if (reader.Read())
+                        cmd.Parameters.AddWithValue("@u", TBUsername.Text);
+                        cmd.Parameters.AddWithValue("@p", TBPassword.Text);
+
+                        using (var reader = cmd.ExecuteReader())
                         {
-                            string role = reader.GetString(0);
-
-                            Session.IdAkun = Convert.ToInt32(reader["id_akun"]);
-                            Session.NamaUser = reader["nama"].ToString();
-
-                            this.Close();
-
-                            if (role == "admins")
+                            if (reader.Read())
                             {
-                                new FormAdmin().Show();
-                            }
+                                string role = reader.GetString(0);
 
-                            else if (role == "kasir")
-                            {
-                                new FormKasir().Show();
-                            }
+                                Session.IdAkun = Convert.ToInt32(reader["id_akun"]);
+                                Session.NamaUser = reader["username"].ToString();
 
-                            else if (role == "pegawai tambak")
-                            {
-                                new FormPegawaiTambak().Show();
-                            }
+                                this.Hide();
 
-                            else if (role == "shipper")
-                            {
-                                new FormShipper().Show();
-                            }
+                                if (role == "admins")
+                                {
+                                    new FormAdmin().Show();
+                                }
 
-                            else if (role == "supplier")
-                            {
-                                new FormSupplier().Show();
-                            }
+                                else if (role == "kasir")
+                                {
+                                    new FormKasir().Show();
+                                }
 
-                            else if (role == "pembeli")
-                            {
-                                new FormPembeli().Show();
+                                else if (role == "pegawai tambak")
+                                {
+                                    new FormPegawaiTambak().Show();
+                                }
+
+                                else if (role == "shipper")
+                                {
+                                    new FormShipper().Show();
+                                }
+
+                                else if (role == "supplier")
+                                {
+                                    new FormSupplier().Show();
+                                }
+
+                                else if (role == "pembeli")
+                                {
+                                    new FormPembeli().Show();
+                                }
+                                else
+                                {
+                                    new FormMain().Show();
+                                }
                             }
                             else
                             {
-                                new FormMain().Show();
+                                MessageBox.Show("Login gagal!");
                             }
                         }
-                        else
-                        {
-                            MessageBox.Show("Login gagal!");
-                        }
+
                     }
-                }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Gagal memuat tabel ikan: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    
+                
             }
         }
 

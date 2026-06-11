@@ -74,7 +74,6 @@ namespace FishIt
                 {
                     try
                     {
-                        // 1. Hitung total harga
                         decimal totalHarga = 0;
                         string queryTotal = "SELECT SUM(k.kuantitas * i.harga_per_kg) FROM keranjang k JOIN ikan i ON k.id_ikan = i.id_ikan WHERE k.id_akun = @id_akun";
                         using (var cmdTotal = new NpgsqlCommand(queryTotal, conn))
@@ -90,7 +89,6 @@ namespace FishIt
                             return;
                         }
 
-                        // 2. Insert ke Orders (id_status_pembayaran = 1 artinya 'Belum Bayar')
                         int idOrderBaru = 0;
                         string queryOrder = @"INSERT INTO orders (tanggal_order, total_harga, id_akun, id_metode_pembayaran, id_status_pembayaran) 
                                               VALUES (CURRENT_DATE, @total, @id_akun, 1, 1) 

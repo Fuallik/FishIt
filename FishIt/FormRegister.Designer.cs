@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormRegister));
             TBKecamatan = new TextBox();
             labelJudul = new Label();
             labelRegister = new Label();
@@ -47,13 +48,15 @@
             labelKecamatan = new Label();
             TBKonfirmasiPassword = new TextBox();
             labelKonfirmasiPassword = new Label();
+            btnExit = new Button();
             SuspendLayout();
             // 
             // TBKecamatan
             // 
+            TBKecamatan.BorderStyle = BorderStyle.None;
             TBKecamatan.Location = new Point(62, 612);
             TBKecamatan.Name = "TBKecamatan";
-            TBKecamatan.Size = new Size(335, 31);
+            TBKecamatan.Size = new Size(335, 24);
             TBKecamatan.TabIndex = 16;
             TBKecamatan.TextChanged += TBKecamatan_TextChanged;
             // 
@@ -63,7 +66,7 @@
             labelJudul.BackColor = Color.Transparent;
             labelJudul.Font = new Font("Segoe UI", 20F, FontStyle.Bold, GraphicsUnit.Point, 0);
             labelJudul.ImageAlign = ContentAlignment.TopCenter;
-            labelJudul.Location = new Point(161, 9);
+            labelJudul.Location = new Point(176, 9);
             labelJudul.Name = "labelJudul";
             labelJudul.Size = new Size(137, 54);
             labelJudul.TabIndex = 0;
@@ -76,7 +79,7 @@
             labelRegister.AutoSize = true;
             labelRegister.BackColor = Color.Transparent;
             labelRegister.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            labelRegister.Location = new Point(174, 63);
+            labelRegister.Location = new Point(184, 63);
             labelRegister.Name = "labelRegister";
             labelRegister.Size = new Size(107, 32);
             labelRegister.TabIndex = 1;
@@ -85,9 +88,10 @@
             // 
             // TBNama
             // 
+            TBNama.BorderStyle = BorderStyle.None;
             TBNama.Location = new Point(62, 129);
             TBNama.Name = "TBNama";
-            TBNama.Size = new Size(335, 31);
+            TBNama.Size = new Size(335, 24);
             TBNama.TabIndex = 2;
             TBNama.TextChanged += TBNama_TextChanged;
             // 
@@ -114,9 +118,10 @@
             // 
             // TBUsername
             // 
+            TBUsername.BorderStyle = BorderStyle.None;
             TBUsername.Location = new Point(62, 198);
             TBUsername.Name = "TBUsername";
-            TBUsername.Size = new Size(335, 31);
+            TBUsername.Size = new Size(335, 24);
             TBUsername.TabIndex = 5;
             TBUsername.TextChanged += TBUsername_TextChanged;
             // 
@@ -132,9 +137,10 @@
             // 
             // TBPassword
             // 
+            TBPassword.BorderStyle = BorderStyle.None;
             TBPassword.Location = new Point(62, 267);
             TBPassword.Name = "TBPassword";
-            TBPassword.Size = new Size(335, 31);
+            TBPassword.Size = new Size(335, 24);
             TBPassword.TabIndex = 7;
             TBPassword.UseSystemPasswordChar = true;
             TBPassword.TextChanged += TBPassword_TextChanged;
@@ -151,9 +157,10 @@
             // 
             // TBTelpon
             // 
+            TBTelpon.BorderStyle = BorderStyle.None;
             TBTelpon.Location = new Point(62, 405);
             TBTelpon.Name = "TBTelpon";
-            TBTelpon.Size = new Size(335, 31);
+            TBTelpon.Size = new Size(335, 24);
             TBTelpon.TabIndex = 9;
             TBTelpon.TextChanged += TBTelpon_TextChanged;
             // 
@@ -169,9 +176,10 @@
             // 
             // TBAlamat
             // 
+            TBAlamat.BorderStyle = BorderStyle.None;
             TBAlamat.Location = new Point(62, 474);
             TBAlamat.Name = "TBAlamat";
-            TBAlamat.Size = new Size(335, 31);
+            TBAlamat.Size = new Size(335, 24);
             TBAlamat.TabIndex = 11;
             TBAlamat.TextChanged += TBAlamat_TextChanged;
             // 
@@ -182,7 +190,7 @@
             buttonRegister.FlatStyle = FlatStyle.Flat;
             buttonRegister.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             buttonRegister.ForeColor = Color.White;
-            buttonRegister.Location = new Point(145, 699);
+            buttonRegister.Location = new Point(160, 699);
             buttonRegister.Name = "buttonRegister";
             buttonRegister.Size = new Size(169, 50);
             buttonRegister.TabIndex = 13;
@@ -202,9 +210,10 @@
             // 
             // TBKelurahan
             // 
+            TBKelurahan.BorderStyle = BorderStyle.None;
             TBKelurahan.Location = new Point(62, 543);
             TBKelurahan.Name = "TBKelurahan";
-            TBKelurahan.Size = new Size(335, 31);
+            TBKelurahan.Size = new Size(335, 24);
             TBKelurahan.TabIndex = 14;
             TBKelurahan.TextChanged += TBKelurahan_TextChanged;
             // 
@@ -220,9 +229,10 @@
             // 
             // TBKonfirmasiPassword
             // 
+            TBKonfirmasiPassword.BorderStyle = BorderStyle.None;
             TBKonfirmasiPassword.Location = new Point(62, 336);
             TBKonfirmasiPassword.Name = "TBKonfirmasiPassword";
-            TBKonfirmasiPassword.Size = new Size(335, 31);
+            TBKonfirmasiPassword.Size = new Size(335, 24);
             TBKonfirmasiPassword.TabIndex = 18;
             TBKonfirmasiPassword.UseSystemPasswordChar = true;
             // 
@@ -236,12 +246,27 @@
             labelKonfirmasiPassword.TabIndex = 19;
             labelKonfirmasiPassword.Text = "Konfirmasi Password";
             // 
+            // btnExit
+            // 
+            btnExit.BackColor = Color.Transparent;
+            btnExit.BackgroundImage = (Image)resources.GetObject("btnExit.BackgroundImage");
+            btnExit.BackgroundImageLayout = ImageLayout.Zoom;
+            btnExit.FlatAppearance.BorderSize = 0;
+            btnExit.FlatStyle = FlatStyle.Flat;
+            btnExit.Location = new Point(458, 9);
+            btnExit.Name = "btnExit";
+            btnExit.Size = new Size(30, 30);
+            btnExit.TabIndex = 20;
+            btnExit.UseVisualStyleBackColor = false;
+            btnExit.Click += btnExit_Click;
+            // 
             // FormRegister
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(500, 800);
+            Controls.Add(btnExit);
             Controls.Add(labelKonfirmasiPassword);
             Controls.Add(TBKonfirmasiPassword);
             Controls.Add(labelKecamatan);
@@ -291,5 +316,6 @@
         private TextBox TBKecamatan;
         private TextBox TBKonfirmasiPassword;
         private Label labelKonfirmasiPassword;
+        private Button btnExit;
     }
 }

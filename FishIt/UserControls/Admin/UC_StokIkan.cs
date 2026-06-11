@@ -54,7 +54,7 @@ namespace FishIt
                         {
                             if (reader.Read())
                             {
-                                long totalIkan = Convert.ToInt64(reader["total_ikan"]);
+                                decimal totalIkan = Convert.ToDecimal(reader["total_ikan"]);
 
                                 lblHitungIkan.Text = totalIkan.ToString();
                             }

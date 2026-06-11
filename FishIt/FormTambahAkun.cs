@@ -39,7 +39,6 @@ namespace FishIt
 
         private void btnSaveTambahAkun_Click(object sender, EventArgs e)
         {
-            // 1. VALIDASI KEKOSONGAN INPUT MANUAL
             if (string.IsNullOrWhiteSpace(TBUsername.Text) ||
                 string.IsNullOrWhiteSpace(TBNama.Text) ||
                 string.IsNullOrWhiteSpace(TBPassword.Text) ||
@@ -53,7 +52,6 @@ namespace FishIt
                 return;
             }
 
-            // 2. VALIDASI KECOCOKAN PASSWORD
             if (TBPassword.Text != TBKonfirmasi.Text)
             {
                 MessageBox.Show("Password dan Konfirmasi Password tidak cocok! Silakan periksa kembali.",
@@ -63,15 +61,13 @@ namespace FishIt
                 return;
             }
 
-            // 3. VALIDASI COMBOBOX JABATAN
             if (CBJabatan.SelectedIndex == -1 || CBJabatan.SelectedValue == null)
             {
                 MessageBox.Show("Silakan pilih Jabatan terlebih dahulu!", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            // Query CALL disesuaikan jumlah parameternya menjadi 10 buah
-            string query = "CALL sp_tambah_akun(@p_username, @p_nama, @p_passwords, @p_alamat, @p_no_telp, @p_aktif, @p_id_role, @p_nama_kelurahan, @p_nama_kecamatan, @p_id_baru)";
+            string query = "CALL sp_tambah_akun(@p_username, @p_passwords, @p_nama, @p_no_telp, @p_alamat, @p_aktif, @p_id_role, @p_nama_kelurahan, @p_nama_kecamatan, @p_id_baru)";
 
             using (var conn = new NpgsqlConnection(Config.ConnString))
             {
@@ -82,34 +78,24 @@ namespace FishIt
                     {
                         cmd.CommandType = CommandType.Text;
 
-                        // URUTAN WAJIB SAMA PERSIS DENGAN DI PGADMIN:
                         cmd.Parameters.Add("@p_username", NpgsqlTypes.NpgsqlDbType.Varchar).Value = TBUsername.Text.Trim();
                         cmd.Parameters.Add("@p_nama", NpgsqlTypes.NpgsqlDbType.Varchar).Value = TBNama.Text.Trim();
                         cmd.Parameters.Add("@p_passwords", NpgsqlTypes.NpgsqlDbType.Varchar).Value = TBPassword.Text.Trim();
                         cmd.Parameters.Add("@p_alamat", NpgsqlTypes.NpgsqlDbType.Varchar).Value = TBAlamat.Text.Trim();
                         cmd.Parameters.Add("@p_no_telp", NpgsqlTypes.NpgsqlDbType.Varchar).Value = TBTelpon.Text.Trim();
-
-                        // Parameter ke-6: p_aktif (Boolean) -> Kita set langsung true
                         cmd.Parameters.Add("@p_aktif", NpgsqlTypes.NpgsqlDbType.Boolean).Value = true;
-
-                        // Parameter ke-7: p_id_role (Integer)
                         int idRoleTerpilih = Convert.ToInt32(CBJabatan.SelectedValue);
                         cmd.Parameters.Add("@p_id_role", NpgsqlTypes.NpgsqlDbType.Integer).Value = idRoleTerpilih;
-
-                        // Parameter ke-8 & 9: Wilayah (Varchar)
                         cmd.Parameters.Add("@p_nama_kelurahan", NpgsqlTypes.NpgsqlDbType.Varchar).Value = TBKelurahan.Text.Trim();
                         cmd.Parameters.Add("@p_nama_kecamatan", NpgsqlTypes.NpgsqlDbType.Varchar).Value = TBKecamatan.Text.Trim();
 
-                        // Parameter ke-10: p_id_baru (Integer OUT / InputOutput)
                         var paramIdBaru = new NpgsqlParameter("@p_id_baru", NpgsqlTypes.NpgsqlDbType.Integer);
                         paramIdBaru.Direction = ParameterDirection.InputOutput;
                         paramIdBaru.Value = DBNull.Value;
                         cmd.Parameters.Add(paramIdBaru);
 
-                        // Eksekusi data
                         cmd.ExecuteNonQuery();
 
-                        // Ambil nilai balik ID Akun Baru
                         int idUserTerbuat = Convert.ToInt32(paramIdBaru.Value);
 
                         MessageBox.Show($"Akun baru berhasil ditambahkan!\n" +
@@ -143,7 +129,7 @@ namespace FishIt
         }
         private void LoadRole()
         {
-            string queryRole = "SELECT id_role, nama_role FROM roles WHERE id_role != 6 ORDER BY nama_role ASC";
+            string queryRole = "SELECT id_role, nama_role FROM roles ORDER BY nama_role ASC";
 
             using (var conn = new NpgsqlConnection(Config.ConnString))
             {
@@ -156,12 +142,10 @@ namespace FishIt
                         DataTable dt = new DataTable();
                         adapter.Fill(dt);
 
-                        // Ikat data ke ComboBox Role seperti biasa
                         CBJabatan.DataSource = dt;
                         CBJabatan.DisplayMember = "nama_role";
                         CBJabatan.ValueMember = "id_role";
 
-                        // Set agar ComboBox tidak langsung terpilih otomatis di awal (kosong dulu)
                         CBJabatan.SelectedIndex = -1;
                     }
                 }
