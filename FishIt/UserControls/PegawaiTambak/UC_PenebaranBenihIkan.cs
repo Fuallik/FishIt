@@ -13,6 +13,7 @@ namespace FishIt.UserControls.PegawaiTambak
         public UC_PenebaranBenihIkan()
         {
             InitializeComponent();
+            new AutoScaleHelper(this);
         }
     }
 }

@@ -169,12 +169,6 @@ namespace FishIt
 
         private void buttonOperasi_Click(object sender, EventArgs e)
         {
-            UC_Operasi operasi = new UC_Operasi();
-            operasi.Dock = DockStyle.Fill;
-
-            panelContent.Controls.Clear();
-            panelContent.Controls.Add(operasi);
-
             panelSubKelolaAkun.Visible = !panelSubKelolaAkun.Visible;
 
             buttonOperasi.MouseEnter += SidebarButton_MouseEnter;
