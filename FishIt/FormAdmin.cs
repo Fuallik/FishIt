@@ -15,32 +15,11 @@ namespace FishIt
         public FormAdmin()
         {
             InitializeComponent();
-            //PanelHelper.BuatMelengkung(panelSearch, 25);
             new AutoScaleHelper(this);
 
             panelSubKelolaAkun.Visible = false;
             panelSubDataFishIt.Visible = false;
             panelSubLaporan.Visible = false;
-        }
-        private void txtSearch_TextChanged(object sender, EventArgs e)
-        {
-            // Cek UC apa yang sedang aktif di dalam panelContent
-            if (panelContent.Controls.Count > 0)
-            {
-                System.Windows.Forms.Control ucAktif = panelContent.Controls[0];
-
-                // Jika yang sedang aktif adalah UC_DashboardAdmin
-                if (ucAktif is UC_DashboardAdmin dashboard)
-                {
-                    // Panggil fungsi pencarian milik dashboard (jika ada)
-                    //dashboard.FilterDashboard(TBSearch.Text);
-                }
-                // Jika yang sedang aktif adalah UC_KelolaAkun
-                else if (ucAktif is UC_DataAkun kelolaAkun)
-                {
-                    // kelolaAkun.CariAkun(txtSearch.Text);
-                }
-            }
         }
 
         private void FormAdmin_Load(object sender, EventArgs e)
@@ -48,7 +27,7 @@ namespace FishIt
             LoadPage(new UC_DashboardAdmin());
         }
 
-        private void LoadPage(System.Windows.Forms.UserControl page) //UserControl page)
+        private void LoadPage(System.Windows.Forms.UserControl page)
         {
             panelContent.Controls.Clear();
             page.Dock = DockStyle.Fill;
@@ -108,13 +87,6 @@ namespace FishIt
 
         private void buttonKelolaAkun_Click(object sender, EventArgs e)
         {
-
-            //UC_DataAkun akun = new UC_DataAkun();
-            //akun.Dock = DockStyle.Fill;
-
-            //panelContent.Controls.Clear();
-            ///panelContent.Controls.Add(akun);
-
             panelSubKelolaAkun.Visible = !panelSubKelolaAkun.Visible;
 
             buttonKelolaAkun.MouseEnter += SidebarButton_MouseEnter;
@@ -144,13 +116,6 @@ namespace FishIt
 
         private void buttonIkan_Click(object sender, EventArgs e)
         {
-            //panelContent.Controls.Clear();
-
-            //UC_DataFishIt fishIt = new UC_DataFishIt();
-            //fishIt.Dock = DockStyle.Fill;
-
-            //panelContent.Controls.Add(fishIt);
-
             panelSubDataFishIt.Visible = !panelSubDataFishIt.Visible;
 
             buttonIkan.MouseEnter += SidebarButton_MouseEnter;
@@ -159,13 +124,6 @@ namespace FishIt
 
         private void buttonLaporan_Click(object sender, EventArgs e)
         {
-            panelContent.Controls.Clear();
-
-            UC_Laporan laporan = new UC_Laporan();
-            laporan.Dock = DockStyle.Fill;
-
-            panelContent.Controls.Add(laporan);
-
             panelSubLaporan.Visible = !panelSubLaporan.Visible;
 
             buttonLaporan.MouseEnter += SidebarButton_MouseEnter;

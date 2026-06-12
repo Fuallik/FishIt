@@ -121,10 +121,10 @@
     <value>17, 17</value>
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="button1.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="btnExit.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAgAAAAIACAYAAAD0eNT6AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAN
-        1QAADdUBPdZY8QAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAACF6SURBVHhe7d09
+        1AAADdQB75G6FQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAACF6SURBVHhe7d09
         i3Z5me7hv42gYNAiwkw0MNANre5GMTMQDMUvYCD9GUz9AM4EjcmImA2YiIrJgGggaOR3MBKUCeYlGYO9
         xYEZ3fyr76quWteqqvtlnev1GDiSq+qpp+5V3fU77Xle2l//+teW0lp7t7X2zdbad1prP2yt/bq19tvW
         2h9ba39qrf2utfab1tpPW2vfba19q7X2ldbaR4cfCwC2qDft1LbeuN663rzevt7A3sLexN7G3sjeyt7M

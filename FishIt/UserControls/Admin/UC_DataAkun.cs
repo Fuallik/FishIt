@@ -48,21 +48,18 @@ namespace FishIt
         }
         private void HitungAkunAktif()
         {
-            // Pastikan nama tabel di query ini diganti sesuai nama tabel aslimu di PostgreSQL
             string query = "SELECT COUNT(*) FROM akun WHERE aktif = true";
 
             using (var conn = new NpgsqlConnection(Config.ConnString))
             {
                 try
                 {
-                    conn.Open(); // Membuka koneksi di dalam try agar jika gagal langsung masuk ke catch
+                    conn.Open();
 
                     using (var cmd = new NpgsqlCommand(query, conn))
                     {
-                        // KUNCI: PostgreSQL mengembalikan Int64 (long) untuk fungsi COUNT(*)
                         long totalAkun = (long)cmd.ExecuteScalar();
 
-                        // Masukkan ke label kamu
                         lblHitungAkunAktif.Text = totalAkun.ToString();
                     }
                 }
@@ -70,7 +67,7 @@ namespace FishIt
                 {
                     MessageBox.Show("Gagal memuat data: " + ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-            } // Koneksi otomatis tertutup dengan aman di sini berkat 'using'
+            }
         }
 
         private void HitungAkunTidakAktif()
@@ -217,29 +214,20 @@ namespace FishIt
 
         public void TampilkanDataDariPostgres()
         {
-            // Tulis perintah SQL untuk mengambil data dari tabel kamu
             string query = "SELECT a.id_akun, a.username, a.nama, a.no_telp, a.alamat, r.nama_role, a.aktif FROM akun a JOIN roles r ON a.id_role = r.id_role ORDER BY a.id_akun ASC";
 
-            // Membuka koneksi dengan blok 'using' supaya memori otomatis bersih setelah selesai
             using (var conn = new NpgsqlConnection(Config.ConnString))
             {
                 try
                 {
-                    conn.Open(); // Buka gerbang koneksi ke Postgres
+                    conn.Open();
 
                     using (NpgsqlCommand cmd = new NpgsqlCommand(query, conn))
                     {
-                        // DataAdapter bertindak sebagai jembatan pembawa data
                         NpgsqlDataAdapter adapter = new NpgsqlDataAdapter(cmd);
-
-                        // DataTable bertindak sebagai keranjang penampung data di aplikasi kita
                         DataTable dt = new DataTable();
-
-                        // Isi keranjang (dt) dengan data yang diambil oleh adapter
                         adapter.Fill(dt);
 
-                        // IKATKAN keranjang data ke DataGridView milikmu
-                        // Ganti 'dataGridView1' sesuai dengan nama DGV kamu di desainer
                         DGVDataAkun.DataSource = dt;
                         DGVDataAkun.Columns["id_akun"].HeaderText = "ID Pengguna";
                         DGVDataAkun.Columns["username"].HeaderText = "Nama Pengguna";
@@ -254,7 +242,6 @@ namespace FishIt
                 }
                 catch (Exception ex)
                 {
-                    // Menampilkan pesan jika koneksi gagal atau query salah
                     MessageBox.Show("Waduh, gagal ambil data: " + ex.Message, "Error Database", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }

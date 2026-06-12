@@ -28,10 +28,9 @@ namespace FishIt
         }
         private void MuatRiwayat()
         {
-            // JOIN ke tabel status_pembayaran agar memunculkan nama status (Belum Bayar / Lunas)
             string query = @"SELECT o.id_order, o.tanggal_order, o.total_harga, s.nama_status, m.jenis_metode_pembayaran
                              FROM orders o
-                             JOIN status_pembayaran s ON o.id_status_pembayaran = s.id_status
+                             JOIN status_pembayaran s ON o.id_status_pembayaran = s.id_status_pembayaran
                              JOIN metode_pembayaran m ON o.id_metode_pembayaran = m.id_metode_pembayaran
                              WHERE o.id_akun = @id_akun
                              ORDER BY o.id_order DESC";

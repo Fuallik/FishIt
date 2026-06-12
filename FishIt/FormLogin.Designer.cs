@@ -38,7 +38,7 @@
             labelJudul = new Label();
             labelPassword = new Label();
             labelUsername = new Label();
-            button1 = new Button();
+            btnExit = new Button();
             SuspendLayout();
             // 
             // labelLogin
@@ -140,19 +140,19 @@
             labelUsername.Text = "Username";
             labelUsername.Click += label1_Click;
             // 
-            // button1
+            // btnExit
             // 
-            button1.BackColor = Color.Transparent;
-            button1.BackgroundImage = (Image)resources.GetObject("button1.BackgroundImage");
-            button1.BackgroundImageLayout = ImageLayout.Zoom;
-            button1.FlatAppearance.BorderSize = 0;
-            button1.FlatStyle = FlatStyle.Flat;
-            button1.Location = new Point(415, 12);
-            button1.Name = "button1";
-            button1.Size = new Size(30, 30);
-            button1.TabIndex = 10;
-            button1.UseVisualStyleBackColor = false;
-            button1.Click += button1_Click;
+            btnExit.BackColor = Color.Transparent;
+            btnExit.BackgroundImage = (Image)resources.GetObject("btnExit.BackgroundImage");
+            btnExit.BackgroundImageLayout = ImageLayout.Zoom;
+            btnExit.FlatAppearance.BorderSize = 0;
+            btnExit.FlatStyle = FlatStyle.Flat;
+            btnExit.Location = new Point(415, 12);
+            btnExit.Name = "btnExit";
+            btnExit.Size = new Size(30, 30);
+            btnExit.TabIndex = 10;
+            btnExit.UseVisualStyleBackColor = false;
+            btnExit.Click += button1_Click;
             // 
             // FormLogin
             // 
@@ -161,7 +161,7 @@
             BackColor = Color.White;
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(457, 663);
-            Controls.Add(button1);
+            Controls.Add(btnExit);
             Controls.Add(labelJudul);
             Controls.Add(buttonLogin);
             Controls.Add(buttonRegister);
@@ -191,6 +191,6 @@
         private Label labelJudul;
         private Label labelPassword;
         private Label labelUsername;
-        private Button button1;
+        private Button btnExit;
     }
 }

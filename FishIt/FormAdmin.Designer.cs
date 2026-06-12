@@ -106,7 +106,7 @@
             panelSubLaporan.Dock = DockStyle.Top;
             panelSubLaporan.Location = new Point(0, 418);
             panelSubLaporan.Name = "panelSubLaporan";
-            panelSubLaporan.Size = new Size(200, 130);
+            panelSubLaporan.Size = new Size(200, 127);
             panelSubLaporan.TabIndex = 0;
             // 
             // buttonPengiriman
