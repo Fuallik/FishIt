@@ -93,7 +93,7 @@
             labelInfo.Name = "labelInfo";
             labelInfo.Size = new Size(323, 32);
             labelInfo.TabIndex = 4;
-            labelInfo.Text = "Bakso Kontol Bakso Kontol";
+            labelInfo.Text = "PT. Fish It\r\n";
             // 
             // pictureBox1
             // 
@@ -107,7 +107,7 @@
             pictureBox1.TabIndex = 5;
             pictureBox1.TabStop = false;
             // 
-            // Form1
+            // FormMain
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -120,7 +120,7 @@
             Controls.Add(labelJudulLogin);
             Controls.Add(pictureBox1);
             FormBorderStyle = FormBorderStyle.None;
-            Name = "Form1";
+            Name = "FormMain";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Form1";
             WindowState = FormWindowState.Maximized;

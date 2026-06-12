@@ -10,47 +10,41 @@ namespace FishIt
     {
         public static void AturTemaModern(DataGridView dgv)
         {
-            // 1. Pengaturan Dasar & Kebersihan Tabel
             dgv.BorderStyle = BorderStyle.None;
             dgv.BackgroundColor = Color.White;
-            dgv.GridColor = Color.FromArgb(235, 237, 240); // Garis pembatas tipis abu-abu muda
-            dgv.RowHeadersVisible = false; // Menghilangkan kolom kosong paling kiri
-            dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect; // Klik baris langsung memblok satu baris penuh
+            dgv.GridColor = Color.FromArgb(235, 237, 240);
+            dgv.RowHeadersVisible = false;
+            dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgv.MultiSelect = false;
-            dgv.AllowUserToResizeRows = false; // Mencegah user mengacak-acak tinggi baris
-            dgv.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal; // Hanya garis horizontal, vertikal dihilangkan
+            dgv.AllowUserToResizeRows = false;
+            dgv.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
 
-            // 2. Desain Header Kolom (Bagian Atas)
-            dgv.EnableHeadersVisualStyles = false; // Wajib di-false agar custom warna berfungsi
+            dgv.EnableHeadersVisualStyles = false;
             dgv.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
 
             DataGridViewCellStyle headerStyle = new DataGridViewCellStyle();
-            headerStyle.BackColor = Color.FromArgb(41, 128, 185); // Warna utama (Misal: Biru Royal)
+            headerStyle.BackColor = Color.FromArgb(41, 128, 185);
             headerStyle.ForeColor = Color.White;
             headerStyle.Font = new Font("Segoe UI", 10, FontStyle.Bold);
             headerStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dgv.ColumnHeadersDefaultCellStyle = headerStyle;
-            dgv.ColumnHeadersHeight = 40; // Membuat header lebih tinggi dan lega
+            dgv.ColumnHeadersHeight = 40;
 
-            // 3. Desain Baris Data (Rows)
             DataGridViewCellStyle rowStyle = new DataGridViewCellStyle();
             rowStyle.BackColor = Color.White;
-            rowStyle.ForeColor = Color.FromArgb(45, 52, 54); // Warna teks abu-abu gelap (lebih lembut dari hitam pekat)
+            rowStyle.ForeColor = Color.FromArgb(45, 52, 54);
             rowStyle.Font = new Font("Segoe UI", 9.5f, FontStyle.Regular);
-            rowStyle.SelectionBackColor = Color.FromArgb(225, 242, 250); // Warna saat baris diklik (Biru sangat muda)
-            rowStyle.SelectionForeColor = Color.FromArgb(41, 128, 185); // Warna teks saat diklik
+            rowStyle.SelectionBackColor = Color.FromArgb(225, 242, 250);
+            rowStyle.SelectionForeColor = Color.FromArgb(41, 128, 185);
             dgv.RowsDefaultCellStyle = rowStyle;
 
-            // 4. Efek Zebra (Baris Selang-Seling) untuk Mempermudah Membaca Data
             DataGridViewCellStyle altRowStyle = new DataGridViewCellStyle();
-            altRowStyle.BackColor = Color.FromArgb(248, 249, 250); // Abu-abu super muda untuk baris genap
+            altRowStyle.BackColor = Color.FromArgb(248, 249, 250);
             dgv.AlternatingRowsDefaultCellStyle = altRowStyle;
 
-            // 5. Atur Tinggi Baris Data
             dgv.RowTemplate.Height = 35;
 
-            // 6. Pengaturan Ukuran Kolom Otomatis
-            dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill; // Kolom otomatis melar memenuhi layar
+            dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
     }
 }

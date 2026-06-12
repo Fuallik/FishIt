@@ -26,10 +26,38 @@ namespace FishIt
             TBAlamat.PlaceholderText = "Alamat";
             TBKelurahan.PlaceholderText = "Kelurahan";
             TBKecamatan.PlaceholderText = "Kecamatan";
+
+            btnExit.FlatStyle = FlatStyle.Flat;
+            btnExit.FlatAppearance.BorderSize = 0;
+
+            btnExit.BackColor = Color.Transparent;
+            btnExit.FlatAppearance.MouseOverBackColor = Color.Transparent;
+            btnExit.FlatAppearance.MouseDownBackColor = Color.Transparent;
+
+            btnExit.ForeColor = Color.Black;
+
+            btnExit.UseVisualStyleBackColor = false;
+
+            btnExit.MouseEnter += btnExit_MouseEnter;
+            btnExit.MouseLeave += btnExit_MouseLeave;
+
+            PanelHelper.MakeButtonRounded(buttonRegister, 20);
         }
         public static class Config
         {
             public static string ConnString = ConfigurationManager.ConnectionStrings["DbConnection"].ConnectionString;
+        }
+        private void btnExit_MouseEnter(object sender, EventArgs e)
+        {
+            btnExit.ForeColor = Color.MidnightBlue;
+        }
+
+        private void btnExit_MouseLeave(object sender, EventArgs e)
+        {
+            btnExit.ForeColor = Color.Black;
+
+            btnExit.MouseEnter += btnExit_MouseEnter;
+            btnExit.MouseLeave += btnExit_MouseLeave;
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -98,16 +126,12 @@ namespace FishIt
             string kelurahan = TBKelurahan.Text.Trim();
             string kecamatan = TBKecamatan.Text.Trim();
 
-
-
-            // Validasi: Cek apakah TextBox kosong
             if (string.IsNullOrEmpty(nama) || string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password) || string.IsNullOrEmpty(konfirmasipassword) || string.IsNullOrEmpty(telpon))
             {
                 MessageBox.Show("nama, username, password, konfirmasi password, dan no telepon tidak boleh kosong!", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            // Validasi: Cek apakah password dan konfirmasi password cocok
             if (password != konfirmasipassword)
             {
                 MessageBox.Show("Password dan Konfirmasi Password tidak cocok!", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -128,12 +152,10 @@ namespace FishIt
 
             try
             {
-                // Panggil koneksi Database menggunakan class buatanmu
                 using (var conn = new NpgsqlConnection(Config.ConnString))
                 {
                     conn.Open();
 
-                    // Cek ke database apakah Username sudah dipakai orang lain
                     string checkQuery = "SELECT COUNT(*) FROM akun WHERE Username = @username";
                     using (var checkCmd = new NpgsqlCommand(checkQuery, conn))
                     {
@@ -148,34 +170,32 @@ namespace FishIt
                     }
 
                     int id_Kecamatan = GetOrCreateKecamatan(conn, kecamatan);
-                    int id_Kelurahan = GetOrCreateKelurahan(
-                        conn,
-                        kelurahan,
-                        id_Kecamatan
-                    );
+                    int id_Kelurahan = GetOrCreateKelurahan(conn, kelurahan, id_Kecamatan);
 
-                    // Enkripsi password sebelum disimpan (Keamanan)
-                    //string hashedPassword = HashPassword(password);
-
-                    // Simpan data Username dan Password (yang sudah di-hash) ke tabel Users
-                    string insertQuery = @"CALL tambah_akun(@nama, @username, @passwords, @telpon, @alamat, @id_kelurahan, @id_role)";
+                    string insertQuery = @"CALL sp_tambah_akun(@p_username, @p_nama, @p_passwords, @p_alamat, @p_no_telp, @p_aktif, @p_id_role, @p_nama_kelurahan, @p_nama_kecamatan, @p_id_baru)";
                     using (var insertCmd = new NpgsqlCommand(insertQuery, conn))
                     {
-                        insertCmd.Parameters.AddWithValue("@nama", nama);
-                        insertCmd.Parameters.AddWithValue("@username", username);
-                        insertCmd.Parameters.AddWithValue("@passwords", password);
-                        insertCmd.Parameters.AddWithValue("@telpon", telpon);
-                        insertCmd.Parameters.AddWithValue("@alamat", alamat);
-                        insertCmd.Parameters.AddWithValue("@id_Kelurahan", id_Kelurahan);
-                        insertCmd.Parameters.AddWithValue("@id_role", 6);
+                        insertCmd.Parameters.AddWithValue("@p_nama", nama);
+                        insertCmd.Parameters.AddWithValue("@p_username", username);
+                        insertCmd.Parameters.AddWithValue("@p_passwords", password);
+                        insertCmd.Parameters.AddWithValue("@p_no_telp", telpon);
+                        insertCmd.Parameters.AddWithValue("@p_alamat", alamat);
+                        insertCmd.Parameters.AddWithValue("@p_aktif", true);
+                        insertCmd.Parameters.AddWithValue("@p_id_role", 6);
+                        insertCmd.Parameters.AddWithValue("@p_nama_kelurahan", kelurahan);
+                        insertCmd.Parameters.AddWithValue("@p_nama_kecamatan", kecamatan);
 
-                        int rowsAffected = insertCmd.ExecuteNonQuery();
+                        var paramIdBaru = new NpgsqlParameter("@p_id_baru", NpgsqlTypes.NpgsqlDbType.Integer);
+                        paramIdBaru.Direction = ParameterDirection.InputOutput;
+                        paramIdBaru.Value = DBNull.Value;
+                        insertCmd.Parameters.Add(paramIdBaru);
 
-                        if (rowsAffected > 0)
+                        insertCmd.ExecuteNonQuery();
+
+                        if (paramIdBaru.Value != DBNull.Value && Convert.ToInt32(paramIdBaru.Value) > 0)
                         {
                             MessageBox.Show("Registrasi Berhasil! Silakan Login.", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                            // Bersihkan TextBox setelah sukses mendaftar
                             TBNama.Clear();
                             TBUsername.Clear();
                             TBPassword.Clear();
@@ -195,30 +215,23 @@ namespace FishIt
             }
             catch (Exception ex)
             {
-                // Menangkap error jika database belum nyala atau query salah
                 MessageBox.Show("Terjadi kesalahan koneksi atau database: " + ex.Message, "Error System", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-
-
         private int GetOrCreateKecamatan(NpgsqlConnection conn, string nama_Kecamatan)
         {
-            // Cek apakah kecamatan sudah ada
             string selectQuery = "SELECT id_kecamatan FROM kecamatan WHERE LOWER(nama_kecamatan) = LOWER(@nama_kecamatan)";
             using (var selectCmd = new NpgsqlCommand(selectQuery, conn))
             {
                 selectCmd.Parameters.AddWithValue("@nama_kecamatan", nama_Kecamatan);
                 object result = selectCmd.ExecuteScalar();
 
-                // Jika data ada, kembalikan ID-nya
                 if (result != null)
                 {
                     return Convert.ToInt32(result);
                 }
             }
 
-            // Jika data tidak ada, Insert data baru dan ambil ID-nya (RETURNING id)
             string insertQuery = "INSERT INTO kecamatan (nama_kecamatan) VALUES (@nama_kecamatan) RETURNING id_kecamatan";
             using (var insertCmd = new NpgsqlCommand(insertQuery, conn))
             {
@@ -227,10 +240,7 @@ namespace FishIt
             }
         }
 
-        private int GetOrCreateKelurahan(
-    NpgsqlConnection conn,
-    string nama_Kelurahan,
-    int id_Kecamatan)
+        private int GetOrCreateKelurahan(NpgsqlConnection conn, string nama_Kelurahan, int id_Kecamatan)
         {
             string selectQuery =
                 "SELECT id_kelurahan FROM kelurahan WHERE LOWER(nama_kelurahan) = LOWER(@nama_kelurahan) AND id_kecamatan = @id_kecamatan";
@@ -263,6 +273,11 @@ namespace FishIt
         private void labelRegister_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

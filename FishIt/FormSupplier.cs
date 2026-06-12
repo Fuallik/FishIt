@@ -150,27 +150,27 @@ namespace FishIt
 
         private void buttonKatalogBenih_Click(object sender, EventArgs e)
         {
-
+            LoadPage(new UC_KatalogBenih());
         }
 
         private void buttonKatalogPakan_Click(object sender, EventArgs e)
         {
-
+            LoadPage(new UC_KatalogPakan());
         }
 
         private void buttonPengajuanBenih_Click(object sender, EventArgs e)
         {
-
+            LoadPage(new UC_PengajuanBenih());
         }
 
         private void buttonPengajuanPakan_Click(object sender, EventArgs e)
         {
-
+            LoadPage(new UC_PengajuanPakan());
         }
 
         private void buttonRiwayatVerifikasi_Click(object sender, EventArgs e)
         {
-
+            LoadPage(new UC_RiwayatVerifikasi());
         }
     }
 }
