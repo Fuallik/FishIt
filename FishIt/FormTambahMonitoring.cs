@@ -18,7 +18,7 @@ namespace FishIt
         {
             InitializeComponent();
 
-            MuatKolam(); // isi dropdown kolam dari database
+            MuatKolam();
         }
 
         public static class Config
@@ -42,9 +42,9 @@ namespace FishIt
                     adapter.Fill(tabel);
 
                     CBKolam.DataSource = tabel;
-                    CBKolam.DisplayMember = "nomor";    // teks yang tampil
-                    CBKolam.ValueMember = "id_kolam"; // nilai di balik teks
-                    CBKolam.SelectedIndex = -1;         // jangan auto-kepilih, paksa user milih
+                    CBKolam.DisplayMember = "nomor";
+                    CBKolam.ValueMember = "id_kolam";
+                    CBKolam.SelectedIndex = -1;
                 }
                 catch (Exception ex)
                 {
@@ -74,7 +74,6 @@ namespace FishIt
                 return;
             }
 
-            // === 2. SIMPAN (INSERT, semua pakai parameter) ===
             using (var conn = new NpgsqlConnection(Config.ConnString))
 
                 try
@@ -86,7 +85,6 @@ namespace FishIt
                                    (berat_rata_rata, kondisi, jumlah_mati, catatan, id_akun, id_kolam)
                                    VALUES
                                    (@berat, @kondisi, @mati, @catatan, @id_akun, @id_kolam)";
-                    // 'tanggal' sengaja TIDAK ada di sini -> DB otomatis isi waktu saat ini
 
                     using var cmd = new NpgsqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("@berat", NUDBerat.Value);
@@ -101,7 +99,7 @@ namespace FishIt
                     MessageBox.Show("Data monitoring berhasil disimpan!", "Sukses",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    this.DialogResult = DialogResult.OK; // sinyal ke UC: ada data baru, refresh!
+                    this.DialogResult = DialogResult.OK;
                     this.Close();
                 }
                 catch (Exception ex)

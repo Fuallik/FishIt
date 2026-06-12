@@ -44,7 +44,6 @@ namespace FishIt.UserControls.PegawaiTambak
                 {
                     conn.Open();
 
-                    // Filter cuma data milik akun yang login
                     using var cmd = new NpgsqlCommand(
                         "SELECT * FROM view_pemberian_pakan WHERE id_akun = @id", conn);
                     cmd.Parameters.AddWithValue("@id", Session.IdAkun);
@@ -54,7 +53,6 @@ namespace FishIt.UserControls.PegawaiTambak
                     adapter.Fill(tabel);
                     DGVPakan.DataSource = tabel;
 
-                    // Sembunyikan kolom id_akun — dipakai buat filter, nggak perlu dilihat user
                     if (DGVPakan.Columns.Contains("id_akun"))
                         DGVPakan.Columns["id_akun"].Visible = false;
                 }
@@ -84,7 +82,6 @@ namespace FishIt.UserControls.PegawaiTambak
                 }
         }
 
-        // Versi "SEMUA akun" -> tanpa id, panggil function dengan 1 argumen
         private decimal HitungPakan(NpgsqlConnection conn, string periode)
         {
             using var cmd = new NpgsqlCommand("SELECT fn_total_pakan(@periode)", conn);
@@ -92,7 +89,6 @@ namespace FishIt.UserControls.PegawaiTambak
             return Convert.ToDecimal(cmd.ExecuteScalar());
         }
 
-        // Versi "PER akun" -> dengan id, panggil function dengan 2 argumen
         private decimal HitungPakan(NpgsqlConnection conn, string periode, int idAkun)
         {
             using var cmd = new NpgsqlCommand("SELECT fn_total_pakan(@periode, @id_akun)", conn);

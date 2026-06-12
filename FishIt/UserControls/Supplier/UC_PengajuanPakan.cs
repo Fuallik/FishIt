@@ -26,7 +26,6 @@ namespace FishIt
             MuatRiwayatPengajuan();
         }
 
-        /// <summary> Isi ComboBox pakan dari tabel pakan. </summary>
         private void MuatComboPakan()
         {
             cmbPakan.Items.Clear();
@@ -50,7 +49,6 @@ namespace FishIt
             }
         }
 
-        /// <summary> Tampilkan daftar pengajuan pakan milik supplier yang login. </summary>
         private void MuatRiwayatPengajuan()
         {
             string query = @"
@@ -117,10 +115,8 @@ namespace FishIt
                 {
                     try
                     {
-                        // 1. Cari/buat pakan, ambil id-nya.
                         int idPakan = AmbilAtauBuatPakan(conn, tx, namaPakan);
 
-                        // 2. INSERT pengajuan (tipe 'Pakan', id_benih NULL).
                         string sqlPengajuan = @"
                             INSERT INTO pengiriman_supplier
                                 (tanggal_kirim, tipe, kuantitas, status_verifikasi, id_akun, id_benih, id_pakan)
@@ -153,9 +149,6 @@ namespace FishIt
             }
         }
 
-        /// <summary>
-        /// Cari id_pakan berdasarkan nama. Kalau belum ada, buat baru (stok 0) lalu kembalikan id-nya.
-        /// </summary>
         private int AmbilAtauBuatPakan(NpgsqlConnection conn, NpgsqlTransaction tx, string nama)
         {
             using (var cmd = new NpgsqlCommand(

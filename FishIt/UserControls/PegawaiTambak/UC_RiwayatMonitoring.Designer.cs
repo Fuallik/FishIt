@@ -37,9 +37,12 @@
             // 
             // DGVRiwayatTambahAkun
             // 
+            DGVRiwayatTambahAkun.AllowUserToAddRows = false;
+            DGVRiwayatTambahAkun.AllowUserToDeleteRows = false;
             DGVRiwayatTambahAkun.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             DGVRiwayatTambahAkun.Location = new Point(30, 106);
             DGVRiwayatTambahAkun.Name = "DGVRiwayatTambahAkun";
+            DGVRiwayatTambahAkun.ReadOnly = true;
             DGVRiwayatTambahAkun.RowHeadersWidth = 62;
             DGVRiwayatTambahAkun.Size = new Size(740, 470);
             DGVRiwayatTambahAkun.TabIndex = 40;

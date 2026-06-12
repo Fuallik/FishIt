@@ -15,7 +15,7 @@ namespace FishIt.UserControls.PegawaiTambak
         public UC_PenebaranBenihIkan()
         {
             InitializeComponent();
-            GridHelper.AturTemaModern(DGVPenebaran);   // ganti nama DGV sesuai Designer-mu
+            GridHelper.AturTemaModern(DGVPenebaran);
             new AutoScaleHelper(this);
         }
 
@@ -45,7 +45,6 @@ namespace FishIt.UserControls.PegawaiTambak
                 {
                     conn.Open();
 
-                    // Filter cuma data milik akun yang login
                     using var cmd = new NpgsqlCommand(
                         "SELECT * FROM view_penebaran WHERE id_akun = @id", conn);
                     cmd.Parameters.AddWithValue("@id", Session.IdAkun);
@@ -55,7 +54,6 @@ namespace FishIt.UserControls.PegawaiTambak
                     adapter.Fill(tabel);
                     DGVPenebaran.DataSource = tabel;
 
-                    // Sembunyikan kolom id_akun — dipakai buat filter, nggak perlu dilihat user
                     if (DGVPenebaran.Columns.Contains("id_akun"))
                         DGVPenebaran.Columns["id_akun"].Visible = false;
                 }
@@ -92,7 +90,6 @@ namespace FishIt.UserControls.PegawaiTambak
             return Convert.ToInt64(cmd.ExecuteScalar());
         }
 
-        // Versi PER akun (2 argumen) — overloading, sama kayak HitungMonitoring
         private long HitungPenebaran(NpgsqlConnection conn, string periode, int idAkun)
         {
             using var cmd = new NpgsqlCommand("SELECT fn_total_penebaran(@periode, @id_akun)", conn);

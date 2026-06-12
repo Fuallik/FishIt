@@ -15,7 +15,7 @@ namespace FishIt.UserControls.PegawaiTambak
         public UC_PanenIkan()
         {
             InitializeComponent();
-            GridHelper.AturTemaModern(DGVPanen);   // ganti nama DGV sesuai Designer-mu
+            GridHelper.AturTemaModern(DGVPanen);
             new AutoScaleHelper(this);
         }
 
@@ -45,7 +45,6 @@ namespace FishIt.UserControls.PegawaiTambak
                 {
                     conn.Open();
 
-                    // Filter cuma data milik akun yang login
                     using var cmd = new NpgsqlCommand(
                         "SELECT * FROM view_panen WHERE id_akun = @id", conn);
                     cmd.Parameters.AddWithValue("@id", Session.IdAkun);
@@ -55,7 +54,6 @@ namespace FishIt.UserControls.PegawaiTambak
                     adapter.Fill(tabel);
                     DGVPanen.DataSource = tabel;
 
-                    // Sembunyikan kolom id_akun — dipakai buat filter, nggak perlu dilihat user
                     if (DGVPanen.Columns.Contains("id_akun"))
                         DGVPanen.Columns["id_akun"].Visible = false;
                 }

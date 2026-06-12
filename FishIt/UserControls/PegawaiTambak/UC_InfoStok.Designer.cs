@@ -79,9 +79,12 @@
             // 
             // DGVPakan
             // 
+            DGVPakan.AllowUserToAddRows = false;
+            DGVPakan.AllowUserToDeleteRows = false;
             DGVPakan.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             DGVPakan.Location = new Point(28, 214);
             DGVPakan.Name = "DGVPakan";
+            DGVPakan.ReadOnly = true;
             DGVPakan.RowHeadersWidth = 62;
             DGVPakan.Size = new Size(360, 361);
             DGVPakan.TabIndex = 39;
@@ -109,9 +112,12 @@
             // 
             // DGVBenih
             // 
+            DGVBenih.AllowUserToAddRows = false;
+            DGVBenih.AllowUserToDeleteRows = false;
             DGVBenih.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             DGVBenih.Location = new Point(413, 214);
             DGVBenih.Name = "DGVBenih";
+            DGVBenih.ReadOnly = true;
             DGVBenih.RowHeadersWidth = 62;
             DGVBenih.Size = new Size(360, 361);
             DGVBenih.TabIndex = 42;
