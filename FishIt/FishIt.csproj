@@ -14,4 +14,14 @@
     <PackageReference Include="Npgsql" Version="10.0.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Controllers\Admin\" />
+    <Folder Include="Controllers\Kasir\" />
+    <Folder Include="Controllers\Supplier\" />
+    <Folder Include="Controllers\Shipper\" />
+    <Folder Include="Controllers\PegawaiTambak\" />
+    <Folder Include="Controllers\Pembeli\" />
+    <Folder Include="Models\" />
+  </ItemGroup>
+
 </Project>
