@@ -44,7 +44,6 @@ namespace FishIt.UserControls.PegawaiTambak
                 try
                 {
                     conn.Open();
-                    // Semua kolam, tanpa filter akun
                     using var cmd = new NpgsqlCommand("SELECT * FROM view_status_kolam", conn);
                     using var adapter = new NpgsqlDataAdapter(cmd);
                     var tabel = new DataTable();
@@ -66,7 +65,6 @@ namespace FishIt.UserControls.PegawaiTambak
                 try
                 {
                     conn.Open();
-                    // ganti nama label sesuai Designer-mu
                     labelTerisi.Text = HitungKolam(conn, "Terisi").ToString();
                     labelKosong.Text = HitungKolam(conn, "Kosong").ToString();
                 }

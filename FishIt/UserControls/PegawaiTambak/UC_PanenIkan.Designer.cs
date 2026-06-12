@@ -46,9 +46,12 @@
             // 
             // DGVPanen
             // 
+            DGVPanen.AllowUserToAddRows = false;
+            DGVPanen.AllowUserToDeleteRows = false;
             DGVPanen.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             DGVPanen.Location = new Point(30, 236);
             DGVPanen.Name = "DGVPanen";
+            DGVPanen.ReadOnly = true;
             DGVPanen.RowHeadersWidth = 62;
             DGVPanen.Size = new Size(740, 340);
             DGVPanen.TabIndex = 23;

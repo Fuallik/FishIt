@@ -99,8 +99,6 @@ namespace FishIt
                             cmdOrder.Parameters.AddWithValue("@id_akun", Session.IdAkun);
                             idOrderBaru = Convert.ToInt32(cmdOrder.ExecuteScalar());
                         }
-
-                        // 3. Masuk ke detail_order
                         string queryDetail = @"INSERT INTO detail_order (kuantitas, harga, id_ikan, id_order)
                                                SELECT k.kuantitas, i.harga_per_kg, k.id_ikan, @id_order
                                                FROM keranjang k
@@ -113,8 +111,6 @@ namespace FishIt
                             cmdDetail.Parameters.AddWithValue("@id_akun", Session.IdAkun);
                             cmdDetail.ExecuteNonQuery();
                         }
-
-                        // 4. Bersihkan keranjang sementara
                         string queryHapus = "DELETE FROM keranjang WHERE id_akun = @id_akun";
                         using (var cmdHapus = new NpgsqlCommand(queryHapus, conn))
                         {
@@ -125,7 +121,6 @@ namespace FishIt
                         tx.Commit();
                         MessageBox.Show("Checkout Berhasil! Antrean telah dikirim ke Kasir.", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                        // TRICK UX: Setelah sukses checkout, otomatis alihkan panel konten utama ke halaman Riwayat
                         Form FormInduk = this.FindForm();
                         Panel pnlKonten = (Panel)FormInduk.Controls.Find("panelKontenPembeli", true)[0];
 
@@ -133,9 +128,9 @@ namespace FishIt
                     }
                     catch (Exception ex)
                     {
-                        tx.Rollback(); // Hanya jalan kalau query SQL di atas ada yang gagal
+                        tx.Rollback();
                         MessageBox.Show("Database Gagal: " + ex.Message, "Error SQL", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return; // Langsung keluar, jangan lanjut ke UI bawah
+                        return;
                     }
                 }
             }
@@ -146,14 +141,13 @@ namespace FishIt
                 try
                 {
                     Form FormInduk = this.FindForm();
-                    // TIPS: Pastikan nama "panelKontenPembeli" ini sama persis dengan (Name) panel di Form Utama kamu!
+
                     Panel pnlKonten = (Panel)FormInduk.Controls.Find("panelKontenPembeli", true)[0];
 
                     PanelHelper.ShowUserControl(pnlKonten, new UC_RIwayatPembeli());
                 }
                 catch (Exception exUI)
                 {
-                    // Jika eror, yang eror cuma perpindahan halaman visualnya saja, databasemu tetap aman!
                     MessageBox.Show("Gagal membuka halaman riwayat secara otomatis: " + exUI.Message, "Eror Tampilan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }

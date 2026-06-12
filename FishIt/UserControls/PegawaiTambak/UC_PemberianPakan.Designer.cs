@@ -46,9 +46,12 @@
             // 
             // DGVPakan
             // 
+            DGVPakan.AllowUserToAddRows = false;
+            DGVPakan.AllowUserToDeleteRows = false;
             DGVPakan.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             DGVPakan.Location = new Point(30, 236);
             DGVPakan.Name = "DGVPakan";
+            DGVPakan.ReadOnly = true;
             DGVPakan.RowHeadersWidth = 62;
             DGVPakan.Size = new Size(740, 340);
             DGVPakan.TabIndex = 28;

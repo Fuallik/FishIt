@@ -26,10 +26,8 @@ namespace FishIt
         {
             InitializeComponent();
 
-            // Tangkap username rahasia untuk proses eksekusi nanti
             this.UsernameTarget = username;
 
-            // Tampilkan data ke TextBox/Label di Form Pop-up ini
             TBNama.Text = nama;
             TBUsername.Text = username;
             TBAlamat.Text = alamat;
@@ -37,7 +35,6 @@ namespace FishIt
             TBKelurahan.Text = kelurahan;
             TBKecamatan.Text = kecamatan;
 
-            // Set semua komponen agar tidak bisa diedit oleh admin
             TBNama.ReadOnly = true;
             TBUsername.ReadOnly = true;
             TBAlamat.ReadOnly = true;
@@ -48,7 +45,6 @@ namespace FishIt
 
         private void btnYaHapus_Click(object sender, EventArgs e)
         {
-            // Sinyal bahwa admin setuju menghapus setelah melihat detail
             this.DialogResult = DialogResult.Yes;
             this.Close();
         }

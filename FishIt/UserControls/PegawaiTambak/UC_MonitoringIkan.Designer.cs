@@ -46,9 +46,12 @@
             // 
             // DGVMonitoringIkan
             // 
+            DGVMonitoringIkan.AllowUserToAddRows = false;
+            DGVMonitoringIkan.AllowUserToDeleteRows = false;
             DGVMonitoringIkan.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             DGVMonitoringIkan.Location = new Point(30, 236);
             DGVMonitoringIkan.Name = "DGVMonitoringIkan";
+            DGVMonitoringIkan.ReadOnly = true;
             DGVMonitoringIkan.RowHeadersWidth = 62;
             DGVMonitoringIkan.Size = new Size(740, 340);
             DGVMonitoringIkan.TabIndex = 18;

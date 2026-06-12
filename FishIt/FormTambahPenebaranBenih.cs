@@ -48,7 +48,6 @@ namespace FishIt
                 using var conn = new NpgsqlConnection(Config.ConnString);
                 conn.Open();
 
-                // INSERT polos. Trigger di DB yang otomatis kurangi stok benih & set kolam jadi 'Terisi'.
                 using var cmd = new NpgsqlCommand(@"
             INSERT INTO penebaran (tanggal_tebar, jumlah_ekor, id_akun, id_benih, id_kolam)
             VALUES (CURRENT_DATE, @ekor, @akun, @benih, @kolam)", conn);
@@ -62,12 +61,11 @@ namespace FishIt
 
                 MessageBox.Show("Penebaran benih dicatat & stok otomatis diperbarui!", "Sukses",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.DialogResult = DialogResult.OK;   // sinyal ke UC biar refresh grid + kartu
+                this.DialogResult = DialogResult.OK;
                 this.Close();
             }
             catch (PostgresException pgEx)
             {
-                // Pesan dari RAISE EXCEPTION di trigger nyangkut di sini (mis. "Stok benih tidak cukup")
                 MessageBox.Show(pgEx.MessageText, "Gagal",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
@@ -93,7 +91,6 @@ namespace FishIt
                 CBKolam.ValueMember = "id_kolam";
                 CBKolam.SelectedIndex = -1;
 
-                // blok benih DIHAPUS dari sini — benih diisi setelah kolam dipilih
             }
             catch (Exception ex)
             {
@@ -109,8 +106,6 @@ namespace FishIt
                 using var conn = new NpgsqlConnection(Config.ConnString);
                 conn.Open();
 
-                // Benih yang boleh ditebar ke kolam ini = benih yang habitatnya (id_jenis_ikan)
-                // SAMA dengan habitat kolam tsb. Sub-query ambil habitat si kolam.
                 using var cmd = new NpgsqlCommand(@"
             SELECT b.id_benih, b.nama
             FROM benih b
@@ -124,7 +119,7 @@ namespace FishIt
                 using var ad = new NpgsqlDataAdapter(cmd);
                 ad.Fill(dt);
 
-                CBBenihIkan.DataSource = dt;          // <-- BENAR: dropdown benih
+                CBBenihIkan.DataSource = dt;
                 CBBenihIkan.DisplayMember = "nama";
                 CBBenihIkan.ValueMember = "id_benih";
                 CBBenihIkan.SelectedIndex = -1;
@@ -138,7 +133,6 @@ namespace FishIt
 
         private void CBBenihIkan_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // Belum ada benih dipilih -> kosongin label, berhenti
             if (CBBenihIkan.SelectedIndex == -1)
             {
                 labelStok.Text = "";
@@ -151,7 +145,6 @@ namespace FishIt
                 {
                     conn.Open();
 
-                    // Ambil sisa stok benih yang dipilih
                     using var cmd = new NpgsqlCommand(
                         "SELECT jumlah_stok FROM benih WHERE id_benih=@id", conn);
                     cmd.Parameters.AddWithValue("@id", Convert.ToInt32(CBBenihIkan.SelectedValue));
@@ -162,7 +155,7 @@ namespace FishIt
                 catch (Exception ex)
                 {
                     labelStok.Text = "Gagal ambil stok";
-                    Console.WriteLine(ex.Message); // detail teknis buat debug, nggak ganggu user
+                    Console.WriteLine(ex.Message);
                 }
         }
 

@@ -36,10 +36,8 @@ namespace FishIt
 
         private void TBUsername_KeyDown(object sender, KeyEventArgs e)
         {
-            // Cek apakah tombol yang ditekan admin adalah tombol ENTER
             if (e.KeyCode == Keys.Enter)
             {
-                // Mencegah suara "ding" default windows saat menekan enter di textbox
                 e.SuppressKeyPress = true;
 
                 string usernameInput = TBUsername.Text.Trim();
@@ -50,7 +48,6 @@ namespace FishIt
                     return;
                 }
 
-                // Ambil data detail dari database
                 string query = @"SELECT a.nama, a.alamat, a.no_telp, kl.nama_kelurahan, kc.nama_kecamatan
                                  FROM akun a
                                  JOIN kelurahan kl ON a.id_kelurahan = kl.id_kelurahan
@@ -70,20 +67,16 @@ namespace FishIt
                             {
                                 if (reader.Read())
                                 {
-                                    // 1. Ambil data dari database ke variabel sementara
                                     string nama = reader["nama"].ToString();
                                     string alamat = reader["alamat"].ToString();
                                     string telp = reader["no_telp"].ToString();
                                     string kelurahan = reader["nama_kelurahan"].ToString();
                                     string kecamatan = reader["nama_kecamatan"].ToString();
 
-                                    // 2. Buka FORM POP-UP BARU dan kirim datanya lewat Constructor
                                     FormKonfirmasiHapus popUp = new FormKonfirmasiHapus(usernameInput, nama, alamat, telp, kelurahan, kecamatan);
 
-                                    // 3. Tampilkan Pop-up dan tunggu keputusan verifikasi admin
                                     if (popUp.ShowDialog() == DialogResult.Yes)
                                     {
-                                        // Jika admin klik "Ya, Hapus" di form pop-up, jalankan Stored Procedure Soft Delete
                                         EksekusiSoftDelete(usernameInput);
                                     }
                                 }
@@ -99,7 +92,6 @@ namespace FishIt
                     }
                     catch (Exception ex)
                     {
-                        // GANTI BARIS YANG EROR TADI DENGAN INI:
                         MessageBox.Show("Gagal mengambil detail akun:\n" + ex.Message, "Error Database", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
@@ -122,7 +114,7 @@ namespace FishIt
 
                         MessageBox.Show($"Akun '{username}' berhasil dinonaktifkan dari sistem!", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                        this.DialogResult = DialogResult.OK; // Segera refresh DataGridView utama
+                        this.DialogResult = DialogResult.OK;
                         this.Close();
                     }
                 }
