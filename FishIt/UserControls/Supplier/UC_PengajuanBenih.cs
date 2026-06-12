@@ -14,6 +14,13 @@ namespace FishIt
                 ConfigurationManager.ConnectionStrings["DbConnection"].ConnectionString;
         }
 
+        // Nilai default untuk ikan yang dibuat otomatis lewat pengajuan benih.
+        // Ikan baru ini belum punya harga/stok/kualitas sebenarnya, jadi diberi nilai
+        // aman: harga 0, stok 0, kualitas C (id_kualitas = 3, kualitas terendah).
+        private const decimal HARGA_DEFAULT = 0;
+        private const decimal STOK_DEFAULT = 0;
+        private const int ID_KUALITAS_DEFAULT = 3; // 3 = 'C'
+
         public UC_PengajuanBenih()
         {
             InitializeComponent();
@@ -23,15 +30,15 @@ namespace FishIt
         private void UC_PengajuanBenih_Load(object sender, EventArgs e)
         {
             MuatComboJenisIkan();
-            MuatComboBenih();
+            MuatComboNama();
             MuatRiwayatPengajuan();
         }
 
         // ====================================================================
-        // BAGIAN MUAT DATA UNTUK COMBOBOX (biar supplier bisa PILIH yang sudah ada)
+        // MUAT DATA UNTUK COMBOBOX
         // ====================================================================
 
-        /// <summary> Isi ComboBox jenis ikan dari tabel jenis_ikan. </summary>
+        /// <summary> Isi ComboBox jenis ikan (Air Tawar / Laut / Payau). </summary>
         private void MuatComboJenisIkan()
         {
             cmbJenisIkan.Items.Clear();
@@ -55,25 +62,28 @@ namespace FishIt
             }
         }
 
-        /// <summary> Isi ComboBox benih dari tabel benih. </summary>
-        private void MuatComboBenih()
+        /// <summary>
+        /// Isi ComboBox "Nama" dari daftar ikan yang sudah ada.
+        /// Satu nama dipakai untuk ikan sekaligus benih, jadi sumbernya tabel ikan.
+        /// </summary>
+        private void MuatComboNama()
         {
-            cmbBenih.Items.Clear();
+            cmbNama.Items.Clear();
             using (var conn = new NpgsqlConnection(Config.ConnString))
             {
                 try
                 {
                     conn.Open();
-                    using (var cmd = new NpgsqlCommand("SELECT nama FROM benih ORDER BY nama", conn))
+                    using (var cmd = new NpgsqlCommand("SELECT nama_ikan FROM ikan ORDER BY nama_ikan", conn))
                     using (var reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
-                            cmbBenih.Items.Add(reader.GetString(0));
+                            cmbNama.Items.Add(reader.GetString(0));
                     }
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Gagal memuat benih: " + ex.Message,
+                    MessageBox.Show("Gagal memuat daftar ikan: " + ex.Message,
                         "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
@@ -121,25 +131,24 @@ namespace FishIt
         }
 
         // ====================================================================
-        // BAGIAN INTI: AJUKAN (pakai TRANSACTION karena ada beberapa INSERT
-        // yang saling bergantung dan harus "semua berhasil atau semua batal")
+        // INTI: AJUKAN (pakai TRANSACTION — beberapa INSERT berantai yang
+        // harus "semua berhasil atau semua batal")
         // ====================================================================
 
         private void btnAjukan_Click(object sender, EventArgs e)
         {
-            // --- 1. Validasi input dasar di sisi C# dulu (biar tidak bolak-balik ke DB) ---
+            // --- 1. Validasi input di sisi C# dulu ---
             string namaJenis = cmbJenisIkan.Text.Trim();
-            string namaBenih = cmbBenih.Text.Trim();
+            string nama = cmbNama.Text.Trim();          // satu nama: dipakai utk ikan & benih
             string kuantitasStr = txtKuantitas.Text.Trim();
 
-            if (string.IsNullOrEmpty(namaJenis) || string.IsNullOrEmpty(namaBenih) || string.IsNullOrEmpty(kuantitasStr))
+            if (string.IsNullOrEmpty(namaJenis) || string.IsNullOrEmpty(nama) || string.IsNullOrEmpty(kuantitasStr))
             {
-                MessageBox.Show("Jenis ikan, nama benih, dan kuantitas wajib diisi.",
+                MessageBox.Show("Jenis ikan, nama, dan kuantitas wajib diisi.",
                     "Perhatian", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            // Kuantitas harus angka > 0. decimal karena kolomnya numeric(10,2).
             if (!decimal.TryParse(kuantitasStr, out decimal kuantitas) || kuantitas <= 0)
             {
                 MessageBox.Show("Kuantitas harus berupa angka lebih dari 0.",
@@ -150,48 +159,50 @@ namespace FishIt
             using (var conn = new NpgsqlConnection(Config.ConnString))
             {
                 conn.Open();
-                // Transaction dibuka di sisi C#. Semua perintah di bawah memakai transaksi yang sama.
                 using (var tx = conn.BeginTransaction())
                 {
                     try
                     {
-                        // --- 2. Cari id_jenis_ikan. Kalau belum ada, INSERT lalu ambil id-nya. ---
+                        // --- 2. Jenis ikan: cari, kalau belum ada buat baru ---
                         int idJenis = AmbilAtauBuatJenisIkan(conn, tx, namaJenis);
 
-                        // --- 3. Cari id_benih. Kalau belum ada, INSERT (pakai idJenis di atas). ---
-                        int idBenih = AmbilAtauBuatBenih(conn, tx, namaBenih, idJenis);
+                        // --- 3. Ikan: cari berdasarkan nama, kalau belum ada buat baru
+                        //         dengan nilai default (harga 0, stok 0, kualitas C). ---
+                        int idIkan = AmbilAtauBuatIkan(conn, tx, nama, idJenis);
 
-                        // --- 4. INSERT pengajuan ke pengiriman_supplier ---
-                        //     status awal 'Menunggu' (belum diverifikasi admin).
+                        // --- 4. Benih: cari berdasarkan nama, kalau belum ada buat baru
+                        //         (butuh id_jenis_ikan DAN id_ikan, dua-duanya NOT NULL). ---
+                        int idBenih = AmbilAtauBuatBenih(conn, tx, nama, idJenis, idIkan);
+
+                        // --- 5. INSERT pengajuan. status 'Pending', kolom nama diisi nama benih. ---
                         string sqlPengajuan = @"
                             INSERT INTO pengiriman_supplier
-                                (tanggal_kirim, tipe, kuantitas, status_verifikasi, id_akun, id_benih, id_pakan)
+                                (tanggal_kirim, tipe, kuantitas, status_verifikasi, id_akun, id_benih, id_pakan, nama)
                             VALUES
-                                (CURRENT_DATE, 'Benih', @kuantitas, 'Menunggu', @id_akun, @id_benih, NULL)";
+                                (CURRENT_DATE, 'Benih', @kuantitas, 'Pending', @id_akun, @id_benih, NULL, @nama)";
                         using (var cmd = new NpgsqlCommand(sqlPengajuan, conn, tx))
                         {
                             cmd.Parameters.AddWithValue("@kuantitas", kuantitas);
                             cmd.Parameters.AddWithValue("@id_akun", Session.IdAkun);
                             cmd.Parameters.AddWithValue("@id_benih", idBenih);
+                            cmd.Parameters.AddWithValue("@nama", nama);
                             cmd.ExecuteNonQuery();
                         }
 
-                        // --- 5. Kalau semua langkah di atas sukses, baru COMMIT (disimpan permanen). ---
+                        // --- 6. Semua sukses -> COMMIT ---
                         tx.Commit();
 
                         MessageBox.Show("Pengajuan benih berhasil dikirim!", "Sukses",
                             MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                        // Bersihkan form & refresh tampilan
                         txtKuantitas.Clear();
                         MuatComboJenisIkan();
-                        MuatComboBenih();
+                        MuatComboNama();
                         MuatRiwayatPengajuan();
                     }
                     catch (Exception ex)
                     {
-                        // Kalau ADA SATU SAJA langkah yang gagal, batalkan SEMUANYA.
-                        // Jadi tidak ada jenis_ikan/benih "setengah jadi" yang nyangkut tanpa pengajuan.
+                        // Satu gagal -> batalkan semua. Tidak ada ikan/benih "setengah jadi".
                         tx.Rollback();
                         MessageBox.Show("Pengajuan gagal, semua perubahan dibatalkan.\n\nDetail: " + ex.Message,
                             "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -200,23 +211,18 @@ namespace FishIt
             }
         }
 
-        /// <summary>
-        /// Cari id_jenis_ikan berdasarkan nama. Kalau belum ada, buat baru lalu kembalikan id-nya.
-        /// Semua perintah memakai koneksi + transaksi yang sedang berjalan (conn, tx).
-        /// </summary>
+        /// <summary> Cari id_jenis_ikan dari nama; kalau belum ada, buat baru. </summary>
         private int AmbilAtauBuatJenisIkan(NpgsqlConnection conn, NpgsqlTransaction tx, string nama)
         {
-            // Coba cari dulu (case-insensitive biar 'Lele' = 'lele').
             using (var cmd = new NpgsqlCommand(
                 "SELECT id_jenis_ikan FROM jenis_ikan WHERE LOWER(nama_jenis_ikan) = LOWER(@nama)", conn, tx))
             {
                 cmd.Parameters.AddWithValue("@nama", nama);
                 object hasil = cmd.ExecuteScalar();
                 if (hasil != null)
-                    return Convert.ToInt32(hasil); // sudah ada, pakai yang ini
+                    return Convert.ToInt32(hasil);
             }
 
-            // Belum ada -> INSERT baru. RETURNING langsung mengembalikan id yang baru dibuat.
             using (var cmd = new NpgsqlCommand(
                 "INSERT INTO jenis_ikan (nama_jenis_ikan) VALUES (@nama) RETURNING id_jenis_ikan", conn, tx))
             {
@@ -226,11 +232,38 @@ namespace FishIt
         }
 
         /// <summary>
-        /// Cara kerja sama seperti jenis ikan, tapi untuk benih.
-        /// Benih baru butuh id_jenis_ikan (FK NOT NULL), makanya idJenis dikirim ke sini.
-        /// jumlah_stok diisi 0 dulu karena benih baru belum punya stok masuk.
+        /// Cari id_ikan dari nama_ikan; kalau belum ada, buat ikan baru dengan
+        /// nilai default (harga 0, stok 0, kualitas C). id_jenis_ikan dari langkah sebelumnya.
         /// </summary>
-        private int AmbilAtauBuatBenih(NpgsqlConnection conn, NpgsqlTransaction tx, string nama, int idJenis)
+        private int AmbilAtauBuatIkan(NpgsqlConnection conn, NpgsqlTransaction tx, string nama, int idJenis)
+        {
+            using (var cmd = new NpgsqlCommand(
+                "SELECT id_ikan FROM ikan WHERE LOWER(nama_ikan) = LOWER(@nama)", conn, tx))
+            {
+                cmd.Parameters.AddWithValue("@nama", nama);
+                object hasil = cmd.ExecuteScalar();
+                if (hasil != null)
+                    return Convert.ToInt32(hasil);
+            }
+
+            using (var cmd = new NpgsqlCommand(
+                @"INSERT INTO ikan (harga_per_kg, stok_ikan, nama_ikan, id_jenis_ikan, id_kualitas)
+                  VALUES (@harga, @stok, @nama, @id_jenis, @id_kualitas) RETURNING id_ikan", conn, tx))
+            {
+                cmd.Parameters.AddWithValue("@harga", HARGA_DEFAULT);
+                cmd.Parameters.AddWithValue("@stok", STOK_DEFAULT);
+                cmd.Parameters.AddWithValue("@nama", nama);
+                cmd.Parameters.AddWithValue("@id_jenis", idJenis);
+                cmd.Parameters.AddWithValue("@id_kualitas", ID_KUALITAS_DEFAULT);
+                return Convert.ToInt32(cmd.ExecuteScalar());
+            }
+        }
+
+        /// <summary>
+        /// Cari id_benih dari nama; kalau belum ada, buat baru.
+        /// Benih butuh id_jenis_ikan DAN id_ikan (dua-duanya NOT NULL).
+        /// </summary>
+        private int AmbilAtauBuatBenih(NpgsqlConnection conn, NpgsqlTransaction tx, string nama, int idJenis, int idIkan)
         {
             using (var cmd = new NpgsqlCommand(
                 "SELECT id_benih FROM benih WHERE LOWER(nama) = LOWER(@nama)", conn, tx))
@@ -242,11 +275,12 @@ namespace FishIt
             }
 
             using (var cmd = new NpgsqlCommand(
-                @"INSERT INTO benih (nama, jumlah_stok, tanggal_masuk, id_jenis_ikan)
-                  VALUES (@nama, 0, CURRENT_DATE, @id_jenis) RETURNING id_benih", conn, tx))
+                @"INSERT INTO benih (nama, jumlah_stok, id_jenis_ikan, id_ikan, tanggal_masuk)
+                  VALUES (@nama, 0, @id_jenis, @id_ikan, CURRENT_DATE) RETURNING id_benih", conn, tx))
             {
                 cmd.Parameters.AddWithValue("@nama", nama);
                 cmd.Parameters.AddWithValue("@id_jenis", idJenis);
+                cmd.Parameters.AddWithValue("@id_ikan", idIkan);
                 return Convert.ToInt32(cmd.ExecuteScalar());
             }
         }

@@ -61,9 +61,13 @@ namespace FishIt
 
                                 switch (status)
                                 {
-                                    case "Menunggu":
+                                    // Status "menunggu verifikasi" memakai 'Pending' (sesuai pengajuan & layar verifikasi Admin).
+                                    case "Pending":
                                         lblAngkaMenunggu.Text = jumlah.ToString();
                                         break;
+                                    // CATATAN TIM: nilai status saat Admin menyetujui/menolak belum final
+                                    // (logika approve ada di UC_DetailVerifikasi yang belum dibuat).
+                                    // Sesuaikan dua case di bawah begitu tim menentukan nilainya.
                                     case "Disetujui":
                                         lblAngkaDisetujui.Text = jumlah.ToString();
                                         break;

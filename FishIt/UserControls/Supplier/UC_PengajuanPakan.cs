@@ -123,14 +123,15 @@ namespace FishIt
                         // 2. INSERT pengajuan (tipe 'Pakan', id_benih NULL).
                         string sqlPengajuan = @"
                             INSERT INTO pengiriman_supplier
-                                (tanggal_kirim, tipe, kuantitas, status_verifikasi, id_akun, id_benih, id_pakan)
+                                (tanggal_kirim, tipe, kuantitas, status_verifikasi, id_akun, id_benih, id_pakan, nama)
                             VALUES
-                                (CURRENT_DATE, 'Pakan', @kuantitas, 'Menunggu', @id_akun, NULL, @id_pakan)";
+                                (CURRENT_DATE, 'Pakan', @kuantitas, 'Pending', @id_akun, NULL, @id_pakan, @nama)";
                         using (var cmd = new NpgsqlCommand(sqlPengajuan, conn, tx))
                         {
                             cmd.Parameters.AddWithValue("@kuantitas", kuantitas);
                             cmd.Parameters.AddWithValue("@id_akun", Session.IdAkun);
                             cmd.Parameters.AddWithValue("@id_pakan", idPakan);
+                            cmd.Parameters.AddWithValue("@nama", namaPakan);  // isi kolom 'nama' (NOT NULL) dgn nama pakan
                             cmd.ExecuteNonQuery();
                         }
 

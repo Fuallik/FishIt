@@ -20,8 +20,8 @@
             lblJudul = new Label();
             lblJenisIkan = new Label();
             cmbJenisIkan = new ComboBox();
-            lblBenih = new Label();
-            cmbBenih = new ComboBox();
+            lblNama = new Label();
+            cmbNama = new ComboBox();
             lblKuantitas = new Label();
             txtKuantitas = new TextBox();
             btnAjukan = new Button();
@@ -60,24 +60,24 @@
             cmbJenisIkan.Size = new Size(300, 33);
             cmbJenisIkan.TabIndex = 2;
             // 
-            // lblBenih
+            // lblNama
             // 
-            lblBenih.AutoSize = true;
-            lblBenih.Font = new Font("Segoe UI", 10F);
-            lblBenih.Location = new Point(23, 150);
-            lblBenih.Name = "lblBenih";
-            lblBenih.Size = new Size(120, 25);
-            lblBenih.TabIndex = 3;
-            lblBenih.Text = "Nama Benih";
+            lblNama.AutoSize = true;
+            lblNama.Font = new Font("Segoe UI", 10F);
+            lblNama.Location = new Point(23, 150);
+            lblNama.Name = "lblNama";
+            lblNama.Size = new Size(120, 25);
+            lblNama.TabIndex = 3;
+            lblNama.Text = "Nama";
             // 
-            // cmbBenih
+            // cmbNama
             // 
-            cmbBenih.DropDownStyle = ComboBoxStyle.DropDown;
-            cmbBenih.Font = new Font("Segoe UI", 10F);
-            cmbBenih.Location = new Point(23, 178);
-            cmbBenih.Name = "cmbBenih";
-            cmbBenih.Size = new Size(300, 33);
-            cmbBenih.TabIndex = 4;
+            cmbNama.DropDownStyle = ComboBoxStyle.DropDown;
+            cmbNama.Font = new Font("Segoe UI", 10F);
+            cmbNama.Location = new Point(23, 178);
+            cmbNama.Name = "cmbNama";
+            cmbNama.Size = new Size(300, 33);
+            cmbNama.TabIndex = 4;
             // 
             // lblKuantitas
             // 
@@ -142,8 +142,8 @@
             Controls.Add(btnAjukan);
             Controls.Add(txtKuantitas);
             Controls.Add(lblKuantitas);
-            Controls.Add(cmbBenih);
-            Controls.Add(lblBenih);
+            Controls.Add(cmbNama);
+            Controls.Add(lblNama);
             Controls.Add(cmbJenisIkan);
             Controls.Add(lblJenisIkan);
             Controls.Add(lblJudul);
@@ -160,8 +160,8 @@
         private Label lblJudul;
         private Label lblJenisIkan;
         private ComboBox cmbJenisIkan;
-        private Label lblBenih;
-        private ComboBox cmbBenih;
+        private Label lblNama;
+        private ComboBox cmbNama;
         private Label lblKuantitas;
         private TextBox txtKuantitas;
         private Button btnAjukan;
