@@ -2,15 +2,8 @@
 {
     partial class UC_RiwayatPengirimanPesanan
     {
-        /// <summary> 
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary> 
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -22,37 +15,69 @@
 
         #region Component Designer generated code
 
-        /// <summary> 
-        /// Required method for Designer support - do not modify 
-        /// the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
-            label1 = new Label();
+            lblJudul = new Label();
+            DGVRiwayat = new DataGridView();
+            btnRefresh = new Button();
+            ((System.ComponentModel.ISupportInitialize)DGVRiwayat).BeginInit();
             SuspendLayout();
             // 
-            // label1
+            // lblJudul
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(310, 149);
-            label1.Name = "label1";
-            label1.Size = new Size(279, 25);
-            label1.TabIndex = 0;
-            label1.Text = "RIWAYAT PENGIRIMAN PESANAN";
+            lblJudul.AutoSize = true;
+            lblJudul.Font = new Font("Segoe UI", 16F, FontStyle.Bold);
+            lblJudul.Location = new Point(23, 20);
+            lblJudul.Name = "lblJudul";
+            lblJudul.Size = new Size(330, 37);
+            lblJudul.TabIndex = 0;
+            lblJudul.Text = "Riwayat Pengiriman";
+            // 
+            // DGVRiwayat
+            // 
+            DGVRiwayat.AllowUserToAddRows = false;
+            DGVRiwayat.AllowUserToDeleteRows = false;
+            DGVRiwayat.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            DGVRiwayat.Location = new Point(23, 80);
+            DGVRiwayat.Name = "DGVRiwayat";
+            DGVRiwayat.ReadOnly = true;
+            DGVRiwayat.Size = new Size(754, 400);
+            DGVRiwayat.TabIndex = 1;
+            // 
+            // btnRefresh
+            // 
+            btnRefresh.BackColor = Color.FromArgb(127, 140, 141);
+            btnRefresh.FlatStyle = FlatStyle.Flat;
+            btnRefresh.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btnRefresh.ForeColor = Color.White;
+            btnRefresh.Location = new Point(657, 495);
+            btnRefresh.Name = "btnRefresh";
+            btnRefresh.Size = new Size(120, 45);
+            btnRefresh.TabIndex = 2;
+            btnRefresh.Text = "Refresh";
+            btnRefresh.UseVisualStyleBackColor = false;
+            btnRefresh.Click += btnRefresh_Click;
             // 
             // UC_RiwayatPengirimanPesanan
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(label1);
+            BackColor = Color.White;
+            Controls.Add(btnRefresh);
+            Controls.Add(DGVRiwayat);
+            Controls.Add(lblJudul);
             Name = "UC_RiwayatPengirimanPesanan";
             Size = new Size(800, 600);
+            Load += UC_RiwayatPengirimanPesanan_Load;
+            ((System.ComponentModel.ISupportInitialize)DGVRiwayat).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private Label label1;
+        private Label lblJudul;
+        private DataGridView DGVRiwayat;
+        private Button btnRefresh;
     }
 }
