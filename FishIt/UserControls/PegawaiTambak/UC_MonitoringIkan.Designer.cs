@@ -28,169 +28,170 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DGVRiwayatTambahAkun = new DataGridView();
-            panel1 = new Panel();
-            label1 = new Label();
-            panel4 = new Panel();
-            labelTotalMonitoringBulan = new Label();
-            label5 = new Label();
-            panel2 = new Panel();
-            labelTotalMonitoringHariIni = new Label();
-            label3 = new Label();
-            iconButton2 = new FontAwesome.Sharp.IconButton();
-            ((System.ComponentModel.ISupportInitialize)DGVRiwayatTambahAkun).BeginInit();
-            panel1.SuspendLayout();
-            panel4.SuspendLayout();
-            panel2.SuspendLayout();
+            DGVMonitoringIkan = new DataGridView();
+            buttonTambahMonitoring = new FontAwesome.Sharp.IconButton();
+            panel3 = new Panel();
+            label2 = new Label();
+            panel5 = new Panel();
+            labelTotalHariPerAkun = new Label();
+            label6 = new Label();
+            panel6 = new Panel();
+            labelTotalBulanPerAkun = new Label();
+            label8 = new Label();
+            ((System.ComponentModel.ISupportInitialize)DGVMonitoringIkan).BeginInit();
+            panel3.SuspendLayout();
+            panel5.SuspendLayout();
+            panel6.SuspendLayout();
             SuspendLayout();
             // 
-            // DGVRiwayatTambahAkun
+            // DGVMonitoringIkan
             // 
-            DGVRiwayatTambahAkun.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            DGVRiwayatTambahAkun.Location = new Point(30, 236);
-            DGVRiwayatTambahAkun.Name = "DGVRiwayatTambahAkun";
-            DGVRiwayatTambahAkun.RowHeadersWidth = 62;
-            DGVRiwayatTambahAkun.Size = new Size(740, 340);
-            DGVRiwayatTambahAkun.TabIndex = 18;
+            DGVMonitoringIkan.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            DGVMonitoringIkan.Location = new Point(30, 236);
+            DGVMonitoringIkan.Name = "DGVMonitoringIkan";
+            DGVMonitoringIkan.RowHeadersWidth = 62;
+            DGVMonitoringIkan.Size = new Size(740, 340);
+            DGVMonitoringIkan.TabIndex = 18;
             // 
-            // panel1
+            // buttonTambahMonitoring
             // 
-            panel1.BackColor = Color.CornflowerBlue;
-            panel1.Controls.Add(label1);
-            panel1.Location = new Point(25, 26);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(287, 55);
-            panel1.TabIndex = 19;
+            buttonTambahMonitoring.BackColor = Color.CornflowerBlue;
+            buttonTambahMonitoring.FlatAppearance.BorderSize = 0;
+            buttonTambahMonitoring.FlatStyle = FlatStyle.Flat;
+            buttonTambahMonitoring.Font = new Font("Segoe UI", 13F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            buttonTambahMonitoring.ForeColor = Color.White;
+            buttonTambahMonitoring.IconChar = FontAwesome.Sharp.IconChar.PlusSquare;
+            buttonTambahMonitoring.IconColor = Color.White;
+            buttonTambahMonitoring.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            buttonTambahMonitoring.IconSize = 100;
+            buttonTambahMonitoring.Location = new Point(720, 160);
+            buttonTambahMonitoring.Margin = new Padding(0);
+            buttonTambahMonitoring.MaximumSize = new Size(100, 100);
+            buttonTambahMonitoring.Name = "buttonTambahMonitoring";
+            buttonTambahMonitoring.Size = new Size(50, 50);
+            buttonTambahMonitoring.TabIndex = 45;
+            buttonTambahMonitoring.TextImageRelation = TextImageRelation.ImageBeforeText;
+            buttonTambahMonitoring.UseVisualStyleBackColor = false;
+            buttonTambahMonitoring.Click += buttonTambahMonitoring_Click;
             // 
-            // label1
+            // panel3
             // 
-            label1.BackColor = Color.Transparent;
-            label1.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.ForeColor = Color.White;
-            label1.Location = new Point(0, 9);
-            label1.Name = "label1";
-            label1.Size = new Size(287, 32);
-            label1.TabIndex = 3;
-            label1.Text = "Total Monitoring";
-            label1.TextAlign = ContentAlignment.MiddleCenter;
+            panel3.BackColor = Color.CornflowerBlue;
+            panel3.Controls.Add(label2);
+            panel3.Location = new Point(30, 22);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(325, 55);
+            panel3.TabIndex = 46;
             // 
-            // panel4
+            // label2
             // 
-            panel4.BackColor = Color.CornflowerBlue;
-            panel4.Controls.Add(labelTotalMonitoringBulan);
-            panel4.Controls.Add(label5);
-            panel4.Location = new Point(25, 94);
-            panel4.Name = "panel4";
-            panel4.Size = new Size(135, 120);
-            panel4.TabIndex = 37;
+            label2.BackColor = Color.Transparent;
+            label2.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label2.ForeColor = Color.White;
+            label2.Location = new Point(0, 9);
+            label2.Name = "label2";
+            label2.Size = new Size(325, 32);
+            label2.TabIndex = 3;
+            label2.Text = "Total Monitoring Per Akun";
+            label2.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // labelTotalMonitoringBulan
+            // panel5
             // 
-            labelTotalMonitoringBulan.BackColor = Color.Transparent;
-            labelTotalMonitoringBulan.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            labelTotalMonitoringBulan.ForeColor = Color.White;
-            labelTotalMonitoringBulan.Location = new Point(0, 61);
-            labelTotalMonitoringBulan.Name = "labelTotalMonitoringBulan";
-            labelTotalMonitoringBulan.Size = new Size(135, 32);
-            labelTotalMonitoringBulan.TabIndex = 5;
-            labelTotalMonitoringBulan.Text = "0";
-            labelTotalMonitoringBulan.TextAlign = ContentAlignment.MiddleCenter;
+            panel5.BackColor = Color.CornflowerBlue;
+            panel5.Controls.Add(labelTotalHariPerAkun);
+            panel5.Controls.Add(label6);
+            panel5.Location = new Point(200, 90);
+            panel5.Name = "panel5";
+            panel5.Size = new Size(155, 120);
+            panel5.TabIndex = 48;
             // 
-            // label5
+            // labelTotalHariPerAkun
             // 
-            label5.BackColor = Color.Transparent;
-            label5.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label5.ForeColor = Color.White;
-            label5.Location = new Point(0, 9);
-            label5.Name = "label5";
-            label5.Size = new Size(135, 32);
-            label5.TabIndex = 3;
-            label5.Text = "1 Bulan";
-            label5.TextAlign = ContentAlignment.MiddleCenter;
+            labelTotalHariPerAkun.BackColor = Color.Transparent;
+            labelTotalHariPerAkun.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            labelTotalHariPerAkun.ForeColor = Color.White;
+            labelTotalHariPerAkun.Location = new Point(0, 61);
+            labelTotalHariPerAkun.Name = "labelTotalHariPerAkun";
+            labelTotalHariPerAkun.Size = new Size(152, 32);
+            labelTotalHariPerAkun.TabIndex = 5;
+            labelTotalHariPerAkun.Text = "0";
+            labelTotalHariPerAkun.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // panel2
+            // label6
             // 
-            panel2.BackColor = Color.CornflowerBlue;
-            panel2.Controls.Add(labelTotalMonitoringHariIni);
-            panel2.Controls.Add(label3);
-            panel2.Location = new Point(177, 94);
-            panel2.Name = "panel2";
-            panel2.Size = new Size(135, 120);
-            panel2.TabIndex = 38;
+            label6.BackColor = Color.Transparent;
+            label6.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label6.ForeColor = Color.White;
+            label6.Location = new Point(0, 9);
+            label6.Name = "label6";
+            label6.Size = new Size(155, 32);
+            label6.TabIndex = 3;
+            label6.Text = "Hari Ini";
+            label6.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // labelTotalMonitoringHariIni
+            // panel6
             // 
-            labelTotalMonitoringHariIni.BackColor = Color.Transparent;
-            labelTotalMonitoringHariIni.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            labelTotalMonitoringHariIni.ForeColor = Color.White;
-            labelTotalMonitoringHariIni.Location = new Point(0, 61);
-            labelTotalMonitoringHariIni.Name = "labelTotalMonitoringHariIni";
-            labelTotalMonitoringHariIni.Size = new Size(135, 32);
-            labelTotalMonitoringHariIni.TabIndex = 5;
-            labelTotalMonitoringHariIni.Text = "0";
-            labelTotalMonitoringHariIni.TextAlign = ContentAlignment.MiddleCenter;
+            panel6.BackColor = Color.CornflowerBlue;
+            panel6.Controls.Add(labelTotalBulanPerAkun);
+            panel6.Controls.Add(label8);
+            panel6.Location = new Point(30, 90);
+            panel6.Name = "panel6";
+            panel6.Size = new Size(155, 120);
+            panel6.TabIndex = 47;
             // 
-            // label3
+            // labelTotalBulanPerAkun
             // 
-            label3.BackColor = Color.Transparent;
-            label3.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label3.ForeColor = Color.White;
-            label3.Location = new Point(0, 9);
-            label3.Name = "label3";
-            label3.Size = new Size(135, 32);
-            label3.TabIndex = 3;
-            label3.Text = "Hari Ini";
-            label3.TextAlign = ContentAlignment.MiddleCenter;
+            labelTotalBulanPerAkun.BackColor = Color.Transparent;
+            labelTotalBulanPerAkun.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            labelTotalBulanPerAkun.ForeColor = Color.White;
+            labelTotalBulanPerAkun.Location = new Point(0, 61);
+            labelTotalBulanPerAkun.Name = "labelTotalBulanPerAkun";
+            labelTotalBulanPerAkun.Size = new Size(155, 32);
+            labelTotalBulanPerAkun.TabIndex = 5;
+            labelTotalBulanPerAkun.Text = "0";
+            labelTotalBulanPerAkun.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // iconButton2
+            // label8
             // 
-            iconButton2.BackColor = Color.CornflowerBlue;
-            iconButton2.FlatAppearance.BorderSize = 0;
-            iconButton2.FlatStyle = FlatStyle.Flat;
-            iconButton2.Font = new Font("Segoe UI", 13F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            iconButton2.ForeColor = Color.White;
-            iconButton2.IconChar = FontAwesome.Sharp.IconChar.PlusSquare;
-            iconButton2.IconColor = Color.White;
-            iconButton2.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            iconButton2.IconSize = 100;
-            iconButton2.Location = new Point(720, 164);
-            iconButton2.Margin = new Padding(0);
-            iconButton2.MaximumSize = new Size(100, 100);
-            iconButton2.Name = "iconButton2";
-            iconButton2.Size = new Size(50, 50);
-            iconButton2.TabIndex = 45;
-            iconButton2.TextImageRelation = TextImageRelation.ImageBeforeText;
-            iconButton2.UseVisualStyleBackColor = false;
+            label8.BackColor = Color.Transparent;
+            label8.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label8.ForeColor = Color.White;
+            label8.Location = new Point(0, 9);
+            label8.Name = "label8";
+            label8.Size = new Size(152, 32);
+            label8.TabIndex = 3;
+            label8.Text = "1 Bulan";
+            label8.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // UC_MonitoringIkan
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.LightSteelBlue;
-            Controls.Add(iconButton2);
-            Controls.Add(panel2);
-            Controls.Add(panel4);
-            Controls.Add(panel1);
-            Controls.Add(DGVRiwayatTambahAkun);
+            Controls.Add(panel5);
+            Controls.Add(panel6);
+            Controls.Add(panel3);
+            Controls.Add(buttonTambahMonitoring);
+            Controls.Add(DGVMonitoringIkan);
             Name = "UC_MonitoringIkan";
             Size = new Size(800, 600);
-            ((System.ComponentModel.ISupportInitialize)DGVRiwayatTambahAkun).EndInit();
-            panel1.ResumeLayout(false);
-            panel4.ResumeLayout(false);
-            panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)DGVMonitoringIkan).EndInit();
+            panel3.ResumeLayout(false);
+            panel5.ResumeLayout(false);
+            panel6.ResumeLayout(false);
             ResumeLayout(false);
         }
 
         #endregion
-        private DataGridView DGVRiwayatTambahAkun;
-        private Panel panel1;
-        private Label label1;
-        private Panel panel4;
-        private Label labelTotalMonitoringBulan;
-        private Label label5;
-        private Panel panel2;
-        private Label labelTotalMonitoringHariIni;
-        private Label label3;
-        private FontAwesome.Sharp.IconButton iconButton2;
+        private DataGridView DGVMonitoringIkan;
+        private FontAwesome.Sharp.IconButton buttonTambahMonitoring;
+        private Panel panel3;
+        private Label label2;
+        private Panel panel5;
+        private Label labelTotalHariPerAkun;
+        private Label label6;
+        private Panel panel6;
+        private Label labelTotalBulanPerAkun;
+        private Label label8;
     }
 }

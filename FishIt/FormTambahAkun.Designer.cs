@@ -50,6 +50,7 @@
             label9 = new Label();
             btnSaveTambahAkun = new FontAwesome.Sharp.IconButton();
             btnBatalTambahAkun = new FontAwesome.Sharp.IconButton();
+            iconDropDownButton1 = new FontAwesome.Sharp.IconDropDownButton();
             SuspendLayout();
             // 
             // lblTambahAkun
@@ -289,6 +290,15 @@
             btnBatalTambahAkun.UseVisualStyleBackColor = false;
             btnBatalTambahAkun.Click += btnBatalTambahAkun_Click;
             // 
+            // iconDropDownButton1
+            // 
+            iconDropDownButton1.IconChar = FontAwesome.Sharp.IconChar.None;
+            iconDropDownButton1.IconColor = Color.Black;
+            iconDropDownButton1.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            iconDropDownButton1.Name = "iconDropDownButton1";
+            iconDropDownButton1.Size = new Size(23, 23);
+            iconDropDownButton1.Text = "iconDropDownButton1";
+            // 
             // FormTambahAkun
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
@@ -350,5 +360,6 @@
         private Label label9;
         private FontAwesome.Sharp.IconButton btnSaveTambahAkun;
         private FontAwesome.Sharp.IconButton btnBatalTambahAkun;
+        private FontAwesome.Sharp.IconDropDownButton iconDropDownButton1;
     }
 }
