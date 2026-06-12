@@ -33,12 +33,11 @@ namespace FishIt.UserControls.PegawaiTambak
 
         private void MuatData()
         {
-            MuatGrid("SELECT * FROM view_stok_pakan", DGVPakan);   // ganti nama DGV sesuai Designer
+            MuatGrid("SELECT * FROM view_stok_pakan", DGVPakan);
             MuatGrid("SELECT * FROM view_stok_benih", DGVBenih);
             MuatKartu();
         }
 
-        // Satu method dipakai dua grid (kasih query + DGV target)
         private void MuatGrid(string query, DataGridView dgv)
         {
             using (var conn = new NpgsqlConnection(Config.ConnString))
@@ -68,11 +67,9 @@ namespace FishIt.UserControls.PegawaiTambak
                 {
                     conn.Open();
 
-                    // PAKAN — desimal, pakai N2
                     labelJenisPakan.Text = HitungStok(conn, "PAKAN", "JENIS").ToString("N0") + " jenis";
                     labelStokPakan.Text = HitungStok(conn, "PAKAN", "TOTAL").ToString("N2") + " kg";
 
-                    // BENIH — bilangan bulat, pakai N0 (tanpa koma)
                     labelJenisBenih.Text = HitungStok(conn, "BENIH", "JENIS").ToString() + " jenis";
                     labelStokBenih.Text = HitungStok(conn, "BENIH", "TOTAL").ToString() + " ekor";
                 }

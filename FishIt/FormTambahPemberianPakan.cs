@@ -151,7 +151,6 @@ namespace FishIt
                 
                 conn.Open();
 
-                // Ambil sisa stok pakan yang baru dipilih
                 using var cmd = new NpgsqlCommand(
                     "SELECT jumlah_stok FROM pakan WHERE id_pakan=@id", conn);
                 cmd.Parameters.AddWithValue("@id", Convert.ToInt32(CBPakan.SelectedValue));
@@ -162,7 +161,6 @@ namespace FishIt
             catch (Exception ex)
             {
                 labelStokPakan.Text = "Gagal ambil stok";
-                // detail teknis cukup buat debugging, nggak usah ganggu user pakai MessageBox
                 Console.WriteLine(ex.Message);
             }
         }

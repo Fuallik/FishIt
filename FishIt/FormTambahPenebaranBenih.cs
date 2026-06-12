@@ -91,7 +91,6 @@ namespace FishIt
                 CBKolam.ValueMember = "id_kolam";
                 CBKolam.SelectedIndex = -1;
 
-                // blok benih DIHAPUS dari sini — benih diisi setelah kolam dipilih
             }
             catch (Exception ex)
             {
@@ -107,8 +106,6 @@ namespace FishIt
                 using var conn = new NpgsqlConnection(Config.ConnString);
                 conn.Open();
 
-                // Benih yang boleh ditebar ke kolam ini = benih yang habitatnya (id_jenis_ikan)
-                // SAMA dengan habitat kolam tsb. Sub-query ambil habitat si kolam.
                 using var cmd = new NpgsqlCommand(@"
             SELECT b.id_benih, b.nama
             FROM benih b
@@ -122,7 +119,7 @@ namespace FishIt
                 using var ad = new NpgsqlDataAdapter(cmd);
                 ad.Fill(dt);
 
-                CBBenihIkan.DataSource = dt;          // <-- BENAR: dropdown benih
+                CBBenihIkan.DataSource = dt;
                 CBBenihIkan.DisplayMember = "nama";
                 CBBenihIkan.ValueMember = "id_benih";
                 CBBenihIkan.SelectedIndex = -1;
@@ -136,7 +133,6 @@ namespace FishIt
 
         private void CBBenihIkan_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // Belum ada benih dipilih -> kosongin label, berhenti
             if (CBBenihIkan.SelectedIndex == -1)
             {
                 labelStok.Text = "";
@@ -149,7 +145,6 @@ namespace FishIt
                 {
                     conn.Open();
 
-                    // Ambil sisa stok benih yang dipilih
                     using var cmd = new NpgsqlCommand(
                         "SELECT jumlah_stok FROM benih WHERE id_benih=@id", conn);
                     cmd.Parameters.AddWithValue("@id", Convert.ToInt32(CBBenihIkan.SelectedValue));
@@ -160,7 +155,7 @@ namespace FishIt
                 catch (Exception ex)
                 {
                     labelStok.Text = "Gagal ambil stok";
-                    Console.WriteLine(ex.Message); // detail teknis buat debug, nggak ganggu user
+                    Console.WriteLine(ex.Message);
                 }
         }
 

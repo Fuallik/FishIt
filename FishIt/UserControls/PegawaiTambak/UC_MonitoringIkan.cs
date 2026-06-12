@@ -22,7 +22,7 @@ namespace FishIt.UserControls.PegawaiTambak
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
-            MuatData(); // <-- isi grid + kartu di sini
+            MuatData();
         }
 
         public static class Config

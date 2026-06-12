@@ -18,7 +18,7 @@ namespace FishIt
         {
             InitializeComponent();
 
-            MuatKolam(); // isi dropdown kolam dari database
+            MuatKolam();
         }
 
         public static class Config
