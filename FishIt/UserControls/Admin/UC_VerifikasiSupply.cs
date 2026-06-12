@@ -71,10 +71,11 @@ namespace FishIt
                     MessageBox.Show("ID Pengajuan tidak boleh kosong!", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
-                string query = @"SELECT p.id_pengiriman_supplier, a.nama, p.nama AS nama_ikan, p.kuantitas, p.tipe, p.tanggal_kirim, p.status_verifikasi, p.tanggal_verifikasi
-                         FROM pengiriman_supplier p
-                         JOIN akun a ON p.id_akun = a.id_akun
-                         WHERE p.id_pengiriman_supplier = @id_p AND p.status_verifikasi = 'Pending' ";
+                string query = @"SELECT p.id_pengiriman_supplier, p.id_benih, p.id_pakan, a.nama AS nama_supplier, 
+                                p.nama AS nama_barang, p.kuantitas, p.tipe, p.tanggal_kirim, p.status_verifikasi, p.tanggal_verifikasi
+                                FROM pengiriman_supplier p
+                                JOIN akun a ON p.id_akun = a.id_akun
+                                WHERE p.id_pengiriman_supplier = @id_p AND p.status_verifikasi = 'Pending'";
 
                 using (var conn = new NpgsqlConnection(Config.ConnString))
                 {
@@ -90,25 +91,49 @@ namespace FishIt
                                 if (reader.Read())
                                 {
                                     int idPengajuan = Convert.ToInt32(reader["id_pengiriman_supplier"]);
-                                    string namaSupplier = reader["nama"].ToString();
-                                    string namaPengiriman = reader["nama"].ToString();
+                                    int idBenih = reader["id_benih"] == DBNull.Value ? 0 : Convert.ToInt32(reader["id_benih"]);
+                                    int idPakan = reader["id_pakan"] == DBNull.Value ? 0 : Convert.ToInt32(reader["id_pakan"]);
+
+                                    string namaSupplier = reader["nama_supplier"].ToString();
+                                    string namaPengiriman = reader["nama_barang"].ToString();
                                     int kuantitas = Convert.ToInt32(reader["kuantitas"]);
                                     string tipe = reader["tipe"].ToString();
-                                    string tanggalKirim = Convert.ToDateTime(reader["tanggal_kirim"]).ToString("yyyy-MM-dd");
+                                   
                                     string statusVerifikasi = reader["status_verifikasi"].ToString();
-                                    string tanggalVerifikasi = reader["tanggal_verifikasi"] == DBNull.Value ? "Belum Diverifikasi" : Convert.ToDateTime(reader["tanggal_verifikasi"]).ToString("yyyy-MM-dd");
+                                   
 
-                                    // 4. Buka USER CONTROL DETAIL dan kirim datanya lewat Constructor
-                                    Form FormInduk = this.FindForm();
-                                    Panel pnlKonten = (Panel)FormInduk.Controls.Find("panelKontenAdmin", true)[0]; // Sesuaikan nama panel adminmu
 
-                                    // Kita oper semua data ke Constructor UC Detail
-                                    UC_DetailVerifikasi ucDetail = new UC_DetailVerifikasi(
-                                        idPengajuan, kuantitas, tipe, tanggalKirim, statusVerifikasi, tanggalVerifikasi, namaSupplier
-                                    );
+                                    string tanggalKirim = "";
+                                    if (reader["tanggal_kirim"] is DateOnly dateKirim)
+                                    {
+                                        tanggalKirim = dateKirim.ToString("yyyy-MM-dd");
+                                    }
+                                    else
+                                    {
+                                        tanggalKirim = Convert.ToDateTime(reader["tanggal_kirim"]).ToString("yyyy-MM-dd");
+                                    }
 
-                                    // Tampilkan UC Detail ke panel utama
-                                    PanelHelper.ShowUserControl(pnlKonten, ucDetail);
+                                    string tanggalVerifikasi = "Belum Diverifikasi";
+                                    if (reader["tanggal_verifikasi"] != DBNull.Value)
+                                    {
+                                        if (reader["tanggal_verifikasi"] is DateOnly dateVerif)
+                                        {
+                                            tanggalVerifikasi = dateVerif.ToString("yyyy-MM-dd");
+                                        }
+                                        else
+                                        {
+                                            tanggalVerifikasi = Convert.ToDateTime(reader["tanggal_verifikasi"]).ToString("yyyy-MM-dd");
+                                        }
+                                    }
+                                    using (UC_DetailVerifikasi popUp = new UC_DetailVerifikasi(idPengajuan, idBenih, idPakan, namaPengiriman, kuantitas, tipe, tanggalKirim, statusVerifikasi, tanggalVerifikasi, namaSupplier))
+                                    {
+                                        popUp.StartPosition = FormStartPosition.CenterParent;
+                                        if (popUp.ShowDialog() == DialogResult.OK)
+                                        {
+                                            TBIDPengajuan.Clear();
+                                            MuatPengajuanSupplier();
+                                        }
+                                    }
                                 }
                                 else
                                 {

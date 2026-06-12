@@ -14,5 +14,10 @@ namespace FishIt
         {
             InitializeComponent();
         }
+
+        private void UC_Pengiriman_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

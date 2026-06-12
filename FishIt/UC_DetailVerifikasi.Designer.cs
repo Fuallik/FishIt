@@ -171,11 +171,11 @@
             lblHapusAkun.BackColor = Color.Transparent;
             lblHapusAkun.Font = new Font("Segoe UI", 20F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblHapusAkun.ImageAlign = ContentAlignment.TopCenter;
-            lblHapusAkun.Location = new Point(71, 30);
+            lblHapusAkun.Location = new Point(31, 30);
             lblHapusAkun.Name = "lblHapusAkun";
-            lblHapusAkun.Size = new Size(358, 54);
+            lblHapusAkun.Size = new Size(436, 54);
             lblHapusAkun.TabIndex = 23;
-            lblHapusAkun.Text = "Konfirmasi Hapus";
+            lblHapusAkun.Text = "Konfirmasi Pengajuan\r\n";
             lblHapusAkun.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // label1
@@ -202,7 +202,7 @@
             btnACC.IconChar = FontAwesome.Sharp.IconChar.None;
             btnACC.IconColor = Color.Black;
             btnACC.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            btnACC.Location = new Point(340, 751);
+            btnACC.Location = new Point(340, 728);
             btnACC.Name = "btnACC";
             btnACC.Size = new Size(112, 34);
             btnACC.TabIndex = 38;
@@ -218,7 +218,7 @@
             btnTolak.IconChar = FontAwesome.Sharp.IconChar.None;
             btnTolak.IconColor = Color.Black;
             btnTolak.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            btnTolak.Location = new Point(188, 751);
+            btnTolak.Location = new Point(188, 728);
             btnTolak.Name = "btnTolak";
             btnTolak.Size = new Size(112, 34);
             btnTolak.TabIndex = 39;
@@ -231,7 +231,7 @@
             btnKembali.IconChar = FontAwesome.Sharp.IconChar.None;
             btnKembali.IconColor = Color.Black;
             btnKembali.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            btnKembali.Location = new Point(30, 751);
+            btnKembali.Location = new Point(31, 728);
             btnKembali.Name = "btnKembali";
             btnKembali.Size = new Size(112, 34);
             btnKembali.TabIndex = 40;
@@ -262,6 +262,8 @@
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.White;
+            ClientSize = new Size(478, 794);
             Controls.Add(label2);
             Controls.Add(TBNamaIkan);
             Controls.Add(btnKembali);
@@ -282,8 +284,9 @@
             Controls.Add(labelNama);
             Controls.Add(TBIdPengajuan);
             Controls.Add(lblHapusAkun);
+            FormBorderStyle = FormBorderStyle.None;
             Name = "UC_DetailVerifikasi";
-            Size = new Size(500, 800);
+            StartPosition = FormStartPosition.CenterScreen;
             Load += UC_DetailVerifikasi_Load;
             ResumeLayout(false);
             PerformLayout();

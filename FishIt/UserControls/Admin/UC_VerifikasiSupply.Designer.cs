@@ -29,11 +29,10 @@
         private void InitializeComponent()
         {
             panelMonitoring = new Panel();
-            btnDetailVerifikasi = new FontAwesome.Sharp.IconButton();
+            TBIDPengajuan = new TextBox();
             labelJumlahAkun = new Label();
             label2 = new Label();
             DGVPengajuan = new DataGridView();
-            TBIDPengajuan = new TextBox();
             panelMonitoring.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)DGVPengajuan).BeginInit();
             SuspendLayout();
@@ -42,7 +41,6 @@
             // 
             panelMonitoring.BackColor = Color.CornflowerBlue;
             panelMonitoring.Controls.Add(TBIDPengajuan);
-            panelMonitoring.Controls.Add(btnDetailVerifikasi);
             panelMonitoring.Controls.Add(labelJumlahAkun);
             panelMonitoring.Controls.Add(label2);
             panelMonitoring.Location = new Point(20, 20);
@@ -50,23 +48,17 @@
             panelMonitoring.Size = new Size(760, 142);
             panelMonitoring.TabIndex = 1;
             // 
-            // btnDetailVerifikasi
+            // TBIDPengajuan
             // 
-            btnDetailVerifikasi.BackColor = Color.RoyalBlue;
-            btnDetailVerifikasi.FlatAppearance.BorderSize = 0;
-            btnDetailVerifikasi.FlatStyle = FlatStyle.Flat;
-            btnDetailVerifikasi.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
-            btnDetailVerifikasi.ForeColor = Color.White;
-            btnDetailVerifikasi.IconChar = FontAwesome.Sharp.IconChar.None;
-            btnDetailVerifikasi.IconColor = Color.Black;
-            btnDetailVerifikasi.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            btnDetailVerifikasi.Location = new Point(597, 92);
-            btnDetailVerifikasi.Name = "btnDetailVerifikasi";
-            btnDetailVerifikasi.Size = new Size(150, 40);
-            btnDetailVerifikasi.TabIndex = 6;
-            btnDetailVerifikasi.Text = "Verifikasi";
-            btnDetailVerifikasi.UseVisualStyleBackColor = false;
-            btnDetailVerifikasi.Click += btnDetailVerifikasi_Click;
+            TBIDPengajuan.BackColor = Color.RoyalBlue;
+            TBIDPengajuan.BorderStyle = BorderStyle.FixedSingle;
+            TBIDPengajuan.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            TBIDPengajuan.ForeColor = Color.White;
+            TBIDPengajuan.Location = new Point(565, 95);
+            TBIDPengajuan.Name = "TBIDPengajuan";
+            TBIDPengajuan.Size = new Size(181, 31);
+            TBIDPengajuan.TabIndex = 7;
+            TBIDPengajuan.TextChanged += TBIDPengajuan_TextChanged;
             // 
             // labelJumlahAkun
             // 
@@ -102,16 +94,6 @@
             DGVPengajuan.Size = new Size(760, 402);
             DGVPengajuan.TabIndex = 2;
             // 
-            // TBIDPengajuan
-            // 
-            TBIDPengajuan.BackColor = Color.RoyalBlue;
-            TBIDPengajuan.BorderStyle = BorderStyle.FixedSingle;
-            TBIDPengajuan.Location = new Point(597, 43);
-            TBIDPengajuan.Name = "TBIDPengajuan";
-            TBIDPengajuan.Size = new Size(150, 31);
-            TBIDPengajuan.TabIndex = 7;
-            TBIDPengajuan.TextChanged += TBIDPengajuan_TextChanged;
-            // 
             // UC_VerifikasiSupply
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
@@ -131,7 +113,6 @@
         #endregion
 
         private Panel panelMonitoring;
-        private FontAwesome.Sharp.IconButton btnDetailVerifikasi;
         private Label labelJumlahAkun;
         private Label label2;
         private DataGridView DGVPengajuan;

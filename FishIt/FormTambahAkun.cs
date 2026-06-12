@@ -67,7 +67,7 @@ namespace FishIt
                 return;
             }
 
-            string query = "CALL sp_tambah_akun(@p_username, @p_passwords, @p_nama, @p_no_telp, @p_alamat, @p_aktif, @p_id_role, @p_nama_kelurahan, @p_nama_kecamatan, @p_id_baru)";
+            string query = "CALL sp_tambah_akun(@p_username, @p_nama, @p_passwords, @p_alamat, @p_no_telp, @p_aktif, @p_id_role, @p_nama_kelurahan, @p_nama_kecamatan, @p_id_baru)";
 
             using (var conn = new NpgsqlConnection(Config.ConnString))
             {
@@ -86,6 +86,7 @@ namespace FishIt
                         cmd.Parameters.Add("@p_aktif", NpgsqlTypes.NpgsqlDbType.Boolean).Value = true;
                         int idRoleTerpilih = Convert.ToInt32(CBJabatan.SelectedValue);
                         cmd.Parameters.Add("@p_id_role", NpgsqlTypes.NpgsqlDbType.Integer).Value = idRoleTerpilih;
+                                                
                         cmd.Parameters.Add("@p_nama_kelurahan", NpgsqlTypes.NpgsqlDbType.Varchar).Value = TBKelurahan.Text.Trim();
                         cmd.Parameters.Add("@p_nama_kecamatan", NpgsqlTypes.NpgsqlDbType.Varchar).Value = TBKecamatan.Text.Trim();
 

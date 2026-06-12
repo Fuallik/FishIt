@@ -175,11 +175,11 @@ namespace FishIt
                     string insertQuery = @"CALL sp_tambah_akun(@p_username, @p_nama, @p_passwords, @p_alamat, @p_no_telp, @p_aktif, @p_id_role, @p_nama_kelurahan, @p_nama_kecamatan, @p_id_baru)";
                     using (var insertCmd = new NpgsqlCommand(insertQuery, conn))
                     {
-                        insertCmd.Parameters.AddWithValue("@p_nama", nama);
                         insertCmd.Parameters.AddWithValue("@p_username", username);
+                        insertCmd.Parameters.AddWithValue("@p_nama", nama);
                         insertCmd.Parameters.AddWithValue("@p_passwords", password);
-                        insertCmd.Parameters.AddWithValue("@p_no_telp", telpon);
                         insertCmd.Parameters.AddWithValue("@p_alamat", alamat);
+                        insertCmd.Parameters.AddWithValue("@p_no_telp", telpon);
                         insertCmd.Parameters.AddWithValue("@p_aktif", true);
                         insertCmd.Parameters.AddWithValue("@p_id_role", 6);
                         insertCmd.Parameters.AddWithValue("@p_nama_kelurahan", kelurahan);

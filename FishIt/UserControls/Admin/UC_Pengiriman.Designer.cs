@@ -36,6 +36,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             Name = "UC_Pengiriman";
             Size = new Size(800, 600);
+            Load += UC_Pengiriman_Load;
             ResumeLayout(false);
         }
 
