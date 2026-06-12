@@ -391,6 +391,7 @@
             FormBorderStyle = FormBorderStyle.None;
             Name = "FormPegawaiTambak";
             Text = "FormPTambak";
+            WindowState = FormWindowState.Maximized;
             panelSubKelolaAkun.ResumeLayout(false);
             panelSB.ResumeLayout(false);
             panelSubDataFishIt.ResumeLayout(false);

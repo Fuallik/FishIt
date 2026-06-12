@@ -48,7 +48,6 @@ namespace FishIt
                 using var conn = new NpgsqlConnection(Config.ConnString);
                 conn.Open();
 
-                // INSERT polos. Trigger di DB yang otomatis kurangi stok benih & set kolam jadi 'Terisi'.
                 using var cmd = new NpgsqlCommand(@"
             INSERT INTO penebaran (tanggal_tebar, jumlah_ekor, id_akun, id_benih, id_kolam)
             VALUES (CURRENT_DATE, @ekor, @akun, @benih, @kolam)", conn);
@@ -62,12 +61,11 @@ namespace FishIt
 
                 MessageBox.Show("Penebaran benih dicatat & stok otomatis diperbarui!", "Sukses",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.DialogResult = DialogResult.OK;   // sinyal ke UC biar refresh grid + kartu
+                this.DialogResult = DialogResult.OK;
                 this.Close();
             }
             catch (PostgresException pgEx)
             {
-                // Pesan dari RAISE EXCEPTION di trigger nyangkut di sini (mis. "Stok benih tidak cukup")
                 MessageBox.Show(pgEx.MessageText, "Gagal",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }

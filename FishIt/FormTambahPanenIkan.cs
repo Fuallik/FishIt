@@ -66,11 +66,11 @@ namespace FishIt
                 using var ad = new NpgsqlDataAdapter(cmd);
                 ad.Fill(dt);
 
-                CBIkan.DataSource = null;          // <-- bersihkan binding lama dulu
+                CBIkan.DataSource = null;
                 CBIkan.DataSource = dt;
                 CBIkan.DisplayMember = "label";
                 CBIkan.ValueMember = "id_ikan";
-                CBIkan.SelectedIndex = -1;          // jangan auto-pilih
+                CBIkan.SelectedIndex = -1;
             }
             catch (Exception ex)
             {
@@ -119,7 +119,6 @@ namespace FishIt
                 using var conn = new NpgsqlConnection(Config.ConnString);
                 conn.Open();
 
-                // INSERT polos. Trigger yang otomatis set kolam 'Kosong' & tambah stok ikan.
                 using var cmd = new NpgsqlCommand(@"
             INSERT INTO panen (tanggal_panen, jumlah_kg, jumlah_ekor, kualitas, id_akun, id_ikan, id_kolam)
             VALUES (CURRENT_DATE, @kg, @ekor, @kualitas, @akun, @ikan, @kolam)", conn);
@@ -165,7 +164,7 @@ namespace FishIt
                 return;
             }
 
-            MuatIkanByKolam(idKolam);   // ganti kolam -> dropdown ikan ikut berubah
+            MuatIkanByKolam(idKolam);
             labelIkan.Text = "0";
         }
 

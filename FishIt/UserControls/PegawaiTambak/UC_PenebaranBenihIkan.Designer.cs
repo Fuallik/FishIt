@@ -46,9 +46,12 @@
             // 
             // DGVPenebaran
             // 
+            DGVPenebaran.AllowUserToAddRows = false;
+            DGVPenebaran.AllowUserToDeleteRows = false;
             DGVPenebaran.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             DGVPenebaran.Location = new Point(30, 236);
             DGVPenebaran.Name = "DGVPenebaran";
+            DGVPenebaran.ReadOnly = true;
             DGVPenebaran.RowHeadersWidth = 62;
             DGVPenebaran.Size = new Size(740, 340);
             DGVPenebaran.TabIndex = 33;

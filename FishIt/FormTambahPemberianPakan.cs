@@ -31,7 +31,6 @@ namespace FishIt
                 {
                     conn.Open();
 
-                    // Dropdown kolam
                     var dtKolam = new DataTable();
                     using (var ad = new NpgsqlDataAdapter(
                         "SELECT id_kolam, nomor FROM kolam ORDER BY nomor", conn))
@@ -41,7 +40,6 @@ namespace FishIt
                     CBKolam.ValueMember = "id_kolam";
                     CBKolam.SelectedIndex = -1;
 
-                    // Dropdown pakan
                     var dtPakan = new DataTable();
                     using (var ad = new NpgsqlDataAdapter(
                         "SELECT id_pakan, nama FROM pakan ORDER BY nama", conn))
@@ -65,7 +63,6 @@ namespace FishIt
 
         private void btnSaveTambahMonitoring_Click(object sender, EventArgs e)
         {
-            // Validasi dasar
             if (CBKolam.SelectedIndex == -1 || CBPakan.SelectedIndex == -1)
             {
                 MessageBox.Show("Pilih kolam dan pakan dulu!", "Peringatan",
@@ -82,8 +79,6 @@ namespace FishIt
             using var conn = new NpgsqlConnection(Config.ConnString);
             conn.Open();
 
-            // === MULAI TRANSAKSI ===
-            // Semua perintah di bawah jadi SATU paket: sukses semua, atau batal semua.
             using var tx = conn.BeginTransaction();
             try
             {
@@ -91,8 +86,6 @@ namespace FishIt
                 int idKolam = Convert.ToInt32(CBKolam.SelectedValue);
                 decimal jumlah = NUBJumlahPakan.Value;
 
-                // 1. Cek stok pakan. FOR UPDATE = kunci baris ini selama transaksi
-                //    biar nggak bentrok kalau ada yang ngasih pakan barengan.
                 decimal stok;
                 using (var cmdCek = new NpgsqlCommand(
                     "SELECT jumlah_stok FROM pakan WHERE id_pakan=@id FOR UPDATE", conn, tx))
@@ -101,16 +94,14 @@ namespace FishIt
                     stok = Convert.ToDecimal(cmdCek.ExecuteScalar());
                 }
 
-                // 2. Aturan bisnis: dilarang ngasih pakan lebih dari stok
                 if (jumlah > stok)
                 {
                     MessageBox.Show($"Stok pakan tidak cukup! Sisa stok: {stok:N2} kg",
                         "Stok Kurang", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    tx.Rollback();   // batalkan, nggak ada yang tersimpan
+                    tx.Rollback();
                     return;
                 }
 
-                // 3. Catat pemberian pakan (tanggal otomatis hari ini)
                 using (var cmdInsert = new NpgsqlCommand(@"
                     INSERT INTO pemberian_pakan (tanggal, jumlah_kg, id_akun, id_pakan, id_kolam)
                     VALUES (CURRENT_DATE, @jumlah, @akun, @pakan, @kolam)", conn, tx))
@@ -122,7 +113,6 @@ namespace FishIt
                     cmdInsert.ExecuteNonQuery();
                 }
 
-                // 4. Kurangi stok pakan
                 using (var cmdUpdate = new NpgsqlCommand(
                     "UPDATE pakan SET jumlah_stok = jumlah_stok - @jumlah WHERE id_pakan=@id", conn, tx))
                 {
@@ -131,7 +121,6 @@ namespace FishIt
                     cmdUpdate.ExecuteNonQuery();
                 }
 
-                // 5. Semua lolos -> simpan permanen
                 tx.Commit();
 
                 MessageBox.Show("Pemberian pakan dicatat & stok diperbarui!", "Sukses",
@@ -141,7 +130,7 @@ namespace FishIt
             }
             catch (Exception ex)
             {
-                tx.Rollback();   // ada error di tengah jalan -> batalkan SEMUA
+                tx.Rollback();
                 MessageBox.Show("Transaksi gagal, semua perubahan dibatalkan: " + ex.Message,
                     "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }

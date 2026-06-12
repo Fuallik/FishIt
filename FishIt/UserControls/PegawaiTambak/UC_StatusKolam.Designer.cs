@@ -45,9 +45,12 @@
             // 
             // DGVStatusKolam
             // 
+            DGVStatusKolam.AllowUserToAddRows = false;
+            DGVStatusKolam.AllowUserToDeleteRows = false;
             DGVStatusKolam.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             DGVStatusKolam.Location = new Point(30, 236);
             DGVStatusKolam.Name = "DGVStatusKolam";
+            DGVStatusKolam.ReadOnly = true;
             DGVStatusKolam.RowHeadersWidth = 62;
             DGVStatusKolam.Size = new Size(740, 340);
             DGVStatusKolam.TabIndex = 40;
