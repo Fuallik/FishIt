@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             label1 = new Label();
-            panelContent = new Panel();
+            panelKontenPembeli = new Panel();
             panelTB = new Panel();
             panelSB = new Panel();
             buttonLogoutAdmin = new FontAwesome.Sharp.IconButton();
@@ -51,15 +51,15 @@
             label1.Text = "INI PEMBELI";
             label1.Click += label1_Click;
             // 
-            // panelContent
+            // panelKontenPembeli
             // 
-            panelContent.BackColor = Color.LightSteelBlue;
-            panelContent.Dock = DockStyle.Fill;
-            panelContent.Location = new Point(200, 50);
-            panelContent.Name = "panelContent";
-            panelContent.Size = new Size(780, 606);
-            panelContent.TabIndex = 5;
-            panelContent.Paint += panelContent_Paint_1;
+            panelKontenPembeli.BackColor = Color.LightSteelBlue;
+            panelKontenPembeli.Dock = DockStyle.Fill;
+            panelKontenPembeli.Location = new Point(200, 50);
+            panelKontenPembeli.Name = "panelKontenPembeli";
+            panelKontenPembeli.Size = new Size(780, 606);
+            panelKontenPembeli.TabIndex = 5;
+            panelKontenPembeli.Paint += panelContent_Paint_1;
             // 
             // panelTB
             // 
@@ -221,7 +221,7 @@
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(980, 656);
-            Controls.Add(panelContent);
+            Controls.Add(panelKontenPembeli);
             Controls.Add(panelTB);
             Controls.Add(panelSB);
             Controls.Add(label1);
@@ -238,7 +238,7 @@
         #endregion
 
         private Label label1;
-        private Panel panelContent;
+        private Panel panelKontenPembeli;
         private Panel panelTB;
         private Panel panelSB;
         private FontAwesome.Sharp.IconButton buttonLogoutAdmin;

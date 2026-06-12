@@ -20,15 +20,15 @@ namespace FishIt
         private void FormPembeli_Load(object sender, EventArgs e)
         {
             LoadPage(new UC_DashboardPembeli()); ;
-            panelContent.Visible = false;
+            panelKontenPembeli.Visible = false;
         }
         private void LoadPage(UserControl page)
         {
-            panelContent.Controls.Clear();
+            panelKontenPembeli.Controls.Clear();
 
             page.Dock = DockStyle.Fill;
 
-            panelContent.Controls.Add(page);
+            panelKontenPembeli.Controls.Add(page);
         }
         private void SidebarButton_MouseEnter(object sender, EventArgs e)
         {
@@ -65,12 +65,12 @@ namespace FishIt
 
         private void buttonKatalogIkan_Click(object sender, EventArgs e)
         {
-            panelContent.Controls.Clear();
+            panelKontenPembeli.Controls.Clear();
 
             UC_KatalogIkanPembeli katalogIkan = new UC_KatalogIkanPembeli();
             katalogIkan.Dock = DockStyle.Fill;
 
-            panelContent.Controls.Add(katalogIkan);
+            panelKontenPembeli.Controls.Add(katalogIkan);
 
             buttonKatalogIkan.MouseEnter += SidebarButton_MouseEnter;
             buttonKatalogIkan.MouseLeave += SidebarButton_MouseLeave;
@@ -78,12 +78,12 @@ namespace FishIt
 
         private void buttonKeranjang_Click(object sender, EventArgs e)
         {
-            panelContent.Controls.Clear();
+            panelKontenPembeli.Controls.Clear();
 
             UC_Keranjang keranjang = new UC_Keranjang();
             keranjang.Dock = DockStyle.Fill;
 
-            panelContent.Controls.Add(keranjang);
+            panelKontenPembeli.Controls.Add(keranjang);
 
             buttonKeranjang.MouseEnter += SidebarButton_MouseEnter;
             buttonKeranjang.MouseLeave += SidebarButton_MouseLeave;
@@ -91,12 +91,12 @@ namespace FishIt
 
         private void buttonRiwayat_Click(object sender, EventArgs e)
         {
-            panelContent.Controls.Clear();
+            panelKontenPembeli.Controls.Clear();
 
             UC_RIwayatPembeli riwayat = new UC_RIwayatPembeli();
             riwayat.Dock = DockStyle.Fill;
 
-            panelContent.Controls.Add(riwayat);
+            panelKontenPembeli.Controls.Add(riwayat);
 
             buttonRiwayat.MouseEnter += SidebarButton_MouseEnter;
             buttonRiwayat.MouseLeave += SidebarButton_MouseLeave;

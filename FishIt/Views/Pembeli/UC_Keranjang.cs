@@ -68,6 +68,8 @@ namespace FishIt
         private void btnCheckout_Click(object sender, EventArgs e)
         {
             bool isSuksesDatabase = false;
+
+            // --- BLOK DATABASE (TIDAK ADA KODE UI/TAMPILAN DI SINI) ---
             using (var conn = new NpgsqlConnection(FormTambahAkun.Config.ConnString))
             {
                 conn.Open();
@@ -91,27 +93,28 @@ namespace FishIt
                         }
 
                         int idOrderBaru = 0;
-                        string queryOrder = @"INSERT INTO orders (tanggal_order, total_harga, id_akun, id_metode_pembayaran, id_status_pembayaran) 
-                                              VALUES (CURRENT_DATE, @total, @id_akun, 1, 1) 
-                                              RETURNING id_order";
+                        string queryOrder = @"INSERT INTO orders (tanggal_order, total_harga, id_akun, id_metode_pembayaran, id_status_pembayaran, status_pembayaran, status_order) 
+                                      VALUES (CURRENT_DATE, @total, @id_akun, 1, 1, 'Pending Kasir', 'Menunggu Pembayaran') 
+                                      RETURNING id_order";
                         using (var cmdOrder = new NpgsqlCommand(queryOrder, conn))
                         {
                             cmdOrder.Parameters.AddWithValue("@total", totalHarga);
                             cmdOrder.Parameters.AddWithValue("@id_akun", Session.IdAkun);
                             idOrderBaru = Convert.ToInt32(cmdOrder.ExecuteScalar());
                         }
-                        string queryDetail = @"INSERT INTO detail_order (kuantitas, harga, id_ikan, id_order)
-                                               SELECT k.kuantitas, i.harga_per_kg, k.id_ikan, @id_order
-                                               FROM keranjang k
-                                               JOIN ikan i ON k.id_ikan = i.id_ikan
-                                               WHERE k.id_akun = @id_akun";
 
+                        string queryDetail = @"INSERT INTO detail_order (kuantitas, harga, id_ikan, id_order)
+                                       SELECT k.kuantitas, i.harga_per_kg, k.id_ikan, @id_order
+                                       FROM keranjang k
+                                       JOIN ikan i ON k.id_ikan = i.id_ikan
+                                       WHERE k.id_akun = @id_akun";
                         using (var cmdDetail = new NpgsqlCommand(queryDetail, conn))
                         {
                             cmdDetail.Parameters.AddWithValue("@id_order", idOrderBaru);
                             cmdDetail.Parameters.AddWithValue("@id_akun", Session.IdAkun);
                             cmdDetail.ExecuteNonQuery();
                         }
+
                         string queryHapus = "DELETE FROM keranjang WHERE id_akun = @id_akun";
                         using (var cmdHapus = new NpgsqlCommand(queryHapus, conn))
                         {
@@ -120,12 +123,8 @@ namespace FishIt
                         }
 
                         tx.Commit();
-                        MessageBox.Show("Checkout Berhasil! Antrean telah dikirim ke Kasir.", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                        Form FormInduk = this.FindForm();
-                        Panel pnlKonten = (Panel)FormInduk.Controls.Find("panelKontenPembeli", true)[0];
-
-                        PanelHelper.ShowUserControl(pnlKonten, new UC_RIwayatPembeli());
+                        // WAJIB ADA: Ubah penanda sukses agar UI di bawah bisa jalan
+                        isSuksesDatabase = true;
                     }
                     catch (Exception ex)
                     {
@@ -135,16 +134,15 @@ namespace FishIt
                     }
                 }
             }
+
+            // --- BLOK TAMPILAN / UI ---
             if (isSuksesDatabase)
             {
                 MessageBox.Show("Checkout Berhasil! Antrean telah dikirim ke Kasir.", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
                 try
                 {
                     Form FormInduk = this.FindForm();
-
                     Panel pnlKonten = (Panel)FormInduk.Controls.Find("panelKontenPembeli", true)[0];
-
                     PanelHelper.ShowUserControl(pnlKonten, new UC_RIwayatPembeli());
                 }
                 catch (Exception exUI)
@@ -152,7 +150,6 @@ namespace FishIt
                     MessageBox.Show("Gagal membuka halaman riwayat secara otomatis: " + exUI.Message, "Eror Tampilan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
-
         }
 
     }

@@ -8,86 +8,63 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using FishIt.Controllers.PegawaiTambak;
+using FishIt.Views.PegawaiTambak;
+using FishIt.Models;
 
 namespace FishIt.UserControls.PegawaiTambak
 {
-    public partial class UC_InfoStok : UserControl
+    public partial class UC_InfoStok : UserControl, IInfoStok
     {
+        private CInfoStok _controller;
+
         public UC_InfoStok()
         {
             InitializeComponent();
             GridHelper.AturTemaModern(DGVPakan);
             GridHelper.AturTemaModern(DGVBenih);
             new AutoScaleHelper(this);
-        }
 
-        public static class Config
-        {
-            public static string ConnString = ConfigurationManager.ConnectionStrings["DbConnection"].ConnectionString;
+            // Inisialisasi Controller
+            _controller = new CInfoStok(this);
         }
 
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
-            MuatData();
+            // Perintahkan controller untuk memuat data
+            _controller.MuatData();
         }
 
-        private void MuatData()
+        // ==========================================
+        // IMPLEMENTASI INTERFACE IInfoStokView
+        // ==========================================
+
+        public void SetDataPakan(DataTable data)
         {
-            MuatGrid("SELECT * FROM view_stok_pakan", DGVPakan);
-            MuatGrid("SELECT * FROM view_stok_benih", DGVBenih);
-            MuatKartu();
+            DGVPakan.DataSource = data;
         }
 
-        private void MuatGrid(string query, DataGridView dgv)
+        public void SetDataBenih(DataTable data)
         {
-            using (var conn = new NpgsqlConnection(Config.ConnString))
-            {
-                try
-                {
-                    conn.Open();
-                    using var cmd = new NpgsqlCommand(query, conn);
-                    using var adapter = new NpgsqlDataAdapter(cmd);
-                    var tabel = new DataTable();
-                    adapter.Fill(tabel);
-                    dgv.DataSource = tabel;
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Gagal memuat data: " + ex.Message,
-                        "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
+            DGVBenih.DataSource = data;
         }
 
-        private void MuatKartu()
+        public void SetRingkasanPakan(decimal jenis, decimal total)
         {
-            using (var conn = new NpgsqlConnection(Config.ConnString))
-            {
-                try
-                {
-                    conn.Open();
-
-                    labelJenisPakan.Text = HitungStok(conn, "PAKAN", "JENIS").ToString("N0") + " jenis";
-                    labelStokPakan.Text = HitungStok(conn, "PAKAN", "TOTAL").ToString("N2") + " kg";
-
-                    labelJenisBenih.Text = HitungStok(conn, "BENIH", "JENIS").ToString() + " jenis";
-                    labelStokBenih.Text = HitungStok(conn, "BENIH", "TOTAL").ToString() + " ekor";
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Gagal memuat ringkasan: " + ex.Message,
-                        "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
+            labelJenisPakan.Text = $"{jenis:N0} jenis";
+            labelStokPakan.Text = $"{total:N2} kg";
         }
 
-        private decimal HitungStok(NpgsqlConnection conn, string tipe, string mode)
+        public void SetRingkasanBenih(decimal jenis, decimal total)
         {
-            using var cmd = new NpgsqlCommand("SELECT fn_info_stok(@tipe, @mode)", conn);
-            cmd.Parameters.AddWithValue("@tipe", tipe);
-            cmd.Parameters.AddWithValue("@mode", mode);
-            return Convert.ToDecimal(cmd.ExecuteScalar());
+            labelJenisBenih.Text = $"{jenis:N0} jenis";
+            labelStokBenih.Text = $"{total:N0} ekor"; // Benih biasanya dalam satuan ekor bulat (N0)
+        }
+
+        public void TampilkanPesanError(string pesan)
+        {
+            MessageBox.Show($"Terjadi kesalahan: {pesan}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 }

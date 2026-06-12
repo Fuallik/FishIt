@@ -30,8 +30,8 @@
         {
             panelContent = new Panel();
             panelSB = new Panel();
-            buttonLogout = new FontAwesome.Sharp.IconButton();
             buttonRiwayatPembayaran = new FontAwesome.Sharp.IconButton();
+            buttonLogout = new FontAwesome.Sharp.IconButton();
             buttonKonfirmasiPembayaran = new FontAwesome.Sharp.IconButton();
             buttonDashboard = new FontAwesome.Sharp.IconButton();
             label1 = new Label();
@@ -50,8 +50,8 @@
             // panelSB
             // 
             panelSB.BackColor = Color.CornflowerBlue;
-            panelSB.Controls.Add(buttonLogout);
             panelSB.Controls.Add(buttonRiwayatPembayaran);
+            panelSB.Controls.Add(buttonLogout);
             panelSB.Controls.Add(buttonKonfirmasiPembayaran);
             panelSB.Controls.Add(buttonDashboard);
             panelSB.Controls.Add(label1);
@@ -60,6 +60,30 @@
             panelSB.Name = "panelSB";
             panelSB.Size = new Size(200, 606);
             panelSB.TabIndex = 9;
+            // 
+            // buttonRiwayatPembayaran
+            // 
+            buttonRiwayatPembayaran.BackColor = Color.Transparent;
+            buttonRiwayatPembayaran.Dock = DockStyle.Top;
+            buttonRiwayatPembayaran.FlatAppearance.BorderSize = 0;
+            buttonRiwayatPembayaran.FlatStyle = FlatStyle.Flat;
+            buttonRiwayatPembayaran.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            buttonRiwayatPembayaran.ForeColor = Color.White;
+            buttonRiwayatPembayaran.IconChar = FontAwesome.Sharp.IconChar.CashRegister;
+            buttonRiwayatPembayaran.IconColor = Color.White;
+            buttonRiwayatPembayaran.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            buttonRiwayatPembayaran.IconSize = 30;
+            buttonRiwayatPembayaran.ImageAlign = ContentAlignment.MiddleLeft;
+            buttonRiwayatPembayaran.Location = new Point(0, 150);
+            buttonRiwayatPembayaran.Name = "buttonRiwayatPembayaran";
+            buttonRiwayatPembayaran.Padding = new Padding(15, 0, 0, 0);
+            buttonRiwayatPembayaran.Size = new Size(200, 50);
+            buttonRiwayatPembayaran.TabIndex = 12;
+            buttonRiwayatPembayaran.Text = "Riwayat Pembayaran";
+            buttonRiwayatPembayaran.TextAlign = ContentAlignment.MiddleLeft;
+            buttonRiwayatPembayaran.TextImageRelation = TextImageRelation.ImageBeforeText;
+            buttonRiwayatPembayaran.UseVisualStyleBackColor = false;
+            buttonRiwayatPembayaran.Click += buttonRiwayatPembayaran_Click;
             // 
             // buttonLogout
             // 
@@ -85,29 +109,6 @@
             buttonLogout.TextImageRelation = TextImageRelation.ImageBeforeText;
             buttonLogout.UseVisualStyleBackColor = false;
             buttonLogout.Click += buttonLogout_Click;
-            // 
-            // buttonRiwayatPembayaran
-            // 
-            buttonRiwayatPembayaran.BackColor = Color.Transparent;
-            buttonRiwayatPembayaran.Dock = DockStyle.Top;
-            buttonRiwayatPembayaran.FlatAppearance.BorderSize = 0;
-            buttonRiwayatPembayaran.FlatStyle = FlatStyle.Flat;
-            buttonRiwayatPembayaran.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            buttonRiwayatPembayaran.ForeColor = Color.White;
-            buttonRiwayatPembayaran.IconChar = FontAwesome.Sharp.IconChar.ClipboardList;
-            buttonRiwayatPembayaran.IconColor = Color.White;
-            buttonRiwayatPembayaran.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            buttonRiwayatPembayaran.IconSize = 30;
-            buttonRiwayatPembayaran.ImageAlign = ContentAlignment.MiddleLeft;
-            buttonRiwayatPembayaran.Location = new Point(0, 150);
-            buttonRiwayatPembayaran.Name = "buttonRiwayatPembayaran";
-            buttonRiwayatPembayaran.Padding = new Padding(15, 0, 0, 0);
-            buttonRiwayatPembayaran.Size = new Size(200, 50);
-            buttonRiwayatPembayaran.TabIndex = 10;
-            buttonRiwayatPembayaran.Text = "Riwayat Pembayaran";
-            buttonRiwayatPembayaran.TextImageRelation = TextImageRelation.ImageBeforeText;
-            buttonRiwayatPembayaran.UseVisualStyleBackColor = false;
-            buttonRiwayatPembayaran.Click += buttonRiwayatPembayaran_Click;
             // 
             // buttonKonfirmasiPembayaran
             // 
@@ -199,9 +200,9 @@
         private Panel panelSB;
         private FontAwesome.Sharp.IconButton buttonLogout;
         private FontAwesome.Sharp.IconButton buttonKonfirmasiPembayaran;
-        private FontAwesome.Sharp.IconButton buttonRiwayatPembayaran;
         private FontAwesome.Sharp.IconButton buttonDashboard;
         private Label label1;
         private Panel panelTB;
+        private FontAwesome.Sharp.IconButton buttonRiwayatPembayaran;
     }
 }
