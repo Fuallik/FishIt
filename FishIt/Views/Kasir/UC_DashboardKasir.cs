@@ -13,6 +13,7 @@ namespace FishIt
         public UC_DashboardKasir()
         {
             InitializeComponent();
+            new AutoScaleHelper(this);
         }
     }
 }

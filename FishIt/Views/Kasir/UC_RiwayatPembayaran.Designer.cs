@@ -35,6 +35,8 @@
             labelTotal = new Label();
             label1 = new Label();
             DGVDetail = new DataGridView();
+            label2 = new Label();
+            label3 = new Label();
             panel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)DGVRiwayat).BeginInit();
             panel1.SuspendLayout();
@@ -57,7 +59,7 @@
             // 
             panel6.BackColor = Color.CornflowerBlue;
             panel6.Controls.Add(label8);
-            panel6.Location = new Point(158, 33);
+            panel6.Location = new Point(162, 21);
             panel6.Name = "panel6";
             panel6.Size = new Size(474, 44);
             panel6.TabIndex = 65;
@@ -80,7 +82,7 @@
             panel1.BackColor = Color.CornflowerBlue;
             panel1.Controls.Add(labelTotal);
             panel1.Controls.Add(label1);
-            panel1.Location = new Point(277, 107);
+            panel1.Location = new Point(276, 83);
             panel1.Name = "panel1";
             panel1.Size = new Size(240, 78);
             panel1.TabIndex = 66;
@@ -121,11 +123,37 @@
             DGVDetail.Size = new Size(354, 352);
             DGVDetail.TabIndex = 67;
             // 
+            // label2
+            // 
+            label2.BackColor = Color.Transparent;
+            label2.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label2.ForeColor = Color.Black;
+            label2.Location = new Point(63, 164);
+            label2.Name = "label2";
+            label2.Size = new Size(280, 38);
+            label2.TabIndex = 68;
+            label2.Text = "Pembayaran";
+            label2.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // label3
+            // 
+            label3.BackColor = Color.Transparent;
+            label3.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label3.ForeColor = Color.Black;
+            label3.Location = new Point(440, 164);
+            label3.Name = "label3";
+            label3.Size = new Size(280, 38);
+            label3.TabIndex = 69;
+            label3.Text = "Detail Pembayaran";
+            label3.TextAlign = ContentAlignment.MiddleCenter;
+            // 
             // UC_RiwayatPembayaran
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.LightSteelBlue;
+            Controls.Add(label3);
+            Controls.Add(label2);
             Controls.Add(DGVDetail);
             Controls.Add(panel1);
             Controls.Add(DGVRiwayat);
@@ -149,5 +177,7 @@
         private Label labelTotal;
         private Label label1;
         private DataGridView DGVDetail;
+        private Label label2;
+        private Label label3;
     }
 }

@@ -19,6 +19,7 @@ namespace FishIt
         {
             InitializeComponent();
             GridHelper.AturTemaModern(DGVPengajuan);
+            new AutoScaleHelper(this);
         }
 
         private void UC_PengajuanPakan_Load(object sender, EventArgs e)

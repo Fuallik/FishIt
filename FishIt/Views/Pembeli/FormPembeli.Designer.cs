@@ -57,7 +57,7 @@
             panelKontenPembeli.Dock = DockStyle.Fill;
             panelKontenPembeli.Location = new Point(200, 50);
             panelKontenPembeli.Name = "panelKontenPembeli";
-            panelKontenPembeli.Size = new Size(780, 606);
+            panelKontenPembeli.Size = new Size(802, 662);
             panelKontenPembeli.TabIndex = 5;
             panelKontenPembeli.Paint += panelContent_Paint_1;
             // 
@@ -67,7 +67,7 @@
             panelTB.Dock = DockStyle.Top;
             panelTB.Location = new Point(200, 0);
             panelTB.Name = "panelTB";
-            panelTB.Size = new Size(780, 50);
+            panelTB.Size = new Size(802, 50);
             panelTB.TabIndex = 4;
             // 
             // panelSB
@@ -82,7 +82,7 @@
             panelSB.Dock = DockStyle.Left;
             panelSB.Location = new Point(0, 0);
             panelSB.Name = "panelSB";
-            panelSB.Size = new Size(200, 656);
+            panelSB.Size = new Size(200, 712);
             panelSB.TabIndex = 6;
             // 
             // buttonLogoutAdmin
@@ -99,7 +99,7 @@
             buttonLogoutAdmin.IconFont = FontAwesome.Sharp.IconFont.Auto;
             buttonLogoutAdmin.IconSize = 30;
             buttonLogoutAdmin.ImageAlign = ContentAlignment.MiddleLeft;
-            buttonLogoutAdmin.Location = new Point(0, 606);
+            buttonLogoutAdmin.Location = new Point(0, 662);
             buttonLogoutAdmin.Name = "buttonLogoutAdmin";
             buttonLogoutAdmin.Padding = new Padding(15, 0, 0, 0);
             buttonLogoutAdmin.Size = new Size(200, 50);
@@ -220,7 +220,7 @@
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(980, 656);
+            ClientSize = new Size(1002, 712);
             Controls.Add(panelKontenPembeli);
             Controls.Add(panelTB);
             Controls.Add(panelSB);

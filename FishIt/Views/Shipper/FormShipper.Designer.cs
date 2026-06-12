@@ -74,9 +74,9 @@
             panelSB.Controls.Add(buttonPengirimanPesanan);
             panelSB.Controls.Add(buttonDashboardShipper);
             panelSB.Dock = DockStyle.Left;
-            panelSB.Location = new Point(0, 50);
+            panelSB.Location = new Point(0, 0);
             panelSB.Name = "panelSB";
-            panelSB.Size = new Size(200, 606);
+            panelSB.Size = new Size(200, 712);
             panelSB.TabIndex = 8;
             // 
             // buttonLogoutAdmin
@@ -85,7 +85,7 @@
             buttonLogoutAdmin.Dock = DockStyle.Bottom;
             buttonLogoutAdmin.FlatAppearance.BorderSize = 0;
             buttonLogoutAdmin.FlatStyle = FlatStyle.Flat;
-            buttonLogoutAdmin.Location = new Point(0, 556);
+            buttonLogoutAdmin.Location = new Point(0, 662);
             buttonLogoutAdmin.Name = "buttonLogoutAdmin";
             buttonLogoutAdmin.Size = new Size(200, 50);
             buttonLogoutAdmin.TabIndex = 6;
@@ -112,9 +112,9 @@
             // 
             panelNB.BackColor = Color.CornflowerBlue;
             panelNB.Dock = DockStyle.Top;
-            panelNB.Location = new Point(0, 0);
+            panelNB.Location = new Point(200, 0);
             panelNB.Name = "panelNB";
-            panelNB.Size = new Size(980, 50);
+            panelNB.Size = new Size(802, 50);
             panelNB.TabIndex = 7;
             // 
             // panelContent
@@ -123,17 +123,17 @@
             panelContent.Dock = DockStyle.Fill;
             panelContent.Location = new Point(200, 50);
             panelContent.Name = "panelContent";
-            panelContent.Size = new Size(780, 606);
+            panelContent.Size = new Size(802, 662);
             panelContent.TabIndex = 10;
             // 
             // FormShipper
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(980, 656);
+            ClientSize = new Size(1002, 712);
             Controls.Add(panelContent);
-            Controls.Add(panelSB);
             Controls.Add(panelNB);
+            Controls.Add(panelSB);
             FormBorderStyle = FormBorderStyle.None;
             Name = "FormShipper";
             Text = "FormShipper";

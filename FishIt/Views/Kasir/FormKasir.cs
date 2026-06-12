@@ -34,8 +34,6 @@ namespace FishIt
         private void FormKasir_Load(object sender, EventArgs e)
         {
             LoadPage(new UC_DashboardKasir());
-            DebugControls(this);
-            panelContent.Visible = false;
         }
 
         private void LoadPage(UserControl page)

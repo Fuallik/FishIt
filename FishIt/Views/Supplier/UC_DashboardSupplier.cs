@@ -20,6 +20,7 @@ namespace FishIt
             PanelHelper.BuatMelengkung(panelMenunggu, 20);
             PanelHelper.BuatMelengkung(panelDisetujui, 20);
             PanelHelper.BuatMelengkung(panelDitolak, 20);
+            new AutoScaleHelper(this);
         }
 
         private void UC_DashboardSupplier_Load(object sender, EventArgs e)

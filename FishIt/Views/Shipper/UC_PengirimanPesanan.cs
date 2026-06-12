@@ -19,6 +19,7 @@ namespace FishIt.UserControls.Shipper
         {
             InitializeComponent();
             GridHelper.AturTemaModern(DGVPengiriman); // pakai tema DGV yang sudah ada di proyek
+            new AutoScaleHelper(this); // supaya layout lebih responsif saat resize
         }
 
         private void UC_PengirimanPesanan_Load(object sender, EventArgs e)

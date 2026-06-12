@@ -19,6 +19,7 @@ namespace FishIt
         {
             InitializeComponent();
             GridHelper.AturTemaModern(DGVRiwayat);
+            new AutoScaleHelper(this);
         }
 
         private void UC_RiwayatVerifikasi_Load(object sender, EventArgs e)

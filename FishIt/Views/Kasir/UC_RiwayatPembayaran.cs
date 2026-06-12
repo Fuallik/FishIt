@@ -36,8 +36,8 @@ namespace FishIt.Views.Kasir
         // 1. TAMPILKAN SEMUA ORDER YANG STATUSNYA SELESAI / LUNAS
         private void LoadRiwayatPembayaran()
         {
-            // Mencari orders dengan id_status_pembayaran = 2 (Selesai)
-            string query = @"SELECT o.id_order, o.tanggal_order, a.nama AS nama_pembeli, o.total_harga, o.status_order
+            // HAPUS o.status_order DARI SELECT
+            string query = @"SELECT o.id_order, o.tanggal_order, a.nama AS nama_pembeli, o.total_harga
                              FROM orders o
                              JOIN akun a ON o.id_akun = a.id_akun
                              WHERE o.id_status_pembayaran = 2
@@ -59,7 +59,8 @@ namespace FishIt.Views.Kasir
                         if (DGVRiwayat.Columns["tanggal_order"] != null) DGVRiwayat.Columns["tanggal_order"].HeaderText = "Tanggal Transaksi";
                         if (DGVRiwayat.Columns["nama_pembeli"] != null) DGVRiwayat.Columns["nama_pembeli"].HeaderText = "Nama Pembeli";
                         if (DGVRiwayat.Columns["total_harga"] != null) DGVRiwayat.Columns["total_harga"].HeaderText = "Total Bayar";
-                        if (DGVRiwayat.Columns["status_order"] != null) DGVRiwayat.Columns["status_order"].HeaderText = "Status";
+                        
+                        // BARIS PENGATURAN HEADER STATUS DIHAPUS
                     }
                 }
                 catch (Exception ex)
@@ -89,10 +90,15 @@ namespace FishIt.Views.Kasir
         // 3. AMBIL DATA RINCIAN ITEM IKAN YANG SUDAH DIBELI
         private void LoadDetailRiwayat(int idOrder)
         {
-            string query = @"SELECT i.nama_ikan, d.kuantitas, d.harga, (d.kuantitas * d.harga) AS subtotal
-                             FROM detail_order d
-                             JOIN ikan i ON d.id_ikan = i.id_ikan
-                             WHERE d.id_order = @id_order";
+            // Query mengambil daftar ikan, kuantitas, harga, dan subtotal dari detail_order
+            string query = @"
+                SELECT i.nama_ikan          AS ""Nama Ikan"",
+                       d.kuantitas          AS ""Jumlah (kg)"",
+                       d.harga              AS ""Harga/kg"",
+                       (d.kuantitas * d.harga) AS ""Subtotal""
+                FROM detail_order d
+                JOIN ikan i ON i.id_ikan = d.id_ikan
+                WHERE d.id_order = @id_order";
 
             using (var conn = new NpgsqlConnection(Config.ConnString))
             {
@@ -101,24 +107,22 @@ namespace FishIt.Views.Kasir
                     conn.Open();
                     using (var cmd = new NpgsqlCommand(query, conn))
                     {
+                        // Masukkan parameter ID order yang dipilih
                         cmd.Parameters.AddWithValue("@id_order", idOrder);
+
                         using (var da = new NpgsqlDataAdapter(cmd))
                         {
                             DataTable dt = new DataTable();
                             da.Fill(dt);
-                            DGVDetail.DataSource = dt;
 
-                            // Opsional: Merapikan header kolom tabel rincian
-                            if (DGVDetail.Columns["nama_ikan"] != null) DGVDetail.Columns["nama_ikan"].HeaderText = "Nama Ikan";
-                            if (DGVDetail.Columns["kuantitas"] != null) DGVDetail.Columns["kuantitas"].HeaderText = "Jumlah (Kg)";
-                            if (DGVDetail.Columns["harga"] != null) DGVDetail.Columns["harga"].HeaderText = "Harga Satuan";
-                            if (DGVDetail.Columns["subtotal"] != null) DGVDetail.Columns["subtotal"].HeaderText = "Subtotal";
+                            // PENTING: Masukkan data ke DGVDetail, bukan DGVRiwayat
+                            DGVDetail.DataSource = dt;
                         }
                     }
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Gagal memuat rincian barang: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Gagal memuat detail pesanan: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }

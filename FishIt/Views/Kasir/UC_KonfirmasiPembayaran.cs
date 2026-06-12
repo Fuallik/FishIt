@@ -116,10 +116,22 @@ namespace FishIt
                 "Konfirmasi", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (konfirmasi != DialogResult.Yes) return;
 
-            // Guard di WHERE (status = 1) mencegah dobel-konfirmasi kalau status sudah berubah
-            string query = @"UPDATE orders
-                     SET id_status_pembayaran = 2
-                     WHERE id_order = @id AND id_status_pembayaran = 1";
+            // QUERY BARU: 
+            // 1. UPDATE status pesanan menjadi Lunas (2)
+            // 2. INSERT otomatis ke tabel pengiriman. 
+            // Menggunakan SELECT ... FROM akun WHERE id_role = 4 untuk mencari Shipper otomatis.
+            string query = @"
+                            UPDATE orders
+                            SET id_status_pembayaran = 2,
+                                status_order = 'Diproses'
+                            WHERE id_order = @id AND id_status_pembayaran = 1;
+
+                            INSERT INTO pengiriman (tanggal_pengiriman, status_pengiriman, id_akun, id_order)
+                            SELECT CURRENT_DATE, 'Diproses', id_akun, @id
+                            FROM akun
+                            WHERE id_role = 4 AND aktif = true
+                            LIMIT 1;
+                        ";
 
             using (var conn = new NpgsqlConnection(Config.ConnString))
             {
@@ -128,20 +140,23 @@ namespace FishIt
                     conn.Open();
                     using var cmd = new NpgsqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@id", idOrderTerpilih);
-                    int baris = cmd.ExecuteNonQuery();   // berapa baris berubah
+
+                    // ExecuteNonQuery akan mengembalikan jumlah baris yang berubah (Update + Insert)
+                    int baris = cmd.ExecuteNonQuery();
 
                     if (baris > 0)
                     {
-                        MessageBox.Show("Pembayaran dikonfirmasi (Lunas)!", "Sukses",
+                        MessageBox.Show("Pembayaran dikonfirmasi (Lunas) & Pesanan otomatis diteruskan ke Shipper!", "Sukses",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
+
                         idOrderTerpilih = 0;
                         labelTotal.Text = "0";
                         DGVDetail.DataSource = null;   // kosongkan panel item
-                        MuatAntrean();               // refresh antrean (order tadi hilang dari daftar)
+                        MuatAntrean();                 // refresh antrean
                     }
                     else
                     {
-                        MessageBox.Show("Order sudah dikonfirmasi sebelumnya. Coba refresh.", "Info",
+                        MessageBox.Show("Order sudah dikonfirmasi sebelumnya atau tidak ditemukan. Coba refresh.", "Info",
                             MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                 }

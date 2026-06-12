@@ -52,9 +52,9 @@
             panelSB.Controls.Add(buttonDashboardSupp);
             panelSB.Controls.Add(buttonLogoutSupp);
             panelSB.Dock = DockStyle.Left;
-            panelSB.Location = new Point(0, 50);
+            panelSB.Location = new Point(0, 0);
             panelSB.Name = "panelSB";
-            panelSB.Size = new Size(200, 662);
+            panelSB.Size = new Size(200, 712);
             panelSB.TabIndex = 5;
             // 
             // buttonRiwayatVerifikasi
@@ -141,7 +141,7 @@
             buttonLogoutSupp.Dock = DockStyle.Bottom;
             buttonLogoutSupp.FlatAppearance.BorderSize = 0;
             buttonLogoutSupp.FlatStyle = FlatStyle.Flat;
-            buttonLogoutSupp.Location = new Point(0, 612);
+            buttonLogoutSupp.Location = new Point(0, 662);
             buttonLogoutSupp.Name = "buttonLogoutSupp";
             buttonLogoutSupp.Size = new Size(200, 50);
             buttonLogoutSupp.TabIndex = 6;
@@ -153,9 +153,9 @@
             // 
             panelNB.BackColor = Color.CornflowerBlue;
             panelNB.Dock = DockStyle.Top;
-            panelNB.Location = new Point(0, 0);
+            panelNB.Location = new Point(200, 0);
             panelNB.Name = "panelNB";
-            panelNB.Size = new Size(1002, 50);
+            panelNB.Size = new Size(802, 50);
             panelNB.TabIndex = 4;
             // 
             // panelContent
@@ -174,8 +174,8 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1002, 712);
             Controls.Add(panelContent);
-            Controls.Add(panelSB);
             Controls.Add(panelNB);
+            Controls.Add(panelSB);
             FormBorderStyle = FormBorderStyle.None;
             Name = "FormSupplier";
             Text = "FormSupplier";

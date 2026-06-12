@@ -19,6 +19,7 @@ namespace FishIt
         {
             InitializeComponent();
             GridHelper.AturTemaModern(DGVKatalog);
+            new AutoScaleHelper(this);
         }
 
         private void UC_KatalogBenih_Load(object sender, EventArgs e)

@@ -107,11 +107,11 @@
             label2.BackColor = Color.Transparent;
             label2.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label2.ForeColor = Color.Black;
-            label2.Location = new Point(114, 170);
+            label2.Location = new Point(74, 170);
             label2.Name = "label2";
-            label2.Size = new Size(181, 38);
+            label2.Size = new Size(264, 38);
             label2.TabIndex = 3;
-            label2.Text = "Antrean";
+            label2.Text = "Antrean Pembayaran";
             label2.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // DGVDetail
@@ -131,11 +131,11 @@
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label1.ForeColor = Color.Black;
-            label1.Location = new Point(491, 170);
+            label1.Location = new Point(445, 170);
             label1.Name = "label1";
-            label1.Size = new Size(181, 38);
+            label1.Size = new Size(280, 38);
             label1.TabIndex = 63;
-            label1.Text = "Detail";
+            label1.Text = "Detail Pembayaran";
             label1.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // UC_KonfirmasiPembayaran

@@ -18,6 +18,7 @@ namespace FishIt.UserControls.Shipper
         {
             InitializeComponent();
             GridHelper.AturTemaModern(DGVRiwayat);
+            new AutoScaleHelper(this);
         }
 
         private void UC_RiwayatPengirimanPesanan_Load(object sender, EventArgs e)

@@ -75,11 +75,11 @@
             // 
             // panelTB
             // 
-            panelTB.BackColor = Color.Transparent;
+            panelTB.BackColor = Color.LightSteelBlue;
             panelTB.Dock = DockStyle.Top;
             panelTB.Location = new Point(200, 0);
             panelTB.Name = "panelTB";
-            panelTB.Size = new Size(780, 50);
+            panelTB.Size = new Size(802, 50);
             panelTB.TabIndex = 4;
             // 
             // buttonOperasi
@@ -216,6 +216,7 @@
             // 
             // buttonPemberianPakan
             // 
+            buttonPemberianPakan.AutoSize = true;
             buttonPemberianPakan.BackColor = Color.Transparent;
             buttonPemberianPakan.Dock = DockStyle.Top;
             buttonPemberianPakan.FlatAppearance.BorderSize = 0;
@@ -286,7 +287,7 @@
             buttonLogout.IconFont = FontAwesome.Sharp.IconFont.Auto;
             buttonLogout.IconSize = 30;
             buttonLogout.ImageAlign = ContentAlignment.MiddleLeft;
-            buttonLogout.Location = new Point(0, 606);
+            buttonLogout.Location = new Point(0, 662);
             buttonLogout.Name = "buttonLogout";
             buttonLogout.Padding = new Padding(15, 0, 0, 0);
             buttonLogout.Size = new Size(200, 50);
@@ -311,7 +312,7 @@
             panelSB.Dock = DockStyle.Left;
             panelSB.Location = new Point(0, 0);
             panelSB.Name = "panelSB";
-            panelSB.Size = new Size(200, 656);
+            panelSB.Size = new Size(200, 712);
             panelSB.TabIndex = 6;
             // 
             // panelSubDataFishIt
@@ -342,7 +343,7 @@
             buttonStok.Padding = new Padding(50, 0, 0, 0);
             buttonStok.Size = new Size(200, 40);
             buttonStok.TabIndex = 13;
-            buttonStok.Text = "Info Stok Benih & Pakan";
+            buttonStok.Text = "Stok Benih & Pakan";
             buttonStok.TextAlign = ContentAlignment.MiddleLeft;
             buttonStok.TextImageRelation = TextImageRelation.ImageBeforeText;
             buttonStok.UseVisualStyleBackColor = false;
@@ -377,14 +378,15 @@
             panelContent.Dock = DockStyle.Fill;
             panelContent.Location = new Point(200, 50);
             panelContent.Name = "panelContent";
-            panelContent.Size = new Size(780, 606);
+            panelContent.Size = new Size(802, 662);
             panelContent.TabIndex = 7;
             // 
             // FormPegawaiTambak
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(980, 656);
+            AutoScroll = true;
+            ClientSize = new Size(1002, 712);
             Controls.Add(panelContent);
             Controls.Add(panelTB);
             Controls.Add(panelSB);
@@ -392,7 +394,9 @@
             Name = "FormPegawaiTambak";
             Text = "FormPTambak";
             WindowState = FormWindowState.Maximized;
+            Load += FormPegawaiTambak_Load;
             panelSubKelolaAkun.ResumeLayout(false);
+            panelSubKelolaAkun.PerformLayout();
             panelSB.ResumeLayout(false);
             panelSubDataFishIt.ResumeLayout(false);
             ResumeLayout(false);
