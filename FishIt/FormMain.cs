@@ -56,9 +56,7 @@ namespace FishIt
 
         private void buttonLogin_Click(object sender, EventArgs e)
         {
-            FormLogin login = Application.OpenForms
-        .OfType<FormLogin>()
-        .FirstOrDefault();
+            FormLogin login = Application.OpenForms.OfType<FormLogin>().FirstOrDefault();
 
             if (login == null)
             { 
@@ -84,9 +82,7 @@ namespace FishIt
 
         private void buttonRegister_Click(object sender, EventArgs e)
         {
-            FormRegister register = Application.OpenForms
-        .OfType<FormRegister>()
-        .FirstOrDefault();
+            FormRegister register = Application.OpenForms.OfType<FormRegister>().FirstOrDefault();
 
             if (register == null)
             {
@@ -99,31 +95,14 @@ namespace FishIt
                 register.Focus();
             }
         }
-        // HOVER -> GREEN
         private void buttonRegister_MouseEnter(object sender, EventArgs e)
         {
             buttonRegister.ForeColor = Color.MidnightBlue;
         }
 
-        // KEMBALI NORMAL
         private void buttonRegister_MouseLeave(object sender, EventArgs e)
         {
             buttonRegister.ForeColor = Color.RoyalBlue;
-        }
-        private void UpdateButtonRadius()
-        {
-            GraphicsPath path = new GraphicsPath();
-
-            int radius = 20;
-
-            path.AddArc(0, 0, radius, radius, 180, 90);
-            path.AddArc(buttonLogin.Width - radius, 0, radius, radius, 270, 90);
-            path.AddArc(buttonLogin.Width - radius, buttonLogin.Height - radius, radius, radius, 0, 90);
-            path.AddArc(0, buttonLogin.Height - radius, radius, radius, 90, 90);
-
-            path.CloseAllFigures();
-
-            buttonLogin.Region = new Region(path);
         }
     }
 }

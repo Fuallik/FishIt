@@ -68,7 +68,7 @@ namespace FishIt
 
                             if (idBenihTerpilih > 0)
                             {
-                                string queryBenih = "UPDATE benih SET stok_benih = jumlah_stok + @qty WHERE id_benih = @id_b";
+                                string queryBenih = "UPDATE benih SET jumlah_stok = jumlah_stok + @qty WHERE id_benih = @id_b";
                                 using (var cmdBenih = new NpgsqlCommand(queryBenih, conn))
                                 {
                                     cmdBenih.Parameters.AddWithValue("@qty", jumlahTambah);
@@ -78,7 +78,7 @@ namespace FishIt
                             }
                             else if (idPakanTerpilih > 0)
                             {
-                                string queryPakan = "UPDATE pakan SET stok_pakan = jumlah_stok + @qty WHERE id_pakan = @id_pk";
+                                string queryPakan = "UPDATE pakan SET jumlah_stok = jumlah_stok + @qty WHERE id_pakan = @id_pk";
                                 using (var cmdPakan = new NpgsqlCommand(queryPakan, conn))
                                 {
                                     cmdPakan.Parameters.AddWithValue("@qty", jumlahTambah);
