@@ -30,18 +30,18 @@
         {
             DGVMonitoringIkan = new DataGridView();
             buttonTambahMonitoring = new FontAwesome.Sharp.IconButton();
-            panel3 = new Panel();
+            panelMonitoring = new Panel();
             label2 = new Label();
-            panel5 = new Panel();
+            panelHari = new Panel();
             labelTotalHariPerAkun = new Label();
             label6 = new Label();
-            panel6 = new Panel();
+            panelBulan = new Panel();
             labelTotalBulanPerAkun = new Label();
             label8 = new Label();
             ((System.ComponentModel.ISupportInitialize)DGVMonitoringIkan).BeginInit();
-            panel3.SuspendLayout();
-            panel5.SuspendLayout();
-            panel6.SuspendLayout();
+            panelMonitoring.SuspendLayout();
+            panelHari.SuspendLayout();
+            panelBulan.SuspendLayout();
             SuspendLayout();
             // 
             // DGVMonitoringIkan
@@ -77,14 +77,14 @@
             buttonTambahMonitoring.UseVisualStyleBackColor = false;
             buttonTambahMonitoring.Click += buttonTambahMonitoring_Click;
             // 
-            // panel3
+            // panelMonitoring
             // 
-            panel3.BackColor = Color.CornflowerBlue;
-            panel3.Controls.Add(label2);
-            panel3.Location = new Point(30, 22);
-            panel3.Name = "panel3";
-            panel3.Size = new Size(325, 55);
-            panel3.TabIndex = 46;
+            panelMonitoring.BackColor = Color.CornflowerBlue;
+            panelMonitoring.Controls.Add(label2);
+            panelMonitoring.Location = new Point(30, 22);
+            panelMonitoring.Name = "panelMonitoring";
+            panelMonitoring.Size = new Size(325, 55);
+            panelMonitoring.TabIndex = 46;
             // 
             // label2
             // 
@@ -98,15 +98,15 @@
             label2.Text = "Total Monitoring Per Akun";
             label2.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // panel5
+            // panelHari
             // 
-            panel5.BackColor = Color.CornflowerBlue;
-            panel5.Controls.Add(labelTotalHariPerAkun);
-            panel5.Controls.Add(label6);
-            panel5.Location = new Point(200, 90);
-            panel5.Name = "panel5";
-            panel5.Size = new Size(155, 120);
-            panel5.TabIndex = 48;
+            panelHari.BackColor = Color.CornflowerBlue;
+            panelHari.Controls.Add(labelTotalHariPerAkun);
+            panelHari.Controls.Add(label6);
+            panelHari.Location = new Point(200, 90);
+            panelHari.Name = "panelHari";
+            panelHari.Size = new Size(155, 120);
+            panelHari.TabIndex = 48;
             // 
             // labelTotalHariPerAkun
             // 
@@ -132,15 +132,15 @@
             label6.Text = "Hari Ini";
             label6.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // panel6
+            // panelBulan
             // 
-            panel6.BackColor = Color.CornflowerBlue;
-            panel6.Controls.Add(labelTotalBulanPerAkun);
-            panel6.Controls.Add(label8);
-            panel6.Location = new Point(30, 90);
-            panel6.Name = "panel6";
-            panel6.Size = new Size(155, 120);
-            panel6.TabIndex = 47;
+            panelBulan.BackColor = Color.CornflowerBlue;
+            panelBulan.Controls.Add(labelTotalBulanPerAkun);
+            panelBulan.Controls.Add(label8);
+            panelBulan.Location = new Point(30, 90);
+            panelBulan.Name = "panelBulan";
+            panelBulan.Size = new Size(155, 120);
+            panelBulan.TabIndex = 47;
             // 
             // labelTotalBulanPerAkun
             // 
@@ -171,29 +171,29 @@
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.LightSteelBlue;
-            Controls.Add(panel5);
-            Controls.Add(panel6);
-            Controls.Add(panel3);
+            Controls.Add(panelHari);
+            Controls.Add(panelBulan);
+            Controls.Add(panelMonitoring);
             Controls.Add(buttonTambahMonitoring);
             Controls.Add(DGVMonitoringIkan);
             Name = "UC_MonitoringIkan";
             Size = new Size(800, 600);
             ((System.ComponentModel.ISupportInitialize)DGVMonitoringIkan).EndInit();
-            panel3.ResumeLayout(false);
-            panel5.ResumeLayout(false);
-            panel6.ResumeLayout(false);
+            panelMonitoring.ResumeLayout(false);
+            panelHari.ResumeLayout(false);
+            panelBulan.ResumeLayout(false);
             ResumeLayout(false);
         }
 
         #endregion
         private DataGridView DGVMonitoringIkan;
         private FontAwesome.Sharp.IconButton buttonTambahMonitoring;
-        private Panel panel3;
+        private Panel panelMonitoring;
         private Label label2;
-        private Panel panel5;
+        private Panel panelHari;
         private Label labelTotalHariPerAkun;
         private Label label6;
-        private Panel panel6;
+        private Panel panelBulan;
         private Label labelTotalBulanPerAkun;
         private Label label8;
     }

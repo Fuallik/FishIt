@@ -90,9 +90,15 @@ namespace FishIt
                 using var conn = new NpgsqlConnection(Config.ConnString);
                 conn.Open();
 
-                using var cmd = new NpgsqlCommand("SELECT fn_sisa_ikan(@kolam, @ikan)", conn);
+                // QUERY DIUBAH: Menghitung sisa ikan persis seperti di Status Kolam (termasuk jumlah mati)
+                string sql = @"
+                    SELECT 
+                        COALESCE((SELECT SUM(jumlah_ekor) FROM penebaran WHERE id_kolam = @kolam), 0)
+                      - COALESCE((SELECT SUM(jumlah_ekor) FROM panen WHERE id_kolam = @kolam), 0)
+                      - COALESCE((SELECT SUM(jumlah_mati) FROM monitoring WHERE id_kolam = @kolam), 0)";
+
+                using var cmd = new NpgsqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@kolam", idKolam);
-                cmd.Parameters.AddWithValue("@ikan", idIkan);
 
                 int sisa = Convert.ToInt32(cmd.ExecuteScalar());
                 labelIkan.Text = sisa.ToString();
@@ -118,6 +124,20 @@ namespace FishIt
                 return;
             }
 
+            // === TAMBAHAN KODE VALIDASI STOK ===
+            int jumlahPanen = (int)NUBEkor.Value;
+            int sisaIkanDiKolam = 0;
+            int.TryParse(labelIkan.Text, out sisaIkanDiKolam);
+
+            if (jumlahPanen > sisaIkanDiKolam)
+            {
+                MessageBox.Show($"Jumlah ekor yang dipanen ({jumlahPanen}) melebihi sisa stok ikan di kolam ({sisaIkanDiKolam})!",
+                    "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                NUBEkor.Focus(); // Fokuskan kursor kembali ke inputan ekor
+                return; // Hentikan proses simpan
+            }
+            // ===================================
+
             try
             {
                 using var conn = new NpgsqlConnection(Config.ConnString);
@@ -127,8 +147,9 @@ namespace FishIt
             INSERT INTO panen (tanggal_panen, jumlah_kg, jumlah_ekor, kualitas, id_akun, id_ikan, id_kolam)
             VALUES (CURRENT_DATE, @kg, @ekor, @kualitas, @akun, @ikan, @kolam)", conn);
 
+                // ... (Sisa kode ke bawah biarkan sama persis seperti sebelumnya) ...
                 cmd.Parameters.AddWithValue("@kg", NUDBerat.Value);
-                cmd.Parameters.AddWithValue("@ekor", (int)NUBEkor.Value);
+                cmd.Parameters.AddWithValue("@ekor", jumlahPanen); // Menggunakan variabel yang sudah dibuat
                 cmd.Parameters.AddWithValue("@kualitas", CBKualitas.SelectedItem.ToString());
                 cmd.Parameters.AddWithValue("@akun", Session.IdAkun);
                 cmd.Parameters.AddWithValue("@ikan", Convert.ToInt32(CBIkan.SelectedValue));

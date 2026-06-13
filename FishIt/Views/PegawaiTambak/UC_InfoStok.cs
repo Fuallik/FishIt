@@ -23,6 +23,12 @@ namespace FishIt.UserControls.PegawaiTambak
             InitializeComponent();
             GridHelper.AturTemaModern(DGVPakan);
             GridHelper.AturTemaModern(DGVBenih);
+            PanelHelper.BuatMelengkung(panelPakan, 25);
+            PanelHelper.BuatMelengkung(panelBenih, 25);
+            PanelHelper.BuatMelengkung(panelJenisPakan, 25);
+            PanelHelper.BuatMelengkung(panelStokPakan, 25);
+            PanelHelper.BuatMelengkung(panelStokBenih, 25);
+            PanelHelper.BuatMelengkung(panelJenisBenih, 25);
             new AutoScaleHelper(this);
 
             // Inisialisasi Controller

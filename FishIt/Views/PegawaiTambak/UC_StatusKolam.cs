@@ -18,6 +18,9 @@ namespace FishIt.UserControls.PegawaiTambak
             InitializeComponent();
             GridHelper.AturTemaModern(DGVStatusKolam);
             new AutoScaleHelper(this);
+            PanelHelper.BuatMelengkung(panel2, 25);
+            PanelHelper.BuatMelengkung(panel3, 25);
+            PanelHelper.BuatMelengkung(panel4, 25);
         }
 
         public static class Config

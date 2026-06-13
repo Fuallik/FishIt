@@ -18,6 +18,10 @@ namespace FishIt.UserControls.PegawaiTambak
             InitializeComponent();
             GridHelper.AturTemaModern(DGVPenebaran);
             new AutoScaleHelper(this);
+            PanelHelper.BuatMelengkung(panel1, 25);
+            PanelHelper.BuatMelengkung(panel5, 25);
+            PanelHelper.BuatMelengkung(panel6, 25);
+            PanelHelper.MakeButtonRounded(buttonTambah, 25);
         }
 
         protected override void OnLoad(EventArgs e)

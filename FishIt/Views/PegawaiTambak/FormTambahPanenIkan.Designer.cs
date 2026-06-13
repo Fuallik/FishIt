@@ -119,7 +119,7 @@
             lblTambahAkun.Name = "lblTambahAkun";
             lblTambahAkun.Size = new Size(505, 54);
             lblTambahAkun.TabIndex = 56;
-            lblTambahAkun.Text = "Panen Ikan";
+            lblTambahAkun.Text = "Pengajuan Katalog Ikan";
             lblTambahAkun.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // CBIkan
@@ -222,7 +222,7 @@
             label4.Name = "label4";
             label4.Size = new Size(135, 32);
             label4.TabIndex = 6;
-            label4.Text = "Sisa Ikan";
+            label4.Text = "Total Ikan";
             label4.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // labelIkan

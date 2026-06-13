@@ -85,19 +85,19 @@ namespace FishIt
                 conn.Open();
 
                 var dtKolam = new DataTable();
-                using (var ad = new NpgsqlDataAdapter(@"SELECT k.id_kolam, k.nomor
-                          FROM kolam k
-                          WHERE
-                              COALESCE((SELECT SUM(jumlah_ekor) FROM penebaran WHERE id_kolam = k.id_kolam), 0)
-                            - COALESCE((SELECT SUM(jumlah_ekor) FROM panen     WHERE id_kolam = k.id_kolam), 0)
-                              > 0
-                          ORDER BY k.nomor", conn))
+                // Query diubah untuk mengambil semua kolam kecuali yang 'Tidak Terpakai'
+                using (var ad = new NpgsqlDataAdapter(@"SELECT id_kolam, nomor 
+                                                        FROM kolam 
+                                                        WHERE status_kolam != 'Tidak Terpakai' 
+                                                        ORDER BY nomor", conn))
+                {
                     ad.Fill(dtKolam);
+                }
+
                 CBKolam.DataSource = dtKolam;
                 CBKolam.DisplayMember = "nomor";
                 CBKolam.ValueMember = "id_kolam";
                 CBKolam.SelectedIndex = -1;
-
             }
             catch (Exception ex)
             {

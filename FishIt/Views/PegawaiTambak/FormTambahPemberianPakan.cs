@@ -49,7 +49,7 @@ namespace FishIt
 
                     var dtPakan = new DataTable();
                     using (var ad = new NpgsqlDataAdapter(
-                        "SELECT id_pakan, nama FROM pakan ORDER BY nama", conn))
+                        "SELECT id_pakan, nama FROM pakan WHERE jumlah_stok > 0 ORDER BY nama", conn))
                         ad.Fill(dtPakan);
                     CBPakan.DataSource = dtPakan;
                     CBPakan.DisplayMember = "nama";
