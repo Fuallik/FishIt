@@ -1,4 +1,5 @@
-﻿using FishIt.Views.Admin;
+﻿using FishIt.Helpers;
+using FishIt.Views.Admin;
 using FontAwesome.Sharp;
 using System;
 using System.Collections.Generic;
@@ -26,6 +27,14 @@ namespace FishIt
         private void FormAdmin_Load(object sender, EventArgs e)
         {
             LoadPage(new UC_DashboardAdmin());
+            if (!string.IsNullOrEmpty(Session.Username))
+            {
+                lblUsernameTopbar.Text = Session.Username;
+            }
+            else
+            {
+                lblUsernameTopbar.Text = "Guest";
+            }
         }
 
         private void LoadPage(System.Windows.Forms.UserControl page)
@@ -52,7 +61,9 @@ namespace FishIt
 
         private void buttonLogoutAdmin_Click(object sender, EventArgs e)
         {
-            Application.Restart();
+            FormLogin login = new FormLogin();
+            login.Show();
+            this.Close();
         }
 
         private void panelContent_Paint(object sender, PaintEventArgs e)
