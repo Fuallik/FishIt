@@ -28,7 +28,7 @@ namespace FishIt
         }
         public void MuatDataPakan()
         {
-            string query = "SELECT id_pakan, nama, jumlah_stok FROM pakan WHERE jumlah_stok > 0";
+            string query = "SELECT id_pakan, nama, jumlah_stok FROM pakan WHERE jumlah_stok > 0 ORDER BY id_pakan ASC";
 
             using (var conn = new NpgsqlConnection(Config.ConnString))
             {
