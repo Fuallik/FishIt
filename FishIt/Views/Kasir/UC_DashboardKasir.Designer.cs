@@ -44,6 +44,7 @@
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.LightSteelBlue;
             Controls.Add(label1);
             Name = "UC_DashboardKasir";
             Size = new Size(800, 600);

@@ -1,4 +1,5 @@
-﻿using FishIt.UserControls.PegawaiTambak;
+﻿using FishIt.Helpers;
+using FishIt.UserControls.PegawaiTambak;
 using FontAwesome.Sharp;
 using System;
 using System.Collections.Generic;
@@ -28,6 +29,14 @@ namespace FishIt
         private void FormPegawaiTambak_Load(object sender, EventArgs e)
         {
             LoadPage(new UC_DashboardPegawaiTambak());
+            if (!string.IsNullOrEmpty(Session.Username))
+            {
+                lblUsernameTopbar.Text = Session.Username;
+            }
+            else
+            {
+                lblUsernameTopbar.Text = "Guest";
+            }
         }
 
         private void LoadPage(System.Windows.Forms.UserControl page)

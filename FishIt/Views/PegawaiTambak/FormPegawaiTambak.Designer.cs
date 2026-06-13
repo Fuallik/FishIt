@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            panelTB = new Panel();
             buttonOperasi = new FontAwesome.Sharp.IconButton();
             buttonDashboard = new FontAwesome.Sharp.IconButton();
             buttonInformasi = new FontAwesome.Sharp.IconButton();
@@ -44,19 +43,17 @@
             buttonStok = new FontAwesome.Sharp.IconButton();
             buttonStatusKolam = new FontAwesome.Sharp.IconButton();
             panelContent = new Panel();
+            panelTB = new Panel();
+            panelUsername = new Panel();
+            lblUsernameTopbar = new Label();
+            iconPictureBox1 = new FontAwesome.Sharp.IconPictureBox();
             panelSubKelolaAkun.SuspendLayout();
             panelSB.SuspendLayout();
             panelSubDataFishIt.SuspendLayout();
+            panelTB.SuspendLayout();
+            panelUsername.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)iconPictureBox1).BeginInit();
             SuspendLayout();
-            // 
-            // panelTB
-            // 
-            panelTB.BackColor = Color.LightSteelBlue;
-            panelTB.Dock = DockStyle.Top;
-            panelTB.Location = new Point(200, 0);
-            panelTB.Name = "panelTB";
-            panelTB.Size = new Size(802, 50);
-            panelTB.TabIndex = 4;
             // 
             // buttonOperasi
             // 
@@ -355,6 +352,49 @@
             panelContent.Size = new Size(802, 662);
             panelContent.TabIndex = 7;
             // 
+            // panelTB
+            // 
+            panelTB.BackColor = Color.LightSteelBlue;
+            panelTB.Controls.Add(panelUsername);
+            panelTB.Dock = DockStyle.Top;
+            panelTB.Location = new Point(200, 0);
+            panelTB.Name = "panelTB";
+            panelTB.Size = new Size(802, 50);
+            panelTB.TabIndex = 1;
+            // 
+            // panelUsername
+            // 
+            panelUsername.Controls.Add(lblUsernameTopbar);
+            panelUsername.Controls.Add(iconPictureBox1);
+            panelUsername.Location = new Point(3, 3);
+            panelUsername.Name = "panelUsername";
+            panelUsername.Size = new Size(796, 44);
+            panelUsername.TabIndex = 0;
+            // 
+            // lblUsernameTopbar
+            // 
+            lblUsernameTopbar.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblUsernameTopbar.ForeColor = Color.MidnightBlue;
+            lblUsernameTopbar.Location = new Point(47, 6);
+            lblUsernameTopbar.Name = "lblUsernameTopbar";
+            lblUsernameTopbar.Size = new Size(746, 38);
+            lblUsernameTopbar.TabIndex = 1;
+            lblUsernameTopbar.Text = "Username";
+            // 
+            // iconPictureBox1
+            // 
+            iconPictureBox1.BackColor = Color.LightSteelBlue;
+            iconPictureBox1.ForeColor = Color.MidnightBlue;
+            iconPictureBox1.IconChar = FontAwesome.Sharp.IconChar.UserTie;
+            iconPictureBox1.IconColor = Color.MidnightBlue;
+            iconPictureBox1.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            iconPictureBox1.IconSize = 38;
+            iconPictureBox1.Location = new Point(3, 3);
+            iconPictureBox1.Name = "iconPictureBox1";
+            iconPictureBox1.Size = new Size(38, 38);
+            iconPictureBox1.TabIndex = 0;
+            iconPictureBox1.TabStop = false;
+            // 
             // FormPegawaiTambak
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
@@ -372,12 +412,13 @@
             panelSubKelolaAkun.ResumeLayout(false);
             panelSB.ResumeLayout(false);
             panelSubDataFishIt.ResumeLayout(false);
+            panelTB.ResumeLayout(false);
+            panelUsername.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)iconPictureBox1).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
-
-        private Panel panelTB;
         private FontAwesome.Sharp.IconButton buttonOperasi;
         private FontAwesome.Sharp.IconButton buttonDashboard;
         private FontAwesome.Sharp.IconButton buttonInformasi;
@@ -393,5 +434,9 @@
         private FontAwesome.Sharp.IconButton buttonStok;
         private FontAwesome.Sharp.IconButton buttonStatusKolam;
         private FontAwesome.Sharp.IconButton buttonPanenIkan;
+        private Panel panelTB;
+        private Panel panelUsername;
+        private Label lblUsernameTopbar;
+        private FontAwesome.Sharp.IconPictureBox iconPictureBox1;
     }
 }

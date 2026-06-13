@@ -1,4 +1,5 @@
-﻿using FishIt.Views.Kasir;
+﻿using FishIt.Helpers;
+using FishIt.Views.Kasir;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -34,6 +35,14 @@ namespace FishIt
         private void FormKasir_Load(object sender, EventArgs e)
         {
             LoadPage(new UC_DashboardKasir());
+            if (!string.IsNullOrEmpty(Session.Username))
+            {
+                lblUsernameTopbar.Text = Session.Username;
+            }
+            else
+            {
+                lblUsernameTopbar.Text = "Guest";
+            }
         }
 
         private void LoadPage(UserControl page)
