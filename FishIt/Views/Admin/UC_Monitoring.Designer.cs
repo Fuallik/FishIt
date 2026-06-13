@@ -68,16 +68,15 @@
             // 
             // lblSatuBulan
             // 
-            lblSatuBulan.AutoSize = true;
             lblSatuBulan.BackColor = Color.Transparent;
             lblSatuBulan.Font = new Font("Segoe UI", 24F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblSatuBulan.ForeColor = Color.White;
-            lblSatuBulan.Location = new Point(77, 18);
+            lblSatuBulan.Location = new Point(38, 18);
             lblSatuBulan.Name = "lblSatuBulan";
-            lblSatuBulan.Size = new Size(54, 65);
+            lblSatuBulan.Size = new Size(122, 65);
             lblSatuBulan.TabIndex = 12;
             lblSatuBulan.Text = "0";
-            lblSatuBulan.TextAlign = ContentAlignment.MiddleLeft;
+            lblSatuBulan.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // label3
             // 
@@ -104,16 +103,15 @@
             // 
             // lblHariIni
             // 
-            lblHariIni.AutoSize = true;
             lblHariIni.BackColor = Color.Transparent;
             lblHariIni.Font = new Font("Segoe UI", 24F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblHariIni.ForeColor = Color.White;
-            lblHariIni.Location = new Point(75, 17);
+            lblHariIni.Location = new Point(33, 17);
             lblHariIni.Name = "lblHariIni";
-            lblHariIni.Size = new Size(54, 65);
+            lblHariIni.Size = new Size(137, 65);
             lblHariIni.TabIndex = 13;
             lblHariIni.Text = "0";
-            lblHariIni.TextAlign = ContentAlignment.MiddleLeft;
+            lblHariIni.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // label1
             // 

@@ -16,6 +16,9 @@ namespace FishIt
         public UC_Pengiriman()
         {
             InitializeComponent();
+            PanelHelper.BuatMelengkung(panelDiproses, 20);
+            PanelHelper.BuatMelengkung(panelDikirim, 20);
+            PanelHelper.BuatMelengkung(panelDiterima, 20);
             new AutoScaleHelper(this);
             GridHelper.AturTemaModern(DGVPengiriman);   // ganti nama DGV sesuai Designer-mu
         }
@@ -109,6 +112,11 @@ namespace FishIt
                 "SELECT COUNT(*) FROM pengiriman WHERE status_pengiriman = @status", conn);
             cmd.Parameters.AddWithValue("@status", status);
             return Convert.ToInt32(cmd.ExecuteScalar());   // COUNT(*) -> ambil nilai tunggal
+        }
+
+        private void UC_Pengiriman_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -48,6 +48,7 @@
             label1 = new Label();
             panelTB = new Panel();
             panelContent = new Panel();
+            btnPanen = new FontAwesome.Sharp.IconButton();
             panelSB.SuspendLayout();
             panelSubLaporan.SuspendLayout();
             panelSubDataFishIt.SuspendLayout();
@@ -100,13 +101,14 @@
             // 
             // panelSubLaporan
             // 
+            panelSubLaporan.Controls.Add(btnPanen);
             panelSubLaporan.Controls.Add(buttonPengiriman);
             panelSubLaporan.Controls.Add(buttonVerifikasi);
             panelSubLaporan.Controls.Add(buttonMonitoring);
             panelSubLaporan.Dock = DockStyle.Top;
             panelSubLaporan.Location = new Point(0, 418);
             panelSubLaporan.Name = "panelSubLaporan";
-            panelSubLaporan.Size = new Size(200, 127);
+            panelSubLaporan.Size = new Size(200, 169);
             panelSubLaporan.TabIndex = 0;
             // 
             // buttonPengiriman
@@ -422,6 +424,30 @@
             panelContent.TabIndex = 1;
             panelContent.Paint += panelContent_Paint_1;
             // 
+            // btnPanen
+            // 
+            btnPanen.BackColor = Color.Transparent;
+            btnPanen.Dock = DockStyle.Top;
+            btnPanen.FlatAppearance.BorderSize = 0;
+            btnPanen.FlatStyle = FlatStyle.Flat;
+            btnPanen.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnPanen.ForeColor = Color.White;
+            btnPanen.IconChar = FontAwesome.Sharp.IconChar.PlusSquare;
+            btnPanen.IconColor = Color.White;
+            btnPanen.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            btnPanen.IconSize = 30;
+            btnPanen.ImageAlign = ContentAlignment.MiddleLeft;
+            btnPanen.Location = new Point(0, 120);
+            btnPanen.Name = "btnPanen";
+            btnPanen.Padding = new Padding(50, 0, 0, 0);
+            btnPanen.Size = new Size(200, 40);
+            btnPanen.TabIndex = 0;
+            btnPanen.Text = "Tambah Stok";
+            btnPanen.TextAlign = ContentAlignment.MiddleLeft;
+            btnPanen.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnPanen.UseVisualStyleBackColor = false;
+            btnPanen.Click += btnPanen_Click;
+            // 
             // FormAdmin
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
@@ -464,5 +490,6 @@
         private Panel panelTB;
         private Panel panelContent;
         private FontAwesome.Sharp.IconButton btnDataAkun;
+        private FontAwesome.Sharp.IconButton btnPanen;
     }
 }

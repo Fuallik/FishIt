@@ -41,7 +41,7 @@ namespace FishIt
                     conn.Open();
 
                     lblHariIni.Text = HitungMonitoring(conn, "HARI_INI").ToString();
-                    lblSatuBulan.Text = HitungMonitoring(conn, "SATU_BULAN").ToString();
+                    lblSatuBulan.Text = HitungMonitoring(conn, "BULAN").ToString();
                 }
                 catch (Exception ex)
                 {

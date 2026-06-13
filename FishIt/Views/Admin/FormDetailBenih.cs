@@ -28,7 +28,7 @@ namespace FishIt
         }
         public void MuatDataBenih()
         {
-            string query = "SELECT id_benih, nama, jumlah_stok FROM benih";
+            string query = "SELECT id_benih, nama, jumlah_stok FROM benih WHERE jumlah_stok > 0";
 
             using (var conn = new NpgsqlConnection(Config.ConnString))
             {

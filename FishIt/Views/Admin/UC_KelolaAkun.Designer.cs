@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             panelJumlahAkun = new Panel();
+            panelStatistik = new Panel();
             label1 = new Label();
+            lblHitungAkunAktif = new Label();
             labelAkunAktif = new Label();
             lblHitungAkunTidakAktif = new Label();
-            panelStatistik = new Panel();
-            lblHitungAkunAktif = new Label();
             label2 = new Label();
             labelJumlahAkun = new Label();
             DGVRiwayatTambahAkun = new DataGridView();
@@ -56,67 +56,65 @@
             panelJumlahAkun.Size = new Size(757, 135);
             panelJumlahAkun.TabIndex = 6;
             // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.BackColor = Color.Transparent;
-            label1.Font = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.ForeColor = Color.White;
-            label1.Location = new Point(58, 89);
-            label1.Name = "label1";
-            label1.Size = new Size(123, 21);
-            label1.TabIndex = 9;
-            label1.Text = "Akun Tidak Aktif\r\n";
-            label1.TextAlign = ContentAlignment.MiddleLeft;
-            // 
-            // labelAkunAktif
-            // 
-            labelAkunAktif.AutoSize = true;
-            labelAkunAktif.BackColor = Color.Transparent;
-            labelAkunAktif.Font = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            labelAkunAktif.ForeColor = Color.White;
-            labelAkunAktif.Location = new Point(79, 41);
-            labelAkunAktif.Name = "labelAkunAktif";
-            labelAkunAktif.Size = new Size(82, 21);
-            labelAkunAktif.TabIndex = 7;
-            labelAkunAktif.Text = "Akun Aktif\r\n";
-            labelAkunAktif.TextAlign = ContentAlignment.MiddleLeft;
-            // 
-            // lblHitungAkunTidakAktif
-            // 
-            lblHitungAkunTidakAktif.BackColor = Color.Transparent;
-            lblHitungAkunTidakAktif.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblHitungAkunTidakAktif.ForeColor = Color.White;
-            lblHitungAkunTidakAktif.Location = new Point(63, 47);
-            lblHitungAkunTidakAktif.Name = "lblHitungAkunTidakAktif";
-            lblHitungAkunTidakAktif.Size = new Size(117, 47);
-            lblHitungAkunTidakAktif.TabIndex = 8;
-            lblHitungAkunTidakAktif.Text = "0";
-            lblHitungAkunTidakAktif.TextAlign = ContentAlignment.MiddleCenter;
-            // 
             // panelStatistik
             // 
             panelStatistik.BackColor = Color.RoyalBlue;
             panelStatistik.Controls.Add(label1);
-            panelStatistik.Controls.Add(lblHitungAkunAktif);
             panelStatistik.Controls.Add(labelAkunAktif);
+            panelStatistik.Controls.Add(lblHitungAkunAktif);
             panelStatistik.Controls.Add(lblHitungAkunTidakAktif);
             panelStatistik.Location = new Point(501, 13);
             panelStatistik.Name = "panelStatistik";
             panelStatistik.Size = new Size(242, 110);
             panelStatistik.TabIndex = 6;
             // 
+            // label1
+            // 
+            label1.BackColor = Color.Transparent;
+            label1.Font = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label1.ForeColor = Color.White;
+            label1.Location = new Point(0, 79);
+            label1.Name = "label1";
+            label1.Size = new Size(242, 31);
+            label1.TabIndex = 9;
+            label1.Text = "Akun Tidak Aktif\r\n";
+            label1.TextAlign = ContentAlignment.MiddleCenter;
+            // 
             // lblHitungAkunAktif
             // 
             lblHitungAkunAktif.BackColor = Color.Transparent;
-            lblHitungAkunAktif.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblHitungAkunAktif.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblHitungAkunAktif.ForeColor = Color.White;
-            lblHitungAkunAktif.Location = new Point(58, 0);
+            lblHitungAkunAktif.Location = new Point(0, 0);
             lblHitungAkunAktif.Name = "lblHitungAkunAktif";
-            lblHitungAkunAktif.Size = new Size(123, 47);
+            lblHitungAkunAktif.Size = new Size(239, 47);
             lblHitungAkunAktif.TabIndex = 5;
             lblHitungAkunAktif.Text = "0";
             lblHitungAkunAktif.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // labelAkunAktif
+            // 
+            labelAkunAktif.BackColor = Color.Transparent;
+            labelAkunAktif.Font = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            labelAkunAktif.ForeColor = Color.White;
+            labelAkunAktif.Location = new Point(0, 36);
+            labelAkunAktif.Name = "labelAkunAktif";
+            labelAkunAktif.Size = new Size(239, 23);
+            labelAkunAktif.TabIndex = 7;
+            labelAkunAktif.Text = "Akun Aktif\r\n";
+            labelAkunAktif.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // lblHitungAkunTidakAktif
+            // 
+            lblHitungAkunTidakAktif.BackColor = Color.Transparent;
+            lblHitungAkunTidakAktif.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblHitungAkunTidakAktif.ForeColor = Color.White;
+            lblHitungAkunTidakAktif.Location = new Point(3, 41);
+            lblHitungAkunTidakAktif.Name = "lblHitungAkunTidakAktif";
+            lblHitungAkunTidakAktif.Size = new Size(236, 52);
+            lblHitungAkunTidakAktif.TabIndex = 8;
+            lblHitungAkunTidakAktif.Text = "0";
+            lblHitungAkunTidakAktif.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // label2
             // 
@@ -212,7 +210,6 @@
             panelJumlahAkun.ResumeLayout(false);
             panelJumlahAkun.PerformLayout();
             panelStatistik.ResumeLayout(false);
-            panelStatistik.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)DGVRiwayatTambahAkun).EndInit();
             ResumeLayout(false);
         }
