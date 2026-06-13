@@ -29,7 +29,7 @@ namespace FishIt
         }
         public void MuatDataIkan()
         {
-            string query = "SELECT i.nama_ikan, j.nama_jenis_ikan, k.kualitas_ikan, i.harga_per_kg, i.stok_ikan \r\nFROM ikan i\r\nJOIN jenis_ikan j ON i.id_jenis_ikan = j.id_jenis_ikan\r\nJOIN kualitas k ON i.id_kualitas = k.id_kualitas";
+            string query = "SELECT i.nama_ikan, j.nama_jenis_ikan, k.kualitas_ikan, i.harga_per_kg, i.stok_ikan \r\nFROM ikan i\r\nJOIN jenis_ikan j ON i.id_jenis_ikan = j.id_jenis_ikan\r\nJOIN kualitas k ON i.id_kualitas = k.id_kualitas\r\nWHERE i.stok_ikan > 0";
 
             using (var conn = new NpgsqlConnection(Config.ConnString))
             {

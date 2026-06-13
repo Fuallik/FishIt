@@ -17,6 +17,10 @@ namespace FishIt
         public UC_DataKolam()
         {
             InitializeComponent();
+            PanelHelper.BuatMelengkung(panelJumlahKolam, 20);
+            PanelHelper.BuatMelengkung(panelStatistik, 20);
+            PanelHelper.MakeButtonRounded(btnTambah, 16);
+            PanelHelper.MakeButtonRounded(btnHapus, 16);
             new AutoScaleHelper(this);
             GridHelper.AturTemaModern(DGVKolam);   // ganti nama DGV sesuai Designer-mu
         }
@@ -109,6 +113,11 @@ namespace FishIt
             FormHapusKolam form = new FormHapusKolam();      // form ini BELUM ADA, perlu dibuat
             if (form.ShowDialog() == DialogResult.OK)
                 MuatData();
+        }
+
+        private void UC_DataKolam_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

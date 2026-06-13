@@ -46,11 +46,11 @@
             TotalTambakKelola = new Label();
             label3 = new Label();
             panelJumlahAkun = new Panel();
+            panelStatistik = new Panel();
             label1 = new Label();
+            lblHitungAkunAktif = new Label();
             labelAkunAktif = new Label();
             lblHitungAkunTidakAKtif = new Label();
-            panelStatistik = new Panel();
-            lblHitungAkunAktif = new Label();
             label2 = new Label();
             labelJumlahAkun = new Label();
             panelUtama.SuspendLayout();
@@ -279,44 +279,6 @@
             panelJumlahAkun.TabIndex = 0;
             panelJumlahAkun.Paint += panelJumlahAkun_Paint;
             // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.BackColor = Color.Transparent;
-            label1.Font = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.ForeColor = Color.White;
-            label1.Location = new Point(71, 91);
-            label1.Name = "label1";
-            label1.Size = new Size(123, 21);
-            label1.TabIndex = 9;
-            label1.Text = "Akun Tidak Aktif\r\n";
-            label1.TextAlign = ContentAlignment.MiddleLeft;
-            // 
-            // labelAkunAktif
-            // 
-            labelAkunAktif.AutoSize = true;
-            labelAkunAktif.BackColor = Color.Transparent;
-            labelAkunAktif.Font = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            labelAkunAktif.ForeColor = Color.White;
-            labelAkunAktif.Location = new Point(86, 41);
-            labelAkunAktif.Name = "labelAkunAktif";
-            labelAkunAktif.Size = new Size(82, 21);
-            labelAkunAktif.TabIndex = 7;
-            labelAkunAktif.Text = "Akun Aktif\r\n";
-            labelAkunAktif.TextAlign = ContentAlignment.MiddleLeft;
-            // 
-            // lblHitungAkunTidakAKtif
-            // 
-            lblHitungAkunTidakAKtif.BackColor = Color.Transparent;
-            lblHitungAkunTidakAKtif.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblHitungAkunTidakAKtif.ForeColor = Color.White;
-            lblHitungAkunTidakAKtif.Location = new Point(61, 54);
-            lblHitungAkunTidakAKtif.Name = "lblHitungAkunTidakAKtif";
-            lblHitungAkunTidakAKtif.Size = new Size(133, 47);
-            lblHitungAkunTidakAKtif.TabIndex = 8;
-            lblHitungAkunTidakAKtif.Text = "0";
-            lblHitungAkunTidakAKtif.TextAlign = ContentAlignment.MiddleCenter;
-            // 
             // panelStatistik
             // 
             panelStatistik.BackColor = Color.RoyalBlue;
@@ -329,17 +291,53 @@
             panelStatistik.Size = new Size(242, 110);
             panelStatistik.TabIndex = 6;
             // 
+            // label1
+            // 
+            label1.BackColor = Color.Transparent;
+            label1.Font = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label1.ForeColor = Color.White;
+            label1.Location = new Point(5, 88);
+            label1.Name = "label1";
+            label1.Size = new Size(234, 29);
+            label1.TabIndex = 9;
+            label1.Text = "Akun Tidak Aktif\r\n";
+            label1.TextAlign = ContentAlignment.MiddleCenter;
+            // 
             // lblHitungAkunAktif
             // 
             lblHitungAkunAktif.BackColor = Color.Transparent;
-            lblHitungAkunAktif.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblHitungAkunAktif.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblHitungAkunAktif.ForeColor = Color.White;
-            lblHitungAkunAktif.Location = new Point(61, 0);
+            lblHitungAkunAktif.Location = new Point(3, 0);
             lblHitungAkunAktif.Name = "lblHitungAkunAktif";
-            lblHitungAkunAktif.Size = new Size(133, 47);
+            lblHitungAkunAktif.Size = new Size(236, 41);
             lblHitungAkunAktif.TabIndex = 5;
             lblHitungAkunAktif.Text = "0";
             lblHitungAkunAktif.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // labelAkunAktif
+            // 
+            labelAkunAktif.BackColor = Color.Transparent;
+            labelAkunAktif.Font = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            labelAkunAktif.ForeColor = Color.White;
+            labelAkunAktif.Location = new Point(3, 41);
+            labelAkunAktif.Name = "labelAkunAktif";
+            labelAkunAktif.Size = new Size(236, 31);
+            labelAkunAktif.TabIndex = 7;
+            labelAkunAktif.Text = "Akun Aktif\r\n";
+            labelAkunAktif.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // lblHitungAkunTidakAKtif
+            // 
+            lblHitungAkunTidakAKtif.BackColor = Color.Transparent;
+            lblHitungAkunTidakAKtif.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblHitungAkunTidakAKtif.ForeColor = Color.White;
+            lblHitungAkunTidakAKtif.Location = new Point(3, 61);
+            lblHitungAkunTidakAKtif.Name = "lblHitungAkunTidakAKtif";
+            lblHitungAkunTidakAKtif.Size = new Size(236, 34);
+            lblHitungAkunTidakAKtif.TabIndex = 8;
+            lblHitungAkunTidakAKtif.Text = "0";
+            lblHitungAkunTidakAKtif.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // label2
             // 
@@ -390,7 +388,6 @@
             panelJumlahAkun.ResumeLayout(false);
             panelJumlahAkun.PerformLayout();
             panelStatistik.ResumeLayout(false);
-            panelStatistik.PerformLayout();
             ResumeLayout(false);
         }
 

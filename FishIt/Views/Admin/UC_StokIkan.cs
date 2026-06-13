@@ -112,7 +112,7 @@ namespace FishIt
                         {
                             if (reader.Read())
                             {
-                                long totalPakan = Convert.ToInt64(reader["total_pakan"]);
+                                decimal totalPakan = Convert.ToDecimal(reader["total_pakan"]);
 
                                 lblHitungPakan.Text = totalPakan.ToString();
                             }

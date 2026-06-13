@@ -30,6 +30,7 @@
         {
             DGVKeranjang = new DataGridView();
             btnCheckout = new FontAwesome.Sharp.IconButton();
+            CBMetodePembayaran = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)DGVKeranjang).BeginInit();
             SuspendLayout();
             // 
@@ -44,6 +45,7 @@
             DGVKeranjang.RowHeadersWidth = 62;
             DGVKeranjang.Size = new Size(794, 541);
             DGVKeranjang.TabIndex = 1;
+            DGVKeranjang.CellClick += DGVKeranjang_CellClick;
             // 
             // btnCheckout
             // 
@@ -64,11 +66,21 @@
             btnCheckout.UseVisualStyleBackColor = false;
             btnCheckout.Click += btnCheckout_Click;
             // 
+            // CBMetodePembayaran
+            // 
+            CBMetodePembayaran.FormattingEnabled = true;
+            CBMetodePembayaran.Location = new Point(408, 12);
+            CBMetodePembayaran.Name = "CBMetodePembayaran";
+            CBMetodePembayaran.Size = new Size(182, 33);
+            CBMetodePembayaran.TabIndex = 3;
+            CBMetodePembayaran.SelectedIndexChanged += CBMetodePembayaran_SelectedIndexChanged;
+            // 
             // UC_Keranjang
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.LightSteelBlue;
+            Controls.Add(CBMetodePembayaran);
             Controls.Add(btnCheckout);
             Controls.Add(DGVKeranjang);
             Name = "UC_Keranjang";
@@ -82,5 +94,6 @@
 
         private DataGridView DGVKeranjang;
         private FontAwesome.Sharp.IconButton btnCheckout;
+        private ComboBox CBMetodePembayaran;
     }
 }

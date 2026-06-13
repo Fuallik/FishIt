@@ -1,4 +1,5 @@
-﻿using FontAwesome.Sharp;
+﻿using FishIt.Views.Admin;
+using FontAwesome.Sharp;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -217,6 +218,18 @@ namespace FishIt
 
             panelContent.Controls.Clear();
             panelContent.Controls.Add(akun);
+
+            buttonKelolaAkun.MouseEnter += SidebarButton_MouseEnter;
+            buttonKelolaAkun.MouseLeave += SidebarButton_MouseLeave;
+        }
+
+        private void btnPanen_Click(object sender, EventArgs e)
+        {
+            UC_HargaPanen panen = new UC_HargaPanen();
+            panen.Dock = DockStyle.Fill;
+
+            panelContent.Controls.Clear();
+            panelContent.Controls.Add(panen);
 
             buttonKelolaAkun.MouseEnter += SidebarButton_MouseEnter;
             buttonKelolaAkun.MouseLeave += SidebarButton_MouseLeave;

@@ -31,14 +31,14 @@
             DGVKolam = new DataGridView();
             btnHapus = new FontAwesome.Sharp.IconButton();
             btnTambah = new FontAwesome.Sharp.IconButton();
-            panelJumlahAkun = new Panel();
+            panelJumlahKolam = new Panel();
             panelStatistik = new Panel();
             labelAkunAktif = new Label();
             labelKolam = new Label();
             label2 = new Label();
             labelJumlahAkun = new Label();
             ((System.ComponentModel.ISupportInitialize)DGVKolam).BeginInit();
-            panelJumlahAkun.SuspendLayout();
+            panelJumlahKolam.SuspendLayout();
             panelStatistik.SuspendLayout();
             SuspendLayout();
             // 
@@ -61,7 +61,7 @@
             btnHapus.FlatStyle = FlatStyle.Flat;
             btnHapus.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnHapus.ForeColor = Color.White;
-            btnHapus.IconChar = FontAwesome.Sharp.IconChar.UserMinus;
+            btnHapus.IconChar = FontAwesome.Sharp.IconChar.MinusCircle;
             btnHapus.IconColor = Color.White;
             btnHapus.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnHapus.ImageAlign = ContentAlignment.MiddleRight;
@@ -82,7 +82,7 @@
             btnTambah.FlatStyle = FlatStyle.Flat;
             btnTambah.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnTambah.ForeColor = Color.White;
-            btnTambah.IconChar = FontAwesome.Sharp.IconChar.UserPlus;
+            btnTambah.IconChar = FontAwesome.Sharp.IconChar.PlusSquare;
             btnTambah.IconColor = Color.White;
             btnTambah.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnTambah.ImageAlign = ContentAlignment.MiddleRight;
@@ -96,17 +96,17 @@
             btnTambah.UseVisualStyleBackColor = false;
             btnTambah.Click += btnTambah_Click;
             // 
-            // panelJumlahAkun
+            // panelJumlahKolam
             // 
-            panelJumlahAkun.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            panelJumlahAkun.BackColor = Color.CornflowerBlue;
-            panelJumlahAkun.Controls.Add(panelStatistik);
-            panelJumlahAkun.Controls.Add(label2);
-            panelJumlahAkun.Controls.Add(labelJumlahAkun);
-            panelJumlahAkun.Location = new Point(21, 27);
-            panelJumlahAkun.Name = "panelJumlahAkun";
-            panelJumlahAkun.Size = new Size(757, 135);
-            panelJumlahAkun.TabIndex = 19;
+            panelJumlahKolam.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            panelJumlahKolam.BackColor = Color.CornflowerBlue;
+            panelJumlahKolam.Controls.Add(panelStatistik);
+            panelJumlahKolam.Controls.Add(label2);
+            panelJumlahKolam.Controls.Add(labelJumlahAkun);
+            panelJumlahKolam.Location = new Point(21, 27);
+            panelJumlahKolam.Name = "panelJumlahKolam";
+            panelJumlahKolam.Size = new Size(757, 135);
+            panelJumlahKolam.TabIndex = 19;
             // 
             // panelStatistik
             // 
@@ -171,15 +171,17 @@
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(panelJumlahAkun);
+            BackColor = Color.LightSteelBlue;
+            Controls.Add(panelJumlahKolam);
             Controls.Add(btnHapus);
             Controls.Add(btnTambah);
             Controls.Add(DGVKolam);
             Name = "UC_DataKolam";
             Size = new Size(800, 600);
+            Load += UC_DataKolam_Load;
             ((System.ComponentModel.ISupportInitialize)DGVKolam).EndInit();
-            panelJumlahAkun.ResumeLayout(false);
-            panelJumlahAkun.PerformLayout();
+            panelJumlahKolam.ResumeLayout(false);
+            panelJumlahKolam.PerformLayout();
             panelStatistik.ResumeLayout(false);
             ResumeLayout(false);
         }
@@ -189,7 +191,7 @@
         private DataGridView DGVKolam;
         private FontAwesome.Sharp.IconButton btnHapus;
         private FontAwesome.Sharp.IconButton btnTambah;
-        private Panel panelJumlahAkun;
+        private Panel panelJumlahKolam;
         private Label labelAkunAktif;
         private Panel panelStatistik;
         private Label labelKolam;
