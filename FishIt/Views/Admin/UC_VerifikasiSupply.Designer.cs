@@ -81,9 +81,9 @@
             label2.ForeColor = Color.White;
             label2.Location = new Point(16, 16);
             label2.Name = "label2";
-            label2.Size = new Size(136, 32);
+            label2.Size = new Size(111, 32);
             label2.TabIndex = 3;
-            label2.Text = "Monitoring";
+            label2.Text = "Verifikasi";
             // 
             // DGVPengajuan
             // 

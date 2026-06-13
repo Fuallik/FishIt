@@ -27,7 +27,7 @@ namespace FishIt
         private void MuatDropdown()
         {
             using (var conn = new NpgsqlConnection(Config.ConnString))
-
+            {
                 try
                 {
                     conn.Open();
@@ -35,32 +35,53 @@ namespace FishIt
                     var dtKolam = new DataTable();
                     using (var ad = new NpgsqlDataAdapter(
                         @"SELECT k.id_kolam, k.nomor
-                          FROM kolam k
-                          WHERE
-                              COALESCE((SELECT SUM(jumlah_ekor) FROM penebaran WHERE id_kolam = k.id_kolam), 0)
-                            - COALESCE((SELECT SUM(jumlah_ekor) FROM panen     WHERE id_kolam = k.id_kolam), 0)
-                              > 0
-                          ORDER BY k.nomor", conn))
+                  FROM kolam k
+                  WHERE fn_isi_kolam(k.id_kolam) > 0
+                  ORDER BY k.nomor", conn))
                         ad.Fill(dtKolam);
+
                     CBKolam.DataSource = dtKolam;
                     CBKolam.DisplayMember = "nomor";
                     CBKolam.ValueMember = "id_kolam";
                     CBKolam.SelectedIndex = -1;
-
-                    var dtPakan = new DataTable();
-                    using (var ad = new NpgsqlDataAdapter(
-                        "SELECT id_pakan, nama FROM pakan WHERE jumlah_stok > 0 ORDER BY nama", conn))
-                        ad.Fill(dtPakan);
-                    CBPakan.DataSource = dtPakan;
-                    CBPakan.DisplayMember = "nama";
-                    CBPakan.ValueMember = "id_pakan";
-                    CBPakan.SelectedIndex = -1;
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show("Gagal memuat dropdown: " + ex.Message, "Error",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+            }
+
+            // Pakan SENGAJA kosong & dimatikan sampai kolam dipilih
+            CBPakan.DataSource = null;
+            CBPakan.Enabled = false;
+        }
+
+        private void MuatPakan()
+        {
+            using (var conn = new NpgsqlConnection(Config.ConnString))
+            {
+                try
+                {
+                    conn.Open();
+                    var dtPakan = new DataTable();
+                    using (var ad = new NpgsqlDataAdapter(
+                        "SELECT id_pakan, nama FROM pakan WHERE jumlah_stok > 0 ORDER BY nama", conn))
+                        ad.Fill(dtPakan);
+
+                    CBPakan.DataSource = null;        // bersihkan binding lama dulu
+                    CBPakan.DataSource = dtPakan;
+                    CBPakan.DisplayMember = "nama";
+                    CBPakan.ValueMember = "id_pakan";
+                    CBPakan.SelectedIndex = -1;
+                    CBPakan.Enabled = true;           // baru aktif setelah kolam dipilih
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Gagal memuat pakan: " + ex.Message, "Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
 
         private void btnBatalTambahMonitoring_Click(object sender, EventArgs e)
@@ -153,23 +174,37 @@ namespace FishIt
 
             using (var conn = new NpgsqlConnection(Config.ConnString))
 
-            try
-            {
-                
-                conn.Open();
+                try
+                {
 
-                using var cmd = new NpgsqlCommand(
-                    "SELECT jumlah_stok FROM pakan WHERE id_pakan=@id", conn);
-                cmd.Parameters.AddWithValue("@id", Convert.ToInt32(CBPakan.SelectedValue));
+                    conn.Open();
 
-                decimal stok = Convert.ToDecimal(cmd.ExecuteScalar());
-                labelStokPakan.Text = $" {stok:N2} kg";
-            }
-            catch (Exception ex)
+                    using var cmd = new NpgsqlCommand(
+                        "SELECT jumlah_stok FROM pakan WHERE id_pakan=@id", conn);
+                    cmd.Parameters.AddWithValue("@id", Convert.ToInt32(CBPakan.SelectedValue));
+
+                    decimal stok = Convert.ToDecimal(cmd.ExecuteScalar());
+                    labelStokPakan.Text = $" {stok:N2} kg";
+                }
+                catch (Exception ex)
+                {
+                    labelStokPakan.Text = "Gagal ambil stok";
+                    Console.WriteLine(ex.Message);
+                }
+        }
+
+        private void CBKolam_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (CBKolam.SelectedIndex == -1 || CBKolam.SelectedValue == null
+        || !int.TryParse(CBKolam.SelectedValue.ToString(), out _))
             {
-                labelStokPakan.Text = "Gagal ambil stok";
-                Console.WriteLine(ex.Message);
+                CBPakan.DataSource = null;
+                CBPakan.Enabled = false;
+                labelStokPakan.Text = "";
+                return;
             }
+
+            MuatPakan();
         }
     }
 }

@@ -37,13 +37,9 @@ namespace FishIt
 
                     // === QUERY DIUBAH: Menambahkan pengurangan ikan mati dari tabel monitoring ===
                     using var cmd = new NpgsqlCommand(
-                       @"SELECT k.id_kolam, k.nomor
+                        @"SELECT k.id_kolam, k.nomor
                           FROM kolam k
-                          WHERE
-                              COALESCE((SELECT SUM(jumlah_ekor) FROM penebaran WHERE id_kolam = k.id_kolam), 0)
-                            - COALESCE((SELECT SUM(jumlah_ekor) FROM panen     WHERE id_kolam = k.id_kolam), 0)
-                            - COALESCE((SELECT SUM(jumlah_mati) FROM monitoring WHERE id_kolam = k.id_kolam), 0)
-                              > 0
+                          WHERE fn_isi_kolam(k.id_kolam) > 0
                           ORDER BY k.nomor", conn);
                     using var adapter = new NpgsqlDataAdapter(cmd);
 
@@ -90,11 +86,7 @@ namespace FishIt
                     conn.Open();
 
                     // === 1. VALIDASI SISA IKAN DI KOLAM ===
-                    string cekSisaIkanQuery = @"
-                SELECT 
-                    COALESCE((SELECT SUM(jumlah_ekor) FROM penebaran WHERE id_kolam = @id_kolam), 0)
-                  - COALESCE((SELECT SUM(jumlah_ekor) FROM panen WHERE id_kolam = @id_kolam), 0)
-                  - COALESCE((SELECT SUM(jumlah_mati) FROM monitoring WHERE id_kolam = @id_kolam), 0)";
+                    string cekSisaIkanQuery = "SELECT fn_isi_kolam(@id_kolam)";
 
                     using (var cmdCek = new NpgsqlCommand(cekSisaIkanQuery, conn))
                     {

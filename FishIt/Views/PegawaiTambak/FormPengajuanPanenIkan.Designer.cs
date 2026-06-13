@@ -1,6 +1,6 @@
 ﻿namespace FishIt
 {
-    partial class FormTambahPanenIkan
+    partial class FormPengajuanPanenIkan
     {
         /// <summary>
         /// Required designer variable.

@@ -46,6 +46,7 @@
             DGVPanen.RowHeadersWidth = 62;
             DGVPanen.Size = new Size(794, 530);
             DGVPanen.TabIndex = 0;
+            DGVPanen.CellClick += DGVPanen_CellClick;
             // 
             // btnSimpan
             // 
@@ -70,11 +71,11 @@
             // labelIkanTerpilih
             // 
             labelIkanTerpilih.AutoSize = true;
-            labelIkanTerpilih.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            labelIkanTerpilih.Font = new Font("Segoe UI Semibold", 8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             labelIkanTerpilih.ForeColor = Color.White;
-            labelIkanTerpilih.Location = new Point(276, 15);
+            labelIkanTerpilih.Location = new Point(16, 24);
             labelIkanTerpilih.Name = "labelIkanTerpilih";
-            labelIkanTerpilih.Size = new Size(153, 32);
+            labelIkanTerpilih.Size = new Size(100, 21);
             labelIkanTerpilih.TabIndex = 3;
             labelIkanTerpilih.Text = "Nama Panen";
             // 
@@ -89,7 +90,6 @@
             Controls.Add(DGVPanen);
             Name = "UC_HargaPanen";
             Size = new Size(800, 600);
-            Load += UC_HargaPanen_Load;
             ((System.ComponentModel.ISupportInitialize)DGVPanen).EndInit();
             ResumeLayout(false);
             PerformLayout();

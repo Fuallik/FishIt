@@ -15,9 +15,12 @@ namespace FishIt.Views.Admin
     public partial class UC_HargaPanen : UserControl
     {
         private int idPanenTerpilih = 0;
-        private int idIkanTerpilih = 0;
+        private string namaIkanTerpilih = "";
+        private int idJenisTerpilih = 0;
+        private int idKualitasTerpilih = 0;
         private decimal jumlahKgTerpilih = 0;
-        private bool ikanSudahPunyaHarga = false;
+        private int idIkanKatalogDitemukan = 0;   // 0 = entri (spesies+kualitas) belum ada di katalog
+
         public UC_HargaPanen()
         {
             InitializeComponent();
@@ -25,36 +28,36 @@ namespace FishIt.Views.Admin
             GridHelper.AturTemaModern(DGVPanen);
         }
 
-        private void UC_HargaPanen_Load(object sender, EventArgs e)
-        {
-
-        }
         public static class Config
         {
             public static string ConnString = ConfigurationManager.ConnectionStrings["DbConnection"].ConnectionString;
         }
+
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
             MuatAntrean();
         }
+
+        // Grid: panen yang belum diproses. Sertakan jenis & id_kualitas (dari konversi A/B/C).
         private void MuatAntrean()
         {
             string query = @"
-                SELECT p.id_panen     AS ""ID"",
-                       p.id_ikan       AS ""ID Ikan"",
-                       i.nama_ikan      AS ""Ikan"",
-                       k.nomor          AS ""Kolam"",
-                       p.jumlah_kg      AS ""Jumlah (kg)"",
-                       p.kualitas       AS ""Kualitas"",
-                       p.tanggal_panen  AS ""Tgl Panen"",
-                       a.nama           AS ""Dipanen Oleh"",
-                       i.harga_per_kg   AS ""Harga Ikan Saat Ini""
+                SELECT p.id_panen        AS ""ID"",
+                       i.nama_ikan         AS ""Ikan"",
+                       i.id_jenis_ikan     AS ""ID Jenis"",
+                       p.kualitas          AS ""Kualitas"",
+                       ku.id_kualitas      AS ""ID Kualitas"",
+                       k.nomor             AS ""Kolam"",
+                       p.jumlah_kg         AS ""Jumlah (kg)"",
+                       p.tanggal_panen     AS ""Tgl Panen"",
+                       a.nama              AS ""Dipanen Oleh""
                 FROM panen p
-                JOIN ikan i  ON i.id_ikan  = p.id_ikan
-                JOIN kolam k ON k.id_kolam = p.id_kolam
-                JOIN akun a  ON a.id_akun  = p.id_akun
-                WHERE p.sudah_dihargai = FALSE          -- belum diproses
+                JOIN ikan i     ON i.id_ikan = p.id_ikan
+                JOIN kolam k    ON k.id_kolam = p.id_kolam
+                JOIN akun a     ON a.id_akun = p.id_akun
+                JOIN kualitas ku ON ku.kualitas_ikan = p.kualitas   -- konversi 'A'/'B'/'C' -> id_kualitas
+                WHERE p.sudah_dihargai = FALSE
                 ORDER BY p.tanggal_panen ASC";
 
             using (var conn = new NpgsqlConnection(Config.ConnString))
@@ -69,8 +72,8 @@ namespace FishIt.Views.Admin
                     DGVPanen.DataSource = dt;
 
                     GridHelper.AturTemaModern(DGVPanen);
-                    if (DGVPanen.Columns.Contains("ID")) DGVPanen.Columns["ID"].Visible = false;
-                    if (DGVPanen.Columns.Contains("ID Ikan")) DGVPanen.Columns["ID Ikan"].Visible = false;
+                    foreach (var k in new[] { "ID", "ID Jenis", "ID Kualitas" })
+                        if (DGVPanen.Columns.Contains(k)) DGVPanen.Columns[k].Visible = false;
                 }
                 catch (Exception ex)
                 {
@@ -79,34 +82,57 @@ namespace FishIt.Views.Admin
                 }
             }
         }
-        // Klik baris -> simpan data panen terpilih + cek ikan sudah punya harga atau belum
+
+        // Klik baris: simpan info panen + cek apakah entri (spesies+kualitas) sudah ada di katalog
         private void DGVPanen_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return;
-
             var row = DGVPanen.Rows[e.RowIndex];
+
             idPanenTerpilih = Convert.ToInt32(row.Cells["ID"].Value);
-            idIkanTerpilih = Convert.ToInt32(row.Cells["ID Ikan"].Value);
+            namaIkanTerpilih = row.Cells["Ikan"].Value.ToString();
+            idJenisTerpilih = Convert.ToInt32(row.Cells["ID Jenis"].Value);
+            idKualitasTerpilih = Convert.ToInt32(row.Cells["ID Kualitas"].Value);
             jumlahKgTerpilih = Convert.ToDecimal(row.Cells["Jumlah (kg)"].Value);
+            string kualitasChar = row.Cells["Kualitas"].Value.ToString();
 
-            // Harga ikan saat ini: kalau sudah ada (bukan NULL/0) -> ini bukan panen pertama
-            var hargaSekarang = row.Cells["Harga Ikan Saat Ini"].Value;
-            decimal hargaIkan = hargaSekarang == DBNull.Value ? 0 : Convert.ToDecimal(hargaSekarang);
-            ikanSudahPunyaHarga = hargaIkan > 0;
+            using (var conn = new NpgsqlConnection(Config.ConnString))
+            {
+                try
+                {
+                    conn.Open();
+                    // Cari entri katalog yang cocok SPESIES + KUALITAS
+                    using var cmd = new NpgsqlCommand(@"
+                        SELECT id_ikan, harga_per_kg FROM ikan
+                        WHERE nama_ikan = @nama AND id_jenis_ikan = @jenis AND id_kualitas = @kualitas
+                        LIMIT 1", conn);
+                    cmd.Parameters.AddWithValue("@nama", namaIkanTerpilih);
+                    cmd.Parameters.AddWithValue("@jenis", idJenisTerpilih);
+                    cmd.Parameters.AddWithValue("@kualitas", idKualitasTerpilih);
 
-            if (ikanSudahPunyaHarga)
-            {
-                // Panen kedua dst: ikan sudah punya harga -> cukup tambah stok, harga tak perlu diisi
-                TBHarga.Text = hargaIkan.ToString("0.##");
-                TBHarga.Enabled = false;   // dikunci, nggak perlu ubah harga
-                labelIkanTerpilih.Text = row.Cells["Ikan"].Value + " (sudah ada harga, hanya tambah stok)";
-            }
-            else
-            {
-                // Panen pertama: admin wajib isi harga
-                TBHarga.Text = "";
-                TBHarga.Enabled = true;
-                labelIkanTerpilih.Text = row.Cells["Ikan"].Value + " (belum ada harga, isi harga dulu)";
+                    using var r = cmd.ExecuteReader();
+                    if (r.Read())
+                    {
+                        // Sudah ada di katalog -> cukup tambah stok, harga dikunci
+                        idIkanKatalogDitemukan = Convert.ToInt32(r["id_ikan"]);
+                        TBHarga.Text = Convert.ToDecimal(r["harga_per_kg"]).ToString("0.##");
+                        TBHarga.Enabled = false;
+                        labelIkanTerpilih.Text = $"{namaIkanTerpilih} (Kualitas {kualitasChar}) — sudah di katalog, hanya tambah stok";
+                    }
+                    else
+                    {
+                        // Belum ada -> entri katalog BARU, admin wajib isi harga
+                        idIkanKatalogDitemukan = 0;
+                        TBHarga.Text = "";
+                        TBHarga.Enabled = true;
+                        labelIkanTerpilih.Text = $"{namaIkanTerpilih} (Kualitas {kualitasChar}) — BARU, isi harga dulu";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Gagal cek katalog: " + ex.Message,
+                        "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
@@ -119,9 +145,9 @@ namespace FishIt.Views.Admin
                 return;
             }
 
-            // Tentukan harga: kalau ikan belum punya harga, admin harus input angka valid > 0
-            decimal harga;
-            if (!ikanSudahPunyaHarga)
+            // Harga wajib hanya kalau entri katalog BARU
+            decimal harga = 0;
+            if (idIkanKatalogDitemukan == 0)
             {
                 if (!decimal.TryParse(TBHarga.Text.Trim(), NumberStyles.Any,
                         CultureInfo.InvariantCulture, out harga) || harga <= 0)
@@ -131,36 +157,36 @@ namespace FishIt.Views.Admin
                     return;
                 }
             }
-            else
-            {
-                harga = 0;   // tidak dipakai (harga ikan tidak diubah)
-            }
 
             using var conn = new NpgsqlConnection(Config.ConnString);
             conn.Open();
-            using var tx = conn.BeginTransaction();   // stok + harga + penanda harus konsisten
+            using var tx = conn.BeginTransaction();   // katalog + penanda harus konsisten
             try
             {
-                // 1. SELALU tambah stok ikan (tiap panen yang diproses nambah stok sekali)
-                using (var cmdStok = new NpgsqlCommand(
-                    "UPDATE ikan SET stok_ikan = stok_ikan + @kg WHERE id_ikan = @id_ikan", conn, tx))
+                if (idIkanKatalogDitemukan > 0)
                 {
+                    // Entri (spesies+kualitas) sudah ada -> tambah stok saja
+                    using var cmdStok = new NpgsqlCommand(
+                        "UPDATE ikan SET stok_ikan = stok_ikan + @kg WHERE id_ikan = @id", conn, tx);
                     cmdStok.Parameters.AddWithValue("@kg", jumlahKgTerpilih);
-                    cmdStok.Parameters.AddWithValue("@id_ikan", idIkanTerpilih);
+                    cmdStok.Parameters.AddWithValue("@id", idIkanKatalogDitemukan);
                     cmdStok.ExecuteNonQuery();
                 }
-
-                // 2. Set harga HANYA kalau panen pertama (ikan belum punya harga)
-                if (!ikanSudahPunyaHarga)
+                else
                 {
-                    using var cmdHarga = new NpgsqlCommand(
-                        "UPDATE ikan SET harga_per_kg = @harga WHERE id_ikan = @id_ikan", conn, tx);
-                    cmdHarga.Parameters.AddWithValue("@harga", harga);
-                    cmdHarga.Parameters.AddWithValue("@id_ikan", idIkanTerpilih);
-                    cmdHarga.ExecuteNonQuery();
+                    // Belum ada -> BUAT entri katalog baru untuk kualitas ini
+                    using var cmdNew = new NpgsqlCommand(@"
+                        INSERT INTO ikan (harga_per_kg, stok_ikan, nama_ikan, id_jenis_ikan, id_kualitas)
+                        VALUES (@harga, @kg, @nama, @jenis, @kualitas)", conn, tx);
+                    cmdNew.Parameters.AddWithValue("@harga", harga);
+                    cmdNew.Parameters.AddWithValue("@kg", jumlahKgTerpilih);
+                    cmdNew.Parameters.AddWithValue("@nama", namaIkanTerpilih);
+                    cmdNew.Parameters.AddWithValue("@jenis", idJenisTerpilih);
+                    cmdNew.Parameters.AddWithValue("@kualitas", idKualitasTerpilih);
+                    cmdNew.ExecuteNonQuery();
                 }
 
-                // 3. Tandai panen ini sudah diproses. Guard FALSE cegah dobel proses.
+                // Tandai panen diproses. Guard FALSE cegah dobel.
                 int baris;
                 using (var cmdTandai = new NpgsqlCommand(
                     "UPDATE panen SET sudah_dihargai = TRUE WHERE id_panen = @id AND sudah_dihargai = FALSE", conn, tx))
@@ -168,8 +194,6 @@ namespace FishIt.Views.Admin
                     cmdTandai.Parameters.AddWithValue("@id", idPanenTerpilih);
                     baris = cmdTandai.ExecuteNonQuery();
                 }
-
-                // Kalau 0 baris -> panen sudah diproses sebelumnya. Batalkan semua (jangan tambah stok lagi).
                 if (baris == 0)
                 {
                     tx.Rollback();
@@ -179,14 +203,15 @@ namespace FishIt.Views.Admin
                 }
 
                 tx.Commit();
-                MessageBox.Show("Harga ditetapkan & stok ikan ditambahkan ke katalog!", "Sukses",
+                MessageBox.Show("Stok masuk ke katalog sesuai kualitasnya!", "Sukses",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 idPanenTerpilih = 0;
+                idIkanKatalogDitemukan = 0;
                 TBHarga.Text = "";
                 TBHarga.Enabled = true;
                 labelIkanTerpilih.Text = "";
-                MuatAntrean();   // refresh antrean (panen tadi hilang)
+                MuatAntrean();
             }
             catch (Exception ex)
             {

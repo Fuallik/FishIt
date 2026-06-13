@@ -76,7 +76,7 @@ namespace FishIt
                 try
                 {
                     conn.Open();
-                    using (var cmd = new NpgsqlCommand("SELECT nama_ikan FROM ikan ORDER BY nama_ikan", conn))
+                    using (var cmd = new NpgsqlCommand("SELECT DISTINCT nama_ikan FROM ikan ORDER BY nama_ikan", conn))
                     using (var reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
@@ -87,6 +87,55 @@ namespace FishIt
                 {
                     MessageBox.Show("Gagal memuat daftar ikan: " + ex.Message,
                         "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Dipanggil saat supplier MEMILIH ikan dari dropdown.
+        /// Kalau ikan itu sudah ada di database, jenis airnya diisi otomatis
+        /// dan dropdown jenis dikunci -> supplier tidak bisa salah jenis.
+        /// Kalau supplier mengetik nama baru, jenis dibuka lagi supaya bisa dipilih.
+        /// </summary>
+        private void cmbNama_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string nama = cmbNama.Text.Trim();
+            if (string.IsNullOrEmpty(nama)) return;
+
+            string query = @"
+                SELECT j.nama_jenis_ikan
+                FROM ikan i
+                JOIN jenis_ikan j ON j.id_jenis_ikan = i.id_jenis_ikan
+                WHERE LOWER(i.nama_ikan) = LOWER(@nama)
+                LIMIT 1";
+
+            using (var conn = new NpgsqlConnection(Config.ConnString))
+            {
+                try
+                {
+                    conn.Open();
+                    using (var cmd = new NpgsqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@nama", nama);
+                        object hasil = cmd.ExecuteScalar();
+
+                        if (hasil != null)
+                        {
+                            // Ikan sudah ada -> set jenis sesuai data & kunci supaya tak bisa diubah.
+                            cmbJenisIkan.SelectedItem = hasil.ToString();
+                            cmbJenisIkan.Enabled = false;
+                        }
+                        else
+                        {
+                            // Nama baru -> buka lagi biar supplier pilih jenisnya sendiri.
+                            cmbJenisIkan.Enabled = true;
+                        }
+                    }
+                }
+                catch
+                {
+                    // Kalau gagal cek, biarkan jenis tetap bisa dipilih manual (jangan blokir supplier).
+                    cmbJenisIkan.Enabled = true;
                 }
             }
         }
@@ -198,6 +247,8 @@ namespace FishIt
                             MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                         txtKuantitas.Clear();
+                        cmbJenisIkan.Enabled = true;   // buka lagi kunci jenis setelah selesai
+                        cmbNama.SelectedIndex = -1;     // kosongkan pilihan nama
                         MuatComboJenisIkan();
                         MuatComboNama();
                         MuatRiwayatPengajuan();

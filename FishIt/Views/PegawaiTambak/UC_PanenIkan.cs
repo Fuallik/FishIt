@@ -107,7 +107,7 @@ namespace FishIt.UserControls.PegawaiTambak
 
         private void buttonTambahPanen_Click(object sender, EventArgs e)
         {
-            FormTambahPanenIkan form = new FormTambahPanenIkan();
+            FormPengajuanPanenIkan form = new FormPengajuanPanenIkan();
             if (form.ShowDialog() == DialogResult.OK)
                 MuatData();
         }

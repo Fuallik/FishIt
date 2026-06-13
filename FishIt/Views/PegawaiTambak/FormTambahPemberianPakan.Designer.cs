@@ -72,6 +72,7 @@
             CBKolam.Name = "CBKolam";
             CBKolam.Size = new Size(333, 33);
             CBKolam.TabIndex = 60;
+            CBKolam.SelectedIndexChanged += CBKolam_SelectedIndexChanged;
             // 
             // btnBatalTambahMonitoring
             // 

@@ -11,9 +11,9 @@ using System.Windows.Forms;
 
 namespace FishIt
 {
-    public partial class FormTambahPanenIkan : Form
+    public partial class FormPengajuanPanenIkan : Form
     {
-        public FormTambahPanenIkan()
+        public FormPengajuanPanenIkan()
         {
             InitializeComponent();
             MuatDropdown();
@@ -33,8 +33,16 @@ namespace FishIt
 
                 var dtKolam = new DataTable();
                 using (var ad = new NpgsqlDataAdapter(@"
-                 SELECT k.id_kolam, k.nomor FROM kolam k WHERE ( SELECT m.siap_panen FROM monitoring m WHERE m.id_kolam = k.id_kolam ORDER BY m.tanggal DESC, m.id_monitoring DESC LIMIT 1 ) = TRUE AND k.status_kolam = 'Terisi'
-                 ORDER BY k.nomor", conn))
+                    SELECT k.id_kolam, k.nomor
+                    FROM kolam k
+                    WHERE (
+                        SELECT m.siap_panen FROM monitoring m
+                        WHERE m.id_kolam = k.id_kolam
+                        ORDER BY m.tanggal DESC, m.id_monitoring DESC
+                        LIMIT 1
+                    ) = TRUE
+                      AND fn_isi_kolam(k.id_kolam) > 0     -- ganti blok COALESCE jadi ini
+                    ORDER BY k.nomor", conn))
                     ad.Fill(dtKolam);
                 CBKolam.DataSource = dtKolam;
                 CBKolam.DisplayMember = "nomor";
@@ -91,11 +99,7 @@ namespace FishIt
                 conn.Open();
 
                 // QUERY DIUBAH: Menghitung sisa ikan persis seperti di Status Kolam (termasuk jumlah mati)
-                string sql = @"
-                    SELECT 
-                        COALESCE((SELECT SUM(jumlah_ekor) FROM penebaran WHERE id_kolam = @kolam), 0)
-                      - COALESCE((SELECT SUM(jumlah_ekor) FROM panen WHERE id_kolam = @kolam), 0)
-                      - COALESCE((SELECT SUM(jumlah_mati) FROM monitoring WHERE id_kolam = @kolam), 0)";
+                string sql = "SELECT fn_isi_kolam(@kolam)";
 
                 using var cmd = new NpgsqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@kolam", idKolam);

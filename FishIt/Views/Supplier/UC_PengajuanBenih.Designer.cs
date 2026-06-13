@@ -53,7 +53,7 @@
             // cmbJenisIkan
             // 
             // DropDown (bukan DropDownList) supaya bisa diketik manual ATAU dipilih.
-            cmbJenisIkan.DropDownStyle = ComboBoxStyle.DropDown;
+            cmbJenisIkan.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbJenisIkan.Font = new Font("Segoe UI", 10F);
             cmbJenisIkan.Location = new Point(23, 103);
             cmbJenisIkan.Name = "cmbJenisIkan";
@@ -78,6 +78,7 @@
             cmbNama.Name = "cmbNama";
             cmbNama.Size = new Size(300, 33);
             cmbNama.TabIndex = 4;
+            cmbNama.SelectedIndexChanged += cmbNama_SelectedIndexChanged;
             // 
             // lblKuantitas
             // 

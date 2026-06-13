@@ -177,7 +177,7 @@
             buttonPenebaran.IconChar = FontAwesome.Sharp.IconChar.PlusSquare;
             buttonPenebaran.IconColor = Color.White;
             buttonPenebaran.IconFont = FontAwesome.Sharp.IconFont.Solid;
-            buttonPenebaran.IconSize = 330;
+            buttonPenebaran.IconSize = 30;
             buttonPenebaran.ImageAlign = ContentAlignment.MiddleLeft;
             buttonPenebaran.Location = new Point(0, 80);
             buttonPenebaran.Name = "buttonPenebaran";

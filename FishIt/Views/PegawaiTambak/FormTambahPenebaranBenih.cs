@@ -44,6 +44,55 @@ namespace FishIt
                 return;
             }
 
+            int idKolam = Convert.ToInt32(CBKolam.SelectedValue);
+            int ekorBaru = (int)NUBEkor.Value;
+
+            using (var conn = new NpgsqlConnection(Config.ConnString))
+            {
+                try
+                {
+                    conn.Open();
+
+                    // Ambil kapasitas kolam + jumlah ikan yang SUDAH ada (tebar - panen) sekaligus
+                    using var cmdCek = new NpgsqlCommand(@"
+                        SELECT k.kapasitas,
+                               fn_isi_kolam(k.id_kolam) AS isi_sekarang
+                        FROM kolam k
+                        WHERE k.id_kolam = @kolam", conn);
+                    cmdCek.Parameters.AddWithValue("@kolam", idKolam);
+
+                    int kapasitas = 0, isiSekarang = 0;
+                    using (var r = cmdCek.ExecuteReader())
+                    {
+                        if (r.Read())
+                        {
+                            kapasitas = Convert.ToInt32(r["kapasitas"]);
+                            isiSekarang = Convert.ToInt32(r["isi_sekarang"]);
+                        }
+                    }
+
+                    // Cek: isi sekarang + yang mau ditebar tidak boleh lebih dari kapasitas
+                    if (isiSekarang + ekorBaru > kapasitas)
+                    {
+                        int sisaMuat = kapasitas - isiSekarang;   // berapa lagi yang masih muat
+                        MessageBox.Show(
+                            $"Melebihi kapasitas kolam!\n\n" +
+                            $"Kapasitas    : {kapasitas} ekor\n" +
+                            $"Sudah terisi : {isiSekarang} ekor\n" +
+                            $"Masih muat   : {sisaMuat} ekor\n" +
+                            $"Mau ditebar  : {ekorBaru} ekor",
+                            "Kapasitas Penuh", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;   // batal, jangan lanjut INSERT
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Gagal cek kapasitas: " + ex.Message, "Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            }
+
             try
             {
                 using var conn = new NpgsqlConnection(Config.ConnString);
@@ -114,12 +163,13 @@ namespace FishIt
                 conn.Open();
 
                 using var cmd = new NpgsqlCommand(@"
-            SELECT b.id_benih, b.nama
-            FROM benih b
-            WHERE b.id_jenis_ikan = (
-                SELECT id_jenis_ikan FROM kolam WHERE id_kolam = @kolam
-            )
-            ORDER BY b.nama", conn);
+                    SELECT b.id_benih, b.nama
+                    FROM benih b
+                    WHERE b.id_jenis_ikan = (
+                        SELECT id_jenis_ikan FROM kolam WHERE id_kolam = @kolam
+                    )
+                      AND b.jumlah_stok > 0
+                    ORDER BY b.nama", conn);
                 cmd.Parameters.AddWithValue("@kolam", idKolam);
 
                 var dt = new DataTable();

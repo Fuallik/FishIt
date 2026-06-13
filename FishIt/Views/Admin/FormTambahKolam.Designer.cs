@@ -57,7 +57,7 @@
             btnBatal.IconColor = Color.White;
             btnBatal.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnBatal.IconSize = 35;
-            btnBatal.Location = new Point(25, 450);
+            btnBatal.Location = new Point(25, 600);
             btnBatal.Name = "btnBatal";
             btnBatal.Size = new Size(169, 50);
             btnBatal.TabIndex = 43;
@@ -77,7 +77,7 @@
             btnSave.IconColor = Color.White;
             btnSave.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnSave.IconSize = 35;
-            btnSave.Location = new Point(285, 450);
+            btnSave.Location = new Point(285, 600);
             btnSave.Name = "btnSave";
             btnSave.Size = new Size(169, 50);
             btnSave.TabIndex = 42;
@@ -90,7 +90,7 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
-            label4.Location = new Point(78, 313);
+            label4.Location = new Point(78, 433);
             label4.Name = "label4";
             label4.Size = new Size(121, 32);
             label4.TabIndex = 33;
@@ -100,7 +100,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
-            label2.Location = new Point(78, 244);
+            label2.Location = new Point(78, 360);
             label2.Name = "label2";
             label2.Size = new Size(117, 32);
             label2.TabIndex = 31;
@@ -110,7 +110,7 @@
             // 
             TBKapasitas.BackColor = Color.White;
             TBKapasitas.BorderStyle = BorderStyle.None;
-            TBKapasitas.Location = new Point(78, 279);
+            TBKapasitas.Location = new Point(78, 395);
             TBKapasitas.Name = "TBKapasitas";
             TBKapasitas.Size = new Size(335, 24);
             TBKapasitas.TabIndex = 30;
@@ -121,17 +121,17 @@
             label3.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
             label3.Location = new Point(78, 175);
             label3.Name = "label3";
-            label3.Size = new Size(94, 32);
+            label3.Size = new Size(183, 32);
             label3.TabIndex = 29;
-            label3.Text = "Ukuran";
+            label3.Text = "Ukuran (Meter)";
             // 
             // TBPanjang
             // 
             TBPanjang.BackColor = Color.White;
             TBPanjang.BorderStyle = BorderStyle.None;
-            TBPanjang.Location = new Point(156, 209);
+            TBPanjang.Location = new Point(184, 216);
             TBPanjang.Name = "TBPanjang";
-            TBPanjang.Size = new Size(38, 24);
+            TBPanjang.Size = new Size(210, 24);
             TBPanjang.TabIndex = 28;
             // 
             // labelNama
@@ -168,26 +168,26 @@
             // CBJenisIkan
             // 
             CBJenisIkan.FormattingEnabled = true;
-            CBJenisIkan.Location = new Point(78, 348);
+            CBJenisIkan.Location = new Point(78, 468);
             CBJenisIkan.Name = "CBJenisIkan";
             CBJenisIkan.Size = new Size(335, 33);
             CBJenisIkan.TabIndex = 44;
             // 
             // label1
             // 
-            label1.Font = new Font("Segoe UI Semibold", 8F, FontStyle.Bold);
-            label1.Location = new Point(78, 212);
+            label1.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
+            label1.Location = new Point(78, 213);
             label1.Name = "label1";
-            label1.Size = new Size(79, 21);
+            label1.Size = new Size(100, 35);
             label1.TabIndex = 45;
             label1.Text = "Panjang :";
             // 
             // label5
             // 
-            label5.Font = new Font("Segoe UI Semibold", 8F, FontStyle.Bold);
-            label5.Location = new Point(200, 212);
+            label5.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
+            label5.Location = new Point(78, 260);
             label5.Name = "label5";
-            label5.Size = new Size(61, 21);
+            label5.Size = new Size(100, 35);
             label5.TabIndex = 47;
             label5.Text = "Lebar :";
             // 
@@ -195,17 +195,17 @@
             // 
             TBLebar.BackColor = Color.White;
             TBLebar.BorderStyle = BorderStyle.None;
-            TBLebar.Location = new Point(267, 208);
+            TBLebar.Location = new Point(184, 263);
             TBLebar.Name = "TBLebar";
-            TBLebar.Size = new Size(47, 24);
+            TBLebar.Size = new Size(210, 24);
             TBLebar.TabIndex = 46;
             // 
             // label6
             // 
-            label6.Font = new Font("Segoe UI Semibold", 8F, FontStyle.Bold);
-            label6.Location = new Point(320, 211);
+            label6.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
+            label6.Location = new Point(78, 312);
             label6.Name = "label6";
-            label6.Size = new Size(68, 20);
+            label6.Size = new Size(100, 35);
             label6.TabIndex = 49;
             label6.Text = "Tinggi :";
             // 
@@ -213,16 +213,16 @@
             // 
             TBTinggi.BackColor = Color.White;
             TBTinggi.BorderStyle = BorderStyle.None;
-            TBTinggi.Location = new Point(394, 210);
+            TBTinggi.Location = new Point(184, 315);
             TBTinggi.Name = "TBTinggi";
-            TBTinggi.Size = new Size(53, 24);
+            TBTinggi.Size = new Size(210, 24);
             TBTinggi.TabIndex = 48;
             // 
             // FormTambahKolam
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(500, 542);
+            ClientSize = new Size(500, 706);
             Controls.Add(label6);
             Controls.Add(TBTinggi);
             Controls.Add(label5);

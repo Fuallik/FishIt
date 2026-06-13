@@ -21,6 +21,7 @@ namespace FishIt
             TBIDPengajuan.KeyDown += TBIDPengajuan_KeyDown;
 
             new AutoScaleHelper(this);
+            PanelHelper.BuatMelengkung(panelMonitoring, 25);
         }
 
         private void UC_VerifikasiSupply_Load(object sender, EventArgs e)
