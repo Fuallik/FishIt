@@ -37,10 +37,13 @@
             // 
             // DGVKatalogIkan
             // 
+            DGVKatalogIkan.AllowUserToAddRows = false;
+            DGVKatalogIkan.AllowUserToDeleteRows = false;
             DGVKatalogIkan.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             DGVKatalogIkan.Columns.AddRange(new DataGridViewColumn[] { colTambah });
             DGVKatalogIkan.Location = new Point(3, 54);
             DGVKatalogIkan.Name = "DGVKatalogIkan";
+            DGVKatalogIkan.ReadOnly = true;
             DGVKatalogIkan.RowHeadersWidth = 62;
             DGVKatalogIkan.Size = new Size(794, 541);
             DGVKatalogIkan.TabIndex = 0;
@@ -51,6 +54,7 @@
             colTambah.HeaderText = "Tambahkan";
             colTambah.MinimumWidth = 8;
             colTambah.Name = "colTambah";
+            colTambah.ReadOnly = true;
             colTambah.Text = "+ Keranjang";
             colTambah.UseColumnTextForButtonValue = true;
             colTambah.Width = 150;
@@ -58,6 +62,7 @@
             // numericJumlah
             // 
             numericJumlah.Location = new Point(599, 12);
+            numericJumlah.Maximum = new decimal(new int[] { 100000, 0, 0, 0 });
             numericJumlah.Name = "numericJumlah";
             numericJumlah.Size = new Size(180, 31);
             numericJumlah.TabIndex = 1;

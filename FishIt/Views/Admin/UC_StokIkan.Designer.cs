@@ -29,21 +29,21 @@
         private void InitializeComponent()
         {
             panelJumlahIkan = new Panel();
+            panelStatistikIkan = new Panel();
             lb1 = new Label();
             lblHitungIkan = new Label();
-            panelStatistikIkan = new Panel();
             label2 = new Label();
             labelJumlahAkun = new Label();
             panelJumlahBenih = new Panel();
-            lblHitungBenih = new Label();
-            lbl2 = new Label();
             panelStatistikBenih = new Panel();
+            lbl2 = new Label();
+            lblHitungBenih = new Label();
             label7 = new Label();
             label8 = new Label();
             panelJumlahPakan = new Panel();
-            lblHitungPakan = new Label();
-            lbl3 = new Label();
             panelStatistikPakan = new Panel();
+            lbl3 = new Label();
+            lblHitungPakan = new Label();
             label13 = new Label();
             label14 = new Label();
             btnDetailIkan = new FontAwesome.Sharp.IconButton();
@@ -69,6 +69,16 @@
             panelJumlahIkan.Size = new Size(757, 135);
             panelJumlahIkan.TabIndex = 1;
             // 
+            // panelStatistikIkan
+            // 
+            panelStatistikIkan.BackColor = Color.RoyalBlue;
+            panelStatistikIkan.Controls.Add(lb1);
+            panelStatistikIkan.Controls.Add(lblHitungIkan);
+            panelStatistikIkan.Location = new Point(501, 13);
+            panelStatistikIkan.Name = "panelStatistikIkan";
+            panelStatistikIkan.Size = new Size(242, 110);
+            panelStatistikIkan.TabIndex = 6;
+            // 
             // lb1
             // 
             lb1.AutoSize = true;
@@ -93,16 +103,6 @@
             lblHitungIkan.TabIndex = 8;
             lblHitungIkan.Text = "0";
             lblHitungIkan.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // panelStatistikIkan
-            // 
-            panelStatistikIkan.BackColor = Color.RoyalBlue;
-            panelStatistikIkan.Controls.Add(lb1);
-            panelStatistikIkan.Controls.Add(lblHitungIkan);
-            panelStatistikIkan.Location = new Point(501, 13);
-            panelStatistikIkan.Name = "panelStatistikIkan";
-            panelStatistikIkan.Size = new Size(242, 110);
-            panelStatistikIkan.TabIndex = 6;
             // 
             // label2
             // 
@@ -141,17 +141,15 @@
             panelJumlahBenih.Size = new Size(757, 135);
             panelJumlahBenih.TabIndex = 2;
             // 
-            // lblHitungBenih
+            // panelStatistikBenih
             // 
-            lblHitungBenih.BackColor = Color.Transparent;
-            lblHitungBenih.Font = new Font("Segoe UI", 20F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblHitungBenih.ForeColor = Color.White;
-            lblHitungBenih.Location = new Point(3, 0);
-            lblHitungBenih.Name = "lblHitungBenih";
-            lblHitungBenih.Size = new Size(236, 83);
-            lblHitungBenih.TabIndex = 10;
-            lblHitungBenih.Text = "0";
-            lblHitungBenih.TextAlign = ContentAlignment.MiddleCenter;
+            panelStatistikBenih.BackColor = Color.RoyalBlue;
+            panelStatistikBenih.Controls.Add(lbl2);
+            panelStatistikBenih.Controls.Add(lblHitungBenih);
+            panelStatistikBenih.Location = new Point(501, 13);
+            panelStatistikBenih.Name = "panelStatistikBenih";
+            panelStatistikBenih.Size = new Size(242, 110);
+            panelStatistikBenih.TabIndex = 6;
             // 
             // lbl2
             // 
@@ -166,15 +164,17 @@
             lbl2.Text = "Stok Benih";
             lbl2.TextAlign = ContentAlignment.MiddleLeft;
             // 
-            // panelStatistikBenih
+            // lblHitungBenih
             // 
-            panelStatistikBenih.BackColor = Color.RoyalBlue;
-            panelStatistikBenih.Controls.Add(lbl2);
-            panelStatistikBenih.Controls.Add(lblHitungBenih);
-            panelStatistikBenih.Location = new Point(501, 13);
-            panelStatistikBenih.Name = "panelStatistikBenih";
-            panelStatistikBenih.Size = new Size(242, 110);
-            panelStatistikBenih.TabIndex = 6;
+            lblHitungBenih.BackColor = Color.Transparent;
+            lblHitungBenih.Font = new Font("Segoe UI", 20F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblHitungBenih.ForeColor = Color.White;
+            lblHitungBenih.Location = new Point(3, 0);
+            lblHitungBenih.Name = "lblHitungBenih";
+            lblHitungBenih.Size = new Size(236, 83);
+            lblHitungBenih.TabIndex = 10;
+            lblHitungBenih.Text = "0";
+            lblHitungBenih.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // label7
             // 
@@ -213,17 +213,15 @@
             panelJumlahPakan.Size = new Size(757, 135);
             panelJumlahPakan.TabIndex = 3;
             // 
-            // lblHitungPakan
+            // panelStatistikPakan
             // 
-            lblHitungPakan.BackColor = Color.Transparent;
-            lblHitungPakan.Font = new Font("Segoe UI", 20F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblHitungPakan.ForeColor = Color.White;
-            lblHitungPakan.Location = new Point(3, 0);
-            lblHitungPakan.Name = "lblHitungPakan";
-            lblHitungPakan.Size = new Size(236, 83);
-            lblHitungPakan.TabIndex = 10;
-            lblHitungPakan.Text = "0";
-            lblHitungPakan.TextAlign = ContentAlignment.MiddleCenter;
+            panelStatistikPakan.BackColor = Color.RoyalBlue;
+            panelStatistikPakan.Controls.Add(lbl3);
+            panelStatistikPakan.Controls.Add(lblHitungPakan);
+            panelStatistikPakan.Location = new Point(501, 13);
+            panelStatistikPakan.Name = "panelStatistikPakan";
+            panelStatistikPakan.Size = new Size(242, 110);
+            panelStatistikPakan.TabIndex = 6;
             // 
             // lbl3
             // 
@@ -238,15 +236,17 @@
             lbl3.Text = "Stok Pakan\r\n";
             lbl3.TextAlign = ContentAlignment.MiddleLeft;
             // 
-            // panelStatistikPakan
+            // lblHitungPakan
             // 
-            panelStatistikPakan.BackColor = Color.RoyalBlue;
-            panelStatistikPakan.Controls.Add(lbl3);
-            panelStatistikPakan.Controls.Add(lblHitungPakan);
-            panelStatistikPakan.Location = new Point(501, 13);
-            panelStatistikPakan.Name = "panelStatistikPakan";
-            panelStatistikPakan.Size = new Size(242, 110);
-            panelStatistikPakan.TabIndex = 6;
+            lblHitungPakan.BackColor = Color.Transparent;
+            lblHitungPakan.Font = new Font("Segoe UI", 20F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblHitungPakan.ForeColor = Color.White;
+            lblHitungPakan.Location = new Point(3, 0);
+            lblHitungPakan.Name = "lblHitungPakan";
+            lblHitungPakan.Size = new Size(236, 83);
+            lblHitungPakan.TabIndex = 10;
+            lblHitungPakan.Text = "0";
+            lblHitungPakan.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // label13
             // 

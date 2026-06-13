@@ -132,6 +132,27 @@ namespace FishIt
                 return;
             }
 
+            if (!username.All(char.IsLetterOrDigit))
+            {
+                MessageBox.Show("Username tidak boleh mengandung simbol atau spasi! Hanya boleh huruf dan angka.", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                TBUsername.Focus();
+                return;
+            }
+
+            if (password.Length < 8)
+            {
+                MessageBox.Show("Password minimal harus 8 karakter!", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                TBPassword.Focus();
+                return;
+            }
+
+            if (password.Contains(" "))
+            {
+                MessageBox.Show("Password tidak boleh mengandung spasi!", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                TBPassword.Focus();
+                return;
+            }
+
             if (password != konfirmasipassword)
             {
                 MessageBox.Show("Password dan Konfirmasi Password tidak cocok!", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -140,11 +161,7 @@ namespace FishIt
 
             if (!telpon.All(char.IsDigit))
             {
-                MessageBox.Show(
-                    "Nomor telepon hanya boleh berisi angka!",
-                    "Peringatan",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning);
+                MessageBox.Show("Nomor telepon hanya boleh berisi angka!", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
                 TBTelpon.Focus();
                 return;

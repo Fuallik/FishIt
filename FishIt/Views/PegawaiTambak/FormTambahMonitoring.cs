@@ -36,7 +36,13 @@ namespace FishIt
                     conn.Open();
 
                     using var cmd = new NpgsqlCommand(
-                        "SELECT id_kolam, nomor FROM kolam ORDER BY nomor", conn);
+                       @"SELECT k.id_kolam, k.nomor
+                          FROM kolam k
+                          WHERE
+                              COALESCE((SELECT SUM(jumlah_ekor) FROM penebaran WHERE id_kolam = k.id_kolam), 0)
+                            - COALESCE((SELECT SUM(jumlah_ekor) FROM panen     WHERE id_kolam = k.id_kolam), 0)
+                              > 0
+                          ORDER BY k.nomor", conn);
                     using var adapter = new NpgsqlDataAdapter(cmd);
 
                     var tabel = new DataTable();
@@ -58,57 +64,78 @@ namespace FishIt
         {
             if (CBKolam.SelectedIndex == -1)
             {
-                MessageBox.Show("Pilih kolam dulu!", "Peringatan",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Pilih kolam dulu!", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             if (CBKondisi.SelectedIndex == -1)
             {
-                MessageBox.Show("Pilih kondisi kolam!", "Peringatan",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Pilih kondisi kolam!", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             if (NUDBerat.Value <= 0)
             {
-                MessageBox.Show("Berat rata-rata harus lebih dari 0!", "Peringatan",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Berat rata-rata harus lebih dari 0!", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            using (var conn = new NpgsqlConnection(Config.ConnString))
+            int idKolam = Convert.ToInt32(CBKolam.SelectedValue);
+            int jumlahMati = (int)NUDMati.Value;
 
+            using (var conn = new NpgsqlConnection(Config.ConnString))
+            {
                 try
                 {
                     conn.Open();
 
+                    // === 1. VALIDASI SISA IKAN DI KOLAM ===
+                    string cekSisaIkanQuery = @"
+                SELECT 
+                    COALESCE((SELECT SUM(jumlah_ekor) FROM penebaran WHERE id_kolam = @id_kolam), 0)
+                  - COALESCE((SELECT SUM(jumlah_ekor) FROM panen WHERE id_kolam = @id_kolam), 0)";
+
+                    using (var cmdCek = new NpgsqlCommand(cekSisaIkanQuery, conn))
+                    {
+                        cmdCek.Parameters.AddWithValue("@id_kolam", idKolam);
+                        long sisaIkan = Convert.ToInt64(cmdCek.ExecuteScalar());
+
+                        if (jumlahMati > sisaIkan)
+                        {
+                            MessageBox.Show($"Jumlah ikan mati ({jumlahMati} ekor) melebihi sisa ikan di kolam!\nSisa ikan saat ini hanya {sisaIkan} ekor.",
+                                "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            NUDMati.Focus();
+                            return; // Hentikan proses simpan
+                        }
+                    }
+                    // ======================================
+
+                    // === 2. PROSES INSERT DATA ===
                     string sql = @"
-                                   INSERT INTO monitoring
-                                   (berat_rata_rata, kondisi, jumlah_mati, catatan, id_akun, id_kolam)
-                                   VALUES
-                                   (@berat, @kondisi, @mati, @catatan, @id_akun, @id_kolam)";
+                INSERT INTO monitoring
+                (berat_rata_rata, kondisi, jumlah_mati, catatan, siap_panen, id_akun, id_kolam)
+                VALUES
+                (@berat, @kondisi, @mati, @catatan, @siap, @id_akun, @id_kolam)";
 
                     using var cmd = new NpgsqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("@berat", NUDBerat.Value);
                     cmd.Parameters.AddWithValue("@kondisi", CBKondisi.SelectedItem.ToString());
-                    cmd.Parameters.AddWithValue("@mati", (int)NUDMati.Value);
+                    cmd.Parameters.AddWithValue("@mati", jumlahMati);
                     cmd.Parameters.AddWithValue("@catatan", TBCatatan.Text.Trim());
+                    cmd.Parameters.AddWithValue("@siap", CBPanen.Checked);
                     cmd.Parameters.AddWithValue("@id_akun", Session.IdAkun);
-                    cmd.Parameters.AddWithValue("@id_kolam", Convert.ToInt32(CBKolam.SelectedValue));
+                    cmd.Parameters.AddWithValue("@id_kolam", idKolam);
 
                     cmd.ExecuteNonQuery();
 
-                    MessageBox.Show("Data monitoring berhasil disimpan!", "Sukses",
-                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Data monitoring berhasil disimpan!", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     this.DialogResult = DialogResult.OK;
                     this.Close();
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Gagal menyimpan: " + ex.Message, "Error",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Gagal menyimpan: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-
+            }
         }
 
         private void btnBatalTambahMonitoring_Click(object sender, EventArgs e)

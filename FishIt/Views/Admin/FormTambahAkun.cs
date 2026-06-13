@@ -39,6 +39,11 @@ namespace FishIt
 
         private void btnSaveTambahAkun_Click(object sender, EventArgs e)
         {
+            string username = TBUsername.Text.Trim();
+            string password = TBPassword.Text;
+            string konfirmasi = TBKonfirmasi.Text;
+            string telpon = TBTelpon.Text.Trim();
+
             if (string.IsNullOrWhiteSpace(TBUsername.Text) ||
                 string.IsNullOrWhiteSpace(TBNama.Text) ||
                 string.IsNullOrWhiteSpace(TBPassword.Text) ||
@@ -52,12 +57,40 @@ namespace FishIt
                 return;
             }
 
+            if (!username.All(char.IsLetterOrDigit))
+            {
+                MessageBox.Show("Username tidak boleh mengandung simbol atau spasi! Hanya boleh huruf dan angka.", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                TBUsername.Focus();
+                return;
+            }
+
+            if (password.Length < 8)
+            {
+                MessageBox.Show("Password minimal harus 8 karakter!", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                TBPassword.Focus();
+                return;
+            }
+
+            if (password.Contains(" "))
+            {
+                MessageBox.Show("Password tidak boleh mengandung spasi!", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                TBPassword.Focus();
+                return;
+            }
+
             if (TBPassword.Text != TBKonfirmasi.Text)
             {
                 MessageBox.Show("Password dan Konfirmasi Password tidak cocok! Silakan periksa kembali.",
                                 "Password Salah", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 TBKonfirmasi.Clear();
                 TBKonfirmasi.Focus();
+                return;
+            }
+
+            if (!telpon.All(char.IsDigit))
+            {
+                MessageBox.Show("Nomor telepon hanya boleh berisi angka!", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                TBTelpon.Focus();
                 return;
             }
 
@@ -80,7 +113,7 @@ namespace FishIt
 
                         cmd.Parameters.Add("@p_username", NpgsqlTypes.NpgsqlDbType.Varchar).Value = TBUsername.Text.Trim();
                         cmd.Parameters.Add("@p_nama", NpgsqlTypes.NpgsqlDbType.Varchar).Value = TBNama.Text.Trim();
-                        cmd.Parameters.Add("@p_passwords", NpgsqlTypes.NpgsqlDbType.Varchar).Value = TBPassword.Text.Trim();
+                        cmd.Parameters.Add("@p_passwords", NpgsqlTypes.NpgsqlDbType.Varchar).Value = password;
                         cmd.Parameters.Add("@p_alamat", NpgsqlTypes.NpgsqlDbType.Varchar).Value = TBAlamat.Text.Trim();
                         cmd.Parameters.Add("@p_no_telp", NpgsqlTypes.NpgsqlDbType.Varchar).Value = TBTelpon.Text.Trim();
                         cmd.Parameters.Add("@p_aktif", NpgsqlTypes.NpgsqlDbType.Boolean).Value = true;
@@ -130,7 +163,7 @@ namespace FishIt
         }
         private void LoadRole()
         {
-            string queryRole = "SELECT id_role, nama_role FROM roles ORDER BY nama_role ASC";
+            string queryRole = "SELECT id_role, nama_role FROM roles WHERE nama_role != 'pembeli' ORDER BY nama_role ASC";
 
             using (var conn = new NpgsqlConnection(Config.ConnString))
             {

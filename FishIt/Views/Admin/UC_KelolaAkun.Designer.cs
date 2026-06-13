@@ -40,6 +40,7 @@
             btnTambahAkun = new FontAwesome.Sharp.IconButton();
             btnHapus = new FontAwesome.Sharp.IconButton();
             panelJumlahAkun.SuspendLayout();
+            panelStatistik.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)DGVRiwayatTambahAkun).BeginInit();
             SuspendLayout();
             // 
@@ -47,11 +48,7 @@
             // 
             panelJumlahAkun.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             panelJumlahAkun.BackColor = Color.CornflowerBlue;
-            panelJumlahAkun.Controls.Add(label1);
-            panelJumlahAkun.Controls.Add(labelAkunAktif);
-            panelJumlahAkun.Controls.Add(lblHitungAkunTidakAktif);
             panelJumlahAkun.Controls.Add(panelStatistik);
-            panelJumlahAkun.Controls.Add(lblHitungAkunAktif);
             panelJumlahAkun.Controls.Add(label2);
             panelJumlahAkun.Controls.Add(labelJumlahAkun);
             panelJumlahAkun.Location = new Point(22, 30);
@@ -65,7 +62,7 @@
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label1.ForeColor = Color.White;
-            label1.Location = new Point(370, 95);
+            label1.Location = new Point(58, 89);
             label1.Name = "label1";
             label1.Size = new Size(123, 21);
             label1.TabIndex = 9;
@@ -78,7 +75,7 @@
             labelAkunAktif.BackColor = Color.Transparent;
             labelAkunAktif.Font = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             labelAkunAktif.ForeColor = Color.White;
-            labelAkunAktif.Location = new Point(392, 42);
+            labelAkunAktif.Location = new Point(79, 41);
             labelAkunAktif.Name = "labelAkunAktif";
             labelAkunAktif.Size = new Size(82, 21);
             labelAkunAktif.TabIndex = 7;
@@ -90,15 +87,20 @@
             lblHitungAkunTidakAktif.BackColor = Color.Transparent;
             lblHitungAkunTidakAktif.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblHitungAkunTidakAktif.ForeColor = Color.White;
-            lblHitungAkunTidakAktif.Location = new Point(416, 54);
+            lblHitungAkunTidakAktif.Location = new Point(63, 47);
             lblHitungAkunTidakAktif.Name = "lblHitungAkunTidakAktif";
-            lblHitungAkunTidakAktif.Size = new Size(36, 47);
+            lblHitungAkunTidakAktif.Size = new Size(117, 47);
             lblHitungAkunTidakAktif.TabIndex = 8;
             lblHitungAkunTidakAktif.Text = "0";
+            lblHitungAkunTidakAktif.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // panelStatistik
             // 
             panelStatistik.BackColor = Color.RoyalBlue;
+            panelStatistik.Controls.Add(label1);
+            panelStatistik.Controls.Add(lblHitungAkunAktif);
+            panelStatistik.Controls.Add(labelAkunAktif);
+            panelStatistik.Controls.Add(lblHitungAkunTidakAktif);
             panelStatistik.Location = new Point(501, 13);
             panelStatistik.Name = "panelStatistik";
             panelStatistik.Size = new Size(242, 110);
@@ -109,11 +111,12 @@
             lblHitungAkunAktif.BackColor = Color.Transparent;
             lblHitungAkunAktif.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblHitungAkunAktif.ForeColor = Color.White;
-            lblHitungAkunAktif.Location = new Point(416, 6);
+            lblHitungAkunAktif.Location = new Point(58, 0);
             lblHitungAkunAktif.Name = "lblHitungAkunAktif";
-            lblHitungAkunAktif.Size = new Size(36, 47);
+            lblHitungAkunAktif.Size = new Size(123, 47);
             lblHitungAkunAktif.TabIndex = 5;
             lblHitungAkunAktif.Text = "0";
+            lblHitungAkunAktif.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // label2
             // 
@@ -142,9 +145,12 @@
             // 
             // DGVRiwayatTambahAkun
             // 
+            DGVRiwayatTambahAkun.AllowUserToAddRows = false;
+            DGVRiwayatTambahAkun.AllowUserToDeleteRows = false;
             DGVRiwayatTambahAkun.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             DGVRiwayatTambahAkun.Location = new Point(22, 243);
             DGVRiwayatTambahAkun.Name = "DGVRiwayatTambahAkun";
+            DGVRiwayatTambahAkun.ReadOnly = true;
             DGVRiwayatTambahAkun.RowHeadersWidth = 62;
             DGVRiwayatTambahAkun.Size = new Size(757, 340);
             DGVRiwayatTambahAkun.TabIndex = 13;
@@ -205,6 +211,8 @@
             Load += UC_TambahAkun_Load;
             panelJumlahAkun.ResumeLayout(false);
             panelJumlahAkun.PerformLayout();
+            panelStatistik.ResumeLayout(false);
+            panelStatistik.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)DGVRiwayatTambahAkun).EndInit();
             ResumeLayout(false);
         }

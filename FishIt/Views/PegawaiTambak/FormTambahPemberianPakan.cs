@@ -34,7 +34,13 @@ namespace FishIt
 
                     var dtKolam = new DataTable();
                     using (var ad = new NpgsqlDataAdapter(
-                        "SELECT id_kolam, nomor FROM kolam ORDER BY nomor", conn))
+                        @"SELECT k.id_kolam, k.nomor
+                          FROM kolam k
+                          WHERE
+                              COALESCE((SELECT SUM(jumlah_ekor) FROM penebaran WHERE id_kolam = k.id_kolam), 0)
+                            - COALESCE((SELECT SUM(jumlah_ekor) FROM panen     WHERE id_kolam = k.id_kolam), 0)
+                              > 0
+                          ORDER BY k.nomor", conn))
                         ad.Fill(dtKolam);
                     CBKolam.DataSource = dtKolam;
                     CBKolam.DisplayMember = "nomor";

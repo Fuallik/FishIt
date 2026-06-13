@@ -35,9 +35,12 @@
             // 
             // DGVKeranjang
             // 
+            DGVKeranjang.AllowUserToAddRows = false;
+            DGVKeranjang.AllowUserToDeleteRows = false;
             DGVKeranjang.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             DGVKeranjang.Location = new Point(3, 54);
             DGVKeranjang.Name = "DGVKeranjang";
+            DGVKeranjang.ReadOnly = true;
             DGVKeranjang.RowHeadersWidth = 62;
             DGVKeranjang.Size = new Size(794, 541);
             DGVKeranjang.TabIndex = 1;

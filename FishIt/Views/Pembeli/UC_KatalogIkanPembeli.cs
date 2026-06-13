@@ -66,11 +66,18 @@ namespace FishIt
             {
                 int idIkan = Convert.ToInt32(DGVKatalogIkan.Rows[e.RowIndex].Cells["id_ikan"].Value);
                 string namaIkan = DGVKatalogIkan.Rows[e.RowIndex].Cells["nama_ikan"].Value.ToString();
+                decimal stokIkan = Convert.ToDecimal(DGVKatalogIkan.Rows[e.RowIndex].Cells["stok_ikan"].Value);
                 decimal kuantitas = numericJumlah.Value;
 
                 if (kuantitas <= 0)
                 {
                     MessageBox.Show("Tentukan jumlah Kg terlebih dahulu di kotak jumlah!", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                if (kuantitas > stokIkan)
+                {
+                    MessageBox.Show($"Kuantitas melebihi batas stok! Stok {namaIkan} yang tersedia saat ini hanya {stokIkan} Kg.", "Stok Tidak Cukup", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 

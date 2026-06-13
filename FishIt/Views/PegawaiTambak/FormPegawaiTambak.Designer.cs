@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            buttonRiwayatMonitoring = new FontAwesome.Sharp.IconButton();
             panelTB = new Panel();
             buttonOperasi = new FontAwesome.Sharp.IconButton();
             buttonDashboard = new FontAwesome.Sharp.IconButton();
@@ -49,29 +48,6 @@
             panelSB.SuspendLayout();
             panelSubDataFishIt.SuspendLayout();
             SuspendLayout();
-            // 
-            // buttonRiwayatMonitoring
-            // 
-            buttonRiwayatMonitoring.BackColor = Color.Transparent;
-            buttonRiwayatMonitoring.Dock = DockStyle.Top;
-            buttonRiwayatMonitoring.FlatAppearance.BorderSize = 0;
-            buttonRiwayatMonitoring.FlatStyle = FlatStyle.Flat;
-            buttonRiwayatMonitoring.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            buttonRiwayatMonitoring.ForeColor = Color.White;
-            buttonRiwayatMonitoring.IconChar = FontAwesome.Sharp.IconChar.ClipboardList;
-            buttonRiwayatMonitoring.IconColor = Color.White;
-            buttonRiwayatMonitoring.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            buttonRiwayatMonitoring.IconSize = 30;
-            buttonRiwayatMonitoring.ImageAlign = ContentAlignment.MiddleLeft;
-            buttonRiwayatMonitoring.Location = new Point(0, 440);
-            buttonRiwayatMonitoring.Name = "buttonRiwayatMonitoring";
-            buttonRiwayatMonitoring.Padding = new Padding(15, 0, 0, 0);
-            buttonRiwayatMonitoring.Size = new Size(200, 50);
-            buttonRiwayatMonitoring.TabIndex = 10;
-            buttonRiwayatMonitoring.Text = "Riwayat Monitoring";
-            buttonRiwayatMonitoring.TextImageRelation = TextImageRelation.ImageBeforeText;
-            buttonRiwayatMonitoring.UseVisualStyleBackColor = false;
-            buttonRiwayatMonitoring.Click += buttonRiwayatMonitoring_Click;
             // 
             // panelTB
             // 
@@ -302,7 +278,6 @@
             // 
             panelSB.BackColor = Color.CornflowerBlue;
             panelSB.Controls.Add(buttonLogout);
-            panelSB.Controls.Add(buttonRiwayatMonitoring);
             panelSB.Controls.Add(panelSubDataFishIt);
             panelSB.Controls.Add(buttonInformasi);
             panelSB.Controls.Add(panelSubKelolaAkun);
@@ -410,7 +385,6 @@
         private FontAwesome.Sharp.IconButton buttonInformasi;
         private Panel panelSubKelolaAkun;
         private Label label1;
-        private FontAwesome.Sharp.IconButton buttonRiwayatMonitoring;
         private FontAwesome.Sharp.IconButton buttonLogout;
         private Panel panelSB;
         private Panel panelSubDataFishIt;

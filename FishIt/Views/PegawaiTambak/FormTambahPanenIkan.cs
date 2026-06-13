@@ -32,7 +32,9 @@ namespace FishIt
                 conn.Open();
 
                 var dtKolam = new DataTable();
-                using (var ad = new NpgsqlDataAdapter("SELECT id_kolam, nomor FROM kolam ORDER BY nomor", conn))
+                using (var ad = new NpgsqlDataAdapter(@"
+                 SELECT k.id_kolam, k.nomor FROM kolam k WHERE ( SELECT m.siap_panen FROM monitoring m WHERE m.id_kolam = k.id_kolam ORDER BY m.tanggal DESC, m.id_monitoring DESC LIMIT 1 ) = TRUE AND k.status_kolam = 'Terisi'
+                 ORDER BY k.nomor", conn))
                     ad.Fill(dtKolam);
                 CBKolam.DataSource = dtKolam;
                 CBKolam.DisplayMember = "nomor";
@@ -59,7 +61,8 @@ namespace FishIt
             FROM ikan i
             JOIN benih b ON b.id_ikan = i.id_ikan
             JOIN penebaran p ON p.id_benih = b.id_benih
-            WHERE p.id_kolam = @kolam AND fn_sisa_ikan(@kolam, i.id_ikan) > 0
+            JOIN kolam k ON k.id_kolam = p.id_kolam
+            WHERE p.id_kolam = @kolam AND fn_sisa_ikan(@kolam, i.id_ikan) > 0 AND k.status_kolam != 'Kosong' AND k.status_kolam != 'Tidak terpakai'
             ORDER BY label", conn);
                 cmd.Parameters.AddWithValue("@kolam", idKolam);
 

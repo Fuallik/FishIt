@@ -41,6 +41,8 @@
             label3 = new Label();
             TBCatatan = new TextBox();
             label4 = new Label();
+            label5 = new Label();
+            CBPanen = new CheckBox();
             ((System.ComponentModel.ISupportInitialize)NUDBerat).BeginInit();
             ((System.ComponentModel.ISupportInitialize)NUDMati).BeginInit();
             SuspendLayout();
@@ -152,7 +154,7 @@
             // 
             CBKondisi.DisplayMember = "Baik";
             CBKondisi.FormattingEnabled = true;
-            CBKondisi.Items.AddRange(new object[] { "Siap Panen", "Belum Siap Panen" });
+            CBKondisi.Items.AddRange(new object[] { "Baik", "Sedang", "Buruk" });
             CBKondisi.Location = new Point(82, 304);
             CBKondisi.Margin = new Padding(0);
             CBKondisi.Name = "CBKondisi";
@@ -180,27 +182,49 @@
             // 
             // TBCatatan
             // 
-            TBCatatan.Location = new Point(82, 459);
+            TBCatatan.Location = new Point(82, 539);
             TBCatatan.Multiline = true;
             TBCatatan.Name = "TBCatatan";
-            TBCatatan.Size = new Size(333, 185);
+            TBCatatan.Size = new Size(333, 38);
             TBCatatan.TabIndex = 54;
             // 
             // label4
             // 
             label4.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
-            label4.Location = new Point(82, 424);
+            label4.Location = new Point(82, 504);
             label4.Margin = new Padding(0);
             label4.Name = "label4";
             label4.Size = new Size(333, 32);
             label4.TabIndex = 55;
             label4.Text = "Catatan";
             // 
+            // label5
+            // 
+            label5.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
+            label5.Location = new Point(82, 424);
+            label5.Margin = new Padding(0);
+            label5.Name = "label5";
+            label5.Size = new Size(333, 32);
+            label5.TabIndex = 56;
+            label5.Text = "Panen";
+            // 
+            // CBPanen
+            // 
+            CBPanen.AutoSize = true;
+            CBPanen.Location = new Point(82, 472);
+            CBPanen.Name = "CBPanen";
+            CBPanen.Size = new Size(124, 29);
+            CBPanen.TabIndex = 57;
+            CBPanen.Text = "Siap Panen";
+            CBPanen.UseVisualStyleBackColor = true;
+            // 
             // FormTambahMonitoring
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(500, 810);
+            Controls.Add(CBPanen);
+            Controls.Add(label5);
             Controls.Add(label4);
             Controls.Add(TBCatatan);
             Controls.Add(NUDMati);
@@ -239,5 +263,7 @@
         private Label label3;
         private TextBox TBCatatan;
         private Label label4;
+        private Label label5;
+        private CheckBox CBPanen;
     }
 }

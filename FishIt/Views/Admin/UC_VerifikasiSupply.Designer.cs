@@ -87,9 +87,12 @@
             // 
             // DGVPengajuan
             // 
+            DGVPengajuan.AllowUserToAddRows = false;
+            DGVPengajuan.AllowUserToDeleteRows = false;
             DGVPengajuan.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             DGVPengajuan.Location = new Point(20, 181);
             DGVPengajuan.Name = "DGVPengajuan";
+            DGVPengajuan.ReadOnly = true;
             DGVPengajuan.RowHeadersWidth = 62;
             DGVPengajuan.Size = new Size(760, 402);
             DGVPengajuan.TabIndex = 2;

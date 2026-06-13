@@ -34,9 +34,12 @@
             // 
             // DGVRiwayatPembeli
             // 
+            DGVRiwayatPembeli.AllowUserToAddRows = false;
+            DGVRiwayatPembeli.AllowUserToDeleteRows = false;
             DGVRiwayatPembeli.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             DGVRiwayatPembeli.Location = new Point(3, 38);
             DGVRiwayatPembeli.Name = "DGVRiwayatPembeli";
+            DGVRiwayatPembeli.ReadOnly = true;
             DGVRiwayatPembeli.RowHeadersWidth = 62;
             DGVRiwayatPembeli.Size = new Size(794, 559);
             DGVRiwayatPembeli.TabIndex = 2;

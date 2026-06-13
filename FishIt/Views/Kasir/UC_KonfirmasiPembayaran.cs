@@ -126,6 +126,16 @@ namespace FishIt
                                 status_order = 'Diproses'
                             WHERE id_order = @id AND id_status_pembayaran = 1;
 
+                            UPDATE ikan
+                            SET stok_ikan = stok_ikan - sub.total_kg
+                            FROM (
+                                SELECT id_ikan, SUM(kuantitas) AS total_kg
+                                FROM detail_order
+                                WHERE id_order = @id
+                                GROUP BY id_ikan
+                            ) sub
+                            WHERE ikan.id_ikan = sub.id_ikan;
+
                             INSERT INTO pengiriman (tanggal_pengiriman, status_pengiriman, id_akun, id_order)
                             SELECT CURRENT_DATE, 'Diproses', id_akun, @id
                             FROM akun

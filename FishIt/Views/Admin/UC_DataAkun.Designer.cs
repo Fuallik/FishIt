@@ -61,6 +61,7 @@
             panelAkunKasir.SuspendLayout();
             panelAkunTambak.SuspendLayout();
             panelJumlahAkun.SuspendLayout();
+            panelStatistik.SuspendLayout();
             SuspendLayout();
             // 
             // panelUtama
@@ -107,15 +108,15 @@
             // 
             // TotalPembeliKelola
             // 
-            TotalPembeliKelola.AutoSize = true;
             TotalPembeliKelola.BackColor = Color.Transparent;
             TotalPembeliKelola.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             TotalPembeliKelola.ForeColor = Color.White;
-            TotalPembeliKelola.Location = new Point(54, 51);
+            TotalPembeliKelola.Location = new Point(3, 51);
             TotalPembeliKelola.Name = "TotalPembeliKelola";
-            TotalPembeliKelola.Size = new Size(27, 32);
+            TotalPembeliKelola.Size = new Size(134, 32);
             TotalPembeliKelola.TabIndex = 6;
             TotalPembeliKelola.Text = "0";
+            TotalPembeliKelola.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // lblPembeliKelola
             // 
@@ -141,15 +142,15 @@
             // 
             // TotalShipperKelola
             // 
-            TotalShipperKelola.AutoSize = true;
             TotalShipperKelola.BackColor = Color.Transparent;
             TotalShipperKelola.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             TotalShipperKelola.ForeColor = Color.White;
-            TotalShipperKelola.Location = new Point(54, 51);
+            TotalShipperKelola.Location = new Point(3, 51);
             TotalShipperKelola.Name = "TotalShipperKelola";
-            TotalShipperKelola.Size = new Size(27, 32);
+            TotalShipperKelola.Size = new Size(134, 32);
             TotalShipperKelola.TabIndex = 6;
             TotalShipperKelola.Text = "0";
+            TotalShipperKelola.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // lblShipperKelola
             // 
@@ -175,15 +176,15 @@
             // 
             // TotalSupplierKelola
             // 
-            TotalSupplierKelola.AutoSize = true;
             TotalSupplierKelola.BackColor = Color.Transparent;
             TotalSupplierKelola.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             TotalSupplierKelola.ForeColor = Color.White;
-            TotalSupplierKelola.Location = new Point(54, 51);
+            TotalSupplierKelola.Location = new Point(3, 51);
             TotalSupplierKelola.Name = "TotalSupplierKelola";
-            TotalSupplierKelola.Size = new Size(27, 32);
+            TotalSupplierKelola.Size = new Size(134, 32);
             TotalSupplierKelola.TabIndex = 6;
             TotalSupplierKelola.Text = "0";
+            TotalSupplierKelola.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // lblSupplierKelola
             // 
@@ -209,15 +210,15 @@
             // 
             // TotalKasirKelola
             // 
-            TotalKasirKelola.AutoSize = true;
             TotalKasirKelola.BackColor = Color.Transparent;
             TotalKasirKelola.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             TotalKasirKelola.ForeColor = Color.White;
-            TotalKasirKelola.Location = new Point(54, 51);
+            TotalKasirKelola.Location = new Point(3, 51);
             TotalKasirKelola.Name = "TotalKasirKelola";
-            TotalKasirKelola.Size = new Size(27, 32);
+            TotalKasirKelola.Size = new Size(134, 32);
             TotalKasirKelola.TabIndex = 6;
             TotalKasirKelola.Text = "0";
+            TotalKasirKelola.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // lblKasirKelola
             // 
@@ -243,15 +244,15 @@
             // 
             // TotalTambakKelola
             // 
-            TotalTambakKelola.AutoSize = true;
             TotalTambakKelola.BackColor = Color.Transparent;
             TotalTambakKelola.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             TotalTambakKelola.ForeColor = Color.White;
-            TotalTambakKelola.Location = new Point(54, 50);
+            TotalTambakKelola.Location = new Point(0, 51);
             TotalTambakKelola.Name = "TotalTambakKelola";
-            TotalTambakKelola.Size = new Size(27, 32);
+            TotalTambakKelola.Size = new Size(140, 32);
             TotalTambakKelola.TabIndex = 4;
             TotalTambakKelola.Text = "0";
+            TotalTambakKelola.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // label3
             // 
@@ -269,11 +270,7 @@
             // 
             panelJumlahAkun.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             panelJumlahAkun.BackColor = Color.CornflowerBlue;
-            panelJumlahAkun.Controls.Add(label1);
-            panelJumlahAkun.Controls.Add(labelAkunAktif);
-            panelJumlahAkun.Controls.Add(lblHitungAkunTidakAKtif);
             panelJumlahAkun.Controls.Add(panelStatistik);
-            panelJumlahAkun.Controls.Add(lblHitungAkunAktif);
             panelJumlahAkun.Controls.Add(label2);
             panelJumlahAkun.Controls.Add(labelJumlahAkun);
             panelJumlahAkun.Location = new Point(23, 23);
@@ -288,7 +285,7 @@
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label1.ForeColor = Color.White;
-            label1.Location = new Point(372, 95);
+            label1.Location = new Point(71, 91);
             label1.Name = "label1";
             label1.Size = new Size(123, 21);
             label1.TabIndex = 9;
@@ -301,7 +298,7 @@
             labelAkunAktif.BackColor = Color.Transparent;
             labelAkunAktif.Font = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             labelAkunAktif.ForeColor = Color.White;
-            labelAkunAktif.Location = new Point(392, 42);
+            labelAkunAktif.Location = new Point(86, 41);
             labelAkunAktif.Name = "labelAkunAktif";
             labelAkunAktif.Size = new Size(82, 21);
             labelAkunAktif.TabIndex = 7;
@@ -313,15 +310,20 @@
             lblHitungAkunTidakAKtif.BackColor = Color.Transparent;
             lblHitungAkunTidakAKtif.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblHitungAkunTidakAKtif.ForeColor = Color.White;
-            lblHitungAkunTidakAKtif.Location = new Point(416, 54);
+            lblHitungAkunTidakAKtif.Location = new Point(61, 54);
             lblHitungAkunTidakAKtif.Name = "lblHitungAkunTidakAKtif";
-            lblHitungAkunTidakAKtif.Size = new Size(36, 47);
+            lblHitungAkunTidakAKtif.Size = new Size(133, 47);
             lblHitungAkunTidakAKtif.TabIndex = 8;
             lblHitungAkunTidakAKtif.Text = "0";
+            lblHitungAkunTidakAKtif.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // panelStatistik
             // 
             panelStatistik.BackColor = Color.RoyalBlue;
+            panelStatistik.Controls.Add(label1);
+            panelStatistik.Controls.Add(lblHitungAkunAktif);
+            panelStatistik.Controls.Add(labelAkunAktif);
+            panelStatistik.Controls.Add(lblHitungAkunTidakAKtif);
             panelStatistik.Location = new Point(501, 13);
             panelStatistik.Name = "panelStatistik";
             panelStatistik.Size = new Size(242, 110);
@@ -332,11 +334,12 @@
             lblHitungAkunAktif.BackColor = Color.Transparent;
             lblHitungAkunAktif.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblHitungAkunAktif.ForeColor = Color.White;
-            lblHitungAkunAktif.Location = new Point(416, 6);
+            lblHitungAkunAktif.Location = new Point(61, 0);
             lblHitungAkunAktif.Name = "lblHitungAkunAktif";
-            lblHitungAkunAktif.Size = new Size(36, 47);
+            lblHitungAkunAktif.Size = new Size(133, 47);
             lblHitungAkunAktif.TabIndex = 5;
             lblHitungAkunAktif.Text = "0";
+            lblHitungAkunAktif.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // label2
             // 
@@ -386,6 +389,8 @@
             panelAkunTambak.PerformLayout();
             panelJumlahAkun.ResumeLayout(false);
             panelJumlahAkun.PerformLayout();
+            panelStatistik.ResumeLayout(false);
+            panelStatistik.PerformLayout();
             ResumeLayout(false);
         }
 

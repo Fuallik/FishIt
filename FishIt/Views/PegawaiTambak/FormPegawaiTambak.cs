@@ -155,19 +155,6 @@ namespace FishIt
             buttonStok.MouseLeave += SidebarButton_MouseLeave;
         }
 
-        private void buttonRiwayatMonitoring_Click(object sender, EventArgs e)
-        {
-            panelContent.Controls.Clear();
-
-            UC_RiwayatMonitoring riwayatMonitoring = new UC_RiwayatMonitoring();
-            riwayatMonitoring.Dock = DockStyle.Fill;
-
-            panelContent.Controls.Add(riwayatMonitoring);
-
-            buttonRiwayatMonitoring.MouseEnter += SidebarButton_MouseEnter;
-            buttonRiwayatMonitoring.MouseLeave += SidebarButton_MouseLeave;
-        }
-
         private void buttonLogout_Click(object sender, EventArgs e)
         {
             Application.Restart();
