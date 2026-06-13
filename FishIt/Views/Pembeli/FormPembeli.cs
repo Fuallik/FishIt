@@ -1,4 +1,5 @@
-﻿using FontAwesome.Sharp;
+﻿using FishIt.Helpers;
+using FontAwesome.Sharp;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,8 +20,16 @@ namespace FishIt
 
         private void FormPembeli_Load(object sender, EventArgs e)
         {
-            LoadPage(new UC_DashboardPembeli()); ;
-            panelKontenPembeli.Visible = false;
+            panelKontenPembeli.Visible = true;
+            LoadPage(new UC_DashboardPembeli());
+            if (!string.IsNullOrEmpty(Session.Username))
+            {
+                lblUsernameTopbar.Text = Session.Username;
+            }
+            else
+            {
+                lblUsernameTopbar.Text = "Guest";
+            }
         }
         private void LoadPage(UserControl page)
         {
@@ -50,7 +59,9 @@ namespace FishIt
 
         private void buttonLogout_Click(object sender, EventArgs e)
         {
-            Application.Restart();
+            FormLogin login = new FormLogin();
+            login.Show();
+            this.Close();
         }
 
         private void panelContent_Paint(object sender, PaintEventArgs e)
@@ -104,7 +115,9 @@ namespace FishIt
 
         private void buttonLogoutAdmin_Click(object sender, EventArgs e)
         {
-            Application.Restart();
+            FormLogin login = new FormLogin();
+            login.Show();
+            this.Close();
         }
 
         private void panelContent_Paint_1(object sender, PaintEventArgs e)

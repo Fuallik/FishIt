@@ -28,7 +28,7 @@ namespace FishIt
         }
         public void MuatDataBenih()
         {
-            string query = "SELECT id_benih, nama, jumlah_stok FROM benih WHERE jumlah_stok > 0";
+            string query = "SELECT b.id_benih, b.nama, b.jumlah_stok, j.nama_jenis_ikan FROM benih b JOIN jenis_ikan j ON b.id_jenis_ikan = j.id_jenis_ikan WHERE b.jumlah_stok > 0 ORDER BY b.id_benih ASC";
 
             using (var conn = new NpgsqlConnection(Config.ConnString))
             {
@@ -45,6 +45,7 @@ namespace FishIt
                         DGVBenih.DataSource = dt;
                         DGVBenih.Columns["id_benih"].HeaderText = "ID Benih";
                         DGVBenih.Columns["nama"].HeaderText = "Nama Benih";
+                        DGVBenih.Columns["nama_jenis_ikan"].HeaderText = "Jenis Ikan";
                         DGVBenih.Columns["jumlah_stok"].HeaderText = "Jumlah Stok";
 
 

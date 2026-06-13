@@ -31,6 +31,9 @@
             label1 = new Label();
             panelKontenPembeli = new Panel();
             panelTB = new Panel();
+            panelUsername = new Panel();
+            lblUsernameTopbar = new Label();
+            iconPictureBox1 = new FontAwesome.Sharp.IconPictureBox();
             panelSB = new Panel();
             buttonLogoutAdmin = new FontAwesome.Sharp.IconButton();
             buttonRiwayat = new FontAwesome.Sharp.IconButton();
@@ -38,6 +41,9 @@
             buttonKatalogIkan = new FontAwesome.Sharp.IconButton();
             buttonDashboard = new FontAwesome.Sharp.IconButton();
             label2 = new Label();
+            panelTB.SuspendLayout();
+            panelUsername.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)iconPictureBox1).BeginInit();
             panelSB.SuspendLayout();
             SuspendLayout();
             // 
@@ -64,11 +70,45 @@
             // panelTB
             // 
             panelTB.BackColor = Color.LightSteelBlue;
+            panelTB.Controls.Add(panelUsername);
             panelTB.Dock = DockStyle.Top;
             panelTB.Location = new Point(200, 0);
             panelTB.Name = "panelTB";
             panelTB.Size = new Size(802, 50);
             panelTB.TabIndex = 4;
+            // 
+            // panelUsername
+            // 
+            panelUsername.Controls.Add(lblUsernameTopbar);
+            panelUsername.Controls.Add(iconPictureBox1);
+            panelUsername.Location = new Point(3, 3);
+            panelUsername.Name = "panelUsername";
+            panelUsername.Size = new Size(796, 44);
+            panelUsername.TabIndex = 1;
+            // 
+            // lblUsernameTopbar
+            // 
+            lblUsernameTopbar.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblUsernameTopbar.ForeColor = Color.MidnightBlue;
+            lblUsernameTopbar.Location = new Point(47, 6);
+            lblUsernameTopbar.Name = "lblUsernameTopbar";
+            lblUsernameTopbar.Size = new Size(746, 38);
+            lblUsernameTopbar.TabIndex = 1;
+            lblUsernameTopbar.Text = "Username";
+            // 
+            // iconPictureBox1
+            // 
+            iconPictureBox1.BackColor = Color.LightSteelBlue;
+            iconPictureBox1.ForeColor = Color.MidnightBlue;
+            iconPictureBox1.IconChar = FontAwesome.Sharp.IconChar.UserTie;
+            iconPictureBox1.IconColor = Color.MidnightBlue;
+            iconPictureBox1.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            iconPictureBox1.IconSize = 38;
+            iconPictureBox1.Location = new Point(3, 3);
+            iconPictureBox1.Name = "iconPictureBox1";
+            iconPictureBox1.Size = new Size(38, 38);
+            iconPictureBox1.TabIndex = 0;
+            iconPictureBox1.TabStop = false;
             // 
             // panelSB
             // 
@@ -230,6 +270,10 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "FormPembeli";
             WindowState = FormWindowState.Maximized;
+            Load += FormPembeli_Load;
+            panelTB.ResumeLayout(false);
+            panelUsername.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)iconPictureBox1).EndInit();
             panelSB.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
@@ -247,5 +291,8 @@
         private FontAwesome.Sharp.IconButton buttonKatalogIkan;
         private FontAwesome.Sharp.IconButton buttonDashboard;
         private Label label2;
+        private Panel panelUsername;
+        private Label lblUsernameTopbar;
+        private FontAwesome.Sharp.IconPictureBox iconPictureBox1;
     }
 }

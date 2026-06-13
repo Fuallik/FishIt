@@ -147,7 +147,7 @@ namespace FishIt
                                 string role = reader.GetString(0);
 
                                 Session.IdAkun = Convert.ToInt32(reader["id_akun"]);
-                                Session.NamaUser = reader["username"].ToString();
+                                Session.Username = reader["username"].ToString();
 
                                 this.Hide();
 
