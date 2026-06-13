@@ -28,42 +28,42 @@
         /// </summary>
         private void InitializeComponent()
         {
-            panel1 = new Panel();
+            panelPakan = new Panel();
             label1 = new Label();
             DGVPakan = new DataGridView();
-            panel2 = new Panel();
+            panelBenih = new Panel();
             label3 = new Label();
             DGVBenih = new DataGridView();
-            panel3 = new Panel();
+            panelJenisPakan = new Panel();
             labelJenisPakan = new Label();
             label4 = new Label();
-            panel4 = new Panel();
+            panelStokPakan = new Panel();
             labelStokPakan = new Label();
             label6 = new Label();
-            panel5 = new Panel();
+            panelStokBenih = new Panel();
             labelStokBenih = new Label();
             label8 = new Label();
-            panel6 = new Panel();
+            panelJenisBenih = new Panel();
             labelJenisBenih = new Label();
             label10 = new Label();
-            panel1.SuspendLayout();
+            panelPakan.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)DGVPakan).BeginInit();
-            panel2.SuspendLayout();
+            panelBenih.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)DGVBenih).BeginInit();
-            panel3.SuspendLayout();
-            panel4.SuspendLayout();
-            panel5.SuspendLayout();
-            panel6.SuspendLayout();
+            panelJenisPakan.SuspendLayout();
+            panelStokPakan.SuspendLayout();
+            panelStokBenih.SuspendLayout();
+            panelJenisBenih.SuspendLayout();
             SuspendLayout();
             // 
-            // panel1
+            // panelPakan
             // 
-            panel1.BackColor = Color.CornflowerBlue;
-            panel1.Controls.Add(label1);
-            panel1.Location = new Point(28, 25);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(360, 54);
-            panel1.TabIndex = 40;
+            panelPakan.BackColor = Color.CornflowerBlue;
+            panelPakan.Controls.Add(label1);
+            panelPakan.Location = new Point(28, 25);
+            panelPakan.Name = "panelPakan";
+            panelPakan.Size = new Size(360, 54);
+            panelPakan.TabIndex = 40;
             // 
             // label1
             // 
@@ -89,14 +89,14 @@
             DGVPakan.Size = new Size(360, 361);
             DGVPakan.TabIndex = 39;
             // 
-            // panel2
+            // panelBenih
             // 
-            panel2.BackColor = Color.CornflowerBlue;
-            panel2.Controls.Add(label3);
-            panel2.Location = new Point(413, 25);
-            panel2.Name = "panel2";
-            panel2.Size = new Size(360, 54);
-            panel2.TabIndex = 41;
+            panelBenih.BackColor = Color.CornflowerBlue;
+            panelBenih.Controls.Add(label3);
+            panelBenih.Location = new Point(413, 25);
+            panelBenih.Name = "panelBenih";
+            panelBenih.Size = new Size(360, 54);
+            panelBenih.TabIndex = 41;
             // 
             // label3
             // 
@@ -122,15 +122,15 @@
             DGVBenih.Size = new Size(360, 361);
             DGVBenih.TabIndex = 42;
             // 
-            // panel3
+            // panelJenisPakan
             // 
-            panel3.BackColor = Color.CornflowerBlue;
-            panel3.Controls.Add(labelJenisPakan);
-            panel3.Controls.Add(label4);
-            panel3.Location = new Point(28, 96);
-            panel3.Name = "panel3";
-            panel3.Size = new Size(176, 97);
-            panel3.TabIndex = 43;
+            panelJenisPakan.BackColor = Color.CornflowerBlue;
+            panelJenisPakan.Controls.Add(labelJenisPakan);
+            panelJenisPakan.Controls.Add(label4);
+            panelJenisPakan.Location = new Point(28, 96);
+            panelJenisPakan.Name = "panelJenisPakan";
+            panelJenisPakan.Size = new Size(176, 97);
+            panelJenisPakan.TabIndex = 43;
             // 
             // labelJenisPakan
             // 
@@ -156,15 +156,15 @@
             label4.Text = "Jenis";
             label4.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // panel4
+            // panelStokPakan
             // 
-            panel4.BackColor = Color.CornflowerBlue;
-            panel4.Controls.Add(labelStokPakan);
-            panel4.Controls.Add(label6);
-            panel4.Location = new Point(212, 96);
-            panel4.Name = "panel4";
-            panel4.Size = new Size(176, 97);
-            panel4.TabIndex = 44;
+            panelStokPakan.BackColor = Color.CornflowerBlue;
+            panelStokPakan.Controls.Add(labelStokPakan);
+            panelStokPakan.Controls.Add(label6);
+            panelStokPakan.Location = new Point(212, 96);
+            panelStokPakan.Name = "panelStokPakan";
+            panelStokPakan.Size = new Size(176, 97);
+            panelStokPakan.TabIndex = 44;
             // 
             // labelStokPakan
             // 
@@ -190,15 +190,15 @@
             label6.Text = "Stok";
             label6.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // panel5
+            // panelStokBenih
             // 
-            panel5.BackColor = Color.CornflowerBlue;
-            panel5.Controls.Add(labelStokBenih);
-            panel5.Controls.Add(label8);
-            panel5.Location = new Point(597, 96);
-            panel5.Name = "panel5";
-            panel5.Size = new Size(176, 97);
-            panel5.TabIndex = 46;
+            panelStokBenih.BackColor = Color.CornflowerBlue;
+            panelStokBenih.Controls.Add(labelStokBenih);
+            panelStokBenih.Controls.Add(label8);
+            panelStokBenih.Location = new Point(597, 96);
+            panelStokBenih.Name = "panelStokBenih";
+            panelStokBenih.Size = new Size(176, 97);
+            panelStokBenih.TabIndex = 46;
             // 
             // labelStokBenih
             // 
@@ -224,15 +224,15 @@
             label8.Text = "Stok";
             label8.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // panel6
+            // panelJenisBenih
             // 
-            panel6.BackColor = Color.CornflowerBlue;
-            panel6.Controls.Add(labelJenisBenih);
-            panel6.Controls.Add(label10);
-            panel6.Location = new Point(413, 96);
-            panel6.Name = "panel6";
-            panel6.Size = new Size(176, 97);
-            panel6.TabIndex = 45;
+            panelJenisBenih.BackColor = Color.CornflowerBlue;
+            panelJenisBenih.Controls.Add(labelJenisBenih);
+            panelJenisBenih.Controls.Add(label10);
+            panelJenisBenih.Location = new Point(413, 96);
+            panelJenisBenih.Name = "panelJenisBenih";
+            panelJenisBenih.Size = new Size(176, 97);
+            panelJenisBenih.TabIndex = 45;
             // 
             // labelJenisBenih
             // 
@@ -263,45 +263,45 @@
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.LightSteelBlue;
-            Controls.Add(panel5);
-            Controls.Add(panel6);
-            Controls.Add(panel4);
-            Controls.Add(panel3);
+            Controls.Add(panelStokBenih);
+            Controls.Add(panelJenisBenih);
+            Controls.Add(panelStokPakan);
+            Controls.Add(panelJenisPakan);
             Controls.Add(DGVBenih);
-            Controls.Add(panel2);
-            Controls.Add(panel1);
+            Controls.Add(panelBenih);
+            Controls.Add(panelPakan);
             Controls.Add(DGVPakan);
             Name = "UC_InfoStok";
             Size = new Size(800, 600);
-            panel1.ResumeLayout(false);
+            panelPakan.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)DGVPakan).EndInit();
-            panel2.ResumeLayout(false);
+            panelBenih.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)DGVBenih).EndInit();
-            panel3.ResumeLayout(false);
-            panel4.ResumeLayout(false);
-            panel5.ResumeLayout(false);
-            panel6.ResumeLayout(false);
+            panelJenisPakan.ResumeLayout(false);
+            panelStokPakan.ResumeLayout(false);
+            panelStokBenih.ResumeLayout(false);
+            panelJenisBenih.ResumeLayout(false);
             ResumeLayout(false);
         }
 
         #endregion
 
-        private Panel panel1;
+        private Panel panelPakan;
         private Label label1;
         private DataGridView DGVPakan;
-        private Panel panel2;
+        private Panel panelBenih;
         private Label label3;
         private DataGridView DGVBenih;
-        private Panel panel3;
+        private Panel panelJenisPakan;
         private Label labelJenisPakan;
         private Label label4;
-        private Panel panel4;
+        private Panel panelStokPakan;
         private Label labelStokPakan;
         private Label label6;
-        private Panel panel5;
+        private Panel panelStokBenih;
         private Label labelStokBenih;
         private Label label8;
-        private Panel panel6;
+        private Panel panelJenisBenih;
         private Label labelJenisBenih;
         private Label label10;
     }

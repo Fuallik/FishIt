@@ -68,7 +68,7 @@
             buttonOperasi.ForeColor = Color.White;
             buttonOperasi.IconChar = FontAwesome.Sharp.IconChar.CalendarCheck;
             buttonOperasi.IconColor = Color.White;
-            buttonOperasi.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            buttonOperasi.IconFont = FontAwesome.Sharp.IconFont.Regular;
             buttonOperasi.IconSize = 30;
             buttonOperasi.ImageAlign = ContentAlignment.MiddleLeft;
             buttonOperasi.Location = new Point(0, 100);
@@ -92,7 +92,7 @@
             buttonDashboard.ForeColor = Color.White;
             buttonDashboard.IconChar = FontAwesome.Sharp.IconChar.Bars;
             buttonDashboard.IconColor = Color.White;
-            buttonDashboard.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            buttonDashboard.IconFont = FontAwesome.Sharp.IconFont.Solid;
             buttonDashboard.IconSize = 30;
             buttonDashboard.ImageAlign = ContentAlignment.MiddleLeft;
             buttonDashboard.Location = new Point(0, 50);
@@ -116,7 +116,7 @@
             buttonInformasi.ForeColor = Color.White;
             buttonInformasi.IconChar = FontAwesome.Sharp.IconChar.CircleInfo;
             buttonInformasi.IconColor = Color.White;
-            buttonInformasi.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            buttonInformasi.IconFont = FontAwesome.Sharp.IconFont.Solid;
             buttonInformasi.IconSize = 30;
             buttonInformasi.ImageAlign = ContentAlignment.MiddleLeft;
             buttonInformasi.Location = new Point(0, 310);
@@ -152,7 +152,7 @@
             buttonPanenIkan.ForeColor = Color.White;
             buttonPanenIkan.IconChar = FontAwesome.Sharp.IconChar.Fish;
             buttonPanenIkan.IconColor = Color.White;
-            buttonPanenIkan.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            buttonPanenIkan.IconFont = FontAwesome.Sharp.IconFont.Solid;
             buttonPanenIkan.IconSize = 30;
             buttonPanenIkan.ImageAlign = ContentAlignment.MiddleLeft;
             buttonPanenIkan.Location = new Point(0, 120);
@@ -176,8 +176,8 @@
             buttonPenebaran.ForeColor = Color.White;
             buttonPenebaran.IconChar = FontAwesome.Sharp.IconChar.PlusSquare;
             buttonPenebaran.IconColor = Color.White;
-            buttonPenebaran.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            buttonPenebaran.IconSize = 30;
+            buttonPenebaran.IconFont = FontAwesome.Sharp.IconFont.Solid;
+            buttonPenebaran.IconSize = 330;
             buttonPenebaran.ImageAlign = ContentAlignment.MiddleLeft;
             buttonPenebaran.Location = new Point(0, 80);
             buttonPenebaran.Name = "buttonPenebaran";
@@ -192,7 +192,6 @@
             // 
             // buttonPemberianPakan
             // 
-            buttonPemberianPakan.AutoSize = true;
             buttonPemberianPakan.BackColor = Color.Transparent;
             buttonPemberianPakan.Dock = DockStyle.Top;
             buttonPemberianPakan.FlatAppearance.BorderSize = 0;
@@ -201,7 +200,7 @@
             buttonPemberianPakan.ForeColor = Color.White;
             buttonPemberianPakan.IconChar = FontAwesome.Sharp.IconChar.HandHolding;
             buttonPemberianPakan.IconColor = Color.White;
-            buttonPemberianPakan.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            buttonPemberianPakan.IconFont = FontAwesome.Sharp.IconFont.Solid;
             buttonPemberianPakan.IconSize = 30;
             buttonPemberianPakan.ImageAlign = ContentAlignment.MiddleLeft;
             buttonPemberianPakan.Location = new Point(0, 40);
@@ -225,7 +224,7 @@
             buttonMonitoring.ForeColor = Color.White;
             buttonMonitoring.IconChar = FontAwesome.Sharp.IconChar.ChartLine;
             buttonMonitoring.IconColor = Color.White;
-            buttonMonitoring.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            buttonMonitoring.IconFont = FontAwesome.Sharp.IconFont.Solid;
             buttonMonitoring.IconSize = 30;
             buttonMonitoring.ImageAlign = ContentAlignment.MiddleLeft;
             buttonMonitoring.Location = new Point(0, 0);
@@ -310,7 +309,7 @@
             buttonStok.ForeColor = Color.White;
             buttonStok.IconChar = FontAwesome.Sharp.IconChar.BoxesStacked;
             buttonStok.IconColor = Color.White;
-            buttonStok.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            buttonStok.IconFont = FontAwesome.Sharp.IconFont.Solid;
             buttonStok.IconSize = 30;
             buttonStok.ImageAlign = ContentAlignment.MiddleLeft;
             buttonStok.Location = new Point(0, 40);
@@ -334,7 +333,7 @@
             buttonStatusKolam.ForeColor = Color.White;
             buttonStatusKolam.IconChar = FontAwesome.Sharp.IconChar.Water;
             buttonStatusKolam.IconColor = Color.White;
-            buttonStatusKolam.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            buttonStatusKolam.IconFont = FontAwesome.Sharp.IconFont.Solid;
             buttonStatusKolam.IconSize = 30;
             buttonStatusKolam.ImageAlign = ContentAlignment.MiddleLeft;
             buttonStatusKolam.Location = new Point(0, 0);
@@ -371,7 +370,6 @@
             WindowState = FormWindowState.Maximized;
             Load += FormPegawaiTambak_Load;
             panelSubKelolaAkun.ResumeLayout(false);
-            panelSubKelolaAkun.PerformLayout();
             panelSB.ResumeLayout(false);
             panelSubDataFishIt.ResumeLayout(false);
             ResumeLayout(false);

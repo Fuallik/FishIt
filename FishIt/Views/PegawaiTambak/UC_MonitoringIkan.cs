@@ -18,6 +18,10 @@ namespace FishIt.UserControls.PegawaiTambak
             InitializeComponent();
             GridHelper.AturTemaModern(DGVMonitoringIkan);
             new AutoScaleHelper(this);
+            PanelHelper.BuatMelengkung(panelMonitoring, 25);
+            PanelHelper.BuatMelengkung(panelHari, 25);
+            PanelHelper.BuatMelengkung(panelBulan, 25);
+            PanelHelper.MakeButtonRounded(buttonTambahMonitoring, 25);
         }
 
         protected override void OnLoad(EventArgs e)
@@ -82,14 +86,6 @@ namespace FishIt.UserControls.PegawaiTambak
                 "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-        private int HitungMonitoring(NpgsqlConnection conn, string periode)
-        {
-            using var cmd = new NpgsqlCommand("SELECT fn_total_monitoring(@periode)", conn);
-            cmd.Parameters.AddWithValue("@periode", periode);
-            return Convert.ToInt32(cmd.ExecuteScalar());
-        }
-
         private int HitungMonitoring(NpgsqlConnection conn, string periode, int idAkun)
         {
             using var cmd = new NpgsqlCommand("SELECT fn_total_monitoring(@periode, @id_akun)", conn);

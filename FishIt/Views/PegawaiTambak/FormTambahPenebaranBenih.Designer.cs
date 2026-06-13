@@ -48,7 +48,6 @@
             // 
             CBBenihIkan.DisplayMember = "Baik";
             CBBenihIkan.FormattingEnabled = true;
-            CBBenihIkan.Items.AddRange(new object[] { "Baik", "Sedang", "Buruk" });
             CBBenihIkan.Location = new Point(82, 228);
             CBBenihIkan.Margin = new Padding(0);
             CBBenihIkan.Name = "CBBenihIkan";
@@ -151,6 +150,7 @@
             // NUBEkor
             // 
             NUBEkor.Location = new Point(82, 308);
+            NUBEkor.Maximum = new decimal(new int[] { 100000, 0, 0, 0 });
             NUBEkor.Name = "NUBEkor";
             NUBEkor.Size = new Size(333, 31);
             NUBEkor.TabIndex = 70;
