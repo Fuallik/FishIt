@@ -28,10 +28,46 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            lblUsername = new Label();
+            lblSelamatDatang = new Label();
+            SuspendLayout();
+            // 
+            // lblUsername
+            // 
+            lblUsername.Font = new Font("Segoe UI Semibold", 16F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblUsername.ForeColor = Color.MidnightBlue;
+            lblUsername.Location = new Point(265, 19);
+            lblUsername.Name = "lblUsername";
+            lblUsername.Size = new Size(498, 48);
+            lblUsername.TabIndex = 3;
+            lblUsername.Text = "Username";
+            // 
+            // lblSelamatDatang
+            // 
+            lblSelamatDatang.Font = new Font("Segoe UI Semibold", 16F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblSelamatDatang.ForeColor = Color.MidnightBlue;
+            lblSelamatDatang.Location = new Point(18, 19);
+            lblSelamatDatang.Name = "lblSelamatDatang";
+            lblSelamatDatang.Size = new Size(261, 48);
+            lblSelamatDatang.TabIndex = 2;
+            lblSelamatDatang.Text = "Selamat Datang, ";
+            // 
+            // UC_DashboardPembeli
+            // 
+            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.LightSteelBlue;
+            Controls.Add(lblUsername);
+            Controls.Add(lblSelamatDatang);
+            Name = "UC_DashboardPembeli";
+            Size = new Size(800, 600);
+            Load += UC_DashboardPembeli_Load;
+            ResumeLayout(false);
         }
 
         #endregion
+
+        private Label lblUsername;
+        private Label lblSelamatDatang;
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FishIt.Helpers;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,6 +14,20 @@ namespace FishIt
         public UC_DashboardPembeli()
         {
             InitializeComponent();
+            if (!string.IsNullOrEmpty(Session.Username))
+            {
+                lblUsername.Text = Session.Username;
+            }
+            else
+            {
+                lblUsername.Text = "Guest";
+            }
+            new AutoScaleHelper(this);
+        }
+
+        private void UC_DashboardPembeli_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

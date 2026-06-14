@@ -84,83 +84,50 @@ namespace FishIt
                 MessageBox.Show("Silakan pilih metode pembayaran terlebih dahulu!", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            int idMetodePembayaran = 1;
-            if (CBMetodePembayaran.SelectedItem.ToString() == "QRIS")
-            {
-                idMetodePembayaran = 2;
-            }
+
+            // Tentukan ID Metode Pembayaran
+            int idMetodePembayaran = CBMetodePembayaran.SelectedItem.ToString() == "QRIS" ? 2 : 1;
+
             bool isSuksesDatabase = false;
+            string pesanResult = "Gagal memproses transaksi.";
 
-            using (var conn = new NpgsqlConnection(FormTambahAkun.Config.ConnString))
+            // Query untuk memanggil function kita di PostgreSQL
+            string queryFunc = "SELECT * FROM public.proses_checkout_func(@id_akun, @id_metode)";
+
+            using (var conn = new NpgsqlConnection(FormLogin.Config.ConnString))
             {
-                conn.Open();
-                using (var tx = conn.BeginTransaction())
+                try
                 {
-                    try
+                    conn.Open();
+                    using (var cmd = new NpgsqlCommand(queryFunc, conn))
                     {
-                        decimal totalHarga = 0;
-                        string queryTotal = "SELECT SUM(k.kuantitas * i.harga_per_kg) FROM keranjang k JOIN ikan i ON k.id_ikan = i.id_ikan WHERE k.id_akun = @id_akun";
-                        using (var cmdTotal = new NpgsqlCommand(queryTotal, conn))
-                        {
-                            cmdTotal.Parameters.AddWithValue("@id_akun", Session.IdAkun);
-                            object res = cmdTotal.ExecuteScalar();
-                            totalHarga = res != DBNull.Value ? Convert.ToDecimal(res) : 0;
-                        }
+                        // Daftarkan parameter input seperti biasa
+                        cmd.Parameters.Add("@id_akun", NpgsqlTypes.NpgsqlDbType.Integer).Value = Session.IdAkun;
+                        cmd.Parameters.Add("@id_metode", NpgsqlTypes.NpgsqlDbType.Integer).Value = idMetodePembayaran;
 
-                        if (totalHarga == 0)
+                        // Jalankan perintah dan baca baris hasilnya
+                        using (var reader = cmd.ExecuteReader())
                         {
-                            MessageBox.Show("Keranjang belanja Anda masih kosong!", "Gagal", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
+                            if (reader.Read())
+                            {
+                                // Ambil kolom ke-0 (is_sukses) dan kolom ke-1 (pesan) dari hasil function
+                                isSuksesDatabase = reader.GetBoolean(0);
+                                pesanResult = reader.GetString(1);
+                            }
                         }
-
-                        int idOrderBaru = 0;
-                        string queryOrder = @"INSERT INTO orders (tanggal_order, total_harga, id_akun, id_metode_pembayaran, id_status_pembayaran, status_pembayaran, status_order) 
-                                      VALUES (CURRENT_DATE, @total, @id_akun, @id_metode, 1, 'Pending Kasir', 'Menunggu Pembayaran') 
-                                      RETURNING id_order";
-                        using (var cmdOrder = new NpgsqlCommand(queryOrder, conn))
-                        {
-                            cmdOrder.Parameters.AddWithValue("@total", totalHarga);
-                            cmdOrder.Parameters.AddWithValue("@id_akun", Session.IdAkun);
-                            cmdOrder.Parameters.AddWithValue("@id_metode", idMetodePembayaran);
-                            idOrderBaru = Convert.ToInt32(cmdOrder.ExecuteScalar());
-                        }
-
-                        string queryDetail = @"INSERT INTO detail_order (kuantitas, harga, id_ikan, id_order)
-                                       SELECT k.kuantitas, i.harga_per_kg, k.id_ikan, @id_order
-                                       FROM keranjang k
-                                       JOIN ikan i ON k.id_ikan = i.id_ikan
-                                       WHERE k.id_akun = @id_akun";
-                        using (var cmdDetail = new NpgsqlCommand(queryDetail, conn))
-                        {
-                            cmdDetail.Parameters.AddWithValue("@id_order", idOrderBaru);
-                            cmdDetail.Parameters.AddWithValue("@id_akun", Session.IdAkun);
-                            cmdDetail.ExecuteNonQuery();
-                        }
-
-                        string queryHapus = "DELETE FROM keranjang WHERE id_akun = @id_akun";
-                        using (var cmdHapus = new NpgsqlCommand(queryHapus, conn))
-                        {
-                            cmdHapus.Parameters.AddWithValue("@id_akun", Session.IdAkun);
-                            cmdHapus.ExecuteNonQuery();
-                        }
-
-                        tx.Commit();
-                        // WAJIB ADA: Ubah penanda sukses agar UI di bawah bisa jalan
-                        isSuksesDatabase = true;
                     }
-                    catch (Exception ex)
-                    {
-                        tx.Rollback();
-                        MessageBox.Show("Database Gagal: " + ex.Message, "Error SQL", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return;
-                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Koneksi Database Gagal: " + ex.Message, "Error Kontroler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
                 }
             }
 
-            // --- BLOK TAMPILAN / UI ---
+            // --- BLOK UI TAMPILAN ---
             if (isSuksesDatabase)
             {
-                MessageBox.Show("Checkout Berhasil! Antrean telah dikirim ke Kasir.", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(pesanResult, "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 try
                 {
                     Form FormInduk = this.FindForm();
@@ -171,6 +138,11 @@ namespace FishIt
                 {
                     MessageBox.Show("Gagal membuka halaman riwayat secara otomatis: " + exUI.Message, "Eror Tampilan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
+            }
+            else
+            {
+                // Menampilkan pesan gagal yang dikirimkan langsung dari logic PostgreSQL (misal: keranjang kosong)
+                MessageBox.Show(pesanResult, "Gagal Checkout", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
         private void DGVKeranjang_CellClick(object sender, DataGridViewCellEventArgs e)

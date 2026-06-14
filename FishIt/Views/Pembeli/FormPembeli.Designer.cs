@@ -249,11 +249,13 @@
             // label2
             // 
             label2.Dock = DockStyle.Top;
+            label2.Font = new Font("Segoe UI Semibold", 20F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label2.ForeColor = Color.White;
             label2.Location = new Point(0, 0);
             label2.Name = "label2";
             label2.Size = new Size(200, 50);
             label2.TabIndex = 0;
-            label2.Text = "label2";
+            label2.Text = "FishIt";
             label2.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // FormPembeli

@@ -36,7 +36,7 @@ namespace FishIt
                              WHERE o.id_akun = @id_akun
                              ORDER BY o.id_order DESC";
 
-            using (var conn = new NpgsqlConnection(FormTambahAkun.Config.ConnString))
+            using (var conn = new NpgsqlConnection(FormLogin.Config.ConnString))
             {
                 try
                 {

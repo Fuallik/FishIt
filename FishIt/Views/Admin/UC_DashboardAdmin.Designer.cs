@@ -28,32 +28,46 @@
         /// </summary>
         private void InitializeComponent()
         {
-            label1 = new Label();
+            lblSelamatDatang = new Label();
+            lblUsername = new Label();
             SuspendLayout();
             // 
-            // label1
+            // lblSelamatDatang
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(277, 171);
-            label1.Name = "label1";
-            label1.Size = new Size(120, 25);
-            label1.TabIndex = 0;
-            label1.Text = "DASHBOARD";
+            lblSelamatDatang.Font = new Font("Segoe UI Semibold", 16F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblSelamatDatang.ForeColor = Color.MidnightBlue;
+            lblSelamatDatang.Location = new Point(18, 21);
+            lblSelamatDatang.Name = "lblSelamatDatang";
+            lblSelamatDatang.Size = new Size(261, 48);
+            lblSelamatDatang.TabIndex = 0;
+            lblSelamatDatang.Text = "Selamat Datang, ";
+            // 
+            // lblUsername
+            // 
+            lblUsername.Font = new Font("Segoe UI Semibold", 16F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblUsername.ForeColor = Color.MidnightBlue;
+            lblUsername.Location = new Point(265, 21);
+            lblUsername.Name = "lblUsername";
+            lblUsername.Size = new Size(498, 48);
+            lblUsername.TabIndex = 1;
+            lblUsername.Text = "Username";
             // 
             // UC_DashboardAdmin
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(label1);
+            BackColor = Color.LightSteelBlue;
+            Controls.Add(lblUsername);
+            Controls.Add(lblSelamatDatang);
             Name = "UC_DashboardAdmin";
             Size = new Size(800, 600);
             Load += UC_DashboardAdmin_Load;
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
 
-        private Label label1;
+        private Label lblSelamatDatang;
+        private Label lblUsername;
     }
 }

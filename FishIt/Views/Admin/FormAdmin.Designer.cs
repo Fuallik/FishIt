@@ -428,11 +428,13 @@
             // label1
             // 
             label1.Dock = DockStyle.Top;
+            label1.Font = new Font("Segoe UI Semibold", 20F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.ForeColor = Color.White;
             label1.Location = new Point(0, 0);
             label1.Name = "label1";
             label1.Size = new Size(200, 50);
             label1.TabIndex = 0;
-            label1.Text = "label1";
+            label1.Text = "FishIt";
             label1.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // panelTB

@@ -48,56 +48,30 @@ namespace FishIt
 
             if (dialog == DialogResult.Yes)
             {
-                using (var conn = new NpgsqlConnection(Config.ConnString))
+                // Cukup Update statusnya saja, sisanya serahkan ke Trigger PostgreSQL!
+                string queryUpdate = @"UPDATE pengiriman_supplier 
+                               SET status_verifikasi = 'Disetujui', tanggal_verifikasi = CURRENT_DATE 
+                               WHERE id_pengiriman_supplier = @id";
+
+                using (var conn = new NpgsqlConnection(Config.ConnString)) // Menggunakan config universal
                 {
-                    conn.Open();
-                    using (var tx = conn.BeginTransaction())
+                    try
                     {
-                        try
+                        conn.Open();
+                        using (var cmd = new NpgsqlCommand(queryUpdate, conn))
                         {
-                            string queryUpdate = @"UPDATE pengiriman_supplier 
-                                                   SET status_verifikasi = 'Disetujui', tanggal_verifikasi = CURRENT_DATE 
-                                                   WHERE id_pengiriman_supplier = @id";
-                            using (var cmd = new NpgsqlCommand(queryUpdate, conn))
-                            {
-                                cmd.Parameters.AddWithValue("@id", idPengajuanTerpilih);
-                                cmd.ExecuteNonQuery();
-                            }
-
-                            decimal jumlahTambah = Convert.ToDecimal(TBKuantitas.Text, System.Globalization.CultureInfo.InvariantCulture);
-
-                            if (idBenihTerpilih > 0)
-                            {
-                                string queryBenih = "UPDATE benih SET jumlah_stok = jumlah_stok + @qty WHERE id_benih = @id_b";
-                                using (var cmdBenih = new NpgsqlCommand(queryBenih, conn))
-                                {
-                                    cmdBenih.Parameters.AddWithValue("@qty", jumlahTambah);
-                                    cmdBenih.Parameters.AddWithValue("@id_b", idBenihTerpilih);
-                                    cmdBenih.ExecuteNonQuery();
-                                }
-                            }
-                            else if (idPakanTerpilih > 0)
-                            {
-                                string queryPakan = "UPDATE pakan SET jumlah_stok = jumlah_stok + @qty WHERE id_pakan = @id_pk";
-                                using (var cmdPakan = new NpgsqlCommand(queryPakan, conn))
-                                {
-                                    cmdPakan.Parameters.AddWithValue("@qty", jumlahTambah);
-                                    cmdPakan.Parameters.AddWithValue("@id_pk", idPakanTerpilih);
-                                    cmdPakan.ExecuteNonQuery();
-                                }
-                            }
-
-                            tx.Commit();
-                            MessageBox.Show("Pengajuan supply BERHASIL DISETUJUI dan stok master bertambah!", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                            this.DialogResult = DialogResult.OK;
-                            this.Close();
+                            cmd.Parameters.AddWithValue("@id", idPengajuanTerpilih);
+                            cmd.ExecuteNonQuery();
                         }
-                        catch (Exception ex)
-                        {
-                            tx.Rollback();
-                            MessageBox.Show("Gagal memproses ACC: " + ex.Message, "Error Transaksi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
+
+                        MessageBox.Show("Pengajuan supply BERHASIL DISETUJUI dan stok master bertambah otomatis!", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        this.DialogResult = DialogResult.OK;
+                        this.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Gagal memproses ACC: " + ex.Message, "Error Database", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
