@@ -34,7 +34,7 @@
             lblJudul.Font = new Font("Segoe UI", 16F, FontStyle.Bold);
             lblJudul.Location = new Point(23, 20);
             lblJudul.Name = "lblJudul";
-            lblJudul.Size = new Size(250, 37);
+            lblJudul.Size = new Size(275, 45);
             lblJudul.TabIndex = 0;
             lblJudul.Text = "Pengajuan Pakan";
             // 
@@ -44,17 +44,16 @@
             lblPakan.Font = new Font("Segoe UI", 10F);
             lblPakan.Location = new Point(23, 80);
             lblPakan.Name = "lblPakan";
-            lblPakan.Size = new Size(120, 25);
+            lblPakan.Size = new Size(120, 28);
             lblPakan.TabIndex = 1;
             lblPakan.Text = "Nama Pakan";
             // 
             // cmbPakan
             // 
-            cmbPakan.DropDownStyle = ComboBoxStyle.DropDown;
             cmbPakan.Font = new Font("Segoe UI", 10F);
             cmbPakan.Location = new Point(23, 108);
             cmbPakan.Name = "cmbPakan";
-            cmbPakan.Size = new Size(300, 33);
+            cmbPakan.Size = new Size(300, 36);
             cmbPakan.TabIndex = 2;
             // 
             // lblKuantitas
@@ -63,7 +62,7 @@
             lblKuantitas.Font = new Font("Segoe UI", 10F);
             lblKuantitas.Location = new Point(23, 160);
             lblKuantitas.Name = "lblKuantitas";
-            lblKuantitas.Size = new Size(150, 25);
+            lblKuantitas.Size = new Size(132, 28);
             lblKuantitas.TabIndex = 3;
             lblKuantitas.Text = "Kuantitas (kg)";
             // 
@@ -72,7 +71,7 @@
             txtKuantitas.Font = new Font("Segoe UI", 10F);
             txtKuantitas.Location = new Point(23, 188);
             txtKuantitas.Name = "txtKuantitas";
-            txtKuantitas.Size = new Size(300, 31);
+            txtKuantitas.Size = new Size(300, 34);
             txtKuantitas.TabIndex = 4;
             // 
             // btnAjukan
@@ -95,7 +94,7 @@
             lblRiwayat.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
             lblRiwayat.Location = new Point(360, 75);
             lblRiwayat.Name = "lblRiwayat";
-            lblRiwayat.Size = new Size(200, 30);
+            lblRiwayat.Size = new Size(243, 30);
             lblRiwayat.TabIndex = 6;
             lblRiwayat.Text = "Pengajuan Pakan Saya";
             // 
@@ -107,6 +106,7 @@
             DGVPengajuan.Location = new Point(360, 110);
             DGVPengajuan.Name = "DGVPengajuan";
             DGVPengajuan.ReadOnly = true;
+            DGVPengajuan.RowHeadersWidth = 62;
             DGVPengajuan.Size = new Size(420, 460);
             DGVPengajuan.TabIndex = 7;
             // 
@@ -114,7 +114,7 @@
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.White;
+            BackColor = Color.LightSteelBlue;
             Controls.Add(DGVPengajuan);
             Controls.Add(lblRiwayat);
             Controls.Add(btnAjukan);

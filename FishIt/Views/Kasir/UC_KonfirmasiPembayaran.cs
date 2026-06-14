@@ -20,6 +20,7 @@ namespace FishIt
             InitializeComponent();
             new AutoScaleHelper(this);
             GridHelper.AturTemaModern(DGVAntrean);
+            PanelHelper.BuatMelengkung(panel6, 20);
         }
 
         protected override void OnLoad(EventArgs e)
@@ -77,7 +78,7 @@ namespace FishIt
         SELECT i.nama_ikan          AS ""Nama Ikan"",
                d.kuantitas          AS ""Jumlah (kg)"",
                d.harga              AS ""Harga/kg"",
-               (d.kuantitas * d.harga) AS ""Subtotal""
+               ROUND((d.kuantitas * d.harga)::numeric, 2) AS ""Subtotal""
         FROM detail_order d
         JOIN ikan i ON i.id_ikan = d.id_ikan
         WHERE d.id_order = @id_order";

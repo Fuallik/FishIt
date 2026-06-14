@@ -36,12 +36,12 @@
             buttonPenebaran = new FontAwesome.Sharp.IconButton();
             buttonPemberianPakan = new FontAwesome.Sharp.IconButton();
             buttonMonitoring = new FontAwesome.Sharp.IconButton();
-            label1 = new Label();
             buttonLogout = new FontAwesome.Sharp.IconButton();
             panelSB = new Panel();
             panelSubDataFishIt = new Panel();
             buttonStok = new FontAwesome.Sharp.IconButton();
             buttonStatusKolam = new FontAwesome.Sharp.IconButton();
+            label1 = new Label();
             panelContent = new Panel();
             panelTB = new Panel();
             panelUsername = new Panel();
@@ -235,16 +235,6 @@
             buttonMonitoring.UseVisualStyleBackColor = false;
             buttonMonitoring.Click += buttonMonitoring_Click;
             // 
-            // label1
-            // 
-            label1.Dock = DockStyle.Top;
-            label1.Location = new Point(0, 0);
-            label1.Name = "label1";
-            label1.Size = new Size(200, 50);
-            label1.TabIndex = 0;
-            label1.Text = "label1";
-            label1.TextAlign = ContentAlignment.MiddleCenter;
-            // 
             // buttonLogout
             // 
             buttonLogout.BackColor = Color.Transparent;
@@ -344,8 +334,21 @@
             buttonStatusKolam.UseVisualStyleBackColor = false;
             buttonStatusKolam.Click += buttonStatusKolam_Click;
             // 
+            // label1
+            // 
+            label1.Dock = DockStyle.Top;
+            label1.Font = new Font("Segoe UI Semibold", 20F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.ForeColor = Color.White;
+            label1.Location = new Point(0, 0);
+            label1.Name = "label1";
+            label1.Size = new Size(200, 50);
+            label1.TabIndex = 12;
+            label1.Text = "FishIt";
+            label1.TextAlign = ContentAlignment.MiddleCenter;
+            // 
             // panelContent
             // 
+            panelContent.BackColor = Color.LightSteelBlue;
             panelContent.Dock = DockStyle.Fill;
             panelContent.Location = new Point(200, 50);
             panelContent.Name = "panelContent";
@@ -400,6 +403,7 @@
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoScroll = true;
+            BackColor = SystemColors.Control;
             ClientSize = new Size(1002, 712);
             Controls.Add(panelContent);
             Controls.Add(panelTB);
@@ -423,7 +427,6 @@
         private FontAwesome.Sharp.IconButton buttonDashboard;
         private FontAwesome.Sharp.IconButton buttonInformasi;
         private Panel panelSubKelolaAkun;
-        private Label label1;
         private FontAwesome.Sharp.IconButton buttonLogout;
         private Panel panelSB;
         private Panel panelSubDataFishIt;
@@ -438,5 +441,6 @@
         private Panel panelUsername;
         private Label lblUsernameTopbar;
         private FontAwesome.Sharp.IconPictureBox iconPictureBox1;
+        private Label label1;
     }
 }

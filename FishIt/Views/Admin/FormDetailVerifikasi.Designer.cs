@@ -199,6 +199,10 @@
             // 
             // btnACC
             // 
+            btnACC.BackColor = Color.CornflowerBlue;
+            btnACC.FlatAppearance.BorderSize = 0;
+            btnACC.FlatStyle = FlatStyle.Flat;
+            btnACC.ForeColor = Color.White;
             btnACC.IconChar = FontAwesome.Sharp.IconChar.None;
             btnACC.IconColor = Color.Black;
             btnACC.IconFont = FontAwesome.Sharp.IconFont.Auto;
@@ -207,7 +211,7 @@
             btnACC.Size = new Size(112, 34);
             btnACC.TabIndex = 38;
             btnACC.Text = "Setuju";
-            btnACC.UseVisualStyleBackColor = true;
+            btnACC.UseVisualStyleBackColor = false;
             btnACC.Click += btnACC_Click;
             // 
             // btnTolak
@@ -215,6 +219,8 @@
             btnTolak.BackColor = Color.CornflowerBlue;
             btnTolak.FlatAppearance.BorderSize = 0;
             btnTolak.FlatStyle = FlatStyle.Flat;
+            btnTolak.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnTolak.ForeColor = Color.White;
             btnTolak.IconChar = FontAwesome.Sharp.IconChar.None;
             btnTolak.IconColor = Color.Black;
             btnTolak.IconFont = FontAwesome.Sharp.IconFont.Auto;
@@ -228,6 +234,10 @@
             // 
             // btnKembali
             // 
+            btnKembali.BackColor = Color.CornflowerBlue;
+            btnKembali.FlatAppearance.BorderSize = 0;
+            btnKembali.FlatStyle = FlatStyle.Flat;
+            btnKembali.ForeColor = Color.White;
             btnKembali.IconChar = FontAwesome.Sharp.IconChar.None;
             btnKembali.IconColor = Color.Black;
             btnKembali.IconFont = FontAwesome.Sharp.IconFont.Auto;
@@ -236,7 +246,7 @@
             btnKembali.Size = new Size(112, 34);
             btnKembali.TabIndex = 40;
             btnKembali.Text = "Kembali";
-            btnKembali.UseVisualStyleBackColor = true;
+            btnKembali.UseVisualStyleBackColor = false;
             btnKembali.Click += btnKembali_Click;
             // 
             // label2

@@ -81,7 +81,7 @@
             buttonRegister.FlatAppearance.BorderSize = 0;
             buttonRegister.FlatStyle = FlatStyle.Flat;
             buttonRegister.ForeColor = Color.RoyalBlue;
-            buttonRegister.Location = new Point(148, 552);
+            buttonRegister.Location = new Point(148, 520);
             buttonRegister.Name = "buttonRegister";
             buttonRegister.Size = new Size(169, 34);
             buttonRegister.TabIndex = 6;

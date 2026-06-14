@@ -41,7 +41,7 @@
             lblJudul.Font = new Font("Segoe UI", 16F, FontStyle.Bold);
             lblJudul.Location = new Point(23, 20);
             lblJudul.Name = "lblJudul";
-            lblJudul.Size = new Size(285, 37);
+            lblJudul.Size = new Size(322, 45);
             lblJudul.TabIndex = 0;
             lblJudul.Text = "Pengiriman Pesanan";
             // 
@@ -53,6 +53,7 @@
             DGVPengiriman.Location = new Point(23, 80);
             DGVPengiriman.Name = "DGVPengiriman";
             DGVPengiriman.ReadOnly = true;
+            DGVPengiriman.RowHeadersWidth = 62;
             DGVPengiriman.Size = new Size(754, 380);
             DGVPengiriman.TabIndex = 1;
             // 
@@ -102,7 +103,7 @@
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.White;
+            BackColor = Color.LightSteelBlue;
             Controls.Add(btnRefresh);
             Controls.Add(btnTandaiDiterima);
             Controls.Add(btnMulaiKirim);

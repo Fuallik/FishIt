@@ -36,7 +36,7 @@
             lblJudul.Font = new Font("Segoe UI", 16F, FontStyle.Bold);
             lblJudul.Location = new Point(23, 20);
             lblJudul.Name = "lblJudul";
-            lblJudul.Size = new Size(250, 37);
+            lblJudul.Size = new Size(270, 45);
             lblJudul.TabIndex = 0;
             lblJudul.Text = "Pengajuan Benih";
             // 
@@ -46,18 +46,17 @@
             lblJenisIkan.Font = new Font("Segoe UI", 10F);
             lblJenisIkan.Location = new Point(23, 75);
             lblJenisIkan.Name = "lblJenisIkan";
-            lblJenisIkan.Size = new Size(80, 25);
+            lblJenisIkan.Size = new Size(94, 28);
             lblJenisIkan.TabIndex = 1;
             lblJenisIkan.Text = "Jenis Ikan";
             // 
             // cmbJenisIkan
             // 
-            // DropDown (bukan DropDownList) supaya bisa diketik manual ATAU dipilih.
             cmbJenisIkan.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbJenisIkan.Font = new Font("Segoe UI", 10F);
             cmbJenisIkan.Location = new Point(23, 103);
             cmbJenisIkan.Name = "cmbJenisIkan";
-            cmbJenisIkan.Size = new Size(300, 33);
+            cmbJenisIkan.Size = new Size(300, 36);
             cmbJenisIkan.TabIndex = 2;
             // 
             // lblNama
@@ -66,17 +65,16 @@
             lblNama.Font = new Font("Segoe UI", 10F);
             lblNama.Location = new Point(23, 150);
             lblNama.Name = "lblNama";
-            lblNama.Size = new Size(120, 25);
+            lblNama.Size = new Size(64, 28);
             lblNama.TabIndex = 3;
             lblNama.Text = "Nama";
             // 
             // cmbNama
             // 
-            cmbNama.DropDownStyle = ComboBoxStyle.DropDown;
             cmbNama.Font = new Font("Segoe UI", 10F);
             cmbNama.Location = new Point(23, 178);
             cmbNama.Name = "cmbNama";
-            cmbNama.Size = new Size(300, 33);
+            cmbNama.Size = new Size(300, 36);
             cmbNama.TabIndex = 4;
             cmbNama.SelectedIndexChanged += cmbNama_SelectedIndexChanged;
             // 
@@ -86,7 +84,7 @@
             lblKuantitas.Font = new Font("Segoe UI", 10F);
             lblKuantitas.Location = new Point(23, 225);
             lblKuantitas.Name = "lblKuantitas";
-            lblKuantitas.Size = new Size(150, 25);
+            lblKuantitas.Size = new Size(132, 28);
             lblKuantitas.TabIndex = 5;
             lblKuantitas.Text = "Kuantitas (kg)";
             // 
@@ -95,7 +93,7 @@
             txtKuantitas.Font = new Font("Segoe UI", 10F);
             txtKuantitas.Location = new Point(23, 253);
             txtKuantitas.Name = "txtKuantitas";
-            txtKuantitas.Size = new Size(300, 31);
+            txtKuantitas.Size = new Size(300, 34);
             txtKuantitas.TabIndex = 6;
             // 
             // btnAjukan
@@ -118,7 +116,7 @@
             lblRiwayat.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
             lblRiwayat.Location = new Point(360, 75);
             lblRiwayat.Name = "lblRiwayat";
-            lblRiwayat.Size = new Size(200, 30);
+            lblRiwayat.Size = new Size(239, 30);
             lblRiwayat.TabIndex = 8;
             lblRiwayat.Text = "Pengajuan Benih Saya";
             // 
@@ -130,6 +128,7 @@
             DGVPengajuan.Location = new Point(360, 110);
             DGVPengajuan.Name = "DGVPengajuan";
             DGVPengajuan.ReadOnly = true;
+            DGVPengajuan.RowHeadersWidth = 62;
             DGVPengajuan.Size = new Size(420, 460);
             DGVPengajuan.TabIndex = 9;
             // 
@@ -137,7 +136,7 @@
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.White;
+            BackColor = Color.LightSteelBlue;
             Controls.Add(DGVPengajuan);
             Controls.Add(lblRiwayat);
             Controls.Add(btnAjukan);

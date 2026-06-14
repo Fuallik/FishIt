@@ -21,6 +21,8 @@ namespace FishIt.Views.Kasir
             new AutoScaleHelper(this);
             GridHelper.AturTemaModern(DGVDetail);
             GridHelper.AturTemaModern(DGVRiwayat);
+            PanelHelper.BuatMelengkung(panel1, 20);
+            PanelHelper.BuatMelengkung(panel6, 20);
         }
 
         public static class Config
@@ -80,7 +82,7 @@ namespace FishIt.Views.Kasir
                 decimal totalHarga = Convert.ToDecimal(DGVRiwayat.Rows[e.RowIndex].Cells["total_harga"].Value);
 
                 // Update teks label total dengan format Rupiah
-                labelTotal.Text = "Rp " + totalHarga.ToString("N0");
+                labelTotal.Text = "Rp " + totalHarga.ToString("N2");
 
                 // Ambil rincian item ikan untuk order ini
                 LoadDetailRiwayat(idOrderTerpilih);
@@ -92,13 +94,14 @@ namespace FishIt.Views.Kasir
         {
             // Query mengambil daftar ikan, kuantitas, harga, dan subtotal dari detail_order
             string query = @"
-                SELECT i.nama_ikan          AS ""Nama Ikan"",
-                       d.kuantitas          AS ""Jumlah (kg)"",
-                       d.harga              AS ""Harga/kg"",
-                       (d.kuantitas * d.harga) AS ""Subtotal""
+                    SELECT 
+                    i.nama_ikan AS ""Nama Ikan"",
+                    d.kuantitas AS ""Jumlah (kg)"",
+                    d.harga AS ""Harga/kg"",
+                    ROUND((d.kuantitas * d.harga)::numeric, 2) AS ""Subtotal""
                 FROM detail_order d
                 JOIN ikan i ON i.id_ikan = d.id_ikan
-                WHERE d.id_order = @id_order";
+                WHERE d.id_order = @id_order;";
 
             using (var conn = new NpgsqlConnection(Config.ConnString))
             {

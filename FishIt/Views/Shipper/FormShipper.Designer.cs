@@ -33,9 +33,16 @@
             panelSB = new Panel();
             buttonLogoutAdmin = new Button();
             buttonDashboardShipper = new Button();
+            labelFish = new Label();
             panelNB = new Panel();
             panelContent = new Panel();
+            panelUsername = new Panel();
+            lblUsernameTopbar = new Label();
+            iconPictureBox1 = new FontAwesome.Sharp.IconPictureBox();
             panelSB.SuspendLayout();
+            panelNB.SuspendLayout();
+            panelUsername.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)iconPictureBox1).BeginInit();
             SuspendLayout();
             // 
             // buttonPengirimanPesanan
@@ -44,7 +51,9 @@
             buttonPengirimanPesanan.Dock = DockStyle.Top;
             buttonPengirimanPesanan.FlatAppearance.BorderSize = 0;
             buttonPengirimanPesanan.FlatStyle = FlatStyle.Flat;
-            buttonPengirimanPesanan.Location = new Point(0, 50);
+            buttonPengirimanPesanan.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            buttonPengirimanPesanan.ForeColor = Color.White;
+            buttonPengirimanPesanan.Location = new Point(0, 100);
             buttonPengirimanPesanan.Name = "buttonPengirimanPesanan";
             buttonPengirimanPesanan.Size = new Size(200, 50);
             buttonPengirimanPesanan.TabIndex = 1;
@@ -58,9 +67,11 @@
             buttonRiwayatPengirimanPesanan.Dock = DockStyle.Top;
             buttonRiwayatPengirimanPesanan.FlatAppearance.BorderSize = 0;
             buttonRiwayatPengirimanPesanan.FlatStyle = FlatStyle.Flat;
-            buttonRiwayatPengirimanPesanan.Location = new Point(0, 100);
+            buttonRiwayatPengirimanPesanan.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            buttonRiwayatPengirimanPesanan.ForeColor = Color.White;
+            buttonRiwayatPengirimanPesanan.Location = new Point(0, 150);
             buttonRiwayatPengirimanPesanan.Name = "buttonRiwayatPengirimanPesanan";
-            buttonRiwayatPengirimanPesanan.Size = new Size(200, 70);
+            buttonRiwayatPengirimanPesanan.Size = new Size(200, 50);
             buttonRiwayatPengirimanPesanan.TabIndex = 3;
             buttonRiwayatPengirimanPesanan.Text = "Riwayat Pengiriman Pesanan";
             buttonRiwayatPengirimanPesanan.UseVisualStyleBackColor = false;
@@ -73,6 +84,7 @@
             panelSB.Controls.Add(buttonRiwayatPengirimanPesanan);
             panelSB.Controls.Add(buttonPengirimanPesanan);
             panelSB.Controls.Add(buttonDashboardShipper);
+            panelSB.Controls.Add(labelFish);
             panelSB.Dock = DockStyle.Left;
             panelSB.Location = new Point(0, 0);
             panelSB.Name = "panelSB";
@@ -85,6 +97,8 @@
             buttonLogoutAdmin.Dock = DockStyle.Bottom;
             buttonLogoutAdmin.FlatAppearance.BorderSize = 0;
             buttonLogoutAdmin.FlatStyle = FlatStyle.Flat;
+            buttonLogoutAdmin.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            buttonLogoutAdmin.ForeColor = Color.White;
             buttonLogoutAdmin.Location = new Point(0, 662);
             buttonLogoutAdmin.Name = "buttonLogoutAdmin";
             buttonLogoutAdmin.Size = new Size(200, 50);
@@ -100,7 +114,7 @@
             buttonDashboardShipper.FlatStyle = FlatStyle.Flat;
             buttonDashboardShipper.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             buttonDashboardShipper.ForeColor = Color.White;
-            buttonDashboardShipper.Location = new Point(0, 0);
+            buttonDashboardShipper.Location = new Point(0, 50);
             buttonDashboardShipper.Name = "buttonDashboardShipper";
             buttonDashboardShipper.Size = new Size(200, 50);
             buttonDashboardShipper.TabIndex = 0;
@@ -108,9 +122,22 @@
             buttonDashboardShipper.UseVisualStyleBackColor = true;
             buttonDashboardShipper.Click += buttonDashboard_Click;
             // 
+            // labelFish
+            // 
+            labelFish.Dock = DockStyle.Top;
+            labelFish.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            labelFish.ForeColor = Color.White;
+            labelFish.Location = new Point(0, 0);
+            labelFish.Name = "labelFish";
+            labelFish.Size = new Size(200, 50);
+            labelFish.TabIndex = 7;
+            labelFish.Text = "FishIt";
+            labelFish.TextAlign = ContentAlignment.MiddleCenter;
+            // 
             // panelNB
             // 
-            panelNB.BackColor = Color.CornflowerBlue;
+            panelNB.BackColor = Color.LightSteelBlue;
+            panelNB.Controls.Add(panelUsername);
             panelNB.Dock = DockStyle.Top;
             panelNB.Location = new Point(200, 0);
             panelNB.Name = "panelNB";
@@ -119,12 +146,45 @@
             // 
             // panelContent
             // 
-            panelContent.BackColor = Color.White;
+            panelContent.BackColor = Color.LightSteelBlue;
             panelContent.Dock = DockStyle.Fill;
             panelContent.Location = new Point(200, 50);
             panelContent.Name = "panelContent";
             panelContent.Size = new Size(802, 662);
             panelContent.TabIndex = 10;
+            // 
+            // panelUsername
+            // 
+            panelUsername.Controls.Add(lblUsernameTopbar);
+            panelUsername.Controls.Add(iconPictureBox1);
+            panelUsername.Location = new Point(6, 3);
+            panelUsername.Name = "panelUsername";
+            panelUsername.Size = new Size(796, 44);
+            panelUsername.TabIndex = 11;
+            // 
+            // lblUsernameTopbar
+            // 
+            lblUsernameTopbar.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblUsernameTopbar.ForeColor = Color.MidnightBlue;
+            lblUsernameTopbar.Location = new Point(47, 6);
+            lblUsernameTopbar.Name = "lblUsernameTopbar";
+            lblUsernameTopbar.Size = new Size(746, 38);
+            lblUsernameTopbar.TabIndex = 1;
+            lblUsernameTopbar.Text = "Username";
+            // 
+            // iconPictureBox1
+            // 
+            iconPictureBox1.BackColor = Color.LightSteelBlue;
+            iconPictureBox1.ForeColor = Color.MidnightBlue;
+            iconPictureBox1.IconChar = FontAwesome.Sharp.IconChar.UserTie;
+            iconPictureBox1.IconColor = Color.MidnightBlue;
+            iconPictureBox1.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            iconPictureBox1.IconSize = 38;
+            iconPictureBox1.Location = new Point(3, 3);
+            iconPictureBox1.Name = "iconPictureBox1";
+            iconPictureBox1.Size = new Size(38, 38);
+            iconPictureBox1.TabIndex = 0;
+            iconPictureBox1.TabStop = false;
             // 
             // FormShipper
             // 
@@ -137,7 +197,11 @@
             FormBorderStyle = FormBorderStyle.None;
             Name = "FormShipper";
             Text = "FormShipper";
+            Load += FormShipper_Load;
             panelSB.ResumeLayout(false);
+            panelNB.ResumeLayout(false);
+            panelUsername.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)iconPictureBox1).EndInit();
             ResumeLayout(false);
         }
 
@@ -151,5 +215,9 @@
         private Button buttonDashboardShipper;
         private Panel panelNB;
         private Panel panelContent;
+        private Label labelFish;
+        private Panel panelUsername;
+        private Label lblUsernameTopbar;
+        private FontAwesome.Sharp.IconPictureBox iconPictureBox1;
     }
 }

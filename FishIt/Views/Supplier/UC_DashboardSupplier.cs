@@ -25,8 +25,15 @@ namespace FishIt
 
         private void UC_DashboardSupplier_Load(object sender, EventArgs e)
         {
-            lblSelamatDatang.Text = $"Selamat datang, {Session.NamaUser}";
             HitungRingkasan();
+            if (!string.IsNullOrEmpty(Session.Username))
+            {
+                lblUsername.Text = Session.Username;
+            }
+            else
+            {
+                lblUsername.Text = "Guest";
+            }
         }
 
         /// <summary>

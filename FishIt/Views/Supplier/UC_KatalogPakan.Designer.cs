@@ -29,7 +29,7 @@
             lblJudul.Font = new Font("Segoe UI", 16F, FontStyle.Bold);
             lblJudul.Location = new Point(23, 20);
             lblJudul.Name = "lblJudul";
-            lblJudul.Size = new Size(220, 37);
+            lblJudul.Size = new Size(235, 45);
             lblJudul.TabIndex = 0;
             lblJudul.Text = "Katalog Pakan";
             // 
@@ -41,6 +41,7 @@
             DGVKatalog.Location = new Point(23, 80);
             DGVKatalog.Name = "DGVKatalog";
             DGVKatalog.ReadOnly = true;
+            DGVKatalog.RowHeadersWidth = 62;
             DGVKatalog.Size = new Size(754, 400);
             DGVKatalog.TabIndex = 1;
             // 
@@ -62,7 +63,7 @@
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.White;
+            BackColor = Color.LightSteelBlue;
             Controls.Add(btnRefresh);
             Controls.Add(DGVKatalog);
             Controls.Add(lblJudul);

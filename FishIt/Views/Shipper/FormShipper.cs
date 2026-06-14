@@ -1,4 +1,5 @@
-﻿using FishIt.UserControls.Shipper;
+﻿using FishIt.Helpers;
+using FishIt.UserControls.Shipper;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -40,6 +41,14 @@ namespace FishIt
         private void FormShipper_Load(object sender, EventArgs e)
         {
             LoadPage(new UC_DashboardShipper());
+            if (!string.IsNullOrEmpty(Session.Username))
+            {
+                lblUsernameTopbar.Text = Session.Username;
+            }
+            else
+            {
+                lblUsernameTopbar.Text = "Guest";
+            }
             DebugControls(this);
             panelContent.Visible = false;
         }

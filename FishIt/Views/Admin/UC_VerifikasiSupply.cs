@@ -34,7 +34,7 @@ namespace FishIt
         }
         private void MuatPengajuanSupplier()
         {
-            string query = @"SELECT p.id_pengiriman_supplier, a.nama,  p.nama, p.kuantitas, p.tipe, p.tanggal_kirim, p.status_verifikasi, p.tanggal_verifikasi
+            string query = @"SELECT p.id_pengiriman_supplier as ""ID Pengiriman Supplier"", a.nama as ""Nama Supplier"",  p.nama as ""Nama Barang"", p.kuantitas as ""Kuantitas"", p.tipe as ""Tipe"", p.tanggal_kirim as ""Tanggal Kirim"", p.status_verifikasi as ""Status Verifikasi"", p.tanggal_verifikasi as ""Tanggal Verifikasi""
                              FROM pengiriman_supplier p
                              JOIN akun a ON p.id_akun = a.id_akun
                              WHERE p.status_verifikasi = 'Pending'

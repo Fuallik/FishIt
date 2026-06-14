@@ -17,7 +17,6 @@
 
         private void InitializeComponent()
         {
-            lblSelamatDatang = new Label();
             panelMenunggu = new Panel();
             lblAngkaMenunggu = new Label();
             lblLabelMenunggu = new Label();
@@ -27,20 +26,12 @@
             panelDitolak = new Panel();
             lblAngkaDitolak = new Label();
             lblLabelDitolak = new Label();
+            lblSelamatDatang = new Label();
+            lblUsername = new Label();
             panelMenunggu.SuspendLayout();
             panelDisetujui.SuspendLayout();
             panelDitolak.SuspendLayout();
             SuspendLayout();
-            // 
-            // lblSelamatDatang
-            // 
-            lblSelamatDatang.AutoSize = true;
-            lblSelamatDatang.Font = new Font("Segoe UI", 16F, FontStyle.Bold);
-            lblSelamatDatang.Location = new Point(23, 25);
-            lblSelamatDatang.Name = "lblSelamatDatang";
-            lblSelamatDatang.Size = new Size(280, 37);
-            lblSelamatDatang.TabIndex = 0;
-            lblSelamatDatang.Text = "Dashboard Supplier";
             // 
             // panelMenunggu
             // 
@@ -59,7 +50,7 @@
             lblAngkaMenunggu.ForeColor = Color.White;
             lblAngkaMenunggu.Location = new Point(20, 20);
             lblAngkaMenunggu.Name = "lblAngkaMenunggu";
-            lblAngkaMenunggu.Size = new Size(43, 62);
+            lblAngkaMenunggu.Size = new Size(64, 74);
             lblAngkaMenunggu.TabIndex = 0;
             lblAngkaMenunggu.Text = "0";
             // 
@@ -70,7 +61,7 @@
             lblLabelMenunggu.ForeColor = Color.White;
             lblLabelMenunggu.Location = new Point(20, 90);
             lblLabelMenunggu.Name = "lblLabelMenunggu";
-            lblLabelMenunggu.Size = new Size(100, 25);
+            lblLabelMenunggu.Size = new Size(119, 30);
             lblLabelMenunggu.TabIndex = 1;
             lblLabelMenunggu.Text = "Menunggu";
             // 
@@ -91,7 +82,7 @@
             lblAngkaDisetujui.ForeColor = Color.White;
             lblAngkaDisetujui.Location = new Point(20, 20);
             lblAngkaDisetujui.Name = "lblAngkaDisetujui";
-            lblAngkaDisetujui.Size = new Size(43, 62);
+            lblAngkaDisetujui.Size = new Size(64, 74);
             lblAngkaDisetujui.TabIndex = 0;
             lblAngkaDisetujui.Text = "0";
             // 
@@ -102,7 +93,7 @@
             lblLabelDisetujui.ForeColor = Color.White;
             lblLabelDisetujui.Location = new Point(20, 90);
             lblLabelDisetujui.Name = "lblLabelDisetujui";
-            lblLabelDisetujui.Size = new Size(100, 25);
+            lblLabelDisetujui.Size = new Size(95, 30);
             lblLabelDisetujui.TabIndex = 1;
             lblLabelDisetujui.Text = "Disetujui";
             // 
@@ -123,7 +114,7 @@
             lblAngkaDitolak.ForeColor = Color.White;
             lblAngkaDitolak.Location = new Point(20, 20);
             lblAngkaDitolak.Name = "lblAngkaDitolak";
-            lblAngkaDitolak.Size = new Size(43, 62);
+            lblAngkaDitolak.Size = new Size(64, 74);
             lblAngkaDitolak.TabIndex = 0;
             lblAngkaDitolak.Text = "0";
             // 
@@ -134,19 +125,40 @@
             lblLabelDitolak.ForeColor = Color.White;
             lblLabelDitolak.Location = new Point(20, 90);
             lblLabelDitolak.Name = "lblLabelDitolak";
-            lblLabelDitolak.Size = new Size(100, 25);
+            lblLabelDitolak.Size = new Size(80, 30);
             lblLabelDitolak.TabIndex = 1;
             lblLabelDitolak.Text = "Ditolak";
+            // 
+            // lblSelamatDatang
+            // 
+            lblSelamatDatang.Font = new Font("Segoe UI Semibold", 16F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblSelamatDatang.ForeColor = Color.MidnightBlue;
+            lblSelamatDatang.Location = new Point(23, 24);
+            lblSelamatDatang.Name = "lblSelamatDatang";
+            lblSelamatDatang.Size = new Size(261, 48);
+            lblSelamatDatang.TabIndex = 7;
+            lblSelamatDatang.Text = "Selamat Datang, ";
+            // 
+            // lblUsername
+            // 
+            lblUsername.Font = new Font("Segoe UI Semibold", 16F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblUsername.ForeColor = Color.MidnightBlue;
+            lblUsername.Location = new Point(275, 24);
+            lblUsername.Name = "lblUsername";
+            lblUsername.Size = new Size(504, 48);
+            lblUsername.TabIndex = 6;
+            lblUsername.Text = "Username";
             // 
             // UC_DashboardSupplier
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.White;
+            BackColor = Color.LightSteelBlue;
+            Controls.Add(lblSelamatDatang);
+            Controls.Add(lblUsername);
             Controls.Add(panelDitolak);
             Controls.Add(panelDisetujui);
             Controls.Add(panelMenunggu);
-            Controls.Add(lblSelamatDatang);
             Name = "UC_DashboardSupplier";
             Size = new Size(800, 600);
             Load += UC_DashboardSupplier_Load;
@@ -157,12 +169,9 @@
             panelDitolak.ResumeLayout(false);
             panelDitolak.PerformLayout();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
-
-        private Label lblSelamatDatang;
         private Panel panelMenunggu;
         private Label lblAngkaMenunggu;
         private Label lblLabelMenunggu;
@@ -172,5 +181,7 @@
         private Panel panelDitolak;
         private Label lblAngkaDitolak;
         private Label lblLabelDitolak;
+        private Label lblSelamatDatang;
+        private Label lblUsername;
     }
 }

@@ -20,12 +20,21 @@ namespace FishIt.UserControls.Shipper
             PanelHelper.BuatMelengkung(panelDiproses, 20);
             PanelHelper.BuatMelengkung(panelDikirim, 20);
             PanelHelper.BuatMelengkung(panelSelesai, 20);
+            new AutoScaleHelper(this);
         }
 
         private void UC_DashboardShipper_Load(object sender, EventArgs e)
         {
-            lblSelamatDatang.Text = $"Selamat datang, {Session.NamaUser}";
             HitungRingkasan();
+            if (!string.IsNullOrEmpty(Session.Username))
+            {
+                lblUsername.Text = Session.Username;
+            }
+            else
+            {
+                lblUsername.Text = "Guest";
+            }
+            new AutoScaleHelper(this);
         }
 
         /// <summary>

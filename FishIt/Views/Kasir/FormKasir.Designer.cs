@@ -159,15 +159,18 @@
             // label1
             // 
             label1.Dock = DockStyle.Top;
+            label1.Font = new Font("Segoe UI Semibold", 20F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.ForeColor = Color.White;
             label1.Location = new Point(0, 0);
             label1.Name = "label1";
             label1.Size = new Size(200, 50);
-            label1.TabIndex = 0;
-            label1.Text = "label1";
+            label1.TabIndex = 13;
+            label1.Text = "FishIt";
             label1.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // panelContent
             // 
+            panelContent.BackColor = Color.LightSteelBlue;
             panelContent.Dock = DockStyle.Fill;
             panelContent.Location = new Point(200, 50);
             panelContent.Name = "panelContent";
@@ -222,7 +225,7 @@
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.White;
+            BackColor = SystemColors.Control;
             ClientSize = new Size(1002, 712);
             Controls.Add(panelContent);
             Controls.Add(panelTB);
@@ -244,12 +247,12 @@
         private FontAwesome.Sharp.IconButton buttonLogout;
         private FontAwesome.Sharp.IconButton buttonKonfirmasiPembayaran;
         private FontAwesome.Sharp.IconButton buttonDashboard;
-        private Label label1;
         private FontAwesome.Sharp.IconButton buttonRiwayatPembayaran;
         private Panel panelContent;
         private Panel panelTB;
         private Panel panelUsername;
         private Label lblUsernameTopbar;
         private FontAwesome.Sharp.IconPictureBox iconPictureBox1;
+        private Label label1;
     }
 }

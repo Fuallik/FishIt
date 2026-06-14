@@ -29,7 +29,7 @@
             lblJudul.Font = new Font("Segoe UI", 16F, FontStyle.Bold);
             lblJudul.Location = new Point(23, 20);
             lblJudul.Name = "lblJudul";
-            lblJudul.Size = new Size(330, 37);
+            lblJudul.Size = new Size(319, 45);
             lblJudul.TabIndex = 0;
             lblJudul.Text = "Riwayat Pengiriman";
             // 
@@ -41,6 +41,7 @@
             DGVRiwayat.Location = new Point(23, 80);
             DGVRiwayat.Name = "DGVRiwayat";
             DGVRiwayat.ReadOnly = true;
+            DGVRiwayat.RowHeadersWidth = 62;
             DGVRiwayat.Size = new Size(754, 400);
             DGVRiwayat.TabIndex = 1;
             // 
@@ -62,7 +63,7 @@
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.White;
+            BackColor = Color.LightSteelBlue;
             Controls.Add(btnRefresh);
             Controls.Add(DGVRiwayat);
             Controls.Add(lblJudul);
