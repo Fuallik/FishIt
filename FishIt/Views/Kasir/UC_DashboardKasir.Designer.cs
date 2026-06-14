@@ -28,32 +28,45 @@
         /// </summary>
         private void InitializeComponent()
         {
-            label1 = new Label();
+            lblUsername = new Label();
+            lblSelamatDatang = new Label();
             SuspendLayout();
             // 
-            // label1
+            // lblUsername
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(330, 171);
-            label1.Name = "label1";
-            label1.Size = new Size(173, 25);
-            label1.TabIndex = 0;
-            label1.Text = "DASHBOARD KASIR";
+            lblUsername.Font = new Font("Segoe UI Semibold", 16F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblUsername.ForeColor = Color.MidnightBlue;
+            lblUsername.Location = new Point(268, 23);
+            lblUsername.Name = "lblUsername";
+            lblUsername.Size = new Size(498, 48);
+            lblUsername.TabIndex = 3;
+            lblUsername.Text = "Username";
+            // 
+            // lblSelamatDatang
+            // 
+            lblSelamatDatang.Font = new Font("Segoe UI Semibold", 16F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblSelamatDatang.ForeColor = Color.MidnightBlue;
+            lblSelamatDatang.Location = new Point(21, 23);
+            lblSelamatDatang.Name = "lblSelamatDatang";
+            lblSelamatDatang.Size = new Size(261, 48);
+            lblSelamatDatang.TabIndex = 2;
+            lblSelamatDatang.Text = "Selamat Datang, ";
             // 
             // UC_DashboardKasir
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.LightSteelBlue;
-            Controls.Add(label1);
+            Controls.Add(lblUsername);
+            Controls.Add(lblSelamatDatang);
             Name = "UC_DashboardKasir";
             Size = new Size(800, 600);
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
 
-        private Label label1;
+        private Label lblUsername;
+        private Label lblSelamatDatang;
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FishIt.Helpers;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,6 +14,14 @@ namespace FishIt.UserControls.PegawaiTambak
         public UC_DashboardPegawaiTambak()
         {
             InitializeComponent();
+            if (!string.IsNullOrEmpty(Session.Username))
+            {
+                lblUsername.Text = Session.Username;
+            }
+            else
+            {
+                lblUsername.Text = "Guest";
+            }
             new AutoScaleHelper(this);
         }
     }
