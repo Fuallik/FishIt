@@ -112,6 +112,7 @@
             TBPassword.Name = "TBPassword";
             TBPassword.Size = new Size(335, 24);
             TBPassword.TabIndex = 9;
+            TBPassword.UseSystemPasswordChar = true;
             // 
             // TBUsername
             // 
@@ -151,6 +152,7 @@
             TBKonfirmasi.Name = "TBKonfirmasi";
             TBKonfirmasi.Size = new Size(335, 24);
             TBKonfirmasi.TabIndex = 11;
+            TBKonfirmasi.UseSystemPasswordChar = true;
             // 
             // label5
             // 
