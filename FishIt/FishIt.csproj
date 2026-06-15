@@ -15,11 +15,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\Admin\" />
     <Folder Include="Controllers\Kasir\" />
     <Folder Include="Controllers\Supplier\" />
     <Folder Include="Controllers\Shipper\" />
-    <Folder Include="Controllers\Pembeli\" />
   </ItemGroup>
 
 </Project>

@@ -169,7 +169,6 @@
             Controls.Add(DGVPengiriman);
             Name = "UC_Pengiriman";
             Size = new Size(800, 600);
-            Load += UC_Pengiriman_Load;
             ((System.ComponentModel.ISupportInitialize)DGVPengiriman).EndInit();
             panelDiproses.ResumeLayout(false);
             panelDikirim.ResumeLayout(false);

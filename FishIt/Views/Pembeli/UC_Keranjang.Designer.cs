@@ -73,7 +73,6 @@
             CBMetodePembayaran.Name = "CBMetodePembayaran";
             CBMetodePembayaran.Size = new Size(182, 33);
             CBMetodePembayaran.TabIndex = 3;
-            CBMetodePembayaran.SelectedIndexChanged += CBMetodePembayaran_SelectedIndexChanged;
             // 
             // UC_Keranjang
             // 
@@ -85,7 +84,6 @@
             Controls.Add(DGVKeranjang);
             Name = "UC_Keranjang";
             Size = new Size(800, 600);
-            Load += UC_Keranjang_Load;
             ((System.ComponentModel.ISupportInitialize)DGVKeranjang).EndInit();
             ResumeLayout(false);
         }

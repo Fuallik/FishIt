@@ -337,7 +337,6 @@
             Controls.Add(panelJumlahIkan);
             Name = "UC_StokIkan";
             Size = new Size(800, 600);
-            Load += UC_StokIkan_Load;
             panelJumlahIkan.ResumeLayout(false);
             panelJumlahIkan.PerformLayout();
             panelStatistikIkan.ResumeLayout(false);

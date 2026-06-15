@@ -75,7 +75,6 @@
             Name = "FormDetailBenih";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "FormDetailBenih";
-            Load += FormDetailBenih_Load;
             ((System.ComponentModel.ISupportInitialize)DGVBenih).EndInit();
             ResumeLayout(false);
         }

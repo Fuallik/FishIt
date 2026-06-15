@@ -58,7 +58,6 @@
             TBIDPengajuan.Name = "TBIDPengajuan";
             TBIDPengajuan.Size = new Size(181, 31);
             TBIDPengajuan.TabIndex = 7;
-            TBIDPengajuan.TextChanged += TBIDPengajuan_TextChanged;
             // 
             // labelJumlahAkun
             // 
@@ -106,7 +105,6 @@
             Controls.Add(panelMonitoring);
             Name = "UC_VerifikasiSupply";
             Size = new Size(800, 600);
-            Load += UC_VerifikasiSupply_Load;
             panelMonitoring.ResumeLayout(false);
             panelMonitoring.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)DGVPengajuan).EndInit();

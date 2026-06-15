@@ -122,7 +122,6 @@
             TBUsername.Name = "TBUsername";
             TBUsername.Size = new Size(335, 24);
             TBUsername.TabIndex = 7;
-            TBUsername.TextChanged += TBUsername_TextChanged;
             // 
             // label3
             // 
@@ -333,7 +332,6 @@
             Name = "FormTambahAkun";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "FormTambahAkun";
-            Load += FormTambahAkun_Load;
             ResumeLayout(false);
             PerformLayout();
         }

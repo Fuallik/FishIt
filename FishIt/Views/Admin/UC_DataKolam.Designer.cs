@@ -178,7 +178,6 @@
             Controls.Add(DGVKolam);
             Name = "UC_DataKolam";
             Size = new Size(800, 600);
-            Load += UC_DataKolam_Load;
             ((System.ComponentModel.ISupportInitialize)DGVKolam).EndInit();
             panelJumlahKolam.ResumeLayout(false);
             panelJumlahKolam.PerformLayout();

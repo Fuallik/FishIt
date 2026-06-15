@@ -172,7 +172,6 @@
             Controls.Add(panelMonitoring);
             Name = "UC_Monitoring";
             Size = new Size(800, 600);
-            Load += UC_Monitoring_Load;
             panelMonitoring.ResumeLayout(false);
             panelMonitoring.PerformLayout();
             panelSatuBulan.ResumeLayout(false);

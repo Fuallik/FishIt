@@ -50,7 +50,6 @@ namespace FishIt
                 lblUsernameTopbar.Text = "Guest";
             }
             DebugControls(this);
-            panelContent.Visible = false;
         }
 
         private void LoadPage(UserControl page)

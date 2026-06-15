@@ -144,7 +144,6 @@
             TBSupplier.Name = "TBSupplier";
             TBSupplier.Size = new Size(335, 24);
             TBSupplier.TabIndex = 26;
-            TBSupplier.TextChanged += TBSupplier_TextChanged;
             // 
             // labelNama
             // 
@@ -297,7 +296,6 @@
             FormBorderStyle = FormBorderStyle.None;
             Name = "FormDetailVerifikasi";
             StartPosition = FormStartPosition.CenterScreen;
-            Load += UC_DetailVerifikasi_Load;
             ResumeLayout(false);
             PerformLayout();
         }

@@ -81,7 +81,6 @@
             panelUtama.Padding = new Padding(20);
             panelUtama.Size = new Size(800, 600);
             panelUtama.TabIndex = 1;
-            panelUtama.Paint += panelUtama_Paint;
             // 
             // DGVDataAkun
             // 
@@ -94,7 +93,6 @@
             DGVDataAkun.RowHeadersWidth = 62;
             DGVDataAkun.Size = new Size(754, 258);
             DGVDataAkun.TabIndex = 5;
-            DGVDataAkun.CellContentClick += dataGridView1_CellContentClick;
             // 
             // panelAkunPembeli
             // 
@@ -277,7 +275,6 @@
             panelJumlahAkun.Name = "panelJumlahAkun";
             panelJumlahAkun.Size = new Size(757, 135);
             panelJumlahAkun.TabIndex = 0;
-            panelJumlahAkun.Paint += panelJumlahAkun_Paint;
             // 
             // panelStatistik
             // 
@@ -372,7 +369,6 @@
             Controls.Add(panelUtama);
             Name = "UC_DataAkun";
             Size = new Size(800, 600);
-            Load += UC_KelolaAkun_Load;
             panelUtama.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)DGVDataAkun).EndInit();
             panelAkunPembeli.ResumeLayout(false);

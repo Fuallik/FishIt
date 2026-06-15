@@ -99,7 +99,6 @@
             Name = "FormHapusAkun";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "FormHapusAkun";
-            Load += FormHapusAkun_Load;
             ResumeLayout(false);
             PerformLayout();
         }

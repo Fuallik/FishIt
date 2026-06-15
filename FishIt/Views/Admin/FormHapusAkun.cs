@@ -1,129 +1,63 @@
-﻿using Npgsql;
+﻿using FishIt.Controllers.Admin;
+using FishIt.Views.Admin;
+using FishIt.Models;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 
 namespace FishIt
 {
-    public partial class FormHapusAkun : Form
+    public partial class FormHapusAkun : Form, IHapusAkun
     {
+        private CHapusAkun _controller;
+
         public FormHapusAkun()
         {
             InitializeComponent();
             TBUsername.MaxLength = 50;
             TBUsername.PlaceholderText = "Ketik username di sini...";
             TBUsername.KeyDown += TBUsername_KeyDown;
+
+            _controller = new CHapusAkun(this);
         }
 
-        private void FormHapusAkun_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnHapusAkun_Click(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void btnBatalHapusAkun_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
+        // ===== aksi UI -> controller =====
         private void TBUsername_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
                 e.SuppressKeyPress = true;
-
-                string usernameInput = TBUsername.Text.Trim();
-
-                if (string.IsNullOrWhiteSpace(usernameInput))
-                {
-                    MessageBox.Show("Username tidak boleh kosong!", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
-                string query = @"SELECT a.nama, a.alamat, a.no_telp, kl.nama_kelurahan, kc.nama_kecamatan
-                                 FROM akun a
-                                 JOIN kelurahan kl ON a.id_kelurahan = kl.id_kelurahan
-                                 JOIN kecamatan kc ON kl.id_kecamatan = kc.id_kecamatan
-                                 WHERE LOWER(a.username) = LOWER(@p_username) AND a.aktif = TRUE";
-
-                using (var conn = new NpgsqlConnection(FormTambahAkun.Config.ConnString))
-                {
-                    try
-                    {
-                        conn.Open();
-                        using (var cmd = new NpgsqlCommand(query, conn))
-                        {
-                            cmd.Parameters.Add("@p_username", NpgsqlTypes.NpgsqlDbType.Varchar).Value = usernameInput;
-
-                            using (NpgsqlDataReader reader = cmd.ExecuteReader())
-                            {
-                                if (reader.Read())
-                                {
-                                    string nama = reader["nama"].ToString();
-                                    string alamat = reader["alamat"].ToString();
-                                    string telp = reader["no_telp"].ToString();
-                                    string kelurahan = reader["nama_kelurahan"].ToString();
-                                    string kecamatan = reader["nama_kecamatan"].ToString();
-
-                                    FormKonfirmasiHapus popUp = new FormKonfirmasiHapus(usernameInput, nama, alamat, telp, kelurahan, kecamatan);
-
-                                    if (popUp.ShowDialog() == DialogResult.Yes)
-                                    {
-                                        EksekusiSoftDelete(usernameInput);
-                                    }
-                                }
-                                else
-                                {
-                                    MessageBox.Show($"Akun dengan username '{usernameInput}' tidak ditemukan atau sudah tidak aktif!",
-                                                    "Tidak Ditemukan", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                    TBUsername.Clear();
-                                    TBUsername.Focus();
-                                }
-                            }
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Gagal mengambil detail akun:\n" + ex.Message, "Error Database", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
+                _controller.Cari(TBUsername.Text);
             }
         }
-        private void EksekusiSoftDelete(string username)
+
+        private void btnBatalHapusAkun_Click(object sender, EventArgs e) => this.Close();
+
+        // ===== implementasi IHapusAkun =====
+        public void BukaKonfirmasi(DetailAkunHapus d)
         {
-            string queryHapus = "CALL sp_hapus_akun(@p_username)";
-
-            using (var conn = new NpgsqlConnection(FormTambahAkun.Config.ConnString))
+            using (var popUp = new FormKonfirmasiHapus(
+                TBUsername.Text.Trim(), d.Nama, d.Alamat, d.Telp, d.Kelurahan, d.Kecamatan))
             {
-                try
-                {
-                    conn.Open();
-                    using (var cmd = new NpgsqlCommand(queryHapus, conn))
-                    {
-                        cmd.CommandType = CommandType.Text;
-                        cmd.Parameters.Add("@p_username", NpgsqlTypes.NpgsqlDbType.Varchar).Value = username;
-                        cmd.ExecuteNonQuery();
-
-                        MessageBox.Show($"Akun '{username}' berhasil dinonaktifkan dari sistem!", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                        this.DialogResult = DialogResult.OK;
-                        this.Close();
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Gagal menonaktifkan akun:\n" + ex.Message, "Error Database", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                if (popUp.ShowDialog() == DialogResult.Yes)
+                    _controller.Hapus();
             }
         }
+
+        public void ClearInput()
+        {
+            TBUsername.Clear();
+            TBUsername.Focus();
+        }
+
+        public void TampilkanPeringatan(string p) =>
+            MessageBox.Show(p, "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        public void TampilkanInfo(string p) =>
+            MessageBox.Show(p, "Tidak Ditemukan", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        public void TampilkanSukses(string p) =>
+            MessageBox.Show(p, "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        public void TampilkanError(string p) =>
+            MessageBox.Show("Gagal memproses:\n" + p, "Error Database",
+                MessageBoxButtons.OK, MessageBoxIcon.Error);
+        public void TutupDialog() { this.DialogResult = DialogResult.OK; this.Close(); }
     }
 }
-

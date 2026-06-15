@@ -1,27 +1,23 @@
-﻿using Npgsql;
+﻿using FishIt.Controllers.Admin;
+using FishIt.Views.Admin;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Configuration;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 
 namespace FishIt
 {
-    public partial class FormDetailVerifikasi : Form
+    public partial class FormDetailVerifikasi : Form, IDetailVerifikasi
     {
-        private int idPengajuanTerpilih = 0;
-        private int idBenihTerpilih = 0;
-        private int idPakanTerpilih = 0;
-        public FormDetailVerifikasi(int idPengajuan, int idBenih, int idPakan, string namaBarang, int kuantitas, string tipe, string tanggalKirim, string statusVerifikasi, string tanggalVerifikasi, string namaSupplier)
+        private readonly int idPengajuanTerpilih;
+        private CDetailVerifikasi _controller;
+
+        public FormDetailVerifikasi(int idPengajuan, int idBenih, int idPakan, string namaBarang,
+            int kuantitas, string tipe, string tanggalKirim, string statusVerifikasi,
+            string tanggalVerifikasi, string namaSupplier)
         {
             InitializeComponent();
             idPengajuanTerpilih = idPengajuan;
-            idBenihTerpilih = idBenih;
-            idPakanTerpilih = idPakan;
 
+            // isi tampilan (UI murni)
             TBIdPengajuan.Text = idPengajuan.ToString();
             TBSupplier.Text = namaSupplier;
             TBNamaIkan.Text = namaBarang;
@@ -30,86 +26,29 @@ namespace FishIt
             TBTglKirim.Text = tanggalKirim;
             TBStatus.Text = statusVerifikasi;
             TBTglVerifikasi.Text = tanggalVerifikasi;
+
+            _controller = new CDetailVerifikasi(this);
         }
 
-        private void UC_DetailVerifikasi_Load(object sender, EventArgs e)
-        {
-
-        }
-        public static class Config
-        {
-            public static string ConnString = ConfigurationManager.ConnectionStrings["DbConnection"].ConnectionString;
-        }
-
+        // ===== aksi UI -> controller (konfirmasi tetap di View karena murni UI) =====
         private void btnACC_Click(object sender, EventArgs e)
         {
-            var dialog = MessageBox.Show($"ACC pasokan '{TBNamaIkan.Text}' sebanyak {TBKuantitas.Text}?",
-                                         "Konfirmasi ACC", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            var konfirmasi = MessageBox.Show(
+                $"ACC pasokan '{TBNamaIkan.Text}' sebanyak {TBKuantitas.Text}?",
+                "Konfirmasi ACC", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-            if (dialog == DialogResult.Yes)
-            {
-                // Cukup Update statusnya saja, sisanya serahkan ke Trigger PostgreSQL!
-                string queryUpdate = @"UPDATE pengiriman_supplier 
-                               SET status_verifikasi = 'Disetujui', tanggal_verifikasi = CURRENT_DATE 
-                               WHERE id_pengiriman_supplier = @id";
-
-                using (var conn = new NpgsqlConnection(Config.ConnString)) // Menggunakan config universal
-                {
-                    try
-                    {
-                        conn.Open();
-                        using (var cmd = new NpgsqlCommand(queryUpdate, conn))
-                        {
-                            cmd.Parameters.AddWithValue("@id", idPengajuanTerpilih);
-                            cmd.ExecuteNonQuery();
-                        }
-
-                        MessageBox.Show("Pengajuan supply BERHASIL DISETUJUI dan stok master bertambah otomatis!", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                        this.DialogResult = DialogResult.OK;
-                        this.Close();
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Gagal memproses ACC: " + ex.Message, "Error Database", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-            }
+            if (konfirmasi == DialogResult.Yes)
+                _controller.Setujui(idPengajuanTerpilih);
         }
 
         private void btnTolak_Click(object sender, EventArgs e)
         {
-            var dialog = MessageBox.Show($"Apakah Anda yakin ingin menolak pengajuan ID {idPengajuanTerpilih}?",
-                                         "Konfirmasi Tolak", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            var konfirmasi = MessageBox.Show(
+                $"Apakah Anda yakin ingin menolak pengajuan ID {idPengajuanTerpilih}?",
+                "Konfirmasi Tolak", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
-            if (dialog == DialogResult.Yes)
-            {
-                string query = @"UPDATE pengiriman_supplier 
-                                 SET status_verifikasi = 'Ditolak', tanggal_verifikasi = CURRENT_DATE
-                                 WHERE id_pengiriman_supplier = @id";
-
-                using (var conn = new NpgsqlConnection(Config.ConnString))
-                {
-                    try
-                    {
-                        conn.Open();
-                        using (var cmd = new NpgsqlCommand(query, conn))
-                        {
-                            cmd.Parameters.AddWithValue("@id", idPengajuanTerpilih);
-                            cmd.ExecuteNonQuery();
-                        }
-
-                        MessageBox.Show("Pengajuan supply telah ditolak.", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                        this.DialogResult = DialogResult.OK;
-                        this.Close();
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Gagal menolak pengajuan: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-            }
+            if (konfirmasi == DialogResult.Yes)
+                _controller.Tolak(idPengajuanTerpilih);
         }
 
         private void btnKembali_Click(object sender, EventArgs e)
@@ -118,10 +57,18 @@ namespace FishIt
             this.Close();
         }
 
-        private void TBSupplier_TextChanged(object sender, EventArgs e)
-        {
+        // ===== implementasi IDetailVerifikasi =====
+        public void TampilkanSukses(string pesan) =>
+            MessageBox.Show(pesan, "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
+        public void TampilkanError(string pesan) =>
+            MessageBox.Show("Gagal memproses: " + pesan, "Error Database",
+                MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+        public void TutupDialog()
+        {
+            this.DialogResult = DialogResult.OK;
+            this.Close();
         }
     }
 }
-

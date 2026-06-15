@@ -206,7 +206,6 @@
             Controls.Add(panelJumlahAkun);
             Name = "UC_KelolaAkun";
             Size = new Size(800, 600);
-            Load += UC_TambahAkun_Load;
             panelJumlahAkun.ResumeLayout(false);
             panelJumlahAkun.PerformLayout();
             panelStatistik.ResumeLayout(false);

@@ -76,7 +76,6 @@
             Controls.Add(DGVKatalogIkan);
             Name = "UC_KatalogIkanPembeli";
             Size = new Size(800, 600);
-            Load += UC_KatalogIkanPembeli_Load;
             ((System.ComponentModel.ISupportInitialize)DGVKatalogIkan).EndInit();
             ((System.ComponentModel.ISupportInitialize)numericJumlah).EndInit();
             ResumeLayout(false);

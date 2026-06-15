@@ -1,18 +1,17 @@
 ﻿using FishIt.Helpers;
-using Npgsql;
+using FishIt.Controllers.Admin;
+using FishIt.Views.Admin;
+using FishIt.Models;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Configuration;
 using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 
 namespace FishIt
 {
-    public partial class UC_VerifikasiSupply : UserControl
+    public partial class UC_VerifikasiSupply : UserControl, IVerifikasiSupply
     {
+        private CVerifikasiSupply _controller;
+
         public UC_VerifikasiSupply()
         {
             InitializeComponent();
@@ -22,147 +21,59 @@ namespace FishIt
 
             new AutoScaleHelper(this);
             PanelHelper.BuatMelengkung(panelMonitoring, 25);
+
+            _controller = new CVerifikasiSupply(this);
         }
 
-        private void UC_VerifikasiSupply_Load(object sender, EventArgs e)
+        protected override void OnLoad(EventArgs e)
         {
-            MuatPengajuanSupplier();
+            base.OnLoad(e);
+            _controller.MuatPengajuan();
         }
-        public static class Config
-        {
-            public static string ConnString = ConfigurationManager.ConnectionStrings["DbConnection"].ConnectionString;
-        }
-        private void MuatPengajuanSupplier()
-        {
-            string query = @"SELECT p.id_pengiriman_supplier as ""ID Pengiriman Supplier"", a.nama as ""Nama Supplier"",  p.nama as ""Nama Barang"", p.kuantitas as ""Kuantitas"", p.tipe as ""Tipe"", p.tanggal_kirim as ""Tanggal Kirim"", p.status_verifikasi as ""Status Verifikasi"", p.tanggal_verifikasi as ""Tanggal Verifikasi""
-                             FROM pengiriman_supplier p
-                             JOIN akun a ON p.id_akun = a.id_akun
-                             WHERE p.status_verifikasi = 'Pending'
-                             ORDER BY p.id_pengiriman_supplier ASC";
 
-            using (var conn = new NpgsqlConnection(Config.ConnString))
-            {
-                try
-                {
-                    conn.Open();
-                    using (var da = new NpgsqlDataAdapter(query, conn))
-                    {
-                        DataTable dt = new DataTable();
-                        da.Fill(dt);
-                        DGVPengajuan.DataSource = dt;
-
-                        GridHelper.AturTemaModern(DGVPengajuan);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Gagal memuat data pengajuan: " + ex.Message);
-                }
-            }
-        }
+        // ===== aksi UI -> controller =====
         private void TBIDPengajuan_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
                 e.SuppressKeyPress = true;
+                _controller.Cari(TBIDPengajuan.Text);
+            }
+        }
 
-                string idInputText = TBIDPengajuan.Text.Trim();
+        // ===== implementasi IVerifikasiSupply =====
+        public void SetPengajuan(DataTable data)
+        {
+            DGVPengajuan.DataSource = data;
+            GridHelper.AturTemaModern(DGVPengajuan);
+        }
 
-                if (string.IsNullOrWhiteSpace(idInputText))
+        public void BukaDetail(DetailPengajuan d)
+        {
+            using (var popUp = new FormDetailVerifikasi(
+                d.IdPengajuan, d.IdBenih, d.IdPakan, d.NamaBarang, d.Kuantitas,
+                d.Tipe, d.TanggalKirim, d.StatusVerifikasi, d.TanggalVerifikasi, d.NamaSupplier))
+            {
+                popUp.StartPosition = FormStartPosition.CenterParent;
+                if (popUp.ShowDialog() == DialogResult.OK)
                 {
-                    MessageBox.Show("ID Pengajuan tidak boleh kosong!", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-                string query = @"SELECT p.id_pengiriman_supplier, p.id_benih, p.id_pakan, a.nama AS nama_supplier, 
-                                p.nama AS nama_barang, p.kuantitas, p.tipe, p.tanggal_kirim, p.status_verifikasi, p.tanggal_verifikasi
-                                FROM pengiriman_supplier p
-                                JOIN akun a ON p.id_akun = a.id_akun
-                                WHERE p.id_pengiriman_supplier = @id_p AND p.status_verifikasi = 'Pending'";
-
-                using (var conn = new NpgsqlConnection(Config.ConnString))
-                {
-                    try
-                    {
-                        conn.Open();
-                        using (var cmd = new NpgsqlCommand(query, conn))
-                        {
-                            cmd.Parameters.AddWithValue("@id_p", Convert.ToInt32(idInputText));
-
-                            using (NpgsqlDataReader reader = cmd.ExecuteReader())
-                            {
-                                if (reader.Read())
-                                {
-                                    int idPengajuan = Convert.ToInt32(reader["id_pengiriman_supplier"]);
-                                    int idBenih = reader["id_benih"] == DBNull.Value ? 0 : Convert.ToInt32(reader["id_benih"]);
-                                    int idPakan = reader["id_pakan"] == DBNull.Value ? 0 : Convert.ToInt32(reader["id_pakan"]);
-
-                                    string namaSupplier = reader["nama_supplier"].ToString();
-                                    string namaPengiriman = reader["nama_barang"].ToString();
-                                    int kuantitas = Convert.ToInt32(reader["kuantitas"]);
-                                    string tipe = reader["tipe"].ToString();
-                                   
-                                    string statusVerifikasi = reader["status_verifikasi"].ToString();
-                                   
-
-
-                                    string tanggalKirim = "";
-                                    if (reader["tanggal_kirim"] is DateOnly dateKirim)
-                                    {
-                                        tanggalKirim = dateKirim.ToString("yyyy-MM-dd");
-                                    }
-                                    else
-                                    {
-                                        tanggalKirim = Convert.ToDateTime(reader["tanggal_kirim"]).ToString("yyyy-MM-dd");
-                                    }
-
-                                    string tanggalVerifikasi = "Belum Diverifikasi";
-                                    if (reader["tanggal_verifikasi"] != DBNull.Value)
-                                    {
-                                        if (reader["tanggal_verifikasi"] is DateOnly dateVerif)
-                                        {
-                                            tanggalVerifikasi = dateVerif.ToString("yyyy-MM-dd");
-                                        }
-                                        else
-                                        {
-                                            tanggalVerifikasi = Convert.ToDateTime(reader["tanggal_verifikasi"]).ToString("yyyy-MM-dd");
-                                        }
-                                    }
-                                    using (FormDetailVerifikasi popUp = new FormDetailVerifikasi(idPengajuan, idBenih, idPakan, namaPengiriman, kuantitas, tipe, tanggalKirim, statusVerifikasi, tanggalVerifikasi, namaSupplier))
-                                    {
-                                        popUp.StartPosition = FormStartPosition.CenterParent;
-                                        if (popUp.ShowDialog() == DialogResult.OK)
-                                        {
-                                            TBIDPengajuan.Clear();
-                                            MuatPengajuanSupplier();
-                                        }
-                                    }
-                                }
-                                else
-                                {
-                                    MessageBox.Show($"Pengajuan dengan ID '{idInputText}' tidak ditemukan atau sudah diproses!",
-                                                    "Tidak Ditemukan", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                    TBIDPengajuan.Clear();
-                                    TBIDPengajuan.Focus();
-                                }
-                            }
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Gagal memuat detail pengajuan:\n" + ex.Message, "Error Database", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
+                    ClearInput();
+                    _controller.MuatPengajuan();   // refresh grid setelah ACC/tolak
                 }
             }
         }
 
-        private void btnDetailVerifikasi_Click(object sender, EventArgs e)
+        public void ClearInput()
         {
-
+            TBIDPengajuan.Clear();
+            TBIDPengajuan.Focus();
         }
 
-        private void TBIDPengajuan_TextChanged(object sender, EventArgs e)
-        {
-
-        }
+        public void TampilkanPeringatan(string pesan) =>
+            MessageBox.Show(pesan, "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        public void TampilkanInfo(string pesan) =>
+            MessageBox.Show(pesan, "Tidak Ditemukan", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        public void TampilkanError(string pesan) =>
+            MessageBox.Show("Gagal: " + pesan, "Error Database", MessageBoxButtons.OK, MessageBoxIcon.Error);
     }
 }

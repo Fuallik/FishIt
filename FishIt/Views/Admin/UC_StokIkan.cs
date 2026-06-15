@@ -1,17 +1,15 @@
-﻿using Npgsql;
+﻿using FishIt.Helpers;
+using FishIt.Controllers.Admin;
+using FishIt.Views.Admin;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Configuration;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 
 namespace FishIt
 {
-    public partial class UC_StokIkan : UserControl
+    public partial class UC_StokIkan : UserControl, IStokIkan
     {
+        private CStokIkan _controller;
+
         public UC_StokIkan()
         {
             InitializeComponent();
@@ -25,126 +23,31 @@ namespace FishIt
             PanelHelper.MakeButtonRounded(btnDetailBenih, 20);
             PanelHelper.MakeButtonRounded(btnDetailPakan, 20);
             new AutoScaleHelper(this);
+
+            _controller = new CStokIkan(this);
         }
 
-        private void UC_StokIkan_Load(object sender, EventArgs e)
+        protected override void OnLoad(EventArgs e)
         {
-            HitungStokIkan();
-            HitungStokBenih();
-            HitungStokPakan();
+            base.OnLoad(e);
+            _controller.MuatData();
         }
-        public static class Config
+
+        public void SetRingkasan(decimal totalIkan, decimal totalBenih, decimal totalPakan)
         {
-            public static string ConnString = ConfigurationManager.ConnectionStrings["DbConnection"].ConnectionString;
+            lblHitungIkan.Text = totalIkan.ToString();
+            lblHitungBenih.Text = totalBenih.ToString("0");   // ekor bulat
+            lblHitungPakan.Text = totalPakan.ToString();
         }
 
-        private void HitungStokIkan()
+        public void TampilkanPesanError(string pesan)
         {
-            string query = "SELECT COALESCE(SUM(stok_ikan), 0) AS total_ikan FROM ikan";
-
-            using (var conn = new NpgsqlConnection(Config.ConnString))
-            {
-                try
-                {
-                    conn.Open();
-
-                    using (var cmd = new NpgsqlCommand(query, conn))
-                    {
-                        using (NpgsqlDataReader reader = cmd.ExecuteReader())
-                        {
-                            if (reader.Read())
-                            {
-                                decimal totalIkan = Convert.ToDecimal(reader["total_ikan"]);
-
-                                lblHitungIkan.Text = totalIkan.ToString();
-                            }
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Gagal memuat data: " + ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-        }
-        private void HitungStokBenih()
-        {
-            string query = "SELECT COALESCE(SUM(jumlah_stok), 0) AS total_benih FROM benih";
-
-            using (var conn = new NpgsqlConnection(Config.ConnString))
-            {
-                try
-                {
-                    conn.Open();
-
-                    using (var cmd = new NpgsqlCommand(query, conn))
-                    {
-                        using (NpgsqlDataReader reader = cmd.ExecuteReader())
-                        {
-                            if (reader.Read())
-                            {
-                                long totalBenih = Convert.ToInt64(reader["total_benih"]);
-
-                                lblHitungBenih.Text = totalBenih.ToString();
-                            }
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Gagal memuat data: " + ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-        }
-        private void HitungStokPakan()
-        {
-            string query = "SELECT COALESCE(SUM(jumlah_stok), 0) AS total_pakan FROM pakan";
-
-            using (var conn = new NpgsqlConnection(Config.ConnString))
-            {
-                try
-                {
-                    conn.Open();
-
-                    using (var cmd = new NpgsqlCommand(query, conn))
-                    {
-                        using (NpgsqlDataReader reader = cmd.ExecuteReader())
-                        {
-                            if (reader.Read())
-                            {
-                                decimal totalPakan = Convert.ToDecimal(reader["total_pakan"]);
-
-                                lblHitungPakan.Text = totalPakan.ToString();
-                            }
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Gagal memuat data: " + ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
+            MessageBox.Show("Gagal memuat data: " + pesan, "Database Error",
+                MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        private void btnDetailIkan_Click(object sender, EventArgs e)
-        {
-            FormDetailIkan formDetailIkan = new FormDetailIkan();
-
-            formDetailIkan.ShowDialog();
-        }
-
-        private void btnDetailBenih_Click(object sender, EventArgs e)
-        {
-            FormDetailBenih formDetailBenih = new FormDetailBenih();
-
-            formDetailBenih.ShowDialog();
-        }
-
-        private void btnDetailPakan_Click(object sender, EventArgs e)
-        {
-            FormDetailPakan formDetailPakan = new FormDetailPakan();
-
-            formDetailPakan.ShowDialog();
-        }
+        private void btnDetailIkan_Click(object sender, EventArgs e) { new FormDetailIkan().ShowDialog(); }
+        private void btnDetailBenih_Click(object sender, EventArgs e) { new FormDetailBenih().ShowDialog(); }
+        private void btnDetailPakan_Click(object sender, EventArgs e) { new FormDetailPakan().ShowDialog(); }
     }
 }

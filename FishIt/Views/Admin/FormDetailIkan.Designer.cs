@@ -75,7 +75,6 @@
             Name = "FormDetailIkan";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "FormDetailIkan";
-            Load += FormDetailIkan_Load;
             ((System.ComponentModel.ISupportInitialize)DGVIkan).EndInit();
             ResumeLayout(false);
         }

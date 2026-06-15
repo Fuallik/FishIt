@@ -1,67 +1,41 @@
 ﻿using FishIt.Helpers;
-using Npgsql;
+using FishIt.Controllers.Admin;
+using FishIt.Views.Admin;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Configuration;
 using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 
 namespace FishIt
 {
-    public partial class FormDetailPakan : Form
+    public partial class FormDetailPakan : Form, IDetailPakan
     {
+        private CDetailPakan _controller;
+
         public FormDetailPakan()
         {
             InitializeComponent();
+            _controller = new CDetailPakan(this);
         }
 
-        private void FormDetailPakan_Load(object sender, EventArgs e)
+        protected override void OnLoad(EventArgs e)
         {
-            MuatDataPakan();
+            base.OnLoad(e);
+            _controller.MuatData();
         }
-        public static class Config
+
+        public void SetDataGrid(DataTable data)
         {
-            public static string ConnString = ConfigurationManager.ConnectionStrings["DbConnection"].ConnectionString;
-        }
-        public void MuatDataPakan()
-        {
-            string query = "SELECT id_pakan, nama, jumlah_stok FROM pakan WHERE jumlah_stok > 0 ORDER BY id_pakan ASC";
-
-            using (var conn = new NpgsqlConnection(Config.ConnString))
-            {
-                try
-                {
-                    conn.Open();
-
-                    using (NpgsqlCommand cmd = new NpgsqlCommand(query, conn))
-                    {
-                        NpgsqlDataAdapter adapter = new NpgsqlDataAdapter(cmd);
-                        DataTable dt = new DataTable();
-                        adapter.Fill(dt);
-
-                        DGVPakan.DataSource = dt;
-                        DGVPakan.Columns["id_pakan"].HeaderText = "ID Pakan";
-                        DGVPakan.Columns["nama"].HeaderText = "Nama Pakan";
-                        DGVPakan.Columns["jumlah_stok"].HeaderText = "Jumlah Stok";
-
-
-                        GridHelper.AturTemaModern(DGVPakan);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Gagal memuat tabel ikan: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
+            DGVPakan.DataSource = data;
+            DGVPakan.Columns["id_pakan"].HeaderText = "ID Pakan";
+            DGVPakan.Columns["nama"].HeaderText = "Nama Pakan";
+            DGVPakan.Columns["jumlah_stok"].HeaderText = "Jumlah Stok";
+            GridHelper.AturTemaModern(DGVPakan);
         }
 
+        public void TampilkanError(string pesan) =>
+            MessageBox.Show("Gagal memuat tabel pakan: " + pesan, "Error",
+                MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-        private void btnKembali_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
+        private void btnKembali_Click(object sender, EventArgs e) => this.Close();
     }
 }

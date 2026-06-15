@@ -75,7 +75,6 @@
             Name = "FormDetailPakan";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "FormDetailPakan";
-            Load += FormDetailPakan_Load;
             ((System.ComponentModel.ISupportInitialize)DGVPakan).EndInit();
             ResumeLayout(false);
         }

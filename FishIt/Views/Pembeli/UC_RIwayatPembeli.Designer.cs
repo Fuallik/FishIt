@@ -52,7 +52,6 @@
             Controls.Add(DGVRiwayatPembeli);
             Name = "UC_RIwayatPembeli";
             Size = new Size(800, 600);
-            Load += UC_RIwayatPembeli_Load;
             ((System.ComponentModel.ISupportInitialize)DGVRiwayatPembeli).EndInit();
             ResumeLayout(false);
         }

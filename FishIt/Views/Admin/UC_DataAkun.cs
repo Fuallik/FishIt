@@ -1,18 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using FishIt.Helpers;
+using FishIt.Controllers.Admin;
+using FishIt.Views.Admin;
+using System;
 using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
-using System.Configuration;
-using Npgsql;
-using FishIt.Helpers;
 
 namespace FishIt
 {
-    public partial class UC_DataAkun : UserControl
+    public partial class UC_DataAkun : UserControl, IDataAkun
     {
+        private CDataAkun _controller;
+
         public UC_DataAkun()
         {
             InitializeComponent();
@@ -24,238 +22,45 @@ namespace FishIt
             PanelHelper.BuatMelengkung(panelAkunPembeli, 25);
             PanelHelper.BuatMelengkung(panelStatistik, 25);
             new AutoScaleHelper(this);
+
+            _controller = new CDataAkun(this);
         }
 
-        public static class Config
+        protected override void OnLoad(EventArgs e)
         {
-            public static string ConnString = ConfigurationManager.ConnectionStrings["DbConnection"].ConnectionString;
+            base.OnLoad(e);
+            _controller.MuatData();
         }
 
-        private void UC_KelolaAkun_Load(object sender, EventArgs e)
+        public void SetDataGrid(DataTable data)
         {
-            HitungAkunAktif();
-            HitungAkunTidakAktif();
-            HitungTambak();
-            HitungKasir();
-            HitungSupplier();
-            HitungShipper();
-            HitungPembeli();
-            TampilkanDataDariPostgres();
+            DGVDataAkun.DataSource = data;
+            DGVDataAkun.Columns["id_akun"].HeaderText = "ID Pengguna";
+            DGVDataAkun.Columns["username"].HeaderText = "Nama Pengguna";
+            DGVDataAkun.Columns["nama"].HeaderText = "Nama Lengkap";
+            DGVDataAkun.Columns["no_telp"].HeaderText = "No. Telepon";
+            DGVDataAkun.Columns["alamat"].HeaderText = "Alamat";
+            DGVDataAkun.Columns["nama_role"].HeaderText = "Hak Akses";
+            DGVDataAkun.Columns["aktif"].HeaderText = "Status Aktif";
+            GridHelper.AturTemaModern(DGVDataAkun);
         }
 
-        private void panelUtama_Paint(object sender, PaintEventArgs e)
+        public void SetRingkasan(int aktif, int tidakAktif, int tambak,
+                                 int kasir, int supplier, int shipper, int pembeli)
         {
-
-        }
-        private void HitungAkunAktif()
-        {
-            string query = "SELECT COUNT(*) FROM akun WHERE aktif = true";
-
-            using (var conn = new NpgsqlConnection(Config.ConnString))
-            {
-                try
-                {
-                    conn.Open();
-
-                    using (var cmd = new NpgsqlCommand(query, conn))
-                    {
-                        long totalAkun = (long)cmd.ExecuteScalar();
-
-                        lblHitungAkunAktif.Text = totalAkun.ToString();
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Gagal memuat data: " + ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
+            lblHitungAkunAktif.Text = aktif.ToString();
+            lblHitungAkunTidakAKtif.Text = tidakAktif.ToString();   // nama label asli (typo dibiarkan)
+            TotalTambakKelola.Text = tambak.ToString();
+            TotalKasirKelola.Text = kasir.ToString();
+            TotalSupplierKelola.Text = supplier.ToString();
+            TotalShipperKelola.Text = shipper.ToString();
+            TotalPembeliKelola.Text = pembeli.ToString();
         }
 
-        private void HitungAkunTidakAktif()
+        public void TampilkanPesanError(string pesan)
         {
-            string query = "SELECT COUNT(*) FROM akun WHERE aktif = false";
-
-            using (var conn = new NpgsqlConnection(Config.ConnString))
-            {
-                try
-                {
-                    conn.Open();
-
-                    using (var cmd = new NpgsqlCommand(query, conn))
-                    {
-                        long totalAkun = (long)cmd.ExecuteScalar();
-
-                        lblHitungAkunTidakAKtif.Text = totalAkun.ToString();
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Gagal memuat data: " + ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-        }
-
-        private void HitungTambak()
-        {
-            string query = "SELECT COUNT(*) FROM akun WHERE id_role = 3";
-
-            using (var conn = new NpgsqlConnection(Config.ConnString))
-            {
-                try
-                {
-                    conn.Open();
-
-                    using (var cmd = new NpgsqlCommand(query, conn))
-                    {
-                        long totalAkun = (long)cmd.ExecuteScalar();
-
-                        TotalTambakKelola.Text = totalAkun.ToString();
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Gagal memuat data: " + ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-        }
-        private void HitungKasir()
-        {
-            string query = "SELECT COUNT(*) FROM akun WHERE id_role = 2";
-
-            using (var conn = new NpgsqlConnection(Config.ConnString))
-            {
-                try
-                {
-                    conn.Open();
-
-                    using (var cmd = new NpgsqlCommand(query, conn))
-                    {
-                        long totalAkun = (long)cmd.ExecuteScalar();
-
-                        TotalKasirKelola.Text = totalAkun.ToString();
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Gagal memuat data: " + ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-        }
-
-        private void HitungSupplier()
-        {
-            string query = "SELECT COUNT(*) FROM akun WHERE id_role = 5";
-
-            using (var conn = new NpgsqlConnection(Config.ConnString))
-            {
-                try
-                {
-                    conn.Open();
-
-                    using (var cmd = new NpgsqlCommand(query, conn))
-                    {
-                        long totalAkun = (long)cmd.ExecuteScalar();
-
-                        TotalSupplierKelola.Text = totalAkun.ToString();
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Gagal memuat data: " + ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-        }
-        private void HitungShipper()
-        {
-            string query = "SELECT COUNT(*) FROM akun WHERE id_role = 4";
-
-            using (var conn = new NpgsqlConnection(Config.ConnString))
-            {
-                try
-                {
-                    conn.Open();
-
-                    using (var cmd = new NpgsqlCommand(query, conn))
-                    {
-                        long totalAkun = (long)cmd.ExecuteScalar();
-
-                        TotalShipperKelola.Text = totalAkun.ToString();
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Gagal memuat data: " + ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-        }
-
-        private void HitungPembeli()
-        {
-            string query = "SELECT COUNT(*) FROM akun WHERE id_role = 6";
-
-            using (var conn = new NpgsqlConnection(Config.ConnString))
-            {
-                try
-                {
-                    conn.Open();
-
-                    using (var cmd = new NpgsqlCommand(query, conn))
-                    {
-                        long totalAkun = (long)cmd.ExecuteScalar();
-
-                        TotalPembeliKelola.Text = totalAkun.ToString();
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Gagal memuat data: " + ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-        }
-
-        public void TampilkanDataDariPostgres()
-        {
-            string query = "SELECT a.id_akun, a.username, a.nama, a.no_telp, a.alamat, r.nama_role, a.aktif FROM akun a JOIN roles r ON a.id_role = r.id_role ORDER BY a.id_akun ASC";
-
-            using (var conn = new NpgsqlConnection(Config.ConnString))
-            {
-                try
-                {
-                    conn.Open();
-
-                    using (NpgsqlCommand cmd = new NpgsqlCommand(query, conn))
-                    {
-                        NpgsqlDataAdapter adapter = new NpgsqlDataAdapter(cmd);
-                        DataTable dt = new DataTable();
-                        adapter.Fill(dt);
-
-                        DGVDataAkun.DataSource = dt;
-                        DGVDataAkun.Columns["id_akun"].HeaderText = "ID Pengguna";
-                        DGVDataAkun.Columns["username"].HeaderText = "Nama Pengguna";
-                        DGVDataAkun.Columns["nama"].HeaderText = "Nama Lengkap";
-                        DGVDataAkun.Columns["no_telp"].HeaderText = "No. Telepon";
-                        DGVDataAkun.Columns["alamat"].HeaderText = "Alamat";
-                        DGVDataAkun.Columns["nama_role"].HeaderText = "Hak Akses";
-                        DGVDataAkun.Columns["aktif"].HeaderText = "Status Aktif"; 
-
-                        GridHelper.AturTemaModern(DGVDataAkun);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Waduh, gagal ambil data: " + ex.Message, "Error Database", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-        }
-
-        private void panelJumlahAkun_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
+            MessageBox.Show("Gagal memuat data: " + pesan, "Database Error",
+                MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 }
