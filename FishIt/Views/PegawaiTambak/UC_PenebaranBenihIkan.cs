@@ -1,18 +1,16 @@
 ﻿using FishIt.Helpers;
-using Npgsql;
+using FishIt.Controllers.PegawaiTambak;
+using FishIt.Views.PegawaiTambak;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Configuration;
 using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 
 namespace FishIt.UserControls.PegawaiTambak
 {
-    public partial class UC_PenebaranBenihIkan : UserControl
+    public partial class UC_PenebaranBenihIkan : UserControl, IPenebaran
     {
+        private CPenebaran _controller;
+
         public UC_PenebaranBenihIkan()
         {
             InitializeComponent();
@@ -22,92 +20,29 @@ namespace FishIt.UserControls.PegawaiTambak
             PanelHelper.BuatMelengkung(panel5, 25);
             PanelHelper.BuatMelengkung(panel6, 25);
             PanelHelper.MakeButtonRounded(buttonTambah, 25);
+
+            _controller = new CPenebaran(this);
         }
 
-        protected override void OnLoad(EventArgs e)
+        protected override void OnLoad(EventArgs e) { base.OnLoad(e); _controller.MuatData(); }
+
+        public void SetDataGrid(DataTable data)
         {
-            base.OnLoad(e);
-            MuatData();
+            DGVPenebaran.DataSource = data;
+            if (DGVPenebaran.Columns.Contains("id_akun")) DGVPenebaran.Columns["id_akun"].Visible = false;
         }
-
-        public static class Config
+        public void SetRingkasan(long akumulasi, long bulan)
         {
-            public static string ConnString =
-                ConfigurationManager.ConnectionStrings["DbConnection"].ConnectionString;
+            labelTotalAkumulasiPerAkun.Text = akumulasi + " ekor";
+            labelTotalPerBulanPerAkun.Text = bulan + " ekor";
         }
-
-        private void MuatData()
-        {
-            MuatGrid();
-            MuatKartu();
-        }
-
-        private void MuatGrid()
-        {
-            using (var conn = new NpgsqlConnection(Config.ConnString))
-            {
-                try
-                {
-                    conn.Open();
-
-                    using var cmd = new NpgsqlCommand(
-                        "SELECT * FROM view_penebaran WHERE id_akun = @id", conn);
-                    cmd.Parameters.AddWithValue("@id", Session.IdAkun);
-
-                    using var adapter = new NpgsqlDataAdapter(cmd);
-                    var tabel = new DataTable();
-                    adapter.Fill(tabel);
-                    DGVPenebaran.DataSource = tabel;
-
-                    if (DGVPenebaran.Columns.Contains("id_akun"))
-                        DGVPenebaran.Columns["id_akun"].Visible = false;
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Gagal memuat data: " + ex.Message,
-                        "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-        }
-
-        private void MuatKartu()
-        {
-            using (var conn = new NpgsqlConnection(Config.ConnString))
-            {
-                try
-                {
-                    conn.Open();
-                    labelTotalAkumulasiPerAkun.Text = HitungPenebaran(conn, "AKUMULASI", Session.IdAkun).ToString() + " ekor";
-                    labelTotalPerBulanPerAkun.Text = HitungPenebaran(conn, "BULAN", Session.IdAkun).ToString() + " ekor";
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Gagal memuat ringkasan: " + ex.Message,
-                        "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-        }
-
-        private long HitungPenebaran(NpgsqlConnection conn, string periode)
-        {
-            using var cmd = new NpgsqlCommand("SELECT fn_total_penebaran(@periode)", conn);
-            cmd.Parameters.AddWithValue("@periode", periode);
-            return Convert.ToInt64(cmd.ExecuteScalar());
-        }
-
-        private long HitungPenebaran(NpgsqlConnection conn, string periode, int idAkun)
-        {
-            using var cmd = new NpgsqlCommand("SELECT fn_total_penebaran(@periode, @id_akun)", conn);
-            cmd.Parameters.AddWithValue("@periode", periode);
-            cmd.Parameters.AddWithValue("@id_akun", idAkun);
-            return Convert.ToInt64(cmd.ExecuteScalar());
-        }
+        public void TampilkanError(string pesan) =>
+            MessageBox.Show("Gagal memuat data: " + pesan, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
         private void buttonTambah_Click(object sender, EventArgs e)
         {
-            FormTambahPenebaranBenih form = new FormTambahPenebaranBenih();
-            if (form.ShowDialog() == DialogResult.OK)
-                MuatData();
+            using (var f = new FormTambahPenebaranBenih())
+                if (f.ShowDialog() == DialogResult.OK) _controller.MuatData();
         }
     }
 }

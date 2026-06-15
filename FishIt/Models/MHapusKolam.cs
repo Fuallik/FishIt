@@ -14,21 +14,21 @@ namespace FishIt.Models
             using var conn = new NpgsqlConnection(_connString);
             conn.Open();
             using var cmd = new NpgsqlCommand(
-                "SELECT id_kolam, nomor FROM kolam WHERE status_kolam = 'Kosong' ORDER BY nomor", conn);
+                "SELECT id_kolam, nomor FROM kolam WHERE fn_status_kolam(id_kolam) = 'Kosong' ORDER BY nomor", conn);
             using var ad = new NpgsqlDataAdapter(cmd);
             var dt = new DataTable();
             ad.Fill(dt);
             return dt;
         }
 
-        // Soft-delete: UPDATE status. Guard 'Kosong' -> return jumlah baris berubah (0 = gagal/keburu terisi).
+
         public int HapusKolam(int idKolam)
         {
             using var conn = new NpgsqlConnection(_connString);
             conn.Open();
             using var cmd = new NpgsqlCommand(@"
                 UPDATE kolam SET status_kolam = 'Tidak Terpakai'
-                WHERE id_kolam = @id AND status_kolam = 'Kosong'", conn);
+                WHERE id_kolam = @id AND fn_status_kolam(id_kolam) = 'Kosong'", conn);
             cmd.Parameters.AddWithValue("@id", idKolam);
             return cmd.ExecuteNonQuery();
         }

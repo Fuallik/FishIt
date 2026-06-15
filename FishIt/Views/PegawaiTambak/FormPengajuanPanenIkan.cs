@@ -1,180 +1,66 @@
-﻿using FishIt.Helpers;
-using Npgsql;
+﻿using FishIt.Controllers.PegawaiTambak;
+using FishIt.Views.PegawaiTambak;
+using FishIt.Models;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Configuration;
 using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 
 namespace FishIt
 {
-    public partial class FormPengajuanPanenIkan : Form
+    public partial class FormPengajuanPanenIkan : Form, IPengajuanPanen
     {
+        private CPengajuanPanen _controller;
+
         public FormPengajuanPanenIkan()
         {
             InitializeComponent();
-            MuatDropdown();
+            _controller = new CPengajuanPanen(this);
         }
 
-        public static class Config
+        protected override void OnLoad(EventArgs e)
         {
-            public static string ConnString = ConfigurationManager.ConnectionStrings["DbConnection"].ConnectionString;
+            base.OnLoad(e);
+            _controller.MuatKolam();
         }
 
-        private void MuatDropdown()
+        // ===== aksi UI -> controller =====
+        private void CBKolam_SelectedIndexChanged(object sender, EventArgs e)
         {
-            try
+            if (CBKolam.SelectedIndex == -1 || CBKolam.SelectedValue == null
+                || !int.TryParse(CBKolam.SelectedValue.ToString(), out int idKolam))
             {
-                using var conn = new NpgsqlConnection(Config.ConnString);
-                conn.Open();
-
-                var dtKolam = new DataTable();
-                using (var ad = new NpgsqlDataAdapter(@"
-                    SELECT k.id_kolam, k.nomor
-                    FROM kolam k
-                    WHERE (
-                        SELECT m.siap_panen FROM monitoring m
-                        WHERE m.id_kolam = k.id_kolam
-                        ORDER BY m.tanggal DESC, m.id_monitoring DESC
-                        LIMIT 1
-                    ) = TRUE
-                      AND fn_isi_kolam(k.id_kolam) > 0     -- ganti blok COALESCE jadi ini
-                    ORDER BY k.nomor", conn))
-                    ad.Fill(dtKolam);
-                CBKolam.DataSource = dtKolam;
-                CBKolam.DisplayMember = "nomor";
-                CBKolam.ValueMember = "id_kolam";
-                CBKolam.SelectedIndex = -1;
-
+                KosongkanIkan();
+                labelIkan.Text = "0";
+                return;
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Gagal memuat dropdown: " + ex.Message, "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            _controller.MuatIkan(idKolam);
+            labelIkan.Text = "0";
         }
 
-        private void MuatIkanByKolam(int idKolam)
+        private void CBIkan_SelectedIndexChanged(object sender, EventArgs e)
         {
-            try
-            {
-                using var conn = new NpgsqlConnection(Config.ConnString);
-                conn.Open();
-
-                using var cmd = new NpgsqlCommand(@"
-            SELECT DISTINCT i.id_ikan, i.nama_ikan AS label
-            FROM ikan i
-            JOIN benih b ON b.id_ikan = i.id_ikan
-            JOIN penebaran p ON p.id_benih = b.id_benih
-            JOIN kolam k ON k.id_kolam = p.id_kolam
-            WHERE p.id_kolam = @kolam AND fn_sisa_ikan(@kolam, i.id_ikan) > 0 AND k.status_kolam != 'Kosong' AND k.status_kolam != 'Tidak terpakai'
-            ORDER BY label", conn);
-                cmd.Parameters.AddWithValue("@kolam", idKolam);
-
-                var dt = new DataTable();
-                using var ad = new NpgsqlDataAdapter(cmd);
-                ad.Fill(dt);
-
-                CBIkan.DataSource = null;
-                CBIkan.DataSource = dt;
-                CBIkan.DisplayMember = "label";
-                CBIkan.ValueMember = "id_ikan";
-                CBIkan.SelectedIndex = -1;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Gagal memuat ikan: " + ex.Message, "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void TampilkanSisaIkan(int idKolam, int idIkan)
-        {
-            try
-            {
-                using var conn = new NpgsqlConnection(Config.ConnString);
-                conn.Open();
-
-                // QUERY DIUBAH: Menghitung sisa ikan persis seperti di Status Kolam (termasuk jumlah mati)
-                string sql = "SELECT fn_isi_kolam(@kolam)";
-
-                using var cmd = new NpgsqlCommand(sql, conn);
-                cmd.Parameters.AddWithValue("@kolam", idKolam);
-
-                int sisa = Convert.ToInt32(cmd.ExecuteScalar());
-                labelIkan.Text = sisa.ToString();
-            }
-            catch (Exception ex)
+            if (CBIkan.SelectedIndex == -1 || CBKolam.SelectedValue == null
+                || !int.TryParse(CBKolam.SelectedValue.ToString(), out int idKolam))
             {
                 labelIkan.Text = "0";
-                Console.WriteLine(ex.Message);
+                return;
             }
+            _controller.TampilSisa(idKolam);
         }
+
         private void btnSimpan_Click(object sender, EventArgs e)
         {
-            if (CBKolam.SelectedIndex == -1 || CBIkan.SelectedIndex == -1 || CBKualitas.SelectedIndex == -1)
+            var d = new DataPanen
             {
-                MessageBox.Show("Lengkapi kolam, ikan, dan kualitas dulu!", "Peringatan",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-            if (NUDBerat.Value <= 0 || NUBEkor.Value <= 0)
-            {
-                MessageBox.Show("Jumlah kg dan ekor harus lebih dari 0!", "Peringatan",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            // === TAMBAHAN KODE VALIDASI STOK ===
-            int jumlahPanen = (int)NUBEkor.Value;
-            int sisaIkanDiKolam = 0;
-            int.TryParse(labelIkan.Text, out sisaIkanDiKolam);
-
-            if (jumlahPanen > sisaIkanDiKolam)
-            {
-                MessageBox.Show($"Jumlah ekor yang dipanen ({jumlahPanen}) melebihi sisa stok ikan di kolam ({sisaIkanDiKolam})!",
-                    "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                NUBEkor.Focus(); // Fokuskan kursor kembali ke inputan ekor
-                return; // Hentikan proses simpan
-            }
-            // ===================================
-
-            try
-            {
-                using var conn = new NpgsqlConnection(Config.ConnString);
-                conn.Open();
-
-                using var cmd = new NpgsqlCommand(@"
-            INSERT INTO panen (tanggal_panen, jumlah_kg, jumlah_ekor, kualitas, id_akun, id_ikan, id_kolam)
-            VALUES (CURRENT_DATE, @kg, @ekor, @kualitas, @akun, @ikan, @kolam)", conn);
-
-                // ... (Sisa kode ke bawah biarkan sama persis seperti sebelumnya) ...
-                cmd.Parameters.AddWithValue("@kg", NUDBerat.Value);
-                cmd.Parameters.AddWithValue("@ekor", jumlahPanen); // Menggunakan variabel yang sudah dibuat
-                cmd.Parameters.AddWithValue("@kualitas", CBKualitas.SelectedItem.ToString());
-                cmd.Parameters.AddWithValue("@akun", Session.IdAkun);
-                cmd.Parameters.AddWithValue("@ikan", Convert.ToInt32(CBIkan.SelectedValue));
-                cmd.Parameters.AddWithValue("@kolam", Convert.ToInt32(CBKolam.SelectedValue));
-
-                cmd.ExecuteNonQuery();
-
-                MessageBox.Show("Panen dicatat, kolam dikosongkan & stok ikan bertambah!", "Sukses",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.DialogResult = DialogResult.OK;
-                this.Close();
-            }
-            catch (PostgresException pgEx)
-            {
-                MessageBox.Show(pgEx.MessageText, "Gagal", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Terjadi kesalahan: " + ex.Message, "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+                Kg = NUDBerat.Value,
+                Ekor = (int)NUBEkor.Value,
+                Kualitas = CBKualitas.SelectedItem?.ToString() ?? "",
+                IdKolam = (CBKolam.SelectedValue == null || CBKolam.SelectedIndex == -1)
+                          ? 0 : Convert.ToInt32(CBKolam.SelectedValue),
+                IdIkan = (CBIkan.SelectedValue == null || CBIkan.SelectedIndex == -1)
+                          ? 0 : Convert.ToInt32(CBIkan.SelectedValue)
+            };
+            _controller.Simpan(d);
         }
 
         private void btnBatal_Click(object sender, EventArgs e)
@@ -183,31 +69,31 @@ namespace FishIt
             this.Close();
         }
 
-        private void CBKolam_SelectedIndexChanged(object sender, EventArgs e)
+        // ===== implementasi IPengajuanPanen =====
+        public void SetKolam(DataTable data)
         {
-            if (CBKolam.SelectedIndex == -1 || CBKolam.SelectedValue == null
-        || !int.TryParse(CBKolam.SelectedValue.ToString(), out int idKolam))
-            {
-                CBIkan.DataSource = null;
-                labelIkan.Text = "0";
-                return;
-            }
-
-            MuatIkanByKolam(idKolam);
-            labelIkan.Text = "0";
+            CBKolam.DataSource = data;
+            CBKolam.DisplayMember = "nomor";
+            CBKolam.ValueMember = "id_kolam";
+            CBKolam.SelectedIndex = -1;
         }
-
-        private void CBIkan_SelectedIndexChanged(object sender, EventArgs e)
+        public void SetIkan(DataTable data)
         {
-            if (CBIkan.SelectedIndex == -1 || CBKolam.SelectedValue == null || CBIkan.SelectedValue == null
-        || !int.TryParse(CBKolam.SelectedValue.ToString(), out int idKolam)
-        || !int.TryParse(CBIkan.SelectedValue.ToString(), out int idIkan))
-            {
-                labelIkan.Text = "0";
-                return;
-            }
-
-            TampilkanSisaIkan(idKolam, idIkan);
+            CBIkan.DataSource = null;
+            CBIkan.DataSource = data;
+            CBIkan.DisplayMember = "label";
+            CBIkan.ValueMember = "id_ikan";
+            CBIkan.SelectedIndex = -1;
         }
+        public void KosongkanIkan() => CBIkan.DataSource = null;
+        public void SetSisa(string teks) => labelIkan.Text = teks;
+
+        public void TampilkanPeringatan(string p) =>
+            MessageBox.Show(p, "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        public void TampilkanSukses(string p) =>
+            MessageBox.Show(p, "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        public void TampilkanError(string p) =>
+            MessageBox.Show("Terjadi kesalahan: " + p, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        public void TutupDialog() { this.DialogResult = DialogResult.OK; this.Close(); }
     }
 }

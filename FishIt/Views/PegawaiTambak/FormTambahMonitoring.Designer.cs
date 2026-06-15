@@ -117,7 +117,6 @@
             CBKolam.Name = "CBKolam";
             CBKolam.Size = new Size(333, 33);
             CBKolam.TabIndex = 47;
-            CBKolam.SelectedIndexChanged += CBKolam_SelectedIndexChanged;
             // 
             // label1
             // 

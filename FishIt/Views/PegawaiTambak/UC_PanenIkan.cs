@@ -1,18 +1,16 @@
 ﻿using FishIt.Helpers;
-using Npgsql;
+using FishIt.Controllers.PegawaiTambak;
+using FishIt.Views.PegawaiTambak;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Configuration;
 using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 
 namespace FishIt.UserControls.PegawaiTambak
 {
-    public partial class UC_PanenIkan : UserControl
+    public partial class UC_PanenIkan : UserControl, IPanenIkan
     {
+        private CPanenIkan _controller;
+
         public UC_PanenIkan()
         {
             InitializeComponent();
@@ -22,94 +20,29 @@ namespace FishIt.UserControls.PegawaiTambak
             PanelHelper.BuatMelengkung(panel3, 25);
             PanelHelper.BuatMelengkung(panel4, 25);
             PanelHelper.MakeButtonRounded(buttonTambahPanen, 25);
+
+            _controller = new CPanenIkan(this);
         }
 
-        protected override void OnLoad(EventArgs e)
+        protected override void OnLoad(EventArgs e) { base.OnLoad(e); _controller.MuatData(); }
+
+        public void SetDataGrid(DataTable data)
         {
-            base.OnLoad(e);
-            MuatData();
+            DGVPanen.DataSource = data;
+            if (DGVPanen.Columns.Contains("id_akun")) DGVPanen.Columns["id_akun"].Visible = false;
         }
-
-        public static class Config
+        public void SetRingkasan(decimal akumulasi, decimal tahun)
         {
-            public static string ConnString =
-                ConfigurationManager.ConnectionStrings["DbConnection"].ConnectionString;
+            labelAkumulasiPerAkun.Text = akumulasi.ToString("N2") + " kg";
+            labelPerTahunPerAkun.Text = tahun.ToString("N2") + " kg";
         }
-
-        private void MuatData()
-        {
-            MuatKartu();
-            MuatGrid();
-        }
-
-        private void MuatGrid()
-        {
-            using (var conn = new NpgsqlConnection(Config.ConnString))
-            {
-                try
-                {
-                    conn.Open();
-
-                    using var cmd = new NpgsqlCommand(
-                        "SELECT * FROM view_panen WHERE id_akun = @id", conn);
-                    cmd.Parameters.AddWithValue("@id", Session.IdAkun);
-
-                    using var adapter = new NpgsqlDataAdapter(cmd);
-                    var tabel = new DataTable();
-                    adapter.Fill(tabel);
-                    DGVPanen.DataSource = tabel;
-
-                    if (DGVPanen.Columns.Contains("id_akun"))
-                        DGVPanen.Columns["id_akun"].Visible = false;
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Gagal memuat data: " + ex.Message,
-                        "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-        }
-
-        private void MuatKartu()
-        {
-            using (var conn = new NpgsqlConnection(Config.ConnString))
-            {
-                try
-                {
-                    conn.Open();
-                    labelAkumulasiPerAkun.Text = HitungPanen(conn, "AKUMULASI", Session.IdAkun).ToString("N2") + " kg";
-                    labelPerTahunPerAkun.Text = HitungPanen(conn, "TAHUN", Session.IdAkun).ToString("N2") + " kg";
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Gagal memuat ringkasan: " + ex.Message,
-                        "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-        }
-
-        // SEMUA akun
-        private decimal HitungPanen(NpgsqlConnection conn, string periode)
-        {
-            using var cmd = new NpgsqlCommand("SELECT fn_total_panen(@periode)", conn);
-            cmd.Parameters.AddWithValue("@periode", periode);
-            return Convert.ToDecimal(cmd.ExecuteScalar());
-        }
-
-        // PER akun
-        private decimal HitungPanen(NpgsqlConnection conn, string periode, int idAkun)
-        {
-            using var cmd = new NpgsqlCommand("SELECT fn_total_panen(@periode, @id_akun)", conn);
-            cmd.Parameters.AddWithValue("@periode", periode);
-            cmd.Parameters.AddWithValue("@id_akun", idAkun);
-            return Convert.ToDecimal(cmd.ExecuteScalar());
-        }
+        public void TampilkanError(string pesan) =>
+            MessageBox.Show("Gagal memuat data: " + pesan, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
         private void buttonTambahPanen_Click(object sender, EventArgs e)
         {
-            FormPengajuanPanenIkan form = new FormPengajuanPanenIkan();
-            if (form.ShowDialog() == DialogResult.OK)
-                MuatData();
+            using (var f = new FormPengajuanPanenIkan())
+                if (f.ShowDialog() == DialogResult.OK) _controller.MuatData();
         }
     }
 }

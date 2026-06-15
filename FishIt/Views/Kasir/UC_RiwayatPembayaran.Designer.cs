@@ -160,7 +160,6 @@
             Controls.Add(panel6);
             Name = "UC_RiwayatPembayaran";
             Size = new Size(800, 600);
-            Load += UC_RiwayatPembayaran_Load;
             panel6.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)DGVRiwayat).EndInit();
             panel1.ResumeLayout(false);

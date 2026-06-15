@@ -1,18 +1,16 @@
 ﻿using FishIt.Helpers;
-using Npgsql;
+using FishIt.Controllers.PegawaiTambak;
+using FishIt.Views.PegawaiTambak;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Configuration;
 using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 
 namespace FishIt.UserControls.PegawaiTambak
 {
-    public partial class UC_MonitoringIkan : UserControl
+    public partial class UC_MonitoringIkan : UserControl, IMonitoringIkan
     {
+        private CMonitoringIkan _controller;
+
         public UC_MonitoringIkan()
         {
             InitializeComponent();
@@ -22,86 +20,30 @@ namespace FishIt.UserControls.PegawaiTambak
             PanelHelper.BuatMelengkung(panelHari, 25);
             PanelHelper.BuatMelengkung(panelBulan, 25);
             PanelHelper.MakeButtonRounded(buttonTambahMonitoring, 25);
+
+            _controller = new CMonitoringIkan(this);
         }
 
-        protected override void OnLoad(EventArgs e)
+        protected override void OnLoad(EventArgs e) { base.OnLoad(e); _controller.MuatData(); }
+
+        public void SetDataGrid(DataTable data)
         {
-            base.OnLoad(e);
-            MuatData();
+            DGVMonitoringIkan.DataSource = data;
+            if (DGVMonitoringIkan.Columns.Contains("id_akun"))
+                DGVMonitoringIkan.Columns["id_akun"].Visible = false;
         }
-
-        public static class Config
+        public void SetRingkasan(int totalBulan, int totalHari)
         {
-            public static string ConnString = ConfigurationManager.ConnectionStrings["DbConnection"].ConnectionString;
+            labelTotalBulanPerAkun.Text = totalBulan.ToString();
+            labelTotalHariPerAkun.Text = totalHari.ToString();
         }
-
-        private void MuatData()
-        {
-            MuatGrid();
-            MuatKartu();
-        }
-
-        private void MuatGrid()
-        {
-            using (var conn = new NpgsqlConnection(Config.ConnString))
-            {
-                try
-                {
-                    conn.Open();
-
-                    using var cmd = new NpgsqlCommand(
-                        "SELECT * FROM view_monitoring_ikan WHERE id_akun = @id", conn);
-                    cmd.Parameters.AddWithValue("@id", Session.IdAkun);
-
-                    using var adapter = new NpgsqlDataAdapter(cmd);
-                    var tabel = new DataTable();
-                    adapter.Fill(tabel);
-                    DGVMonitoringIkan.DataSource = tabel;
-                    if (DGVMonitoringIkan.Columns.Contains("id_akun"))
-                        DGVMonitoringIkan.Columns["id_akun"].Visible = false;
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Gagal memuat data: " + ex.Message,
-                        "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-        }
-
-        private void MuatKartu()
-        {
-
-            using (var conn = new NpgsqlConnection(Config.ConnString))
-
-            try
-            {
-                conn.Open();
-
-                labelTotalBulanPerAkun.Text = HitungMonitoring(conn, "BULAN", Session.IdAkun).ToString();
-                labelTotalHariPerAkun.Text = HitungMonitoring(conn, "HARI_INI", Session.IdAkun).ToString();
-             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Gagal memuat ringkasan: " + ex.Message,
-                "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-        private int HitungMonitoring(NpgsqlConnection conn, string periode, int idAkun)
-        {
-            using var cmd = new NpgsqlCommand("SELECT fn_total_monitoring(@periode, @id_akun)", conn);
-            cmd.Parameters.AddWithValue("@periode", periode);
-            cmd.Parameters.AddWithValue("@id_akun", idAkun);
-            return Convert.ToInt32(cmd.ExecuteScalar());
-        }
+        public void TampilkanError(string pesan) =>
+            MessageBox.Show("Gagal memuat data: " + pesan, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
         private void buttonTambahMonitoring_Click(object sender, EventArgs e)
         {
-            FormTambahMonitoring formTambah = new FormTambahMonitoring();
-
-            if (formTambah.ShowDialog() == DialogResult.OK)
-            {
-                MuatData();
-            }
+            using (var f = new FormTambahMonitoring())
+                if (f.ShowDialog() == DialogResult.OK) _controller.MuatData();
         }
     }
 }

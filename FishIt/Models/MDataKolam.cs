@@ -13,12 +13,12 @@ namespace FishIt.Models
         public DataTable GetKolam()
         {
             string query = @"
-                SELECT k.id_kolam        AS ""ID"",
-                       k.nomor            AS ""Nomor"",
-                       k.ukuran           AS ""Ukuran"",
-                       k.kapasitas        AS ""Kapasitas"",
-                       k.status_kolam     AS ""Status"",
-                       j.nama_jenis_ikan  AS ""Jenis Ikan""
+                SELECT k.id_kolam                  AS ""ID"",
+                       k.nomor                     AS ""Nomor"",
+                       k.ukuran                    AS ""Ukuran"",
+                       k.kapasitas                 AS ""Kapasitas"",
+                       fn_status_kolam(k.id_kolam) AS ""Status"",
+                       j.nama_jenis_ikan           AS ""Jenis Ikan""
                 FROM kolam k
                 JOIN jenis_ikan j ON j.id_jenis_ikan = k.id_jenis_ikan
                 ORDER BY k.nomor ASC";
