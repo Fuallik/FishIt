@@ -84,8 +84,13 @@ namespace FishIt
             CBIkan.DisplayMember = "label";
             CBIkan.ValueMember = "id_ikan";
             CBIkan.SelectedIndex = -1;
+            CBIkan.Enabled = true;
         }
-        public void KosongkanIkan() => CBIkan.DataSource = null;
+        public void KosongkanIkan()
+        {
+            CBIkan.DataSource = null;
+            CBIkan.Enabled = false;
+        }
         public void SetSisa(string teks) => labelIkan.Text = teks;
 
         public void TampilkanPeringatan(string p) =>

@@ -111,6 +111,7 @@
             // 
             // CBKolam
             // 
+            CBKolam.DropDownStyle = ComboBoxStyle.DropDownList;
             CBKolam.FormattingEnabled = true;
             CBKolam.Location = new Point(82, 153);
             CBKolam.Margin = new Padding(0);
@@ -126,7 +127,7 @@
             label1.Name = "label1";
             label1.Size = new Size(333, 32);
             label1.TabIndex = 48;
-            label1.Text = "Berat";
+            label1.Text = "Berat (Kg)";
             // 
             // NUDBerat
             // 
@@ -151,7 +152,7 @@
             // 
             // CBKondisi
             // 
-            CBKondisi.DisplayMember = "Baik";
+            CBKondisi.DropDownStyle = ComboBoxStyle.DropDownList;
             CBKondisi.FormattingEnabled = true;
             CBKondisi.Items.AddRange(new object[] { "Baik", "Sedang", "Buruk" });
             CBKondisi.Location = new Point(82, 304);

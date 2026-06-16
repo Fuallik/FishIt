@@ -114,7 +114,7 @@
             panelSubLaporan.Dock = DockStyle.Top;
             panelSubLaporan.Location = new Point(0, 418);
             panelSubLaporan.Name = "panelSubLaporan";
-            panelSubLaporan.Size = new Size(200, 169);
+            panelSubLaporan.Size = new Size(200, 160);
             panelSubLaporan.TabIndex = 0;
             // 
             // btnPanen
@@ -128,7 +128,7 @@
             btnPanen.IconChar = FontAwesome.Sharp.IconChar.PlusSquare;
             btnPanen.IconColor = Color.White;
             btnPanen.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            btnPanen.IconSize = 30;
+            btnPanen.IconSize = 50;
             btnPanen.ImageAlign = ContentAlignment.MiddleLeft;
             btnPanen.Location = new Point(0, 120);
             btnPanen.Name = "btnPanen";
@@ -138,6 +138,7 @@
             btnPanen.Text = "Tambah Stok";
             btnPanen.TextAlign = ContentAlignment.MiddleLeft;
             btnPanen.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnPanen.UseCompatibleTextRendering = true;
             btnPanen.UseVisualStyleBackColor = false;
             btnPanen.Click += btnPanen_Click;
             // 
@@ -152,7 +153,7 @@
             buttonPengiriman.IconChar = FontAwesome.Sharp.IconChar.TruckFast;
             buttonPengiriman.IconColor = Color.White;
             buttonPengiriman.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            buttonPengiriman.IconSize = 30;
+            buttonPengiriman.IconSize = 50;
             buttonPengiriman.ImageAlign = ContentAlignment.MiddleLeft;
             buttonPengiriman.Location = new Point(0, 80);
             buttonPengiriman.Name = "buttonPengiriman";
@@ -162,6 +163,7 @@
             buttonPengiriman.Text = "Pengiriman";
             buttonPengiriman.TextAlign = ContentAlignment.MiddleLeft;
             buttonPengiriman.TextImageRelation = TextImageRelation.ImageBeforeText;
+            buttonPengiriman.UseCompatibleTextRendering = true;
             buttonPengiriman.UseVisualStyleBackColor = false;
             buttonPengiriman.Click += buttonPengiriman_Click;
             // 
@@ -176,7 +178,7 @@
             buttonVerifikasi.IconChar = FontAwesome.Sharp.IconChar.Check;
             buttonVerifikasi.IconColor = Color.White;
             buttonVerifikasi.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            buttonVerifikasi.IconSize = 30;
+            buttonVerifikasi.IconSize = 50;
             buttonVerifikasi.ImageAlign = ContentAlignment.MiddleLeft;
             buttonVerifikasi.Location = new Point(0, 40);
             buttonVerifikasi.Name = "buttonVerifikasi";
@@ -186,6 +188,7 @@
             buttonVerifikasi.Text = "Verifikasi Supply";
             buttonVerifikasi.TextAlign = ContentAlignment.MiddleLeft;
             buttonVerifikasi.TextImageRelation = TextImageRelation.ImageBeforeText;
+            buttonVerifikasi.UseCompatibleTextRendering = true;
             buttonVerifikasi.UseVisualStyleBackColor = false;
             buttonVerifikasi.Click += buttonVerifikasi_Click;
             // 
@@ -200,7 +203,7 @@
             buttonMonitoring.IconChar = FontAwesome.Sharp.IconChar.ChartLine;
             buttonMonitoring.IconColor = Color.White;
             buttonMonitoring.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            buttonMonitoring.IconSize = 30;
+            buttonMonitoring.IconSize = 50;
             buttonMonitoring.ImageAlign = ContentAlignment.MiddleLeft;
             buttonMonitoring.Location = new Point(0, 0);
             buttonMonitoring.Name = "buttonMonitoring";
@@ -210,6 +213,7 @@
             buttonMonitoring.Text = "Monitoring";
             buttonMonitoring.TextAlign = ContentAlignment.MiddleLeft;
             buttonMonitoring.TextImageRelation = TextImageRelation.ImageBeforeText;
+            buttonMonitoring.UseCompatibleTextRendering = true;
             buttonMonitoring.UseVisualStyleBackColor = false;
             buttonMonitoring.Click += buttonMonitoring_Click;
             // 
@@ -224,7 +228,7 @@
             buttonLaporan.IconChar = FontAwesome.Sharp.IconChar.Book;
             buttonLaporan.IconColor = Color.White;
             buttonLaporan.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            buttonLaporan.IconSize = 30;
+            buttonLaporan.IconSize = 50;
             buttonLaporan.ImageAlign = ContentAlignment.MiddleLeft;
             buttonLaporan.Location = new Point(0, 368);
             buttonLaporan.Name = "buttonLaporan";
@@ -234,6 +238,7 @@
             buttonLaporan.Text = "Laporan";
             buttonLaporan.TextAlign = ContentAlignment.MiddleLeft;
             buttonLaporan.TextImageRelation = TextImageRelation.ImageBeforeText;
+            buttonLaporan.UseCompatibleTextRendering = true;
             buttonLaporan.UseVisualStyleBackColor = false;
             buttonLaporan.Click += buttonLaporan_Click;
             // 
@@ -258,7 +263,7 @@
             buttonKolam.IconChar = FontAwesome.Sharp.IconChar.Water;
             buttonKolam.IconColor = Color.White;
             buttonKolam.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            buttonKolam.IconSize = 30;
+            buttonKolam.IconSize = 50;
             buttonKolam.ImageAlign = ContentAlignment.MiddleLeft;
             buttonKolam.Location = new Point(0, 40);
             buttonKolam.Name = "buttonKolam";
@@ -268,6 +273,7 @@
             buttonKolam.Text = "Data Kolam";
             buttonKolam.TextAlign = ContentAlignment.MiddleLeft;
             buttonKolam.TextImageRelation = TextImageRelation.ImageBeforeText;
+            buttonKolam.UseCompatibleTextRendering = true;
             buttonKolam.UseVisualStyleBackColor = false;
             buttonKolam.Click += buttonKolam_Click_1;
             // 
@@ -282,7 +288,7 @@
             buttonStokIkan.IconChar = FontAwesome.Sharp.IconChar.FishFins;
             buttonStokIkan.IconColor = Color.White;
             buttonStokIkan.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            buttonStokIkan.IconSize = 30;
+            buttonStokIkan.IconSize = 50;
             buttonStokIkan.ImageAlign = ContentAlignment.MiddleLeft;
             buttonStokIkan.Location = new Point(0, 0);
             buttonStokIkan.Name = "buttonStokIkan";
@@ -292,6 +298,7 @@
             buttonStokIkan.Text = "Stok Ikan";
             buttonStokIkan.TextAlign = ContentAlignment.MiddleLeft;
             buttonStokIkan.TextImageRelation = TextImageRelation.ImageBeforeText;
+            buttonStokIkan.UseCompatibleTextRendering = true;
             buttonStokIkan.UseVisualStyleBackColor = false;
             buttonStokIkan.Click += buttonStokIkan_Click_1;
             // 
@@ -306,7 +313,7 @@
             buttonIkan.IconChar = FontAwesome.Sharp.IconChar.Archive;
             buttonIkan.IconColor = Color.White;
             buttonIkan.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            buttonIkan.IconSize = 30;
+            buttonIkan.IconSize = 50;
             buttonIkan.ImageAlign = ContentAlignment.MiddleLeft;
             buttonIkan.Location = new Point(0, 231);
             buttonIkan.Name = "buttonIkan";
@@ -316,6 +323,7 @@
             buttonIkan.Text = "Data FishIt";
             buttonIkan.TextAlign = ContentAlignment.MiddleLeft;
             buttonIkan.TextImageRelation = TextImageRelation.ImageBeforeText;
+            buttonIkan.UseCompatibleTextRendering = true;
             buttonIkan.UseVisualStyleBackColor = false;
             buttonIkan.Click += buttonIkan_Click;
             // 
@@ -340,7 +348,7 @@
             btnDataAkun.IconChar = FontAwesome.Sharp.IconChar.UserFriends;
             btnDataAkun.IconColor = Color.White;
             btnDataAkun.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            btnDataAkun.IconSize = 30;
+            btnDataAkun.IconSize = 50;
             btnDataAkun.ImageAlign = ContentAlignment.MiddleLeft;
             btnDataAkun.Location = new Point(0, 40);
             btnDataAkun.Name = "btnDataAkun";
@@ -350,6 +358,7 @@
             btnDataAkun.Text = "Data Akun";
             btnDataAkun.TextAlign = ContentAlignment.MiddleLeft;
             btnDataAkun.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnDataAkun.UseCompatibleTextRendering = true;
             btnDataAkun.UseVisualStyleBackColor = false;
             btnDataAkun.Click += btnDataAkun_Click;
             // 
@@ -364,7 +373,7 @@
             buttonTambahAkun.IconChar = FontAwesome.Sharp.IconChar.Users;
             buttonTambahAkun.IconColor = Color.White;
             buttonTambahAkun.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            buttonTambahAkun.IconSize = 30;
+            buttonTambahAkun.IconSize = 50;
             buttonTambahAkun.ImageAlign = ContentAlignment.MiddleLeft;
             buttonTambahAkun.Location = new Point(0, 0);
             buttonTambahAkun.Name = "buttonTambahAkun";
@@ -374,6 +383,7 @@
             buttonTambahAkun.Text = "Kelola Akun";
             buttonTambahAkun.TextAlign = ContentAlignment.MiddleLeft;
             buttonTambahAkun.TextImageRelation = TextImageRelation.ImageBeforeText;
+            buttonTambahAkun.UseCompatibleTextRendering = true;
             buttonTambahAkun.UseVisualStyleBackColor = false;
             buttonTambahAkun.Click += buttonTambahAkun_Click_1;
             // 
@@ -388,16 +398,17 @@
             buttonKelolaAkun.IconChar = FontAwesome.Sharp.IconChar.User;
             buttonKelolaAkun.IconColor = Color.White;
             buttonKelolaAkun.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            buttonKelolaAkun.IconSize = 30;
+            buttonKelolaAkun.IconSize = 50;
             buttonKelolaAkun.ImageAlign = ContentAlignment.MiddleLeft;
             buttonKelolaAkun.Location = new Point(0, 100);
             buttonKelolaAkun.Name = "buttonKelolaAkun";
             buttonKelolaAkun.Padding = new Padding(15, 0, 0, 0);
             buttonKelolaAkun.Size = new Size(200, 50);
             buttonKelolaAkun.TabIndex = 8;
-            buttonKelolaAkun.Text = "Akun";
+            buttonKelolaAkun.Text = " Akun";
             buttonKelolaAkun.TextAlign = ContentAlignment.MiddleLeft;
             buttonKelolaAkun.TextImageRelation = TextImageRelation.ImageBeforeText;
+            buttonKelolaAkun.UseCompatibleTextRendering = true;
             buttonKelolaAkun.UseVisualStyleBackColor = false;
             buttonKelolaAkun.Click += buttonKelolaAkun_Click;
             // 
@@ -412,7 +423,7 @@
             buttonDashboard.IconChar = FontAwesome.Sharp.IconChar.Bars;
             buttonDashboard.IconColor = Color.White;
             buttonDashboard.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            buttonDashboard.IconSize = 30;
+            buttonDashboard.IconSize = 50;
             buttonDashboard.ImageAlign = ContentAlignment.MiddleLeft;
             buttonDashboard.Location = new Point(0, 50);
             buttonDashboard.Name = "buttonDashboard";
@@ -422,6 +433,7 @@
             buttonDashboard.Text = "Dashboard";
             buttonDashboard.TextAlign = ContentAlignment.MiddleLeft;
             buttonDashboard.TextImageRelation = TextImageRelation.ImageBeforeText;
+            buttonDashboard.UseCompatibleTextRendering = true;
             buttonDashboard.UseVisualStyleBackColor = false;
             buttonDashboard.Click += buttonDashboard_Click_1;
             // 

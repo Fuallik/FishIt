@@ -52,7 +52,7 @@
             label2.Name = "label2";
             label2.Size = new Size(333, 32);
             label2.TabIndex = 63;
-            label2.Text = "Jumlah Pakan";
+            label2.Text = "Jumlah Pakan (Kg)";
             // 
             // label1
             // 
@@ -66,6 +66,7 @@
             // 
             // CBKolam
             // 
+            CBKolam.DropDownStyle = ComboBoxStyle.DropDownList;
             CBKolam.FormattingEnabled = true;
             CBKolam.Location = new Point(82, 152);
             CBKolam.Margin = new Padding(0);
@@ -138,6 +139,7 @@
             // 
             // CBPakan
             // 
+            CBPakan.DropDownStyle = ComboBoxStyle.DropDownList;
             CBPakan.FormattingEnabled = true;
             CBPakan.Location = new Point(82, 228);
             CBPakan.Margin = new Padding(0);

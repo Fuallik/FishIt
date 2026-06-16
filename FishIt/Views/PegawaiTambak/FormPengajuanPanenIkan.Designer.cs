@@ -72,6 +72,7 @@
             // 
             // CBKolam
             // 
+            CBKolam.DropDownStyle = ComboBoxStyle.DropDownList;
             CBKolam.FormattingEnabled = true;
             CBKolam.Location = new Point(82, 152);
             CBKolam.Margin = new Padding(0);
@@ -119,11 +120,12 @@
             lblTambahAkun.Name = "lblTambahAkun";
             lblTambahAkun.Size = new Size(505, 54);
             lblTambahAkun.TabIndex = 56;
-            lblTambahAkun.Text = "Pengajuan Katalog Ikan";
+            lblTambahAkun.Text = "Pengajuan Panen Ikan";
             lblTambahAkun.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // CBIkan
             // 
+            CBIkan.DropDownStyle = ComboBoxStyle.DropDownList;
             CBIkan.FormattingEnabled = true;
             CBIkan.Location = new Point(82, 231);
             CBIkan.Margin = new Padding(0);
@@ -163,6 +165,7 @@
             // 
             // CBKualitas
             // 
+            CBKualitas.DropDownStyle = ComboBoxStyle.DropDownList;
             CBKualitas.FormattingEnabled = true;
             CBKualitas.Items.AddRange(new object[] { "A", "B", "C" });
             CBKualitas.Location = new Point(82, 465);
@@ -238,7 +241,7 @@
             labelIkan.Text = "0";
             labelIkan.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // FormTambahPanenIkan
+            // FormPengajuanPanenIkan
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -258,7 +261,7 @@
             Controls.Add(labelNama);
             Controls.Add(lblTambahAkun);
             FormBorderStyle = FormBorderStyle.None;
-            Name = "FormTambahPanenIkan";
+            Name = "FormPengajuanPanenIkan";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "FormTambahPanenIkan";
             ((System.ComponentModel.ISupportInitialize)NUDBerat).EndInit();

@@ -21,11 +21,10 @@ namespace FishIt
         {
             base.OnLoad(e);
             CBPakan.DataSource = null;
-            CBPakan.Enabled = false;       // pakan nonaktif sampai kolam dipilih
+            CBPakan.Enabled = false;
             _controller.MuatKolam();
         }
 
-        // ===== aksi UI -> controller =====
         private void CBKolam_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (CBKolam.SelectedIndex == -1 || CBKolam.SelectedValue == null
@@ -64,7 +63,6 @@ namespace FishIt
 
         private void btnBatalTambahMonitoring_Click(object sender, EventArgs e) => this.Close();
 
-        // ===== implementasi ITambahPemberianPakan =====
         public void SetKolam(DataTable data)
         {
             CBKolam.DataSource = data;

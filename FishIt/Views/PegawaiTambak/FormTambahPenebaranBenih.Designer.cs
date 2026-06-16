@@ -47,6 +47,7 @@
             // CBBenihIkan
             // 
             CBBenihIkan.DisplayMember = "Baik";
+            CBBenihIkan.DropDownStyle = ComboBoxStyle.DropDownList;
             CBBenihIkan.FormattingEnabled = true;
             CBBenihIkan.Location = new Point(82, 228);
             CBBenihIkan.Margin = new Padding(0);
@@ -67,6 +68,7 @@
             // 
             // CBKolam
             // 
+            CBKolam.DropDownStyle = ComboBoxStyle.DropDownList;
             CBKolam.FormattingEnabled = true;
             CBKolam.Location = new Point(82, 152);
             CBKolam.Margin = new Padding(0);

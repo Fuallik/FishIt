@@ -70,9 +70,9 @@
             buttonRiwayatPembayaran.IconChar = FontAwesome.Sharp.IconChar.ClockRotateLeft;
             buttonRiwayatPembayaran.IconColor = Color.White;
             buttonRiwayatPembayaran.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            buttonRiwayatPembayaran.IconSize = 30;
+            buttonRiwayatPembayaran.IconSize = 50;
             buttonRiwayatPembayaran.ImageAlign = ContentAlignment.MiddleLeft;
-            buttonRiwayatPembayaran.Location = new Point(0, 140);
+            buttonRiwayatPembayaran.Location = new Point(0, 170);
             buttonRiwayatPembayaran.Name = "buttonRiwayatPembayaran";
             buttonRiwayatPembayaran.Padding = new Padding(15, 0, 0, 0);
             buttonRiwayatPembayaran.Size = new Size(200, 40);
@@ -80,6 +80,7 @@
             buttonRiwayatPembayaran.Text = "Riwayat Pembayaran";
             buttonRiwayatPembayaran.TextAlign = ContentAlignment.MiddleLeft;
             buttonRiwayatPembayaran.TextImageRelation = TextImageRelation.ImageBeforeText;
+            buttonRiwayatPembayaran.UseCompatibleTextRendering = true;
             buttonRiwayatPembayaran.UseVisualStyleBackColor = false;
             buttonRiwayatPembayaran.Click += buttonRiwayatPembayaran_Click;
             // 
@@ -119,16 +120,17 @@
             buttonKonfirmasiPembayaran.IconChar = FontAwesome.Sharp.IconChar.CashRegister;
             buttonKonfirmasiPembayaran.IconColor = Color.White;
             buttonKonfirmasiPembayaran.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            buttonKonfirmasiPembayaran.IconSize = 30;
+            buttonKonfirmasiPembayaran.IconSize = 50;
             buttonKonfirmasiPembayaran.ImageAlign = ContentAlignment.MiddleLeft;
             buttonKonfirmasiPembayaran.Location = new Point(0, 100);
             buttonKonfirmasiPembayaran.Name = "buttonKonfirmasiPembayaran";
             buttonKonfirmasiPembayaran.Padding = new Padding(15, 0, 0, 0);
-            buttonKonfirmasiPembayaran.Size = new Size(200, 40);
+            buttonKonfirmasiPembayaran.Size = new Size(200, 70);
             buttonKonfirmasiPembayaran.TabIndex = 8;
             buttonKonfirmasiPembayaran.Text = "Konfirmasi Pembayaran";
             buttonKonfirmasiPembayaran.TextAlign = ContentAlignment.MiddleLeft;
             buttonKonfirmasiPembayaran.TextImageRelation = TextImageRelation.ImageBeforeText;
+            buttonKonfirmasiPembayaran.UseCompatibleTextRendering = true;
             buttonKonfirmasiPembayaran.UseVisualStyleBackColor = false;
             buttonKonfirmasiPembayaran.Click += buttonKonfirmasiPembayaran_Click;
             // 
@@ -143,16 +145,17 @@
             buttonDashboard.IconChar = FontAwesome.Sharp.IconChar.Bars;
             buttonDashboard.IconColor = Color.White;
             buttonDashboard.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            buttonDashboard.IconSize = 30;
+            buttonDashboard.IconSize = 50;
             buttonDashboard.ImageAlign = ContentAlignment.MiddleLeft;
             buttonDashboard.Location = new Point(0, 50);
             buttonDashboard.Name = "buttonDashboard";
             buttonDashboard.Padding = new Padding(15, 0, 0, 0);
             buttonDashboard.Size = new Size(200, 50);
             buttonDashboard.TabIndex = 7;
-            buttonDashboard.Text = " Dashboard";
+            buttonDashboard.Text = "Dashboard";
             buttonDashboard.TextAlign = ContentAlignment.MiddleLeft;
             buttonDashboard.TextImageRelation = TextImageRelation.ImageBeforeText;
+            buttonDashboard.UseCompatibleTextRendering = true;
             buttonDashboard.UseVisualStyleBackColor = false;
             buttonDashboard.Click += buttonDashboard_Click;
             // 

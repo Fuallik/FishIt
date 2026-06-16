@@ -161,7 +161,7 @@
             buttonRiwayat.IconChar = FontAwesome.Sharp.IconChar.ArrowsSpin;
             buttonRiwayat.IconColor = Color.White;
             buttonRiwayat.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            buttonRiwayat.IconSize = 30;
+            buttonRiwayat.IconSize = 50;
             buttonRiwayat.ImageAlign = ContentAlignment.MiddleLeft;
             buttonRiwayat.Location = new Point(0, 200);
             buttonRiwayat.Name = "buttonRiwayat";
@@ -171,6 +171,7 @@
             buttonRiwayat.Text = "Riwayat";
             buttonRiwayat.TextAlign = ContentAlignment.MiddleLeft;
             buttonRiwayat.TextImageRelation = TextImageRelation.ImageBeforeText;
+            buttonRiwayat.UseCompatibleTextRendering = true;
             buttonRiwayat.UseVisualStyleBackColor = false;
             buttonRiwayat.Click += buttonRiwayat_Click;
             // 
@@ -185,7 +186,7 @@
             buttonKeranjang.IconChar = FontAwesome.Sharp.IconChar.BoxOpen;
             buttonKeranjang.IconColor = Color.White;
             buttonKeranjang.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            buttonKeranjang.IconSize = 30;
+            buttonKeranjang.IconSize = 50;
             buttonKeranjang.ImageAlign = ContentAlignment.MiddleLeft;
             buttonKeranjang.Location = new Point(0, 150);
             buttonKeranjang.Name = "buttonKeranjang";
@@ -195,6 +196,7 @@
             buttonKeranjang.Text = "Keranjang";
             buttonKeranjang.TextAlign = ContentAlignment.MiddleLeft;
             buttonKeranjang.TextImageRelation = TextImageRelation.ImageBeforeText;
+            buttonKeranjang.UseCompatibleTextRendering = true;
             buttonKeranjang.UseVisualStyleBackColor = false;
             buttonKeranjang.Click += buttonKeranjang_Click;
             // 
@@ -209,7 +211,7 @@
             buttonKatalogIkan.IconChar = FontAwesome.Sharp.IconChar.FishFins;
             buttonKatalogIkan.IconColor = Color.White;
             buttonKatalogIkan.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            buttonKatalogIkan.IconSize = 30;
+            buttonKatalogIkan.IconSize = 50;
             buttonKatalogIkan.ImageAlign = ContentAlignment.MiddleLeft;
             buttonKatalogIkan.Location = new Point(0, 100);
             buttonKatalogIkan.Name = "buttonKatalogIkan";
@@ -219,6 +221,7 @@
             buttonKatalogIkan.Text = "Katalog Ikan";
             buttonKatalogIkan.TextAlign = ContentAlignment.MiddleLeft;
             buttonKatalogIkan.TextImageRelation = TextImageRelation.ImageBeforeText;
+            buttonKatalogIkan.UseCompatibleTextRendering = true;
             buttonKatalogIkan.UseVisualStyleBackColor = false;
             buttonKatalogIkan.Click += buttonKatalogIkan_Click;
             // 
@@ -233,7 +236,7 @@
             buttonDashboard.IconChar = FontAwesome.Sharp.IconChar.Bars;
             buttonDashboard.IconColor = Color.White;
             buttonDashboard.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            buttonDashboard.IconSize = 30;
+            buttonDashboard.IconSize = 50;
             buttonDashboard.ImageAlign = ContentAlignment.MiddleLeft;
             buttonDashboard.Location = new Point(0, 50);
             buttonDashboard.Name = "buttonDashboard";
@@ -243,6 +246,7 @@
             buttonDashboard.Text = "Dashboard";
             buttonDashboard.TextAlign = ContentAlignment.MiddleLeft;
             buttonDashboard.TextImageRelation = TextImageRelation.ImageBeforeText;
+            buttonDashboard.UseCompatibleTextRendering = true;
             buttonDashboard.UseVisualStyleBackColor = false;
             buttonDashboard.Click += buttonDashboard_Click;
             // 

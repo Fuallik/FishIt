@@ -71,12 +71,18 @@ namespace FishIt
         }
         public void SetBenih(DataTable data)
         {
+            CBBenihIkan.DataSource = null;
             CBBenihIkan.DataSource = data;
             CBBenihIkan.DisplayMember = "nama";
             CBBenihIkan.ValueMember = "id_benih";
             CBBenihIkan.SelectedIndex = -1;
+            CBBenihIkan.Enabled = true;
         }
-        public void KosongkanBenih() => CBBenihIkan.DataSource = null;
+        public void KosongkanBenih()
+        {
+            CBBenihIkan.DataSource = null;
+            CBBenihIkan.Enabled = false;
+        }
         public void SetStok(string teks) => labelStok.Text = teks;
 
         public void TampilkanPeringatan(string p) =>
