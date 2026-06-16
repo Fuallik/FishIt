@@ -39,6 +39,26 @@ namespace FishIt.Models
         }
 
         /// <summary>
+        /// Daftar nama ikan yang JENIS-nya sesuai (untuk menyaring dropdown nama
+        /// setelah supplier memilih jenis ikan). Mis. pilih "Air Tawar" -> hanya
+        /// Lele, Nila, dst.
+        /// </summary>
+        public DataTable GetNamaIkanByJenis(string namaJenis)
+        {
+            using var conn = new NpgsqlConnection(_connString);
+            conn.Open();
+            using var cmd = new NpgsqlCommand(@"
+                SELECT DISTINCT i.nama_ikan
+                FROM ikan i
+                JOIN jenis_ikan j ON j.id_jenis_ikan = i.id_jenis_ikan
+                WHERE LOWER(j.nama_jenis_ikan) = LOWER(@jenis)
+                ORDER BY i.nama_ikan", conn);
+            cmd.Parameters.AddWithValue("@jenis", namaJenis);
+            using var ad = new NpgsqlDataAdapter(cmd);
+            var dt = new DataTable(); ad.Fill(dt); return dt;
+        }
+
+        /// <summary>
         /// Untuk auto-isi jenis air: cari nama jenis ikan dari sebuah nama ikan yang sudah ada.
         /// Mengembalikan null kalau ikan belum terdaftar (berarti nama baru).
         /// </summary>

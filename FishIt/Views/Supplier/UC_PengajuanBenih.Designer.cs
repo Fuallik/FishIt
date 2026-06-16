@@ -58,6 +58,7 @@
             cmbJenisIkan.Name = "cmbJenisIkan";
             cmbJenisIkan.Size = new Size(300, 36);
             cmbJenisIkan.TabIndex = 2;
+            cmbJenisIkan.SelectedIndexChanged += cmbJenisIkan_SelectedIndexChanged;
             // 
             // lblNama
             // 
@@ -77,6 +78,7 @@
             cmbNama.Size = new Size(300, 36);
             cmbNama.TabIndex = 4;
             cmbNama.SelectedIndexChanged += cmbNama_SelectedIndexChanged;
+            cmbNama.Leave += cmbNama_Leave;
             // 
             // lblKuantitas
             // 

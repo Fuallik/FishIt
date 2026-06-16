@@ -6,10 +6,9 @@ namespace FishIt.Views.Supplier
     internal interface IPengajuanBenih
     {
         void SetDaftarJenisIkan(DataTable data);
-        void SetDaftarNamaIkan(DataTable data);
+        void SetDaftarNamaIkan(DataTable data);   // isi/refresh dropdown nama
         void SetRiwayat(DataTable data);
-        void KunciJenisIkan(string namaJenis);  // auto-isi + kunci saat ikan sudah ada
-        void BukaJenisIkan();                    // buka lagi untuk nama baru
+        void SetJenisIkan(string namaJenis);      // set pilihan jenis (saat auto-isi dari nama)
         void TampilkanPesanInfo(string pesan);
         void TampilkanPesanError(string pesan);
         void TampilkanPesanSukses(string pesan);
