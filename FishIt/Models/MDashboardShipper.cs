@@ -15,11 +15,10 @@ namespace FishIt.Models
 
         public DataTable GetRingkasanPerStatus(int idShipper)
         {
-            string query = @"
-                SELECT status_pengiriman, COUNT(*) AS jumlah
-                FROM pengiriman
-                WHERE id_akun = @id_shipper
-                GROUP BY status_pengiriman";
+            // Panggil FUNCTION database (mengembalikan tabel status + jumlah).
+            // Kolom hasil: status_pengiriman, jumlah — sama seperti query lama,
+            // jadi Controller tidak perlu diubah.
+            string query = "SELECT status_pengiriman, jumlah FROM fn_ringkasan_pengiriman(@id_shipper)";
 
             using var conn = new NpgsqlConnection(_connString);
             conn.Open();
