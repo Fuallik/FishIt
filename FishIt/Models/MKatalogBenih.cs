@@ -19,6 +19,13 @@ namespace FishIt.Models
                         b.tanggal_masuk   AS ""Tanggal Masuk""
                 FROM benih b
                 JOIN jenis_ikan j ON j.id_jenis_ikan = b.id_jenis_ikan
+                WHERE EXISTS (
+                    -- hanya tampilkan benih yang punya minimal satu pengajuan
+                    -- berstatus 'Disetujui' (sudah diverifikasi Admin)
+                    SELECT 1 FROM pengiriman_supplier ps
+                    WHERE ps.id_benih = b.id_benih
+                      AND ps.status_verifikasi = 'Disetujui'
+                )
                 ORDER BY b.nama";
 
             using var conn = new NpgsqlConnection(_connString);

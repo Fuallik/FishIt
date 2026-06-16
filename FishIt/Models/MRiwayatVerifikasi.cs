@@ -16,17 +16,15 @@ namespace FishIt.Models
         public DataTable GetRiwayat(int idAkun)
         {
             string query = @"
-                SELECT  ps.tipe                 AS ""Tipe"",
-                        COALESCE(b.nama, p.nama) AS ""Item"",
-                        ps.kuantitas            AS ""Kuantitas"",
-                        ps.tanggal_kirim        AS ""Tgl Ajukan"",
-                        ps.status_verifikasi    AS ""Status"",
-                        ps.tanggal_verifikasi   AS ""Tgl Verifikasi""
-                FROM pengiriman_supplier ps
-                LEFT JOIN benih b ON b.id_benih = ps.id_benih
-                LEFT JOIN pakan p ON p.id_pakan = ps.id_pakan
-                WHERE ps.id_akun = @id_akun
-                ORDER BY ps.tanggal_kirim DESC";
+                SELECT  tipe              AS ""Tipe"",
+                        nama_item         AS ""Item"",
+                        kuantitas         AS ""Kuantitas"",
+                        tanggal_kirim     AS ""Tgl Ajukan"",
+                        status_verifikasi AS ""Status"",
+                        tanggal_verifikasi AS ""Tgl Verifikasi""
+                FROM view_pengajuan_supplier
+                WHERE id_akun = @id_akun
+                ORDER BY tanggal_kirim DESC";
 
             using var conn = new NpgsqlConnection(_connString);
             conn.Open();

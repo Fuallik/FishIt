@@ -110,6 +110,13 @@ namespace FishIt.Models
 
                 tx.Commit();
             }
+            catch (PostgresException pgEx) when (pgEx.SqlState == "P0001")
+            {
+                // P0001 = RAISE EXCEPTION dari trigger (mis. konsistensi jenis ikan).
+                // Ambil pesan asli trigger yang sudah ramah, lempar sebagai pesan bersih.
+                tx.Rollback();
+                throw new Exception(pgEx.MessageText);
+            }
             catch
             {
                 tx.Rollback();
