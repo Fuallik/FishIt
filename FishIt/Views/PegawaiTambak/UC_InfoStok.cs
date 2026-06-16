@@ -31,20 +31,14 @@ namespace FishIt.UserControls.PegawaiTambak
             PanelHelper.BuatMelengkung(panelJenisBenih, 25);
             new AutoScaleHelper(this);
 
-            // Inisialisasi Controller
             _controller = new CInfoStok(this);
         }
 
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
-            // Perintahkan controller untuk memuat data
             _controller.MuatData();
         }
-
-        // ==========================================
-        // IMPLEMENTASI INTERFACE IInfoStokView
-        // ==========================================
 
         public void SetDataPakan(DataTable data)
         {
@@ -65,7 +59,7 @@ namespace FishIt.UserControls.PegawaiTambak
         public void SetRingkasanBenih(decimal jenis, decimal total)
         {
             labelJenisBenih.Text = $"{jenis:N0} jenis";
-            labelStokBenih.Text = $"{total:N0} ekor"; // Benih biasanya dalam satuan ekor bulat (N0)
+            labelStokBenih.Text = $"{total:N0} ekor";        
         }
 
         public void TampilkanPesanError(string pesan)

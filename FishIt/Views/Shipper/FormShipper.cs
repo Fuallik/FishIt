@@ -19,22 +19,14 @@ namespace FishIt
         public FormShipper()
         {
             InitializeComponent();
-            // 1. Gunakan ClientSize, bukan Size (karena perhitungan di Resize pakai ClientSize)
             originalFormSize = this.ClientSize;
 
-            // 2. Simpan SEMUA data ukuran dan font asli di sini (HANYA SEKALI)
             SaveFonts(this);
             SaveBounds(this);
-            //originalFontSize = buttonLogin.Font.Size;
-
-            // 3. Konfigurasi UI lainnya
             this.AutoScaleMode = AutoScaleMode.Dpi;
             this.ActiveControl = null;
-            // 4. DAFTARKAN EVENT RESIZE SETELAH SEMUA UKURAN ASLI DISIMPAN
             this.Resize += new System.EventHandler(this.FormShipper_Resize);
 
-            // 5. Baru lakukan Maximize. 
-            // Ini akan otomatis memicu FormShipper_Resize dan memperbesar semuanya dengan benar.
             this.WindowState = FormWindowState.Maximized;
         }
 
@@ -69,7 +61,6 @@ namespace FishIt
             ResizeControls(this, xRatio, yRatio);
             ResizeFonts(this, scale);
 
-            //UpdateButtonRadius();
         }
 
         private void SaveFonts(Control parent)
@@ -88,10 +79,8 @@ namespace FishIt
             {
                 if (OriginalFonts.ContainsKey(control))
                 {
-                    // Ambil ukuran asli, kalikan dengan skala (scale)
                     float newSize = OriginalFonts[control] * scale;
 
-                    // Pastikan font tidak menjadi lebih kecil dari 1 (mencegah error crash)
                     if (newSize < 1.0f) newSize = 1.0f;
 
                     control.Font = new Font(

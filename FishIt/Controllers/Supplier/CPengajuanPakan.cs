@@ -5,7 +5,6 @@ using System;
 
 namespace FishIt.Controllers.Supplier
 {
-    /// <summary> CONTROLLER Pengajuan Pakan. </summary>
     internal class CPengajuanPakan
     {
         private readonly IPengajuanPakan _view;
@@ -30,7 +29,6 @@ namespace FishIt.Controllers.Supplier
             }
         }
 
-        /// <summary> Validasi lalu proses pengajuan. </summary>
         public void Ajukan(int idAkun, string namaPakan, string kuantitasStr)
         {
             if (string.IsNullOrEmpty(namaPakan) || string.IsNullOrEmpty(kuantitasStr))

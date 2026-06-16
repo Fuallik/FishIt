@@ -4,17 +4,11 @@ using System.Data;
 
 namespace FishIt.Models
 {
-    /// <summary>
-    /// MODEL untuk fitur Pengiriman Pesanan (Shipper).
-    /// Semua akses database ada di sini; tidak tahu soal UI.
-    /// id_akun shipper dikirim dari luar sebagai parameter (pola tim: Model tidak pakai Session).
-    /// </summary>
     internal class MPengirimanPesanan
     {
         private readonly string _connString =
             ConfigurationManager.ConnectionStrings["DbConnection"].ConnectionString;
 
-        /// <summary> Pengiriman aktif (Diproses/Dikirim) milik shipper tertentu. </summary>
         public DataTable GetPengirimanAktif(int idShipper)
         {
             string query = @"
@@ -42,10 +36,6 @@ namespace FishIt.Models
             return dt;
         }
 
-        /// <summary>
-        /// Ubah status Diproses -> Dikirim. Guard status di WHERE mencegah race condition.
-        /// Mengembalikan jumlah baris terpengaruh (0 = status sudah berubah dari sumber lain).
-        /// </summary>
         public int MulaiKirim(int idPengiriman, int idShipper)
         {
             string query = @"
@@ -57,7 +47,6 @@ namespace FishIt.Models
             return Eksekusi(query, idPengiriman, idShipper);
         }
 
-        /// <summary> Ubah status Dikirim -> Diterima + isi tanggal_diterima. </summary>
         public int TandaiDiterima(int idPengiriman, int idShipper)
         {
             string query = @"

@@ -5,16 +5,11 @@ using System.Data;
 
 namespace FishIt.Models
 {
-    /// <summary>
-    /// MODEL Pengajuan Pakan. Menangani: muat dropdown pakan, muat riwayat,
-    /// dan proses pengajuan (cek/buat pakan + insert pengajuan) dalam satu transaksi.
-    /// </summary>
     internal class MPengajuanPakan
     {
         private readonly string _connString =
             ConfigurationManager.ConnectionStrings["DbConnection"].ConnectionString;
 
-        /// <summary> Daftar nama pakan untuk dropdown (DISTINCT supaya tidak duplikat). </summary>
         public DataTable GetDaftarPakan()
         {
             using var conn = new NpgsqlConnection(_connString);
@@ -26,7 +21,6 @@ namespace FishIt.Models
             return dt;
         }
 
-        /// <summary> Riwayat pengajuan pakan milik supplier. </summary>
         public DataTable GetRiwayat(int idAkun)
         {
             string query = @"
@@ -50,10 +44,6 @@ namespace FishIt.Models
             return dt;
         }
 
-        /// <summary>
-        /// Proses pengajuan pakan dalam satu transaksi:
-        /// cek/buat pakan -> insert pengiriman_supplier (status 'Pending').
-        /// </summary>
         public void Ajukan(int idAkun, string namaPakan, decimal kuantitas)
         {
             using var conn = new NpgsqlConnection(_connString);
@@ -82,11 +72,10 @@ namespace FishIt.Models
             catch
             {
                 tx.Rollback();
-                throw; // dilempar ke Controller untuk ditampilkan View
+                throw;       
             }
         }
 
-        /// <summary> Cari id_pakan dari nama; kalau belum ada, buat baru (stok 0). </summary>
         private int AmbilAtauBuatPakan(NpgsqlConnection conn, NpgsqlTransaction tx, string nama)
         {
             using (var cmd = new NpgsqlCommand(

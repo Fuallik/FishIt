@@ -8,7 +8,7 @@ namespace FishIt.Controllers.Admin
     {
         private readonly IHapusAkun _view;
         private readonly MHapusAkun _model;
-        private string _username = "";   // username yang sedang diproses
+        private string _username = "";       
 
         public CHapusAkun(IHapusAkun view)
         {
@@ -40,7 +40,6 @@ namespace FishIt.Controllers.Admin
             catch (Exception ex) { _view.TampilkanError(ex.Message); }
         }
 
-        // Dipanggil View kalau user klik "Ya" di popup konfirmasi
         public void Hapus()
         {
             try

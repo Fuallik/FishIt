@@ -15,7 +15,6 @@ namespace FishIt.Models
         private readonly string _connString =
             ConfigurationManager.ConnectionStrings["DbConnection"].ConnectionString;
 
-        // Kolam aktif (boleh kosong — penebaran justru ke kolam kosong); kecuali yang Tidak Terpakai
         public DataTable GetKolam()
         {
             using var conn = new NpgsqlConnection(_connString);
@@ -26,7 +25,6 @@ namespace FishIt.Models
             var dt = new DataTable(); ad.Fill(dt); return dt;
         }
 
-        // Benih yang jenisnya cocok dengan kolam + masih ada stok
         public DataTable GetBenihByKolam(int idKolam)
         {
             using var conn = new NpgsqlConnection(_connString);

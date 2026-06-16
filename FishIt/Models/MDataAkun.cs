@@ -29,8 +29,6 @@ namespace FishIt.Models
 
         public int HitungAktif() => Count("SELECT COUNT(*) FROM akun WHERE aktif = true");
         public int HitungTidakAktif() => Count("SELECT COUNT(*) FROM akun WHERE aktif = false");
-
-        // Satu method buat semua role, beda di parameter id_role
         public int HitungRole(int idRole)
         {
             using var conn = new NpgsqlConnection(_connString);

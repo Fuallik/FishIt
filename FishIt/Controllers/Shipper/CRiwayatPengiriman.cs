@@ -4,7 +4,6 @@ using FishIt.Views.Shipper;
 
 namespace FishIt.Controllers.Shipper
 {
-    /// <summary> CONTROLLER Riwayat Pengiriman (Shipper). </summary>
     internal class CRiwayatPengiriman
     {
         private readonly IRiwayatPengiriman _view;

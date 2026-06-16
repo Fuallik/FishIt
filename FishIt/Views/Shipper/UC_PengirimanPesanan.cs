@@ -7,8 +7,6 @@ using System.Windows.Forms;
 
 namespace FishIt.UserControls.Shipper
 {
-    // View implement IPengirimanPesanan. Tugasnya hanya tampilan + meneruskan aksi ke Controller.
-    // Tidak ada query database di sini — semua di Model.
     public partial class UC_PengirimanPesanan : UserControl, IPengirimanPesanan
     {
         private readonly CPengirimanPesanan _controller;
@@ -26,7 +24,6 @@ namespace FishIt.UserControls.Shipper
             _controller.MuatData(Session.IdAkun);
         }
 
-        /// <summary> Ambil id_pengiriman + status baris terpilih. -1 kalau belum pilih. </summary>
         private int AmbilIdTerpilih(out string statusSekarang)
         {
             statusSekarang = "";
@@ -75,8 +72,6 @@ namespace FishIt.UserControls.Shipper
         {
             _controller.MuatData(Session.IdAkun);
         }
-
-        // ---- IMPLEMENTASI INTERFACE ----
 
         public void SetDataPengiriman(DataTable data)
         {

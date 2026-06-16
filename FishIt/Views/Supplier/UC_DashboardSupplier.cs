@@ -24,9 +24,6 @@ namespace FishIt
         {
             _controller.MuatRingkasan(Session.IdAkun, Session.Username);
         }
-
-        // ---- IMPLEMENTASI INTERFACE ----
-
         public void SetRingkasan(int menunggu, int disetujui, int ditolak)
         {
             lblAngkaMenunggu.Text = menunggu.ToString();

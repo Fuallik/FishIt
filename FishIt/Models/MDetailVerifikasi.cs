@@ -8,8 +8,6 @@ namespace FishIt.Models
         private readonly string _connString =
             ConfigurationManager.ConnectionStrings["DbConnection"].ConnectionString;
 
-        // Cukup UPDATE status; penambahan stok master ditangani TRIGGER di PostgreSQL.
-        // Satu method untuk dua aksi (Disetujui / Ditolak), beda di parameter status.
         public void UbahStatus(int idPengajuan, string status)
         {
             using var conn = new NpgsqlConnection(_connString);

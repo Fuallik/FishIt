@@ -52,8 +52,6 @@ namespace FishIt
 
             _controller.Konfirmasi(idOrderTerpilih);
         }
-
-        // ===== implementasi IKonfirmasiPembayaran =====
         public void SetAntrean(DataTable data)
         {
             DGVAntrean.DataSource = data;

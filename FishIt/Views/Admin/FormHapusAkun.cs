@@ -19,8 +19,6 @@ namespace FishIt
 
             _controller = new CHapusAkun(this);
         }
-
-        // ===== aksi UI -> controller =====
         private void TBUsername_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -31,8 +29,6 @@ namespace FishIt
         }
 
         private void btnBatalHapusAkun_Click(object sender, EventArgs e) => this.Close();
-
-        // ===== implementasi IHapusAkun =====
         public void BukaKonfirmasi(DetailAkunHapus d)
         {
             using (var popUp = new FormKonfirmasiHapus(

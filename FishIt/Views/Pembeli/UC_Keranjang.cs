@@ -31,10 +31,8 @@ namespace FishIt
             _controller.MuatData();
         }
 
-        // ===== aksi UI -> controller =====
         private void btnCheckout_Click(object sender, EventArgs e)
         {
-            // Map pilihan combo -> id_metode (QRIS=2, Cash=1, -1 = belum pilih)
             int idMetode = CBMetodePembayaran.SelectedIndex == -1 ? 0
                 : (CBMetodePembayaran.SelectedItem.ToString() == "QRIS" ? 2 : 1);
 
@@ -57,7 +55,6 @@ namespace FishIt
                 _controller.HapusItem(idKeranjang);
         }
 
-        // ===== implementasi IKeranjang =====
         public void SetDataGrid(DataTable data)
         {
             DGVKeranjang.DataSource = data;

@@ -6,7 +6,6 @@ using System.Data;
 
 namespace FishIt.Models
 {
-    // DTO input akun baru (internal: cuma View->Controller->Model, tak lewat method public)
     internal class DataAkunBaru
     {
         public string Username, Password, Konfirmasi, Nama, Alamat, Telpon, Kelurahan, Kecamatan;
@@ -30,7 +29,6 @@ namespace FishIt.Models
             return dt;
         }
 
-        // Panggil stored procedure; ambil id baru dari OUT param. Return id user baru.
         public int TambahAkun(DataAkunBaru d)
         {
             using var conn = new NpgsqlConnection(_connString);
@@ -38,7 +36,7 @@ namespace FishIt.Models
             using var cmd = new NpgsqlCommand(
                 "CALL sp_tambah_akun(@p_username, @p_nama, @p_passwords, @p_alamat, @p_no_telp, " +
                 "@p_aktif, @p_id_role, @p_nama_kelurahan, @p_nama_kecamatan, @p_id_baru)", conn);
-            cmd.CommandType = CommandType.Text;   // CALL pakai Text, bukan StoredProcedure
+            cmd.CommandType = CommandType.Text;        
 
             cmd.Parameters.Add("@p_username", NpgsqlDbType.Varchar).Value = d.Username;
             cmd.Parameters.Add("@p_nama", NpgsqlDbType.Varchar).Value = d.Nama;

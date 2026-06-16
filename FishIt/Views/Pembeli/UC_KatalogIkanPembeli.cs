@@ -23,8 +23,6 @@ namespace FishIt
             base.OnLoad(e);
             _controller.MuatData();
         }
-
-        // ===== aksi UI -> controller =====
         private void dgvStokIkan_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (DGVKatalogIkan.Columns[e.ColumnIndex].Name == "colTambah" && e.RowIndex >= 0)
@@ -37,8 +35,6 @@ namespace FishIt
                     numericJumlah.Value);
             }
         }
-
-        // ===== implementasi IKatalogIkan =====
         public void SetDataGrid(DataTable data)
         {
             DGVKatalogIkan.DataSource = data;

@@ -23,11 +23,11 @@ namespace FishIt.Controllers.Admin
                 _view.SetRingkasan(
                     _model.HitungAktif(),
                     _model.HitungTidakAktif(),
-                    _model.HitungRole(3),  // tambak
-                    _model.HitungRole(2),  // kasir
-                    _model.HitungRole(5),  // supplier
-                    _model.HitungRole(4),  // shipper
-                    _model.HitungRole(6)); // pembeli
+                    _model.HitungRole(3),   
+                    _model.HitungRole(2),   
+                    _model.HitungRole(5),   
+                    _model.HitungRole(4),   
+                    _model.HitungRole(6));  
             }
             catch (Exception ex)
             {

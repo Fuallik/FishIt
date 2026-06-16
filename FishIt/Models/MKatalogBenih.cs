@@ -4,7 +4,6 @@ using System.Data;
 
 namespace FishIt.Models
 {
-    /// <summary> MODEL Katalog Benih: semua benih + jenis ikannya (JOIN). </summary>
     internal class MKatalogBenih
     {
         private readonly string _connString =

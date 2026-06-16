@@ -25,8 +25,6 @@ namespace FishIt.UserControls.Shipper
             _controller.MuatRingkasan(Session.IdAkun, Session.Username);
         }
 
-        // ---- IMPLEMENTASI INTERFACE ----
-
         public void SetRingkasan(int diproses, int dikirim, int diterima)
         {
             lblAngkaDiproses.Text = diproses.ToString();

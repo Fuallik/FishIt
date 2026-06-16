@@ -21,7 +21,6 @@ namespace FishIt.Controllers.Admin
             catch (Exception ex) { _view.TampilkanError(ex.Message); }
         }
 
-        // Konfirmasi Yes/No sudah dilakukan di View (murni UI). Di sini tinggal eksekusi.
         public void Hapus(int idKolam, string nomorKolam)
         {
             try

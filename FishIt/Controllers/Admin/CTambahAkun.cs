@@ -24,7 +24,6 @@ namespace FishIt.Controllers.Admin
 
         public void Simpan(DataAkunBaru d)
         {
-            // ===== validasi (business rules ada di Controller) =====
             if (string.IsNullOrWhiteSpace(d.Username) || string.IsNullOrWhiteSpace(d.Nama) ||
                 string.IsNullOrWhiteSpace(d.Password) || string.IsNullOrWhiteSpace(d.Konfirmasi) ||
                 string.IsNullOrWhiteSpace(d.Alamat) || string.IsNullOrWhiteSpace(d.Telpon) ||
@@ -49,7 +48,6 @@ namespace FishIt.Controllers.Admin
             if (d.IdRole <= 0)
             { _view.TampilkanPeringatan("Silakan pilih Jabatan dulu!"); return; }
 
-            // ===== eksekusi =====
             try
             {
                 _model.TambahAkun(d);

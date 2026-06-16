@@ -5,7 +5,6 @@ using FishIt.Views.Supplier;
 
 namespace FishIt.Controllers.Supplier
 {
-    /// <summary> CONTROLLER Dashboard Supplier. </summary>
     internal class CDashboardSupplier
     {
         private readonly IDashboardSupplier _view;
@@ -23,8 +22,6 @@ namespace FishIt.Controllers.Supplier
             {
                 DataTable data = _model.GetRingkasanPerStatus(idAkun);
 
-                // Terjemahkan baris status -> tiga angka. Status tak muncul = 0.
-                // 'Pending' = menunggu verifikasi (sesuai pengajuan & layar Admin).
                 int menunggu = 0, disetujui = 0, ditolak = 0;
                 foreach (DataRow row in data.Rows)
                 {

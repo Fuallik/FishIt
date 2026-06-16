@@ -2,10 +2,6 @@
 
 namespace FishIt.Views.Shipper
 {
-    /// <summary>
-    /// INTERFACE (kontrak) untuk View Pengiriman Pesanan.
-    /// Controller berbicara ke View hanya lewat method di sini.
-    /// </summary>
     internal interface IPengirimanPesanan
     {
         void SetDataPengiriman(DataTable data);

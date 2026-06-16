@@ -4,7 +4,6 @@ using FishIt.Views.Supplier;
 
 namespace FishIt.Controllers.Supplier
 {
-    /// <summary> CONTROLLER Pengajuan Benih. </summary>
     internal class CPengajuanBenih
     {
         private readonly IPengajuanBenih _view;
@@ -21,7 +20,7 @@ namespace FishIt.Controllers.Supplier
             try
             {
                 _view.SetDaftarJenisIkan(_model.GetDaftarJenisIkan());
-                _view.SetDaftarNamaIkan(_model.GetDaftarNamaIkan()); // awal: semua ikan
+                _view.SetDaftarNamaIkan(_model.GetDaftarNamaIkan());
                 _view.SetRiwayat(_model.GetRiwayat(idAkun));
             }
             catch (Exception ex)
@@ -29,11 +28,6 @@ namespace FishIt.Controllers.Supplier
                 _view.TampilkanPesanError("Gagal memuat data: " + ex.Message);
             }
         }
-
-        /// <summary>
-        /// Saat supplier memilih JENIS ikan: saring dropdown nama supaya hanya
-        /// menampilkan ikan dengan jenis tersebut.
-        /// </summary>
         public void JenisDipilih(string namaJenis)
         {
             if (string.IsNullOrEmpty(namaJenis)) return;
@@ -47,28 +41,20 @@ namespace FishIt.Controllers.Supplier
             }
         }
 
-        /// <summary>
-        /// Saat supplier memilih/mengetik NAMA ikan. Tiga kemungkinan:
-        /// - ikan belum ada (nama baru): jenis ikut yang dipilih supplier, tidak diapa-apakan.
-        /// - ikan sudah ada & belum pilih jenis: jenis diisi otomatis.
-        /// - ikan sudah ada & jenis dipilih TAPI beda: beri peringatan supaya dibetulkan.
-        /// </summary>
         public void NamaDipilih(string namaIkan, string jenisDipilih)
         {
             if (string.IsNullOrEmpty(namaIkan)) return;
             try
             {
                 string jenisAsli = _model.GetJenisIkanByNama(namaIkan);
-                if (jenisAsli == null) return; // nama baru, biarkan jenis pilihan supplier
+                if (jenisAsli == null) return;       
 
                 if (string.IsNullOrEmpty(jenisDipilih))
                 {
-                    // belum pilih jenis -> isikan otomatis sesuai data ikan
                     _view.SetJenisIkan(jenisAsli);
                 }
                 else if (!jenisDipilih.Equals(jenisAsli, StringComparison.OrdinalIgnoreCase))
                 {
-                    // sudah pilih jenis tapi beda dari data ikan -> peringatkan
                     _view.TampilkanPesanInfo(
                         $"Ikan \"{namaIkan}\" sudah terdaftar sebagai {jenisAsli}, " +
                         $"bukan {jenisDipilih}. Mohon betulkan jenis ikannya.");
@@ -76,7 +62,6 @@ namespace FishIt.Controllers.Supplier
             }
             catch
             {
-                // kalau gagal cek, jangan blokir supplier
             }
         }
 
@@ -93,8 +78,6 @@ namespace FishIt.Controllers.Supplier
                 return;
             }
 
-            // Validasi konsistensi jenis: kalau ikan sudah ada dengan jenis berbeda
-            // dari yang dipilih, TOLAK pengajuan (jangan diam-diam pakai jenis lama).
             try
             {
                 string jenisAsli = _model.GetJenisIkanByNama(nama);
@@ -108,7 +91,6 @@ namespace FishIt.Controllers.Supplier
             }
             catch
             {
-                // kalau gagal cek, lanjut saja — trigger database tetap jadi pengaman terakhir.
             }
 
             try

@@ -44,7 +44,7 @@ namespace FishIt.Controllers.PegawaiTambak
                 _view.TampilkanSukses("Pemberian pakan dicatat & stok diperbarui!");
                 _view.TutupDialog();
             }
-            catch (PostgresException pg) { _view.TampilkanPeringatan(pg.MessageText); }  // stok pakan kurang
+            catch (PostgresException pg) { _view.TampilkanPeringatan(pg.MessageText); }
             catch (Exception ex) { _view.TampilkanError(ex.Message); }
         }
     }

@@ -45,7 +45,6 @@ namespace FishIt.Controllers.Pembeli
                 }
                 else
                 {
-                    // pesan gagal datang langsung dari logic PostgreSQL (mis. keranjang kosong)
                     _view.TampilkanGagalCheckout(hasil.Pesan);
                 }
             }
@@ -58,7 +57,7 @@ namespace FishIt.Controllers.Pembeli
             {
                 _model.HapusItem(idKeranjang);
                 _view.TampilkanSukses("Item berhasil dihapus dari keranjang.");
-                MuatData();   // refresh grid
+                MuatData();
             }
             catch (Exception ex) { _view.TampilkanError(ex.Message); }
         }

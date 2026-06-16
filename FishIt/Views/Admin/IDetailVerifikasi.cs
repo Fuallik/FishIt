@@ -4,6 +4,6 @@
     {
         void TampilkanSukses(string pesan);
         void TampilkanError(string pesan);
-        void TutupDialog();   // set DialogResult.OK + Close
+        void TutupDialog();
     }
 }

@@ -4,7 +4,6 @@ using FishIt.Views.Supplier;
 
 namespace FishIt.Controllers.Supplier
 {
-    /// <summary> CONTROLLER Katalog Benih. </summary>
     internal class CKatalogBenih
     {
         private readonly IKatalogBenih _view;

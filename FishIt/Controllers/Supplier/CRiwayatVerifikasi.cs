@@ -4,7 +4,6 @@ using FishIt.Views.Supplier;
 
 namespace FishIt.Controllers.Supplier
 {
-    /// <summary> CONTROLLER Riwayat Verifikasi. </summary>
     internal class CRiwayatVerifikasi
     {
         private readonly IRiwayatVerifikasi _view;

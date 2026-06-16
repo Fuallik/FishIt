@@ -32,7 +32,6 @@ namespace FishIt.Views.Admin
             int idKolam = Convert.ToInt32(CBIdKolam.SelectedValue);
             string nomorKolam = CBIdKolam.Text;
 
-            // Konfirmasi Yes/No murni UI -> di View
             var konfirmasi = MessageBox.Show(
                 $"Tandai kolam '{nomorKolam}' sebagai Tidak Terpakai?",
                 "Konfirmasi Hapus", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
@@ -43,7 +42,6 @@ namespace FishIt.Views.Admin
 
         private void btnBatal_Click(object sender, EventArgs e) => this.Close();
 
-        // ===== implementasi IHapusKolam =====
         public void SetKolam(DataTable data)
         {
             CBIdKolam.DataSource = data;

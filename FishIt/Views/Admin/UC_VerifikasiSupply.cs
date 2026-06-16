@@ -30,8 +30,6 @@ namespace FishIt
             base.OnLoad(e);
             _controller.MuatPengajuan();
         }
-
-        // ===== aksi UI -> controller =====
         private void TBIDPengajuan_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -41,7 +39,6 @@ namespace FishIt
             }
         }
 
-        // ===== implementasi IVerifikasiSupply =====
         public void SetPengajuan(DataTable data)
         {
             DGVPengajuan.DataSource = data;
@@ -58,7 +55,7 @@ namespace FishIt
                 if (popUp.ShowDialog() == DialogResult.OK)
                 {
                     ClearInput();
-                    _controller.MuatPengajuan();   // refresh grid setelah ACC/tolak
+                    _controller.MuatPengajuan();
                 }
             }
         }

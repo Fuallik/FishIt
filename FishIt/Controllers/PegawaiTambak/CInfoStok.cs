@@ -11,7 +11,6 @@ namespace FishIt.Controllers.PegawaiTambak
         private readonly IInfoStok _view;
         private readonly MInfoStok _model;
 
-        // Controller menerima View melalui Dependency Injection
         public CInfoStok(IInfoStok view)
         {
             _view = view;
@@ -22,11 +21,9 @@ namespace FishIt.Controllers.PegawaiTambak
         {
             try
             {
-                // Ambil data grid dari Model dan lempar ke View
                 _view.SetDataPakan(_model.GetStokPakan());
                 _view.SetDataBenih(_model.GetStokBenih());
 
-                // Ambil ringkasan dari Model dan lempar ke View
                 decimal jenisPakan = _model.HitungStok("PAKAN", "JENIS");
                 decimal totalPakan = _model.HitungStok("PAKAN", "TOTAL");
                 _view.SetRingkasanPakan(jenisPakan, totalPakan);

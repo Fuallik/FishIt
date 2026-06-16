@@ -39,14 +39,13 @@ namespace FishIt.Views.Admin
 
         private void btnBatal_Click(object sender, EventArgs e) => this.Close();
 
-        // ===== implementasi ITambahKolam =====
         public void SetJenisIkan(DataTable data)
         {
             CBJenisIkan.DataSource = data;
             CBJenisIkan.DisplayMember = "nama_jenis_ikan";
             CBJenisIkan.ValueMember = "id_jenis_ikan";
             CBJenisIkan.SelectedIndex = -1;
-            CBJenisIkan.DropDownStyle = ComboBoxStyle.DropDownList;   // cuma bisa pilih dari daftar
+            CBJenisIkan.DropDownStyle = ComboBoxStyle.DropDownList;
         }
         public void TampilkanPeringatan(string p) =>
             MessageBox.Show(p, "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);

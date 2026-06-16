@@ -235,7 +235,7 @@
             buttonMonitoring.Padding = new Padding(50, 0, 0, 0);
             buttonMonitoring.Size = new Size(200, 40);
             buttonMonitoring.TabIndex = 9;
-            buttonMonitoring.Text = "Monitoring Kolam";
+            buttonMonitoring.Text = "Monitoring Ikan";
             buttonMonitoring.TextAlign = ContentAlignment.MiddleLeft;
             buttonMonitoring.TextImageRelation = TextImageRelation.ImageBeforeText;
             buttonMonitoring.UseCompatibleTextRendering = true;

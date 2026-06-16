@@ -22,8 +22,6 @@ namespace FishIt
             base.OnLoad(e);
             _controller.MuatKolam();
         }
-
-        // ===== aksi UI -> controller =====
         private void CBKolam_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (CBKolam.SelectedIndex == -1 || CBKolam.SelectedValue == null
@@ -69,7 +67,6 @@ namespace FishIt
             this.Close();
         }
 
-        // ===== implementasi IPengajuanPanen =====
         public void SetKolam(DataTable data)
         {
             CBKolam.DataSource = data;

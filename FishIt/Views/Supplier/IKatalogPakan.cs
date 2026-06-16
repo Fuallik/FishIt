@@ -2,7 +2,6 @@
 
 namespace FishIt.Views.Supplier
 {
-    /// <summary> INTERFACE Katalog Pakan. </summary>
     internal interface IKatalogPakan
     {
         void SetKatalog(DataTable data);

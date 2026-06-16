@@ -4,10 +4,6 @@ using System.Data;
 
 namespace FishIt.Models
 {
-    /// <summary>
-    /// MODEL Riwayat Verifikasi: semua pengajuan (benih & pakan, semua status)
-    /// milik supplier tertentu. LEFT JOIN benih & pakan; COALESCE ambil nama yang terisi.
-    /// </summary>
     internal class MRiwayatVerifikasi
     {
         private readonly string _connString =

@@ -38,8 +38,6 @@ namespace FishIt.Views.Kasir
 
             _controller.MuatDetail(idOrder);
         }
-
-        // ===== implementasi IRiwayatPembayaran =====
         public void SetDataGrid(DataTable data)
         {
             DGVRiwayat.DataSource = data;

@@ -5,7 +5,6 @@ using System.Data;
 
 namespace FishIt.Models
 {
-    // Hasil pencarian entri katalog (spesies + kualitas)
     internal class HasilKatalog
     {
         public bool Ditemukan { get; set; }
@@ -47,7 +46,6 @@ namespace FishIt.Models
             return dt;
         }
 
-        // Cari entri katalog cocok spesies + kualitas
         public HasilKatalog CariKatalog(string nama, int idJenis, int idKualitas)
         {
             using var conn = new NpgsqlConnection(_connString);
@@ -71,8 +69,6 @@ namespace FishIt.Models
             return new HasilKatalog { Ditemukan = false };
         }
 
-        // Transaksi: tambah stok / buat entri katalog + tandai panen diproses.
-        // return false = panen sudah diproses sebelumnya (guard = 0 baris).
         public bool ProsesHarga(int idPanen, HasilKatalog katalog, decimal harga,
                                 string nama, int idJenis, int idKualitas, decimal jumlahKg)
         {
@@ -118,7 +114,7 @@ namespace FishIt.Models
             catch
             {
                 tx.Rollback();
-                throw;   // biar Controller yang tampilkan pesan error
+                throw;         
             }
         }
     }

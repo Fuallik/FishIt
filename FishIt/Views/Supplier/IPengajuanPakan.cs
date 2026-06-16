@@ -2,7 +2,6 @@
 
 namespace FishIt.Views.Supplier
 {
-    /// <summary> INTERFACE Pengajuan Pakan. </summary>
     internal interface IPengajuanPakan
     {
         void SetDaftarPakan(DataTable data);

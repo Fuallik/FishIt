@@ -5,7 +5,6 @@ using FishIt.Views.Shipper;
 
 namespace FishIt.Controllers.Shipper
 {
-    /// <summary> CONTROLLER Dashboard Shipper. </summary>
     internal class CDashboardShipper
     {
         private readonly IDashboardShipper _view;
@@ -23,7 +22,6 @@ namespace FishIt.Controllers.Shipper
             {
                 DataTable data = _model.GetRingkasanPerStatus(idShipper);
 
-                // Terjemahkan baris status -> tiga angka. Status yang tak muncul = 0.
                 int diproses = 0, dikirim = 0, diterima = 0;
                 foreach (DataRow row in data.Rows)
                 {

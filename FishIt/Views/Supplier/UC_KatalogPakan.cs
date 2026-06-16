@@ -22,7 +22,6 @@ namespace FishIt
         private void UC_KatalogPakan_Load(object sender, EventArgs e) => _controller.MuatKatalog();
         private void btnRefresh_Click(object sender, EventArgs e) => _controller.MuatKatalog();
 
-        // ---- IMPLEMENTASI INTERFACE ----
         public void SetKatalog(DataTable data) => DGVKatalog.DataSource = data;
         public void TampilkanPesanError(string pesan) =>
             MessageBox.Show(pesan, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);

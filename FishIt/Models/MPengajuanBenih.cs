@@ -5,20 +5,14 @@ using System.Data;
 
 namespace FishIt.Models
 {
-    /// <summary>
-    /// MODEL Pengajuan Benih. Paling kompleks: saat mengajukan, sistem membuat
-    /// rantai data jenis_ikan -> ikan -> benih -> pengiriman_supplier dalam SATU transaksi.
-    /// Juga menyediakan data untuk dropdown & auto-isi jenis air.
-    /// </summary>
     internal class MPengajuanBenih
     {
         private readonly string _connString =
             ConfigurationManager.ConnectionStrings["DbConnection"].ConnectionString;
 
-        // Default untuk ikan yang dibuat otomatis lewat pengajuan benih.
         private const decimal HARGA_DEFAULT = 0;
         private const decimal STOK_DEFAULT = 0;
-        private const int ID_KUALITAS_DEFAULT = 3; // 'C'
+        private const int ID_KUALITAS_DEFAULT = 3;  
 
         public DataTable GetDaftarJenisIkan()
         {
@@ -38,11 +32,6 @@ namespace FishIt.Models
             var dt = new DataTable(); ad.Fill(dt); return dt;
         }
 
-        /// <summary>
-        /// Daftar nama ikan yang JENIS-nya sesuai (untuk menyaring dropdown nama
-        /// setelah supplier memilih jenis ikan). Mis. pilih "Air Tawar" -> hanya
-        /// Lele, Nila, dst.
-        /// </summary>
         public DataTable GetNamaIkanByJenis(string namaJenis)
         {
             using var conn = new NpgsqlConnection(_connString);
@@ -58,10 +47,6 @@ namespace FishIt.Models
             var dt = new DataTable(); ad.Fill(dt); return dt;
         }
 
-        /// <summary>
-        /// Untuk auto-isi jenis air: cari nama jenis ikan dari sebuah nama ikan yang sudah ada.
-        /// Mengembalikan null kalau ikan belum terdaftar (berarti nama baru).
-        /// </summary>
         public string GetJenisIkanByNama(string namaIkan)
         {
             string query = @"
@@ -98,11 +83,6 @@ namespace FishIt.Models
             var dt = new DataTable(); ad.Fill(dt); return dt;
         }
 
-        /// <summary>
-        /// Proses pengajuan benih dalam satu transaksi berlapis:
-        /// jenis_ikan -> ikan (default harga/stok/kualitas) -> benih -> pengiriman_supplier.
-        /// Satu nama dipakai untuk nama_ikan sekaligus nama benih.
-        /// </summary>
         public void Ajukan(int idAkun, string namaJenis, string nama, decimal kuantitas)
         {
             using var conn = new NpgsqlConnection(_connString);
@@ -132,8 +112,6 @@ namespace FishIt.Models
             }
             catch (PostgresException pgEx) when (pgEx.SqlState == "P0001")
             {
-                // P0001 = RAISE EXCEPTION dari trigger (mis. konsistensi jenis ikan).
-                // Ambil pesan asli trigger yang sudah ramah, lempar sebagai pesan bersih.
                 tx.Rollback();
                 throw new Exception(pgEx.MessageText);
             }

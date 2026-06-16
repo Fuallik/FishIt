@@ -32,7 +32,7 @@ namespace FishIt.Controllers.PegawaiTambak
                 _view.TampilkanSukses("Data monitoring berhasil disimpan!");
                 _view.TutupDialog();
             }
-            catch (PostgresException pg) { _view.TampilkanPeringatan(pg.MessageText); }  // pesan RAISE dari procedure (mis. mati > isi)
+            catch (PostgresException pg) { _view.TampilkanPeringatan(pg.MessageText); }          
             catch (Exception ex) { _view.TampilkanError(ex.Message); }
         }
     }

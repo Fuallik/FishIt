@@ -38,7 +38,7 @@ namespace FishIt.Controllers.Admin
             if (d.IdJenis <= 0)
             { _view.TampilkanPeringatan("Pilih jenis ikan dulu!"); return; }
 
-            string ukuran = $"{p}x{l}x{t}";   // gabung dimensi
+            string ukuran = $"{p}x{l}x{t}";     
 
             try
             {

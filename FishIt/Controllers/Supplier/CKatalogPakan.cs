@@ -5,7 +5,6 @@ using System;
 
 namespace FishIt.Controllers.Supplier
 {
-    /// <summary> CONTROLLER Katalog Pakan. </summary>
     internal class CKatalogPakan
     {
         private readonly IKatalogPakan _view;

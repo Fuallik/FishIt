@@ -24,7 +24,6 @@ namespace FishIt
         private void btnRefresh_Click(object sender, EventArgs e) =>
             _controller.MuatRiwayat(Session.IdAkun);
 
-        // ---- IMPLEMENTASI INTERFACE ----
         public void SetRiwayat(DataTable data) => DGVRiwayat.DataSource = data;
         public void TampilkanPesanError(string pesan) =>
             MessageBox.Show(pesan, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);

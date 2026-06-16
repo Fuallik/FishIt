@@ -4,10 +4,6 @@ using FishIt.Views.Shipper;
 
 namespace FishIt.Controllers.Shipper
 {
-    /// <summary>
-    /// CONTROLLER Pengiriman Pesanan. Menjembatani View dan Model.
-    /// View diterima lewat constructor (Dependency Injection).
-    /// </summary>
     internal class CPengirimanPesanan
     {
         private readonly IPengirimanPesanan _view;

@@ -2,7 +2,6 @@
 
 namespace FishIt.Views.Supplier
 {
-    /// <summary> INTERFACE Riwayat Verifikasi. </summary>
     internal interface IRiwayatVerifikasi
     {
         void SetRiwayat(DataTable data);

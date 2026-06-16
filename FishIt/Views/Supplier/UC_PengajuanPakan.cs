@@ -25,8 +25,6 @@ namespace FishIt
         private void btnAjukan_Click(object sender, EventArgs e) =>
             _controller.Ajukan(Session.IdAkun, cmbPakan.Text.Trim(), txtKuantitas.Text.Trim());
 
-        // ---- IMPLEMENTASI INTERFACE ----
-
         public void SetDaftarPakan(DataTable data)
         {
             cmbPakan.Items.Clear();

@@ -40,7 +40,6 @@ namespace FishIt
 
         private void btnBatalTambahMonitoring_Click(object sender, EventArgs e) => this.Close();
 
-        // ===== implementasi ITambahMonitoring =====
         public void SetKolam(DataTable data)
         {
             CBKolam.DataSource = data;

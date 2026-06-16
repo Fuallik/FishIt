@@ -29,8 +29,6 @@ namespace FishIt.UserControls.Shipper
             _controller.MuatRiwayat(Session.IdAkun);
         }
 
-        // ---- IMPLEMENTASI INTERFACE ----
-
         public void SetDataRiwayat(DataTable data)
         {
             DGVRiwayat.DataSource = data;

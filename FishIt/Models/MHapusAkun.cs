@@ -5,7 +5,6 @@ using System.Data;
 
 namespace FishIt.Models
 {
-    // public: dilempar ke View lewat interface (method public)
     public class DetailAkunHapus
     {
         public string Nama, Alamat, Telp, Kelurahan, Kecamatan;
@@ -16,7 +15,6 @@ namespace FishIt.Models
         private readonly string _connString =
             ConfigurationManager.ConnectionStrings["DbConnection"].ConnectionString;
 
-        // Cari akun aktif by username. Null kalau tak ada / sudah nonaktif.
         public DetailAkunHapus CariAkun(string username)
         {
             string query = @"
@@ -43,7 +41,6 @@ namespace FishIt.Models
             };
         }
 
-        // Soft-delete via procedure
         public void HapusAkun(string username)
         {
             using var conn = new NpgsqlConnection(_connString);

@@ -16,7 +16,6 @@ namespace FishIt.Models
         private readonly string _connString =
             ConfigurationManager.ConnectionStrings["DbConnection"].ConnectionString;
 
-        // Kolam yang monitoring terakhirnya siap_panen = TRUE & masih ada isinya
         public DataTable GetKolam()
         {
             using var conn = new NpgsqlConnection(_connString);
@@ -33,7 +32,6 @@ namespace FishIt.Models
             var dt = new DataTable(); ad.Fill(dt); return dt;
         }
 
-        // FIX: buang JOIN kolam + filter status_kolam basi; cukup andalkan fn_sisa_ikan > 0
         public DataTable GetIkanByKolam(int idKolam)
         {
             using var conn = new NpgsqlConnection(_connString);

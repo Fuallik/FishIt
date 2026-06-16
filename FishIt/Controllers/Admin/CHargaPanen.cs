@@ -10,7 +10,6 @@ namespace FishIt.Controllers.Admin
         private readonly IHargaPanen _view;
         private readonly MHargaPanen _model;
 
-        // State panen terpilih dipegang Controller (bukan View)
         private int _idPanen = 0;
         private string _nama = "";
         private int _idJenis = 0;
@@ -30,7 +29,6 @@ namespace FishIt.Controllers.Admin
             catch (Exception ex) { _view.TampilkanError(ex.Message); }
         }
 
-        // Dipanggil View saat baris grid diklik
         public void PilihPanen(int idPanen, string nama, int idJenis, int idKualitas,
                                decimal jumlahKg, string kualitasChar)
         {
@@ -51,7 +49,6 @@ namespace FishIt.Controllers.Admin
             catch (Exception ex) { _view.TampilkanError(ex.Message); }
         }
 
-        // Dipanggil View saat tombol Simpan
         public void Simpan()
         {
             if (_idPanen == 0)
@@ -64,7 +61,6 @@ namespace FishIt.Controllers.Admin
             bool entriBaru = _katalog == null || !_katalog.Ditemukan;
             if (entriBaru)
             {
-                // Harga wajib hanya kalau entri katalog baru
                 if (!decimal.TryParse(_view.AmbilInputHarga().Trim(), NumberStyles.Any,
                         CultureInfo.InvariantCulture, out harga) || harga <= 0)
                 {

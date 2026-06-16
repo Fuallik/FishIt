@@ -49,7 +49,7 @@ namespace FishIt
                                  int kasir, int supplier, int shipper, int pembeli)
         {
             lblHitungAkunAktif.Text = aktif.ToString();
-            lblHitungAkunTidakAKtif.Text = tidakAktif.ToString();   // nama label asli (typo dibiarkan)
+            lblHitungAkunTidakAKtif.Text = tidakAktif.ToString();
             TotalTambakKelola.Text = tambak.ToString();
             TotalKasirKelola.Text = kasir.ToString();
             TotalSupplierKelola.Text = supplier.ToString();

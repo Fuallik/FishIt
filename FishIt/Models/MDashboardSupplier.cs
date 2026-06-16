@@ -4,7 +4,6 @@ using System.Data;
 
 namespace FishIt.Models
 {
-    /// <summary> MODEL Dashboard Supplier: jumlah pengajuan per status_verifikasi. </summary>
     internal class MDashboardSupplier
     {
         private readonly string _connString =

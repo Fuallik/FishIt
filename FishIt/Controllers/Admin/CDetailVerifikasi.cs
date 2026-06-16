@@ -21,7 +21,6 @@ namespace FishIt.Controllers.Admin
         public void Tolak(int id) =>
             Proses(id, "Ditolak", "Pengajuan supply telah ditolak.");
 
-        // Satu jalur untuk ACC & Tolak, beda status + pesan
         private void Proses(int id, string status, string pesanSukses)
         {
             try

@@ -59,7 +59,6 @@ namespace FishIt
 
         private void btnBatalTambahAkun_Click(object sender, EventArgs e) => this.Close();
 
-        // ===== implementasi ITambahAkun =====
         public void SetRoles(DataTable data)
         {
             CBJabatan.DataSource = data;

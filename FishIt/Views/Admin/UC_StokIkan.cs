@@ -36,7 +36,7 @@ namespace FishIt
         public void SetRingkasan(decimal totalIkan, decimal totalBenih, decimal totalPakan)
         {
             lblHitungIkan.Text = totalIkan.ToString();
-            lblHitungBenih.Text = totalBenih.ToString("0");   // ekor bulat
+            lblHitungBenih.Text = totalBenih.ToString("0");
             lblHitungPakan.Text = totalPakan.ToString();
         }
 

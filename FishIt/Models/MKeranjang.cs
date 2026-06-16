@@ -5,7 +5,6 @@ using System.Data;
 
 namespace FishIt.Models
 {
-    // Hasil dari function checkout (kolom is_sukses + pesan)
     internal class HasilCheckout
     {
         public bool Sukses { get; set; }
@@ -46,7 +45,6 @@ namespace FishIt.Models
             cmd.ExecuteNonQuery();
         }
 
-        // Panggil function checkout di PostgreSQL; baca is_sukses + pesan dari baris hasilnya
         public HasilCheckout Checkout(int idAkun, int idMetode)
         {
             using var conn = new NpgsqlConnection(_connString);

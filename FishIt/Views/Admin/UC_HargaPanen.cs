@@ -25,7 +25,6 @@ namespace FishIt.Views.Admin
             _controller.MuatAntrean();
         }
 
-        // ===== aksi UI -> controller =====
         private void DGVPanen_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return;
@@ -42,7 +41,6 @@ namespace FishIt.Views.Admin
 
         private void btnSimpan_Click(object sender, EventArgs e) => _controller.Simpan();
 
-        // ===== implementasi IHargaPanen (cuma UI) =====
         public void SetAntrean(DataTable data)
         {
             DGVPanen.DataSource = data;

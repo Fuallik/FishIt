@@ -21,7 +21,6 @@ namespace FishIt.Controllers.Admin
             catch (Exception ex) { _view.TampilkanError(ex.Message); }
         }
 
-        // Dipanggil View saat user tekan Enter di kolom ID
         public void Cari(string idText)
         {
             idText = (idText ?? "").Trim();

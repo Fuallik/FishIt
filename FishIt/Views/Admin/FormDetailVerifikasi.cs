@@ -17,7 +17,6 @@ namespace FishIt
             InitializeComponent();
             idPengajuanTerpilih = idPengajuan;
 
-            // isi tampilan (UI murni)
             TBIdPengajuan.Text = idPengajuan.ToString();
             TBSupplier.Text = namaSupplier;
             TBNamaIkan.Text = namaBarang;
@@ -30,7 +29,6 @@ namespace FishIt
             _controller = new CDetailVerifikasi(this);
         }
 
-        // ===== aksi UI -> controller (konfirmasi tetap di View karena murni UI) =====
         private void btnACC_Click(object sender, EventArgs e)
         {
             var konfirmasi = MessageBox.Show(
@@ -57,7 +55,6 @@ namespace FishIt
             this.Close();
         }
 
-        // ===== implementasi IDetailVerifikasi =====
         public void TampilkanSukses(string pesan) =>
             MessageBox.Show(pesan, "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
 

@@ -11,7 +11,6 @@ namespace FishIt
     {
         private readonly CPengajuanBenih _controller;
 
-        // Penanda supaya event tidak saling memicu saat kita mengubah nilai dari kode.
         private bool _sedangMengisiDariKode = false;
 
         public UC_PengajuanBenih()
@@ -25,22 +24,18 @@ namespace FishIt
         private void UC_PengajuanBenih_Load(object sender, EventArgs e) =>
             _controller.MuatAwal(Session.IdAkun);
 
-        // Saat supplier memilih JENIS ikan -> saring dropdown nama sesuai jenis.
         private void cmbJenisIkan_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (_sedangMengisiDariKode) return;
             _controller.JenisDipilih(cmbJenisIkan.Text.Trim());
         }
 
-        // Saat supplier memilih NAMA ikan -> cek jenisnya (auto-isi / peringatan).
         private void cmbNama_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (_sedangMengisiDariKode) return;
             _controller.NamaDipilih(cmbNama.Text.Trim(), cmbJenisIkan.Text.Trim());
         }
 
-        // Saat supplier MENGETIK nama lalu pindah fokus (Leave), cek juga.
-        // SelectedIndexChanged tidak terpicu saat mengetik, jadi Leave menutup celah itu.
         private void cmbNama_Leave(object sender, EventArgs e)
         {
             if (_sedangMengisiDariKode) return;
@@ -51,8 +46,6 @@ namespace FishIt
             _controller.Ajukan(Session.IdAkun, cmbJenisIkan.Text.Trim(),
                                 cmbNama.Text.Trim(), txtKuantitas.Text.Trim());
 
-        // ---- IMPLEMENTASI INTERFACE ----
-
         public void SetDaftarJenisIkan(DataTable data)
         {
             cmbJenisIkan.Items.Clear();
@@ -62,13 +55,12 @@ namespace FishIt
 
         public void SetDaftarNamaIkan(DataTable data)
         {
-            // Pakai penanda supaya pengisian ini tidak memicu event nama.
             _sedangMengisiDariKode = true;
             string namaSekarang = cmbNama.Text;
             cmbNama.Items.Clear();
             foreach (DataRow row in data.Rows)
                 cmbNama.Items.Add(row[0].ToString());
-            cmbNama.Text = namaSekarang; // pertahankan teks yang sedang diketik
+            cmbNama.Text = namaSekarang;      
             _sedangMengisiDariKode = false;
         }
 
@@ -81,8 +73,6 @@ namespace FishIt
 
         public void SetJenisIkan(string namaJenis)
         {
-            // Isi jenis dari kode (mis. auto-isi dari nama ikan yang sudah ada),
-            // tanpa memicu ulang penyaringan nama.
             _sedangMengisiDariKode = true;
             cmbJenisIkan.SelectedItem = namaJenis;
             _sedangMengisiDariKode = false;

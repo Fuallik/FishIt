@@ -49,7 +49,6 @@ namespace FishIt.Models
             return dt;
         }
 
-        // Cari satu pengajuan Pending by ID. Return null kalau tidak ada.
         public DetailPengajuan CariPengajuan(int id)
         {
             string query = @"
@@ -84,7 +83,6 @@ namespace FishIt.Models
             };
         }
 
-        // Tangani date yang bisa datang sebagai DateOnly atau DateTime
         private string FormatTanggal(object nilai)
         {
             if (nilai is DateOnly d) return d.ToString("yyyy-MM-dd");

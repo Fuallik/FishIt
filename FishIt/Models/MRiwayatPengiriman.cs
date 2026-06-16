@@ -4,7 +4,6 @@ using System.Data;
 
 namespace FishIt.Models
 {
-    /// <summary> MODEL untuk Riwayat Pengiriman (Shipper). Read-only. </summary>
     internal class MRiwayatPengiriman
     {
         private readonly string _connString =
