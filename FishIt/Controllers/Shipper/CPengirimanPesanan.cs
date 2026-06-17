@@ -34,12 +34,14 @@ namespace FishIt.Controllers.Shipper
                 int baris = _model.MulaiKirim(idPengiriman, idShipper);
                 if (baris > 0)
                 {
-                    _view.TampilkanPesanSukses("Pesanan ditandai sedang dikirim.");
+                    _view.TampilkanPesanSukses("Pesanan berhasil kamu ambil dan sedang dikirim.");
                     MuatData(idShipper);
                 }
                 else
                 {
-                    _view.TampilkanPesanInfo("Tidak ada perubahan. Mungkin status sudah berubah, coba Refresh.");
+
+                    _view.TampilkanPesanInfo("Pesanan ini sudah diambil shipper lain.");
+                    MuatData(idShipper); 
                 }
             }
             catch (Exception ex)

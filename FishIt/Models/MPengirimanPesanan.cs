@@ -22,8 +22,8 @@ namespace FishIt.Models
                 FROM pengiriman p
                 JOIN orders o ON o.id_order = p.id_order
                 JOIN akun   a ON a.id_akun  = o.id_akun
-                WHERE p.id_akun = @id_shipper
-                  AND p.status_pengiriman IN ('Diproses', 'Dikirim')
+                WHERE p.status_pengiriman = 'Diproses'
+                   OR (p.status_pengiriman = 'Dikirim' AND p.id_akun = @id_shipper)
                 ORDER BY p.tanggal_pengiriman ASC";
 
             using var conn = new NpgsqlConnection(_connString);
@@ -40,9 +40,9 @@ namespace FishIt.Models
         {
             string query = @"
                 UPDATE pengiriman
-                SET status_pengiriman = 'Dikirim'
+                SET status_pengiriman = 'Dikirim',
+                    id_akun = @id_shipper
                 WHERE id_pengiriman = @id
-                  AND id_akun = @id_shipper
                   AND status_pengiriman = 'Diproses'";
             return Eksekusi(query, idPengiriman, idShipper);
         }

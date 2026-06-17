@@ -56,8 +56,6 @@ namespace FishIt.Models
             return dt;
         }
 
-        // TRANSACTION: update status (guard) -> kurangi stok -> insert pengiriman.
-        // Gagal di mana pun = rollback semua. Aman dari dobel-klik.
         public HasilKonfirmasi Konfirmasi(int idOrder)
         {
             using var conn = new NpgsqlConnection(_connString);
